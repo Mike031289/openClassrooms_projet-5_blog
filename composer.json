@@ -1,13 +1,13 @@
 {
-    "name": "projet-5/blog",
+    "name": "mon-blog/app",
     "description": "creation of a blog post for users",
-    "type": "project-5",
+    "type": "mon-blog",
     "require": {
         "michelf/php-markdown": "^1.9"
     },
     "autoload": {
         "psr-4": {
-            "Projet5\\Blog\\": "src/"
+            "mon-blog\\App\\": "src/"
         }
     },
     "authors": [
