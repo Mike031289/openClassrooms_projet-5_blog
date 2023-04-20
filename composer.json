@@ -1,0 +1,19 @@
+{
+    "name": "projet-5/blog",
+    "description": "creation of a blog post for users",
+    "type": "project-5",
+    "require": {
+        "michelf/php-markdown": "^1.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Projet5\\Blog\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mike Agbelou",
+            "email": "mike.agbelou@gmail.com"
+        }
+    ]
+}
