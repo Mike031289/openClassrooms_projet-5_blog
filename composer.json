@@ -1,13 +1,13 @@
 {
-    "name": "mon-blog/app",
-    "description": "creation of a blog post for users",
-    "type": "mon-blog",
+    "name": "pc/mon-blog",
+    "description": "mon premier blog pour le projet-5 openClmassrooms",
     "require": {
-        "michelf/php-markdown": "^1.9"
+        "michelf/php-markdown": "^2.0",
+        "twig/twig": "^3.5"
     },
     "autoload": {
         "psr-4": {
-            "Mon-blog\\App\\": "src/"
+            "Pc\\MonBlog\\": "src/"
         }
     },
     "authors": [
