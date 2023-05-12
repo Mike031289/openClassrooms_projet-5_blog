@@ -3,7 +3,8 @@
     "description": "mon premier blog pour le projet-5 openClmassrooms",
     "require": {
         "michelf/php-markdown": "^2.0",
-        "twig/twig": "^3.5"
+        "twig/twig": "^3.5",
+        "altorouter/altorouter": "^2.0"
     },
     "autoload": {
         "psr-4": {
