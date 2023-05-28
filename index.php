@@ -5,7 +5,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 $loader = new Twig\Loader\FilesystemLoader(__DIR__ . '/app/views/templates');
 $twig = new Twig\Environment($loader);
 
-$router = new AltoRouter();
+$router = new AltoRouter([], '/mon-blog');
 
 $router->map('GET', '/', function() use ($twig) {
     echo $twig->render('index.html.twig', [
