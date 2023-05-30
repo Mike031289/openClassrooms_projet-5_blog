@@ -8,20 +8,30 @@ $twig = new Twig\Environment($loader);
 $router = new Router([], '/mon-blog');
 
 // Chargement des fichiers de Classes 
-spl_autoload_register(function($class){
-    if(file_exists('exceptions/' . $class . '.php'))
+$configFile = file_get_contents("config/config.json");
+$config = json_decode($configFile);
+
+spl_autoload_register(function($class) use($config)
+{
+    foreach($config->autoloadFolder as $folder)
     {
-        require_once('exceptions/' . $class . '.php');
-    }
-    if(file_exists('controller/' . $class . '.php'))
-    {
-        require_once('controller/' . $class . '.php');
-    }
-    if(file_exists('model/' . $class . '.php'))
-    {
-        require_once('model/' . $class . '.php');
+        if(file_exists($folder . '/' . $class . '.php'))
+        {
+            require_once($folder . '/' . $class . '.php');
+            break;
+        }
     }
 });
+try
+	{
+		$httpRequest = new HttpRequest();
+		$router = new Router();
+		$httpRequest->setRoute($router->findRoute($httpRequest));
+	}
+	catch(Exception $e)
+	{
+		echo "Une erreur s'est produite";
+	}
 
 // $router->map('GET', '/', function() use ($twig) {
 //     echo $twig->render('index.html.twig', [

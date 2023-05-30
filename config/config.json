@@ -1,0 +1,15 @@
+{
+	"autoloadFolder": [
+		"exceptions",
+		"controller",
+		"model",
+		"config/exceptions"
+	],
+	"database":  {
+            "name": "Ma base de données",
+            "dbname": "database",
+            "host": "localhost",
+            "user": "user",
+            "password": ""
+    }
+}
