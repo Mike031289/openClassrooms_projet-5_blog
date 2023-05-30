@@ -4,25 +4,4 @@
 	"action" : "Home",
 	"method" : "GET",
 	"param" : []
-},
-{
-	"path" : "/",
-	"controller" : "Home",
-	"action" : "Home",
-	"method" : "GET",
-	"param" : []
-},
-{
-	"path" : "/Login",
-	"controller" : "Home",
-	"action" : "Login",
-	"method" : "GET",
-	"param" : []
-},
-{
-	"path" : "/Login",
-	"controller" : "Home",
-	"action" : "Authentificate",
-	"method" : "POST",
-	"param" : []
 }]
