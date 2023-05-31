@@ -1,12 +1,11 @@
 {
 	"autoloadFolder": [
-		"exceptions",
-		"controllers",
-		"models",
+		"app/controllers",
+		"app/models",
 		"config/exceptions"
 	],
 	"database":  {
-            "name": "Ma base de données",
+            "name": "mon-blog",
             "dbname": "database",
             "host": "localhost",
             "user": "user",

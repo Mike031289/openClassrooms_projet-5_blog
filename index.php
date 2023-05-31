@@ -30,7 +30,7 @@ try
 	}
 	catch(Exception $e)
 	{
-		echo "Une erreur s'est produite";
+		echo "Une erreur s'est produite : " . $e->getMessage();
 	}
 
 // $router->map('GET', '/', function() use ($twig) {
