@@ -1,8 +1,8 @@
 {
 	"autoloadFolder": [
 		"exceptions",
-		"controller",
-		"model",
+		"controllers",
+		"models",
 		"config/exceptions"
 	],
 	"database":  {

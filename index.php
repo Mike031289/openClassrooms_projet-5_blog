@@ -5,7 +5,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 $loader = new Twig\Loader\FilesystemLoader(__DIR__ . '/app/views/templates');
 $twig = new Twig\Environment($loader);
 
-$router = new Router([], '/mon-blog');
+// $router = new Router([], '/mon-blog');
 
 // Chargement des fichiers de Classes 
 $configFile = file_get_contents("config/config.json");
