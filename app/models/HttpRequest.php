@@ -31,4 +31,21 @@
 			{
 				$this->_route = $route;	
 			}
+
+			// This method will help us to  identify the type of method by which the request is being transmitted, so that we can better process it.
+			public function bindParam()
+			{
+				switch($this->_method)
+				{
+					case "GET":
+					case "DELETE":
+							$this->param[] = preg_match("#" . $this->_route . "#",$this->_url);
+					case "POST":
+					case "PUT":
+						foreach($this->_route->getParam() as $param)
+						{
+							$this->_param[] = $param;
+						}
+				}
+			}
 		}
