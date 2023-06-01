@@ -1,8 +1,8 @@
 {
 	"autoloadFolder": [
-		"app/controllers",
-		"app/models",
-		"config/exceptions"
+		"app/Controllers",
+		"app/Models",
+		"config/Exceptions"
 	],
 	"database":  {
             "name": "mon-blog",
