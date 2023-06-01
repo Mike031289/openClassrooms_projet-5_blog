@@ -2,17 +2,21 @@
 	class Router
 	{
 		private $listRoute;
+		private $baseUrl;
 		
-		public function __construct()
+		public function __construct($baseUrl)
 		{
 			$stringRoute = file_get_contents('config/routes.json');
 			$this->listRoute = json_decode($stringRoute);
+			$this->baseUrl = $baseUrl;
 		}
 		
 		public function findRoute($httpRequest)
 		{
-      $routeFound = array_filter($this->listRoute,function($route) use ($httpRequest){
-				return preg_match("#^" . $route->path . "$#", $httpRequest->getUrl()) && $route->method == $httpRequest->getMethod();
+			$url = str_replace($this->baseUrl,"", $httpRequest->getUrl());
+			$methode = $httpRequest->getMethod();
+      $routeFound = array_filter($this->listRoute,function($route) use ($url, $methode){
+				return preg_match("#^" . $route->path . "$#", $url) && $route->method == $methode;
 			});
 			$numberRoute = count($routeFound);
 			if($numberRoute > 1)

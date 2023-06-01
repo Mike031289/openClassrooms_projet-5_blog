@@ -4,6 +4,7 @@
 		"app/Models",
 		"config/Exceptions"
 	],
+    "baseUrl": "/mon-blog",
 	"database":  {
             "name": "mon-blog",
             "dbname": "database",
