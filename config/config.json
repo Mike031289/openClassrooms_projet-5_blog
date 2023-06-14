@@ -2,7 +2,9 @@
 	"autoloadFolder": [
 		"app/Controllers",
 		"app/Models",
-		"config/Exceptions"
+		"Models/Exceptions",
+		"vendor/",
+		"vendor/Route/"
 	],
     "baseUrl": "/mon-blog",
 	"database":  {
