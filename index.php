@@ -22,9 +22,7 @@ spl_autoload_register(function($class) use($config)
 });
 try
 	{
-		echo "yes"; 
 		$httpRequest = new HttpRequest();
-		var_dump($httpRequest); die;
 		$router = new Router($config->baseUrl);
 		$httpRequest->setRoute($router->findRoute($httpRequest));
 	}
