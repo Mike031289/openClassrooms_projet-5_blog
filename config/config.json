@@ -2,7 +2,7 @@
 	"autoloadFolder": [
 		"app/Controllers",
 		"app/Models",
-		"Models/Exceptions",
+		"app/Exceptions",
 		"vendor/",
 		"vendor/Route/"
 	],
