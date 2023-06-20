@@ -8,7 +8,8 @@ Class BaseController
     $this->_httpRequest = $httpRequest;
   }
 
-  public function view($filename){
+  protected function view($filename)
+  {
     if(file_exists('View/' . $filename . 'html.twig'))
     {
       ob_start();
@@ -23,12 +24,13 @@ Class BaseController
     }
   }
 
-  public function bindManager(){
+  public function bindManager()
+  {
 
   }
 
   public function addParam($name,$value)
-		{
-			$this->_param[$name] = $value;
-		}
+  {
+    $this->_param[$name] = $value;
+  }
 }
