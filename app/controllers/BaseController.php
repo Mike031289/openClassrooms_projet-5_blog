@@ -16,7 +16,7 @@ Class BaseController
       extract($this->_param);
       include("View/" . $filename . "html.twig");
       $content = ob_get_clean();
-      include("View/layout.html.twig");
+      include("Views/layout.html.twig");
     }
     else
     {

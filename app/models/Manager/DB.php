@@ -19,4 +19,9 @@
 		{
 			$this->_bdd = new PDO('mysql:dbname=' . $datasource->dbname . ';host=' . $datasource->host, $datasource->user,$datasource->password);
 		}
+
+    public function getDb()
+		{
+			return $this->_db;
+		}
 	}
