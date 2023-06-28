@@ -2,9 +2,6 @@
 // Inclusion of the Composer autoloader
 require_once __DIR__ . '/vendor/autoload.php';
 
-$loader = new Twig\Loader\FilesystemLoader(__DIR__ . '/app/views/templates');
-$twig = new Twig\Environment($loader);
-
 // Loading Class files, Inclusion of application configuration and startup files
 $configFile = file_get_contents("config/config.json");
 $config = json_decode($configFile);
@@ -25,6 +22,7 @@ try
 		$httpRequest = new HttpRequest();
 		$router = new Router($config->baseUrl);
 		$httpRequest->setRoute($router->findRoute($httpRequest));
+		$httpRequest->run($config);
 	}
 	catch(Exception $e)
 	{

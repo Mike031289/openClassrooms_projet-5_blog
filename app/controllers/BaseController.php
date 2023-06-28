@@ -1,22 +1,24 @@
 <?php
-Class BaseController
+class BaseController
 {
   private $_param;
   private $_httpRequest;
+  private $_twig;
 
   public function __construct($httpRequest){
     $this->_httpRequest = $httpRequest;
+    $_loader = new Twig\Loader\FilesystemLoader(__DIR__ . '/app/views/templates');
+    $this->_twig = new Twig\Environment($_loader);
   }
 
   protected function view($filename)
   {
-    if(file_exists('View/' . $filename . 'html.twig'))
+    if(file_exists('../Views/' . $filename . '.html.twig'))
     {
       ob_start();
       extract($this->_param);
-      include("View/" . $filename . "html.twig");
       $content = ob_get_clean();
-      include("Views/layout.html.twig");
+      $this->_twig->render("Views/layout.html.twig");
     }
     else
     {

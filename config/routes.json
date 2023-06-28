@@ -1,6 +1,6 @@
 [{
 	"path" : "/",
-	"controller" : "Home",
+	"controller" : "Blog",
 	"action" : "Home",
 	"method" : "GET",
 	"param" : []
