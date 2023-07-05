@@ -6,10 +6,10 @@ class BaseManager
   private $_object;
   protected $_db;
   
-  public function __construct($table, $object, $datasource)
+  public function __construct($table, $objetect, $datasource)
   {
     $this->_table = $table;
-    $this->_object = $object;
+    $this->_object = $objetect;
     $this->_db = DB::getInstance($datasource);
   }
   
@@ -29,7 +29,7 @@ class BaseManager
 			return $req->fetchAll();
   }
   
-  public function create($obj)
+  public function create($objet)
   {
     $paramNumber = count($param);
     $valueArray = array_fill(1,$param_number,"?");
@@ -39,9 +39,9 @@ class BaseManager
     $boundParam = array();
 			foreach($param as $paramName)
 			{
-				if(property_exists($obj,$paramName))
+				if(property_exists($objet,$paramName))
 				{
-					$boundParam[$paramName] = $obj->$paramName;	
+					$boundParam[$paramName] = $objet->$paramName;	
 				}
 				else
 				{
@@ -51,7 +51,7 @@ class BaseManager
 			$req->execute($boundParam);
   }
   
-  public function update($obj)
+  public function update($objet)
   {
     $sql = "UPDATE " . $this->_table . " SET ";
 			foreach($param as $paramName)
@@ -65,9 +65,9 @@ class BaseManager
 			$boundParam = array();
 			foreach($param as $paramName)
 			{
-				if(property_exists($obj,$paramName))
+				if(property_exists($objet,$paramName))
 				{
-					$boundParam[$paramName] = $obj->$paramName;	
+					$boundParam[$paramName] = $objet->$paramName;	
 				}
 				else
 				{
@@ -78,12 +78,12 @@ class BaseManager
 			$req->execute($boudParam);
   }
   
-  public function delete($obj)
+  public function delete($objet)
   {
-    if(property_exists($obj,"id"))
+    if(property_exists($objet,"id"))
     {
       $req = $_db->prepare("DELETE FROM " . $this->_table . " WHERE id=?");
-      return $req->execute(array($obj->id));
+      return $req->execute(array($objet->id));
     }
     else
     {
