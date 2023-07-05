@@ -4,31 +4,30 @@ class BaseController
   private $_param;
   private $_httpRequest;
   private $_twig;
+  private $_config;
 
-  public function __construct($httpRequest){
+  public function __construct($httpRequest, $config){
     $this->_httpRequest = $httpRequest;
-    $_loader = new Twig\Loader\FilesystemLoader(__DIR__ . '/app/views/templates');
+    $this->_config = $config;
+    $_loader = new Twig\Loader\FilesystemLoader(__DIR__ . '/../Views');
     $this->_twig = new Twig\Environment($_loader);
   }
 
-  protected function view($filename)
+  protected function view($filename, $context = [])
   {
-    if(file_exists('../Views/' . $filename . '.html.twig'))
-    {
       ob_start();
       extract($this->_param);
       $content = ob_get_clean();
-      $this->_twig->render("Views/layout.html.twig");
-    }
-    else
-    {
-      throw new ViewNotFoundException();	
-    }
+      echo $this->_twig->render($filename, $context);
+    
   }
 
-  public function bindManager()
+	public function bindManager()
   {
-
+    foreach($this->_httpRequest->getRoute()->manager as $manager)
+    {
+      $this->$manager = new $manager($this->_config->database);
+    }
   }
 
   public function addParam($name,$value)

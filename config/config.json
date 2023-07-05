@@ -2,13 +2,14 @@
 	"autoloadFolder": [
 		"app/Controllers",
 		"app/Models",
+		"Models/Manager/",
 		"app/Exceptions",
 		"vendor/",
 		"vendor/Route/"
 	],
     "baseUrl": "/mon-blog",
 	"database":  {
-            "name": "mon-blog",
+            "name": "mon_blog",
             "dbname": "database",
             "host": "localhost",
             "user": "user",

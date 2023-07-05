@@ -17,7 +17,7 @@ class BaseManager
   {
     $req = $_db->prepare("SELECT * FROM " . $this->_table . " WHERE id=?");
     $req->execute(array($id));
-    $req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,$this->_obj);
+    $req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,$this->_object);
 			return $req->fetch();
   }
   
@@ -25,18 +25,18 @@ class BaseManager
   {
     $req = $_db->prepare("SELECT * FROM " . $this->_table);
     $req->execute();
-    $req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,$this->_obj);
+    $req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,$this->_object);
 			return $req->fetchAll();
   }
   
   public function create($obj)
   {
     $paramNumber = count($param);
-			$valueArray = array_fill(1,$param_number,"?");
-			$valueString = implode($valueArray,", ");
-			$sql = "INSERT INTO " . $this->_table . "(" . implode($param,", ") . ") VALUES(" . $valueString . ")";
-			$req = $_db->prepare($sql);
-			$boundParam = array();
+    $valueArray = array_fill(1,$param_number,"?");
+    $valueString = implode($valueArray,", ");
+    $sql = "INSERT INTO " . $this->_table . "(" . implode($param,", ") . ") VALUES(" . $valueString . ")";
+    $req = $_db->prepare($sql);
+    $boundParam = array();
 			foreach($param as $paramName)
 			{
 				if(property_exists($obj,$paramName))
