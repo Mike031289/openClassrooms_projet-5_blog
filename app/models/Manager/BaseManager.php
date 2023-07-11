@@ -6,16 +6,16 @@ class BaseManager
   private $_object;
   protected $_db;
   
-  public function __construct($table, $objetect, $datasource)
+  public function __construct($table, $object, $datasource)
   {
     $this->_table = $table;
-    $this->_object = $objetect;
+    $this->_object = $object;
     $this->_db = DB::getInstance($datasource);
   }
   
   public function getById($id)
   {
-    $req = $_db->prepare("SELECT * FROM " . $this->_table . " WHERE id=?");
+    $req = $this->_db->prepare("SELECT * FROM " . $this->_table . " WHERE id=?");
     $req->execute(array($id));
     $req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,$this->_object);
 			return $req->fetch();
@@ -23,25 +23,25 @@ class BaseManager
   
   public function getAll()
   {
-    $req = $_db->prepare("SELECT * FROM " . $this->_table);
+    $req = $this->_db->prepare("SELECT * FROM " . $this->_table);
     $req->execute();
     $req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,$this->_object);
-			return $req->fetchAll();
+			return $req->fetch();
   }
   
-  public function create($objet)
+  public function create($object)
   {
     $paramNumber = count($param);
     $valueArray = array_fill(1,$param_number,"?");
     $valueString = implode($valueArray,", ");
     $sql = "INSERT INTO " . $this->_table . "(" . implode($param,", ") . ") VALUES(" . $valueString . ")";
-    $req = $_db->prepare($sql);
+    $req = $this->_db->prepare($sql);
     $boundParam = array();
 			foreach($param as $paramName)
 			{
-				if(property_exists($objet,$paramName))
+				if(property_exists($object,$paramName))
 				{
-					$boundParam[$paramName] = $objet->$paramName;	
+					$boundParam[$paramName] = $object->$paramName;	
 				}
 				else
 				{
@@ -51,7 +51,7 @@ class BaseManager
 			$req->execute($boundParam);
   }
   
-  public function update($objet)
+  public function update($object)
   {
     $sql = "UPDATE " . $this->_table . " SET ";
 			foreach($param as $paramName)
@@ -59,15 +59,15 @@ class BaseManager
 				$sql = $sql . $paramName . " = ?, ";
 			}
 			$sql = $sql . " WHERE id = ? ";
-			$req = $_db->prepare($sql);
+			$req = $this->_db->prepare($sql);
 			
 			$param[] = 'id';
 			$boundParam = array();
 			foreach($param as $paramName)
 			{
-				if(property_exists($objet,$paramName))
+				if(property_exists($object,$paramName))
 				{
-					$boundParam[$paramName] = $objet->$paramName;	
+					$boundParam[$paramName] = $object->$paramName;	
 				}
 				else
 				{
@@ -78,12 +78,12 @@ class BaseManager
 			$req->execute($boudParam);
   }
   
-  public function delete($objet)
+  public function delete($object)
   {
-    if(property_exists($objet,"id"))
+    if(property_exists($object,"id"))
     {
-      $req = $_db->prepare("DELETE FROM " . $this->_table . " WHERE id=?");
-      return $req->execute(array($objet->id));
+      $req = $this->_db->prepare("DELETE FROM " . $this->_table . " WHERE id=?");
+      return $req->execute(array($object->id));
     }
     else
     {

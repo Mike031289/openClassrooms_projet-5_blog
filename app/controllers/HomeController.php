@@ -4,7 +4,7 @@
 
 		public function Home()
 		{
-			$this->view("blog/home.html.twig", ['content'=> 'Toto']);	
+			$this->view("blog/home.html.twig", ['content'=>'Toto']);	
 		}
 
 	}

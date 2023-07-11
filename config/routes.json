@@ -3,21 +3,33 @@
 	"controller" : "Home",
 	"action" : "home",
 	"method" : "GET",
-	"param" : []
+	"param" : [],
+	"managers": []
 },
 {
-	"path" : "/Login",
-	"controller" : "Home",
+	"path": "/posts",
+	"controller": "Post",
+	"action": "ListPosts",
+	"method": "GET",
+	"param": [],
+	"managers": ["PostManager"]
+},
+
+{
+	"path" : "/login",
+	"controller" : "Login",
 	"action" : "Login",
 	"method" : "GET",
-	"param" : []
+	"param" : [],
+	"managers": []
 },
 {
-	"path" : "/Login",
-	"controller" : "Home",
+	"path" : "/login",
+	"controller" : "Login",
 	"action" : "Authenticate",
 	"method" : "POST",
 	"param" : [
 		"login",
-		"password"]
+		"password"],
+	"managers": []
 }]

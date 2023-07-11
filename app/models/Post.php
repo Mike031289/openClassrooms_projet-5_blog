@@ -2,59 +2,59 @@
 
 class Post
 {
-    private $id;
-    private $title;
-    private $summary;
-    private $images;
-    private $publicationDate;
-    private $updateDate;
-    private $userId;
+    private $_id;
+    private $_title;
+    private $_summary;
+    private $_images;
+    private $_publicationDate;
+    private $_updateDate;
+    private $_userId;
 
     public function __construct($id, $title, $summary, $images, $publicationDate, $updateDate, $userId)
     {
-        $this->id = $id;
-        $this->title = $title;
-        $this->summary = $summary;
-        $this->images = $images;
-        $this->publicationDate = $publicationDate;
-        $this->updateDate = $updateDate;
-        $this->userId = $userId;
+        $this->_id = $id;
+        $this->_title = $title;
+        $this->_summary = $summary;
+        $this->_images = $images;
+        $this->_publicationDate = $publicationDate;
+        $this->_updateDate = $updateDate;
+        $this->_userId = $userId;
     }
 
     // Getters
     public function getId()
     {
-        return $this->id;
+        return $this->_id;
     }
 
     public function getTitle()
     {
-        return $this->title;
+        return $this->_title;
     }
 
     public function getSummary()
     {
-        return $this->summary;
+        return $this->_summary;
     }
 
     public function getImages()
     {
-        return $this->images;
+        return $this->_images;
     }
 
     public function getPublicationDate()
     {
-        return $this->publicationDate;
+        return $this->_publicationDate;
     }
 
     public function getUpdateDate()
     {
-        return $this->updateDate;
+        return $this->_updateDate;
     }
 
     public function getUserId()
     {
-        return $this->userId;
+        return $this->_userId;
     }
 }
 

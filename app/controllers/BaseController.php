@@ -11,6 +11,7 @@ class BaseController
     $this->_config = $config;
     $_loader = new Twig\Loader\FilesystemLoader(__DIR__ . '/../Views');
     $this->_twig = new Twig\Environment($_loader);
+    $this->bindManager();
   }
 
   protected function view($filename, $context = [])
@@ -19,13 +20,13 @@ class BaseController
       extract($this->_param);
       $content = ob_get_clean();
       echo $this->_twig->render($filename, $context);
-    
   }
 
-	public function bindManager()
+	private function bindManager()
   {
-    foreach($this->_httpRequest->getRoute()->manager as $manager)
+    foreach($this->_httpRequest->getRoute()->getManagers() as $manager)
     {
+      var_dump($manager);
       $this->$manager = new $manager($this->_config->database);
     }
   }
