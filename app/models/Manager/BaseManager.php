@@ -17,6 +17,10 @@ class BaseManager
   {
     $req = $this->_db->prepare("SELECT * FROM " . $this->_table . " WHERE id=?");
     $req->execute(array($id));
+    // We're going to define how the results of the query ($req) are to be retrieved:
+    // PDO::FETCH_CLASS indicates that the results are to be returned as instances of the specified class.
+    // PDO::FETCH_PROPS_LATE means that the object's properties will be assigned after the call to the class constructor.
+    // $this->_object represents the current object
     $req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,$this->_object);
 			return $req->fetch();
   }
@@ -26,9 +30,9 @@ class BaseManager
     $req = $this->_db->prepare("SELECT * FROM " . $this->_table);
     $req->execute();
     $req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,$this->_object);
-			return $req->fetch();
+    return $req->fetchAll();
   }
-  
+
   public function create($object)
   {
     $paramNumber = count($param);

@@ -1,60 +1,140 @@
 <?php
-
+// namespace Post;
 class Post
 {
-    private $_id;
-    private $_title;
-    private $_summary;
-    private $_images;
-    private $_publicationDate;
-    private $_updateDate;
-    private $_userId;
+    private $id;
+    private $title;
+    private $content;
+    private $imageUrl;
+    private $authorId;
+    private $createdAt;
+    private $updatedAt;
 
-    public function __construct($id, $title, $summary, $images, $publicationDate, $updateDate, $userId)
-    {
-        $this->_id = $id;
-        $this->_title = $title;
-        $this->_summary = $summary;
-        $this->_images = $images;
-        $this->_publicationDate = $publicationDate;
-        $this->_updateDate = $updateDate;
-        $this->_userId = $userId;
-    }
 
-    // Getters
+    /**
+     * Get the value of id
+     */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
+    /**
+     * Set the value of id
+     */
+    public function setId($id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of title
+     */
     public function getTitle()
     {
-        return $this->_title;
+        return $this->title;
     }
 
-    public function getSummary()
+    /**
+     * Set the value of title
+     */
+    public function setTitle($title): self
     {
-        return $this->_summary;
+        $this->title = $title;
+
+        return $this;
     }
 
-    public function getImages()
+    /**
+     * Get the value of content
+     */
+    public function getContent()
     {
-        return $this->_images;
+        return $this->content;
     }
 
-    public function getPublicationDate()
+    /**
+     * Set the value of content
+     */
+    public function setContent($content): self
     {
-        return $this->_publicationDate;
+        $this->content = $content;
+
+        return $this;
     }
 
-    public function getUpdateDate()
+    /**
+     * Get the value of imageUrl
+     */
+    public function getImageUrl()
     {
-        return $this->_updateDate;
+        return $this->imageUrl;
     }
 
-    public function getUserId()
+    /**
+     * Set the value of imageUrl
+     */
+    public function setImageUrl($imageUrl): self
     {
-        return $this->_userId;
+        $this->imageUrl = $imageUrl;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of authorId
+     */
+    public function getAuthorId()
+    {
+        return $this->authorId;
+    }
+
+    /**
+     * Set the value of authorId
+     */
+    public function setAuthorId($authorId): self
+    {
+        $this->authorId = $authorId;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of createdAt
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set the value of createdAt
+     */
+    public function setCreatedAt($createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of updatedAt
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set the value of updatedAt
+     */
+    public function setUpdatedAt($updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 }
 

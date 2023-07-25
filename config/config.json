@@ -10,7 +10,7 @@
     "baseUrl": "/mon-blog",
 	"database":  {
             "name": "mon-blog",
-            "dbname": "mon_blog",
+            "dbname": "monblog",
             "host": "localhost",
             "user": "root",
             "password": ""

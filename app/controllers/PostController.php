@@ -4,27 +4,15 @@ class PostController extends BaseController
     public function __construct($httpRequest, $config)
     {
         parent::__construct($httpRequest, $config);
-    }
 
+    }
+    /**
+     * @ListPosts calls the getAll() function of the PostManager class to retrieve the list of all posts and display them in a twig template
+     */
     public function ListPosts()
     {
         $posts = $this->PostManager->getAll();
-         $this->view('post.twig', ['content' => $posts]);
-
+        $this->view('blog/post.html.twig', ['posts' => $posts]);
     }
-
+   
 }
-
-
-        // $homPost = $this->addParam('posts', $posts);
-        // var_dump($homPost);
-        // $this->view('post.twig', $this->_param);
-
-        
-
-         // Instancier le manager des articles
-        //  $postManager = new PostManager($this->_config->database);
-
-         // Récupérer tous les articles
- 
-         // Passer les articles au template pour l'affichage

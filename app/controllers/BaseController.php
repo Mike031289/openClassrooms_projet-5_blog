@@ -14,6 +14,9 @@ class BaseController
     $this->bindManager();
   }
 
+  /**
+   * @view is used to display a Twig template by rendering the corresponding HTML content
+   */
   protected function view($filename, $context = [])
   {
       ob_start();
@@ -26,7 +29,6 @@ class BaseController
   {
     foreach($this->_httpRequest->getRoute()->getManagers() as $manager)
     {
-      var_dump($manager);
       $this->$manager = new $manager($this->_config->database);
     }
   }

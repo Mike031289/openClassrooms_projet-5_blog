@@ -17,12 +17,11 @@ spl_autoload_register(function($class) use($config)
         }
     }
 });
-try
+try 
 	{
 		$httpRequest = new HttpRequest();
 		$router = new Router($config->baseUrl);
 		$httpRequest->setRoute($router->findRoute($httpRequest));
-		// fonction run en double ?? elle existe sous une forme dans le fichier HttpRequest.php
 		$httpRequest->run($config);
 	}
 	catch(Exception $e)
