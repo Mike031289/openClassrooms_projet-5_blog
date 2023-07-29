@@ -1,4 +1,6 @@
 <?php
+namespace App\Controllers;
+use App\Manager\PostManager;
 class PostController extends BaseController
 {
     public function __construct($httpRequest, $config)
@@ -11,8 +13,7 @@ class PostController extends BaseController
      */
     public function ListPosts()
     {
-        $posts = $this->PostManager->getAll();
+        $posts = $this->getManager(PostManager::class)->getAll();
         $this->view('blog/post.html.twig', ['posts' => $posts]);
     }
-   
 }

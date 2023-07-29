@@ -1,5 +1,6 @@
-
 <?php
+namespace App\Exceptions;
+
 class ViewNotFoundException extends Exception {
   public function __construct($message = "No view has been found")
   {

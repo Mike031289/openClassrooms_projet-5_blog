@@ -1,5 +1,5 @@
 <?php
-use app\Models\Post;
+namespace App\Manager;
 
 class PostManager extends BaseManager
 {
@@ -7,8 +7,6 @@ class PostManager extends BaseManager
     public function __construct($dataSource)
     {
         parent::__construct("post", "Post", $dataSource);
-        
-
     }
 
 }

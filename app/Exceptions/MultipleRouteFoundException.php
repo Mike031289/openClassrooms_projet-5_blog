@@ -1,4 +1,5 @@
 <?php
+namespace App\Exceptions;
 	class MultipleRouteFoundException extends Exception
 	{
 		public function __construct($message = "More than 1 route has been found")

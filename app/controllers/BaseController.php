@@ -1,17 +1,30 @@
 <?php
+namespace App\Controllers;
+use Twig\Loader\FilesystemLoader;
+use Twig\Environment;
 class BaseController
 {
   private $_param;
   private $_httpRequest;
   private $_twig;
   private $_config;
+  protected $_managers = [];
 
   public function __construct($httpRequest, $config){
     $this->_httpRequest = $httpRequest;
     $this->_config = $config;
-    $_loader = new Twig\Loader\FilesystemLoader(__DIR__ . '/../Views');
-    $this->_twig = new Twig\Environment($_loader);
+    $_loader = new FilesystemLoader(__DIR__ . '/../Views');
+    $this->_twig = new Environment($_loader);
     $this->bindManager();
+
+  }
+
+  /**
+   * @addParam stores parameters with specific keys in the _param table of the current object. These parameters can be used later in other parts of the object, in particular when rendering a view or managing a request, to pass data to templates or to facilitate the object's internal communication
+   */
+  public function addParam($name,$value)
+  {
+    $this->_param[$name] = $value;
   }
 
   /**
@@ -35,15 +48,12 @@ class BaseController
   {
     foreach($this->_httpRequest->getRoute()->getManagers() as $manager)
     {
-      $this->$manager = new $manager($this->_config->database);
+      $this->_managers[$manager] = new $manager($this->_config->database);
     }
   }
 
-  /**
-   * @addParam stores parameters with specific keys in the _param table of the current object. These parameters can be used later in other parts of the object, in particular when rendering a view or managing a request, to pass data to templates or to facilitate the object's internal communication
-   */
-  public function addParam($name,$value)
-  {
-    $this->_param[$name] = $value;
+  protected function getManager(string $className){
+    return $this->_managers[$className];
   }
+
 }

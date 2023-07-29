@@ -1,4 +1,6 @@
 <?php
+namespace App\Exceptions;
+
 	class NoRouteFoundException extends Exception
 	{
 		public function __construct($message = "No route has been found")

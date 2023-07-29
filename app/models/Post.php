@@ -1,15 +1,16 @@
 <?php
-// namespace Post;
+namespace App\Models;
+
 class Post
 {
     private $id;
     private $title;
     private $content;
     private $imageUrl;
+    private $categoryId; 
     private $authorId;
     private $createdAt;
     private $updatedAt;
-
 
     /**
      * Get the value of id
@@ -25,7 +26,6 @@ class Post
     public function setId($id): self
     {
         $this->id = $id;
-
         return $this;
     }
 
@@ -43,7 +43,6 @@ class Post
     public function setTitle($title): self
     {
         $this->title = $title;
-
         return $this;
     }
 
@@ -61,7 +60,6 @@ class Post
     public function setContent($content): self
     {
         $this->content = $content;
-
         return $this;
     }
 
@@ -79,7 +77,23 @@ class Post
     public function setImageUrl($imageUrl): self
     {
         $this->imageUrl = $imageUrl;
+        return $this;
+    }
 
+    /**
+     * Get the value of categoryId
+     */
+    public function getCategoryId()
+    {
+        return $this->categoryId;
+    }
+
+    /**
+     * Set the value of categoryId
+     */
+    public function setCategoryId($categoryId): self
+    {
+        $this->categoryId = $categoryId;
         return $this;
     }
 
@@ -97,7 +111,6 @@ class Post
     public function setAuthorId($authorId): self
     {
         $this->authorId = $authorId;
-
         return $this;
     }
 
@@ -115,7 +128,6 @@ class Post
     public function setCreatedAt($createdAt): self
     {
         $this->createdAt = $createdAt;
-
         return $this;
     }
 
@@ -133,9 +145,6 @@ class Post
     public function setUpdatedAt($updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
         return $this;
     }
 }
-
-

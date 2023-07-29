@@ -8,11 +8,11 @@
 },
 {
 	"path": "/posts",
-	"controller": "Post",
+	"controller": "App\\Controllers\\PostController",
 	"action": "ListPosts",
 	"method": "GET",
 	"param": [],
-	"managers": ["PostManager"]
+	"managers": ["App\\Manager\\PostManager"]
 },
 {
 	"path": "/contact",

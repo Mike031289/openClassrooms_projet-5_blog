@@ -7,7 +7,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Pc\\MonBlog\\": "src/"
+            "App\\": "app/",
+            "App\\Models\\": "app/Models",
+            "App\\Manager\\": "app/Manager",
+            "App\\Controllers\\": "app/Controllers",
+            "App\\Exceptions\\": "app/Exceptions",
+            "App\\Vendor\\": "app/Vendor"
         }
     },
     "authors": [

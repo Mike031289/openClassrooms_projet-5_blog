@@ -1,4 +1,5 @@
 <?php
+namespace App\Manager;
 
 class BaseManager
 {
@@ -35,7 +36,7 @@ class BaseManager
   {
     $req = $this->_db->prepare("SELECT * FROM " . $this->_table);
     $req->execute();
-    $req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,$this->_object);
+    $req->setFetchMode(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE,$this->_object);
     return $req->fetchAll();
   }
 
