@@ -2,6 +2,7 @@
 require 'vendor/autoload.php';
 use App\Vendor\HttpRequest;
 use App\Vendor\Router;
+
 // Loading Class files, Inclusion of application configuration and startup files
 $configFile = file_get_contents("config/config.json");
 $config = json_decode($configFile);

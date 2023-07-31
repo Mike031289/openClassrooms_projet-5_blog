@@ -1,10 +1,10 @@
 [{
 	"path" : "/",
-	"controller" : "Home",
+	"controller" : "App\\Controllers\\HomeController",
 	"action" : "home",
 	"method" : "GET",
 	"param" : [],
-	"managers": []
+	"managers": ["App\\Manager\\PostManager"]
 },
 {
 	"path": "/posts",
