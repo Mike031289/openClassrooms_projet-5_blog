@@ -16,5 +16,5 @@ try
 	}
 	catch(Exception $e)
 	{
-		echo "Une erreur s'est produite : " . $e->getMessage();
+		 return $e->getMessage();
 	}

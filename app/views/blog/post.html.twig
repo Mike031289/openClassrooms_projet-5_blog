@@ -21,7 +21,7 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="http://localhost/mon-blog">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">A propos</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Articles</a></li>
@@ -32,14 +32,16 @@
         <!-- Page header with logo and tagline-->
         <header class="py-5 bg-light border-bottom mb-4">
             <div class="container">
+             <a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
                 <div class="text-center my-5">
-                    <h1 class="fw-bolder">Liste d'articles</h1>
+                    <h1 class="fw-bolder">Liste des articles</h1>
                     <p class="lead mb-0">Nous vous informons sur tous nos activités</p>
                 </div>
             </div>
         </header>
         <!-- Page content-->
         <div class="container">
+        
             <div class="row">
                 <!-- Blog entries-->
                 <div class="col-lg-8">
@@ -143,39 +145,7 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+        <script src="public/js/scripts.js"></script>
     </body>
-    
-    <h1>Liste des posts</h1>
-    {% if posts is empty %}
-    {# {% if category is empty %} #}
-        <p>Aucun post disponible.</p>
-    {% else %}
-        <ul>
-            {% for post in posts %}
-                <li>
-                    <h2>{{ post.title }}</h2>
-                    <img src="{{ post.imageUrl}}" alt="Image">
-                    <p>{{ post.content }}</p>
-                    <p>Auteur : {{ post.authorId}}</p>
-                    <p>Category : {{ post.categoryId}}</p>
-                    <p>Date de publication: {{ post.createdAt}}</p>
-                    <p>Date de mise à jour: {{ post.updatedAt}}</p>
-                </li>
-            {% endfor %}
-    {% endif %}
-
-    {% if category is empty %}
-        <p>Aucune catégory disponible.</p>
-        {% else %}
-            <ul>
-                {% for categories in category %}
-                    <li>
-                        <p>Category : {{ categories.name}}</p>
-                    </li>
-                {% endfor %}
-
-            </ul>
-        {% endif %}
 </html>
 

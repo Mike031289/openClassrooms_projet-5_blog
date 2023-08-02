@@ -40,4 +40,21 @@
 		"login",
 		"password"],
 	"managers": []
-}]
+},
+{
+	"path" : "/error404", 
+	"controller" : "Error",
+	"action" : "notFound", 
+	"method" : "GET",
+	"param" : [],
+	"managers": []
+},
+{
+	"path" : "/errorGeneric", 
+	"controller" : "Error",
+	"action" : "generic", 
+	"method" : "GET",
+	"param" : [],
+	"managers": []
+}
+]

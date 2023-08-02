@@ -1,7 +1,7 @@
 <?php
 namespace App\Vendor;
-// use App\Exceptions\ActionNotFoundException;
-// use App\Exceptions\ControllerNotFoundException;
+use App\Exceptions\ActionNotFoundException;
+use App\Exceptions\ControllerNotFoundException;
 
 	class Route
 	{
