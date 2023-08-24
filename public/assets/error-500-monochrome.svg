@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 797.46 814.59">
+  <defs>
+    <style>.cls-1,.cls-6,.cls-7{fill:none;}.cls-2{fill:#949494;}.cls-3{fill:url(#New_Pattern);}.cls-4{fill:#f8f8f8;}.cls-5{fill:#d3d3d3;}.cls-6,.cls-7{stroke:#000;stroke-linecap:round;stroke-width:2.5px;}.cls-6{stroke-linejoin:round;}.cls-7{stroke-miterlimit:10;}</style>
+    <pattern id="New_Pattern" data-name="New Pattern" width="12" height="12" patternUnits="userSpaceOnUse" viewBox="0 0 12 12">
+      <rect class="cls-1" width="12" height="12"/>
+      <rect class="cls-1" width="12" height="12"/>
+      <circle class="cls-2" cx="12" cy="3" r="2"/>
+      <circle class="cls-2" cx="6" r="2"/>
+      <circle class="cls-2" cy="3" r="2"/>
+      <circle class="cls-2" cx="12" cy="9" r="2"/>
+      <circle class="cls-2" cx="6" cy="6" r="2"/>
+      <circle class="cls-2" cy="9" r="2"/>
+      <circle class="cls-2" cx="6" cy="12" r="2"/>
+    </pattern>
+  </defs>
+  <title>error-500-monochrome</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="vector">
+      <polygon class="cls-3" points="452.59 222.7 458.06 208.54 449.71 207.74 447.28 186.44 442.54 165.38 439.8 145.19 435.11 124.91 434.51 121.92 434.72 94.67 432.07 86.36 427.15 80.58 422.19 82.67 426.69 93.94 428.32 110.34 425.92 122.84 425.79 124.63 428.66 145.62 433.06 168.28 437.09 189.67 442.39 212.02 444.69 230.03 453.16 226.74 452.59 222.7"/>
+      <path class="cls-4" d="M445.24,229.3h0l-10.83-56.46-9.22-49.72,0-.07c-.08.19-.15.39-.23.57,1.13,5.84,19.48,101,19.88,105.83Z"/>
+      <!-- ... d'autres éléments de votre SVG ... -->
+    </g>
+  </g>
+</svg>

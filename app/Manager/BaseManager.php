@@ -17,18 +17,41 @@ class BaseManager
   /**
    * @getById retrieve a specific record from the table associated with the current class based on its identifier (ID). It returns the record in the form of an object corresponding to the class of the current object
    */
+  // public function getById($id)
+  // {
+  //   $req = $this->_db->prepare("SELECT * FROM " . $this->_table . " WHERE id=id");
+  //   $req->execute();
+  //   var_dump($req); die;
+
+  //   // We're going to define how the results of the query ($req) are to be retrieved:
+  //   // PDO::FETCH_CLASS indicates that the results are to be returned as instances of the specified class.
+  //   // PDO::FETCH_PROPS_LATE means that the object's properties will be assigned after the call to the class constructor.
+  //   // $this->_object represents the current object
+  //   $req->setFetchMode(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE,$this->_object);
+	// 		return $req->fetch();
+  // }
   public function getById($id)
-  {
-    $req = $this->_db->prepare("SELECT * FROM " . $this->_table . " WHERE id=?");
-    $req->execute(array($id));
-    // We're going to define how the results of the query ($req) are to be retrieved:
-    // PDO::FETCH_CLASS indicates that the results are to be returned as instances of the specified class.
-    // PDO::FETCH_PROPS_LATE means that the object's properties will be assigned after the call to the class constructor.
-    // $this->_object represents the current object
-    $req->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,$this->_object);
-			return $req->fetch();
-  }
-  
+{
+    // Préparez la requête en utilisant un paramètre nommé (:id)
+    $query = "SELECT * FROM " . $this->_table . " WHERE id = :id";
+    $stmt = $this->_db->prepare($query);
+
+    // Liez le paramètre :id à la valeur de l'ID passé en argument
+    $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+
+    // Exécutez la requête
+    if ($stmt->execute()) {
+        // Définissez le mode de récupération sur FETCH_CLASS | FETCH_PROPS_LATE
+        $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $this->_object);
+
+        // Récupérez et renvoyez le résultat unique sous forme d'objet
+        return $stmt->fetch();
+    } else {
+        // Gérez l'erreur ici (affichage, journalisation, etc.)
+        return null; // ou lancez une exception
+    }
+}
+
   /**
    * @getAll() retrieve all the rows in the table associated(_table) with the current class from the database. It returns an array containing the records in the form of objects corresponding to the class of the current object ($this->_object)
    */

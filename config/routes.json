@@ -9,15 +9,23 @@
 {
 	"path": "/posts",
 	"controller": "App\\Controllers\\PostController",
-	"action": "ListPosts",
+	"action": "listPosts",
 	"method": "GET",
 	"param": [],
 	"managers": ["App\\Manager\\PostManager"]
 },
 {
+	"path": "/post/{id}",
+	"controller": "App\\Controllers\\PostController",
+	"action": "showPost",
+	"method": "GET",
+	"param": ["id"],
+	"managers": ["App\\Manager\\PostManager"]
+},
+{
 	"path": "/contact",
 	"controller": "Contact",
-	"action": "SendMessage",
+	"action": "sendMessage",
 	"method": "POST",
 	"param": [],
 	"managers": ["ContactManager"]
@@ -26,7 +34,7 @@
 {
 	"path" : "/login",
 	"controller" : "Login",
-	"action" : "Login",
+	"action" : "login",
 	"method" : "GET",
 	"param" : [],
 	"managers": []
@@ -34,7 +42,7 @@
 {
 	"path" : "/login",
 	"controller" : "Login",
-	"action" : "Authenticate",
+	"action" : "authenticate",
 	"method" : "POST",
 	"param" : [
 		"login",
@@ -42,19 +50,12 @@
 	"managers": []
 },
 {
-	"path" : "/error404", 
-	"controller" : "Error",
+	"path" : "/404", 
+	"controller": "App\\Controllers\\ErrorController",
 	"action" : "notFound", 
 	"method" : "GET",
 	"param" : [],
 	"managers": []
-},
-{
-	"path" : "/errorGeneric", 
-	"controller" : "Error",
-	"action" : "generic", 
-	"method" : "GET",
-	"param" : [],
-	"managers": []
 }
+
 ]
