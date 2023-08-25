@@ -1,10 +1,76 @@
-{# <!doctype html>
-<html lang="fr">
-	<head>
-		<meta charset="utf-8">
-		<title>Mon premier blog</title>
-	</head>
-	<body>
-		{{ content }}
-	</body>
-</html> #}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>{{ title }}</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="public/assets/favicon.ico" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="public/css/styles.css" rel="stylesheet" />
+</head>
+<body>
+
+		<!-- Responsive navbar-->
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+				<div class="container">
+						<a class="navbar-brand" href="http://localhost/mon-blog/">Mon Blog</a>
+						<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+								<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+										<li class="nav-item">
+												<a class="nav-link {% if page == 'home' %}active{% endif %}" href="http://localhost/mon-blog/">Accueil</a>
+										</li>
+										<li class="nav-item">
+												<a class="nav-link {% if page == 'about' %}active{% endif %}" href="http://localhost/mon-blog/about">A propos</a>
+										</li>
+										<li class="nav-item">
+												<a class="nav-link {% if page == 'posts' %}active{% endif %}" href="http://localhost/mon-blog/posts">Articles</a>
+										</li>
+										<li class="nav-item">
+												<a class="nav-link {% if page == 'contact' %}active{% endif %}" href="http://localhost/mon-blog/contact">Contact</a>
+										</li>
+								</ul>
+						</div>
+				</div>
+		</nav>
+
+    <!-- Page header with logo and tagline-->
+    {% block header %}
+    <header class="py-5 bg-light border-bottom mb-4">
+        <div class="container">
+            <div class="text-center my-5">
+                <h1 class="fw-bolder">{{ block('header_title') }}</h1>
+                <p class="lead mb-0">{{ block('header_description') }}</p>
+            </div>
+        </div>
+    </header>
+    {% endblock %}
+    
+    <!-- Content section -->
+    {% block content %}
+    {% endblock %}
+    
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <div class="container text-center">
+            <p class="m-0 text-center text-white">
+                Copyright &copy; dmdprod 2023
+            </p>
+            <div>
+                <a class="m-0 text-center text-white" href="#">Politique De Confidentialité</a>
+                <a class="m-0 text-center text-white">|</a>
+                <a class="m-0 text-center text-white" href="#">Terms &amp; Conditions D'utilisation</a>
+            </div>
+        </div>
+    </footer>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="public/js/scripts.js"></script>
+</body>
+</html>
