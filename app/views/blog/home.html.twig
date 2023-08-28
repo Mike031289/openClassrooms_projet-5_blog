@@ -34,6 +34,7 @@
                     <p>Auteur : {{ latestPost.authorId }}</p>
                     <p>id : {{ latestPost.id }}</p>
                     <a class="btn btn-primary" href="http://localhost/mon-blog/post/{{ latestPost.id }}">Lire →</a>
+                    {# <a class="btn btn-primary" href="{{ path('post_show', {'id': latestPost.id}) }}">Lire →</a> #}
                 </div>
             </div>
         {% endif %}
@@ -55,6 +56,7 @@
                             <p>Auteur : {{ post.authorId }}</p>
                             <p>id : {{ post.id }}</p>
                             <a class="btn btn-primary" href="http://localhost/mon-blog/post/{{ post.id }}">Lire →</a>
+                            {# <a class="btn btn-primary" href="{{ path('post_show', {'id': post.id}) }}">Lire →</a> #}
                         </div>
                     </div>
                 </div>

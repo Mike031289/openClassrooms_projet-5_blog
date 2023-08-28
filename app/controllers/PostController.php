@@ -16,12 +16,12 @@ class PostController extends BaseController
         $posts = $this->getManager(PostManager::class)->getAll();
         $this->view('blog/posts.html.twig', ['posts' => $posts]);
     }
-    
 
-    public function showPost() {
+    public function showPost($id)
+    {
         // Utilisez l'identifiant pour récupérer les informations de l'article depuis votre gestionnaire d'articles (ArticleManager)
-        $posts = $this->getManager(PostManager::class)->getById($id);
+        $post = $this->getManager(PostManager::class)->getById($id);
         // Passez les informations de l'article à votre vue Twig pour l'affichage
-        $this->view('blog/post.html.twig', ['posts' => $posts]);
+        $this->view('blog/post.html.twig', ['post' => $post]);
     }
 }

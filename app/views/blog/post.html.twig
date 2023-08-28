@@ -1,107 +1,36 @@
+{% extends 'templates/layout.html.twig' %}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>{{ post.title }}</title>
-    <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="public/assets/favicon.ico" />
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="public/css/styles.css" rel="stylesheet" />
-</head> 
- <body>
-        <!-- Responsive navbar-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="#!">Mon Blog</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">A propos</a></li>
-                         <li class="nav-item"><a class="nav-link" href="http://localhost/mon-blog/posts">Articles</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
-                    </ul>
-
-                </div>
-            </div>
-        </nav>
-        <!-- Page header with logo and tagline-->
-        <header class="py-5 bg-light border-bottom mb-4">
-            <div class="container">
-                <div class="text-center my-5">
-                    <title>{{ post.title }}</title>
-                    <p class="lead mb-0">Nous vous informons sur tous nos activités</p>
-                </div>
-            </div>
-        </header>
-        <!-- Page content-->
-        {% if posts is empty %}
-        {# {% if category is empty %} #}
-            <p>Aucun post disponible.</p>
-        {% else %}
-        <!-- Blog post-->
-        {% for post in posts %}
+{% block header %}
+    <header class="py-5 bg-light border-bottom mb-4">
         <div class="container">
-            <div class="row">
-                <!-- Blog entries-->
-                <!-- Featured blog post-->
+            <div class="text-center my-5">
                 <h1>{{ post.title }}</h1>
-                {# <div class="card mb-4 p-0">
-                    <a href="http://localhost/mon-blog/posts"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                    <div class="card-body">
-                        <div class="small text-muted">January 1, 2023</div>
-                        <h2 class="card-title">Featured Post Title</h2>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-                        <a class="btn btn-primary" href="http://localhost/mon-blog/posts">Read more →</a>
-                    </div>
-                </div> #}
-                <div class="col-lg-8">
-
-                    <!-- Nested row for non-featured blog posts-->
-                    {# <div class="container-fluid">
-                         #}
-                    <div class="container-fluid  p-0">
-                        <div class="card mb-4 p-0">
-                            <a href="#!">
-                                {# <img src="{{ post.imageUrl}}" alt="Image"> #}
-                                <img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                                <div class="card-body">
-                                    <div class="small text-muted">Date de publication: {{ post.createdAt}}</div>
-                                    <div class="small text-muted">Date de mise à jour: {{ post.updatedAt}}</div>
-                                    <p class="card-text">{{ post.content }}</p>
-                                    <p>Auteur : {{ post.authorId}}</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                        {% endfor %}
-                        {% endif %}
-                    
-                    {# </div> #}
-                </div>
+                <p class="lead mb-0">Nous vous informons sur tous nos activités</p>
             </div>
         </div>
-        <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container text-center">
-                <p class="m-0 text-center text-white">
-                    Copyright &copy; dmdprod 2023
-                </p>
-                <div>
-                    <a class="m-0 text-center text-white" href="#">Politique De Confidentialité</a>
-                    <a class="m-0 text-center text-white">|</a>
-                    <a class="m-0 text-center text-white" href="#">Terms &amp; Conditions D'utilisation</a>
-                </div>
-            </div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="public/js/scripts.js"></script>
-    </body>
-</html>
+    </header>
+{% endblock %}
 
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            {% if post %}
+                <div class="card mb-4 p-0">
+                    <a href="#!">
+                        <img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." />
+                    </a>
+                    <div class="card-body">
+                        <div class="small text-muted">Date de publication: {{ post.createdAt }}</div>
+                        <div class="small text-muted">Date de mise à jour: {{ post.updatedAt }}</div>
+                        <p class="card-text">{{ post.content }}</p>
+                        <p>Auteur : {{ post.authorId }}</p>
+                    </div>
+                </div>
+            {% else %}
+                <p>L'article n'existe pas.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

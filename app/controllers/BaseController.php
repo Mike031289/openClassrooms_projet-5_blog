@@ -1,59 +1,70 @@
 <?php
+
 namespace App\Controllers;
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
+use Twig\TwigFunction;
+
 class BaseController
 {
-  private $_param;
-  private $_httpRequest;
-  private $_twig;
-  private $_config;
-  protected $_managers = [];
+    private $_param;
+    private $_httpRequest;
+    private $_twig;
+    private $_config;
+    protected $_managers = [];
 
-  public function __construct($httpRequest, $config){
-    $this->_httpRequest = $httpRequest;
-    $this->_config = $config;
-    $_loader = new FilesystemLoader(__DIR__ . '/../Views');
-    $this->_twig = new Environment($_loader);
-    $this->bindManager();
+    public function __construct($httpRequest, $config){
+        $this->_httpRequest = $httpRequest;
+        $this->_config = $config;
+        $_loader = new FilesystemLoader(__DIR__ . '/../Views');
+        $this->_twig = new Environment($_loader);
+        $this->bindManager();
 
-  }
-
-  /**
-   * @addParam stores parameters with specific keys in the _param table of the current object. These parameters can be used later in other parts of the object, in particular when rendering a view or managing a request, to pass data to templates or to facilitate the object's internal communication
-   */
-  public function addParam($name,$value)
-  {
-    $this->_param[$name] = $value;
-  }
-
-  /**
-   * @view is used to display a Twig template by rendering the corresponding HTML content
-   */
-  protected function view($fileName, $viewContent = [])
-  {
-      ob_start();
-      //we're going to extract the variables defined in the $this->_param property. This makes the variables available directly in the Twig template for easy access
-      extract($this->_param);
-      //we retrieve the content captured in the output buffer ob_start(); and store it in the variable $content
-      $content = ob_get_clean();
-      //to render the Twig template specified by $fileName using the data in the $viewContent array. The generated HTML result is stored in a variable. It displays the rendered content using echo
-      echo $this->_twig->render($fileName, $viewContent);
-  }
-
-  /**
-   * @bindManagers function allows us to bind instances of database handlers to properties of the current object. Once the handlers have been bound, they can be used to interact with the database throughout the execution of the application
-   */
-	private function bindManager()
-  {
-    foreach($this->_httpRequest->getRoute()->getManagers() as $manager)
-    {
-      $this->_managers[$manager] = new $manager($this->_config->database);
+        // Ajouter la fonction path à l'environnement Twig
+        // $this->_twig->addFunction(new TwigFunction('path', function ($routeName, $parameters = []) {
+        //     $path = '';
+        //     // Associer le nom de la route à l'URL correspondante
+        //     switch ($routeName) {
+        //         case 'home':
+        //             $path = '/';
+        //             break;
+        //         case 'listPosts':
+        //             $path = '/posts';
+        //             break;
+        //         case 'showPost':
+        //             // Vérifier si l'ID est fourni dans les paramètres
+        //             if (isset($parameters['id'])) {
+        //                 $path = '/post/' . $parameters['id'];
+        //             }
+        //             break;
+        //         // Ajouter d'autres cas pour les autres routes
+        //         default:
+        //             // Gérer les cas inconnus
+        //             break;
+        //     }
+        //     return $path;
+        // }));
     }
-  }
 
-  protected function getManager(string $className){
-    return $this->_managers[$className];
-  }
+    // ... Autres méthodes ...
 
+    protected function view($fileName, $viewContent = [])
+    {
+        ob_start();
+        extract($this->_param);
+        $content = ob_get_clean();
+        echo $this->_twig->render($fileName, $viewContent);
+    }
+
+    private function bindManager()
+    {
+        foreach($this->_httpRequest->getRoute()->getManagers() as $manager)
+        {
+            $this->_managers[$manager] = new $manager($this->_config->database);
+        }
+    }
+
+    protected function getManager(string $className){
+        return $this->_managers[$className];
+    }
 }

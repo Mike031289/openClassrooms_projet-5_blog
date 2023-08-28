@@ -12,13 +12,13 @@ use App\Exceptions\ControllerNotFoundException;
 		private $_param;
 		private $_managers;
 		
-		public function __construct($route)
+		public function __construct($route,  $routeParams)
 		{
 			$this->_path = $route->path;
 			$this->_controller = $route->controller;
 			$this->_action = $route->action;
 			$this->_method = $route->method;
-			$this->_param = $route->param;
+			$this->_param =  $routeParams;
 			$this->_managers = $route->managers;
 		}
 
@@ -75,27 +75,27 @@ use App\Exceptions\ControllerNotFoundException;
 		 * $config contains data from the config file (config.json)
 		 * $httpRequest contains data from the HttpResquest class
 		 */
-		public function run($httpRequest,$config)
-		{
-			$controller = null;
-			$controllerName = $this->_controller;
-				if(class_exists($controllerName))
-				{
-					$controller = new $controllerName($httpRequest,$config);
-					if(method_exists($controller, $this->_action))
-					{
-							$controller->{$this->_action}(...$httpRequest->getParam());
-					}
-					else
-					{
-							throw new ActionNotFoundException();
-					}
-			}
-			else
-			{
-					throw new ControllerNotFoundException();
-			}
-			
-		}
+		public function run($httpRequest, $config)
+    {
+        $controller = null;
+        $controllerName = $this->_controller;
+
+        // Vérifie si la classe du contrôleur existe
+        if (class_exists($controllerName)) {
+            $controller = new $controllerName($httpRequest, $config);
+
+            // Vérifie si la méthode (action) existe dans le contrôleur
+            if (method_exists($controller, $this->_action)) {
+                $params = array_values($this->_param);
+
+                // Appelle l'action du contrôleur avec les paramètres appropriés
+                $controller->{$this->_action}(...$params);
+            } else {
+                throw new ActionNotFoundException();
+            }
+        } else {
+            throw new ControllerNotFoundException();
+        }
+    }
 
 	}
