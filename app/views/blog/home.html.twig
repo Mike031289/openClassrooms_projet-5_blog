@@ -1,6 +1,5 @@
 {% extends 'templates/layout.html.twig' %}
 
-
 {% set page = 'home' %}
 
 {% block header_title %}
@@ -13,7 +12,7 @@
 
 {% block content %}
 <div class="container">
-    <div class="row">
+    <div class="row mt-5">
         <!-- Blog entries -->
         <!-- Featured blog post -->
         <h1 class="">A la une !</h1>
@@ -23,7 +22,7 @@
             {% set latestPost = posts|last %}
             <!-- A la une -->
             <div class="card mb-4 p-0">
-                <a href="http://localhost/mon-blog/post/{{ latestPost.id }}">
+                <a href="http://localhost/mon-blog/post/{{ latestPost.id }}{{ latestPost.title }}">
                     <img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." />
                 </a>
                 <div class="card-body">
@@ -33,19 +32,18 @@
                     <p class="card-text">{{ latestPost.content }}</p>
                     <p>Auteur : {{ latestPost.authorId }}</p>
                     <p>id : {{ latestPost.id }}</p>
-                    <a class="btn btn-primary" href="http://localhost/mon-blog/post/{{ latestPost.id }}">Lire →</a>
-                    {# <a class="btn btn-primary" href="{{ path('post_show', {'id': latestPost.id}) }}">Lire →</a> #}
+                    <a class="btn btn-primary" href="http://localhost/mon-blog/post/{{ latestPost.id }}{{ latestPost.title }}">Lire →</a>
                 </div>
             </div>
         {% endif %}
 
         <!-- List of articles -->
-        <h2 class="">Explorer nos derniers articles :</h2>
+        <h2 class="mt-5">Explorer nos derniers articles :</h2>
         <div class="col-lg-8">
             {% for post in posts %}
                 <div class="container-fluid p-0">
                     <div class="card mb-4 p-0">
-                        <a href="http://localhost/mon-blog/post/{{ post.id }}">
+                        <a href="http://localhost/mon-blog/post/{{ post.id }}{{ post.title }}">
                             <img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." />
                         </a>
                         <div class="card-body">
@@ -55,8 +53,7 @@
                             <p class="card-text">{{ post.content }}</p>
                             <p>Auteur : {{ post.authorId }}</p>
                             <p>id : {{ post.id }}</p>
-                            <a class="btn btn-primary" href="http://localhost/mon-blog/post/{{ post.id }}">Lire →</a>
-                            {# <a class="btn btn-primary" href="{{ path('post_show', {'id': post.id}) }}">Lire →</a> #}
+                            <a class="btn btn-primary" href="http://localhost/mon-blog/post/{{ post.id }}{{ post.title }}">Lire →</a>
                         </div>
                     </div>
                 </div>

@@ -30,13 +30,13 @@ use App\Exceptions\NoRouteFoundException;
 				// Utilisation de preg_match pour extraire les variables de chemin (comme l'ID d'article)
 				$routeParams = [];
 				foreach ($this->listRoute as $route) {
-						$pattern = "#^" . preg_replace('/\{([a-zA-Z_]+)\}/', '([^/]+)', $route->path) . "$#";
+						$pattern = "#^" . preg_replace('/\{([a-zA-Z]+)\}/', '([^/]+)', $route->path) . "$#";
 						if (preg_match($pattern, $url, $matches) && $route->method == $methode) {
 
 								$routeParams = array_combine($route->param, array_slice($matches, 1));
 								return new Route($route, $routeParams);
 						}
-				}
+				}	
 					throw new NoRouteFoundException();
 		}
 

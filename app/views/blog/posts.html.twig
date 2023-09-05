@@ -14,7 +14,7 @@
 <div class="container">
     <div class="row">
         <!-- Featured blog post -->
-        <h1 class="title">A la une !</h1>
+        <h1 class="title mt-5">A la une !</h1>
         <div class="card mb-4 col-lg-8 p-0">
             {% if posts is empty %}
                 <p>Aucun post disponible.</p>
@@ -77,11 +77,11 @@
         </div>
     </div>
 
-    <div class="container">
-        <h2 class="title">Explorer nos derniers articles :</h2>
-        <div class="row">
+    <div class="container-fluid mt-5">
+        <h2 class="title ">Explorer nos derniers articles :</h2>
+        <div class="row mb-5">
             {% for post in posts %}
-                <div class="card m-2 col-lg-3 p-0">
+                <div class="card col-lg-3 p-0 m-5">
                     <a href="#!">
                         <img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." />
                     </a>

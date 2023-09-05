@@ -71,9 +71,9 @@ use App\Exceptions\ControllerNotFoundException;
 		}
 		
 		/**
-		 * @run function manages incoming HTTP requests and associates them with the corresponding controllers and actions: It manages the routing and execution of controller actions for incoming HTTP requests.
-		 * $config contains data from the config file (config.json)
-		 * $httpRequest contains data from the HttpResquest class
+		 * @function run() function manages incoming HTTP requests and associates them with the corresponding controllers and actions: It manages the routing and execution of controller actions for incoming HTTP requests.
+		 * @param $config contains data from the config file (config.json)
+		 * @param $httpRequest contains data from the HttpResquest class
 		 */
 		public function run($httpRequest, $config)
     {

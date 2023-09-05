@@ -20,30 +20,6 @@ class BaseController
         $this->_twig = new Environment($_loader);
         $this->bindManager();
 
-        // Ajouter la fonction path à l'environnement Twig
-        // $this->_twig->addFunction(new TwigFunction('path', function ($routeName, $parameters = []) {
-        //     $path = '';
-        //     // Associer le nom de la route à l'URL correspondante
-        //     switch ($routeName) {
-        //         case 'home':
-        //             $path = '/';
-        //             break;
-        //         case 'listPosts':
-        //             $path = '/posts';
-        //             break;
-        //         case 'showPost':
-        //             // Vérifier si l'ID est fourni dans les paramètres
-        //             if (isset($parameters['id'])) {
-        //                 $path = '/post/' . $parameters['id'];
-        //             }
-        //             break;
-        //         // Ajouter d'autres cas pour les autres routes
-        //         default:
-        //             // Gérer les cas inconnus
-        //             break;
-        //     }
-        //     return $path;
-        // }));
     }
 
     // ... Autres méthodes ...
