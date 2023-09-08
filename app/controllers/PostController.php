@@ -26,8 +26,8 @@ class PostController extends BaseController
     {
         // Utilisez l'identifiant pour récupérer les informations de l'article depuis votre gestionnaire d'articles (ArticleManager)
         $post = $this->getManager(PostManager::class)->getById($id);
-        // var_dump($post);
         // Passez les informations de l'article à votre vue Twig pour l'affichage
         $this->view('blog/post.html.twig', ['post' => $post]);
     }
+
 }

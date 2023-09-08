@@ -84,15 +84,15 @@ use App\Exceptions\ControllerNotFoundException;
         if (class_exists($controllerName)) {
             $controller = new $controllerName($httpRequest, $config);
 
-            // Vérifie si la méthode (action) existe dans le contrôleur
-            if (method_exists($controller, $this->_action)) {
-                $params = array_values($this->_param);
-
-                // Appelle l'action du contrôleur avec les paramètres appropriés
-                $controller->{$this->_action}(...$params);
-            } else {
-                throw new ActionNotFoundException();
-            }
+					// Vérifie si la méthode (action) existe dans le contrôleur
+					if (method_exists($controller, $this->_action)) {
+							$params = array_values($this->_param);
+							
+							// Appelle l'action du contrôleur avec les paramètres appropriés
+							$controller->{$this->_action}(...$params);
+					} else {
+							throw new ActionNotFoundException();
+					}
         } else {
             throw new ControllerNotFoundException();
         }

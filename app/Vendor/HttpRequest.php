@@ -63,6 +63,7 @@ namespace App\Vendor;
 				{
 					case "GET":
 					case "DELETE":
+						// search for a match between the route path ($this->_route->path) and the current URL ($this->_url)
 						if(preg_match("#" . $this->_route->path . "#",$this->_url, $matches))
 						{
 							for($i=1; $i<count($matches)-1; $i++)

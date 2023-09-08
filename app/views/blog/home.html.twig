@@ -32,7 +32,7 @@
                     <p class="card-text">{{ latestPost.content }}</p>
                     <p>Auteur : {{ latestPost.authorId }}</p>
                     <p>id : {{ latestPost.id }}</p>
-                    <a class="btn btn-primary" href="http://localhost/mon-blog/post/{{ latestPost.id }}{{ latestPost.title }}">Lire →</a>
+                    <a class="btn btn-primary" href="http://localhost/mon-blog/post/{{ latestPost.id }}-{{ latestPost.title }}">Lire →</a>
                 </div>
             </div>
         {% endif %}

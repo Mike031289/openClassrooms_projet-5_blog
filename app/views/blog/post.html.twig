@@ -24,61 +24,49 @@
 {% block content %}
     <div class="container-fluid p-0">
     <img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." />
-        {# <div class=""> #}
-            <div class="container mt-5">
-                {% if post %}
-                    <div class="mb-4">
-                        <h3 class="card-title"> {{ post.title }}</h3>
-                        <div class="card-body">
-                            <p class="card-text">{{ post.content }}</p>
-                            <div class="small text-muted">Date de publication: {{ post.createdAt }}</div>
-                            <div class="small text-muted">Date de mise à jour: {{ post.updatedAt }}</div>
-                            <br>
-                            <blockquote class="blockquote mb-0">
-                                <footer class="blockquote-footer">Auteur :
-                                    <cite title="Source Title">{{ post.authorId }}</cite>
-                                </footer>
-                            </blockquote>
-                        </div>
-                        <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-                            <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">List group item heading</h5>
-                            <small>3 days ago</small>
-                            </div>
-                            <p class="mb-1">Some placeholder content in a paragraph.</p>
-                            <small>And some small print.</small>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action">
-                                <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">List group item heading</h5>
-                                <small class="text-body-secondary">3 days ago</small>
-                                </div>
-                                <p class="mb-1">Some placeholder content in a paragraph.</p>
-                                <small class="text-body-secondary">And some muted small print.</small>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action">
-                                <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">List group item heading</h5>
-                                <small class="text-body-secondary">3 days ago</small>
-                                </div>
-                                <p class="mb-1">Some placeholder content in a paragraph.</p>
-                                <small class="text-body-secondary">And some muted small print.</small>
-                            </a>
-                        </div>
+        <div class="container mt-5">
+            {% if post %}
+                <div class="mb-4">
+                    <h3 class="card-title"> {{ post.title }}</h3>
+                    <div class="card-body">
+                        <p class="card-text">{{ post.content }}</p>
+                        <div class="small text-muted">Date de publication: {{ post.createdAt }}</div>
+                        <div class="small text-muted">Date de mise à jour: {{ post.updatedAt }}</div>
+                        <br>
+                        <blockquote class="blockquote mb-0">
+                            <footer class="blockquote-footer">Auteur :
+                                <cite title="Source Title">{{ post.authorId }}</cite>
+                            </footer>
+                        </blockquote>
                     </div>
-                    <form class="">
-                        <div class="mb-3">
-                            <label for="validationTextarea" class="form-label">Commentaires</label>
-                            <textarea class="form-control" id="validationTextarea" placeholder="Laissez nous votre commentaire ici" required></textarea>
-                            <a class="btn btn-secondary mt-2">Envoyer</a>
+                </div>
+
+                <form class="mt-5">
+                    <div class="mb-3">
+                        <label for="validationTextarea" class="form-label">Laissez nous votre commentaire</label>
+                        <textarea class="form-control" id="validationTextarea" placeholder="Laissez nous votre commentaire ici" required></textarea>
+                        <a class="btn btn-success mt-2">Envoyer</a>
+                    </div>
+                </form>
+            {% endif %}
+
+            {# {% else %} #}
+            {% if comment %}
+
+                <div class="list-group mb-3">
+                    <div class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ comment.authorId }}</h5>
+                        <small class="text-body-secondary">{{ post.id }}</small>
                         </div>
-                    </form>
-                {% else %}
-                    <p>L'article n'existe pas.</p>
-                {% endif %}
-            </div>
-        {# </div> #}
+                        <p class="mb-1">{{ comment.content }}</p>
+                        <small class="text-body-secondary">{{ comment.createdAt }}</small>
+                    </div>
+                </div>
+            {% else %}
+                <p>Aucun article ou commentaires disponible.</p>
+            {% endif %}
+        </div>
     </div>
     {% block JsLink %}
         <!-- Core theme JS-->
