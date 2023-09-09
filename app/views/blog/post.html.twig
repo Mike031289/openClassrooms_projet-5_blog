@@ -23,7 +23,7 @@
 
 {% block content %}
     <div class="container-fluid p-0">
-    <img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." />
+        <img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." />
         <div class="container mt-5">
             {% if post %}
                 <div class="mb-4">
@@ -41,38 +41,38 @@
                     </div>
                 </div>
 
-                <form class="mt-5">
+                <form class="mt-5" action="sendComment" method="POST">
                     <div class="mb-3">
                         <label for="validationTextarea" class="form-label">Laissez nous votre commentaire</label>
-                        <textarea class="form-control" id="validationTextarea" placeholder="Laissez nous votre commentaire ici" required></textarea>
-                        <a class="btn btn-success mt-2">Envoyer</a>
+                        <input type="hidden" name="article_id" value="{{ post.id }}">
+                        <textarea class="form-control" id="validationTextarea" name="comment_text" rows="3" cols="50" placeholder="Ajouter un commentaire" required></textarea>
+                        <button type="submit" class="btn btn-success mt-2" value="Envoyer">Envoyer</button>
                     </div>
                 </form>
             {% endif %}
-
-            {# {% else %} #}
-            {% if comment %}
-
-                <div class="list-group mb-3">
-                    <div class="list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">{{ comment.authorId }}</h5>
-                        <small class="text-body-secondary">{{ post.id }}</small>
+            
+            {# Comment rendering loop #}
+            {% if comments %}
+                {% for comment in comments %}
+                    <div class="list-group mb-3">
+                        <div class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">{{ comment.authorId }}</h5>
+                                <small class="text-body-secondary">{{ comment.postId }}</small>
+                            </div>
+                            <p class="mb-1">{{ comment.content }}</p>
+                            <small class="text-body-secondary">{{ comment.createdAt }}</small>
                         </div>
-                        <p class="mb-1">{{ comment.content }}</p>
-                        <small class="text-body-secondary">{{ comment.createdAt }}</small>
                     </div>
-                </div>
+                {% endfor %}
             {% else %}
-                <p>Aucun article ou commentaires disponible.</p>
+                <p>No comments available.</p>
             {% endif %}
         </div>
     </div>
-    {% block JsLink %}
-        <!-- Core theme JS-->
-        <script src="../public/js/scripts.js"></script>
-    {% endblock %}
 {% endblock %}
 
-
-
+{% block JsLink %}
+    <!-- Core theme JS-->
+    <script src="../public/js/scripts.js"></script>
+{% endblock %}

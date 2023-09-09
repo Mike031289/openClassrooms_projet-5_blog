@@ -1,59 +1,61 @@
-[{
-	"path" : "/",
-	"controller" : "App\\Controllers\\HomeController",
-	"action" : "home",
-	"method" : "GET",
-	"param" : [],
-	"managers": ["App\\Manager\\PostManager"]
-},
-{
-	"path": "/posts",
-	"controller": "App\\Controllers\\PostController",
-	"action": "listPosts",
-	"method": "GET",
-	"param": [],
-	"managers": ["App\\Manager\\PostManager"]
-},
-{
-	"path": "/post/{id}",
-	"controller": "App\\Controllers\\PostController",
-	"action": "showPost",
-	"method": "GET",
-	"param": ["id"],
-	"managers": ["App\\Manager\\PostManager"]
-},
-{
-	"path": "/contact",
-	"controller": "Contact",
-	"action": "sendMessage",
-	"method": "POST",
-	"param": [],
-	"managers": ["ContactManager"]
-},
-
-{
-	"path" : "/login",
-	"controller" : "Login",
-	"action" : "login",
-	"method" : "GET",
-	"param" : [],
-	"managers": []
-},
-{
-	"path" : "/login",
-	"controller" : "Login",
-	"action" : "authenticate",
-	"method" : "POST",
-	"param" : [
-		"login",
-		"password"],
-	"managers": []
-},
-{
-	"path" : "/404", 
-	"controller": "App\\Controllers\\ErrorController",
-	"action" : "notFound", 
-	"method" : "GET",
-	"param" : [],
-	"managers": []
-}]
+[
+	{
+			"path": "/",
+			"controller": "App\\Controllers\\HomeController",
+			"action": "home",
+			"method": "GET",
+			"param": [],
+			"managers": ["App\\Manager\\PostManager"]
+	},
+	{
+			"path": "/posts",
+			"controller": "App\\Controllers\\PostController",
+			"action": "listPosts",
+			"method": "GET",
+			"param": [],
+			"managers": ["App\\Manager\\PostManager"]
+	},
+	{
+		"path": "/post/{id}",
+		"controller": "App\\Controllers\\PostController",
+		"action": "showPostWithComments",
+		"method": "GET",
+		"param": ["id"],
+		"managers": ["App\\Manager\\PostManager", "App\\Manager\\CommentManager"]
+	},
+	{
+			"path": "/contact",
+			"controller": "Contact",
+			"action": "sendMessage",
+			"method": "POST",
+			"param": [],
+			"managers": ["ContactManager"]
+	},
+	{
+			"path": "/login",
+			"controller": "Login",
+			"action": "login",
+			"method": "GET",
+			"param": [],
+			"managers": []
+	},
+	{
+			"path": "/login",
+			"controller": "Login",
+			"action": "authenticate",
+			"method": "POST",
+			"param": [
+					"login",
+					"password"
+			],
+			"managers": []
+	},
+	{
+			"path": "/404",
+			"controller": "App\\Controllers\\ErrorController",
+			"action": "notFound",
+			"method": "GET",
+			"param": [],
+			"managers": []
+	}
+]
