@@ -33,22 +33,35 @@
 	},
 	{
 			"path": "/login",
-			"controller": "Login",
+			"controller": "App\\Controllers\\UserController",
 			"action": "login",
 			"method": "GET",
 			"param": [],
-			"managers": []
+			"managers":  ["App\\Manager\\UserManager"]
 	},
 	{
 			"path": "/login",
-			"controller": "Login",
-			"action": "authenticate",
+			"controller": "App\\Controllers\\UserController",
+			"action": "login",
 			"method": "POST",
-			"param": [
-					"login",
-					"password"
-			],
-			"managers": []
+			"param": [],
+			"managers":  ["App\\Manager\\UserManager"]
+	},
+	{
+			"path": "/register",
+			"controller":"App\\Controllers\\UserController",
+			"action": "register",
+			"method": "GET",
+			"param": [],
+			"managers": ["App\\Manager\\UserManager"]
+	},
+	{
+			"path": "/register",
+			"controller":"App\\Controllers\\UserController",
+			"action": "register",
+			"method": "POST",
+			"param": [],
+			"managers": ["App\\Manager\\UserManager"]
 	},
 	{
 			"path": "/404",

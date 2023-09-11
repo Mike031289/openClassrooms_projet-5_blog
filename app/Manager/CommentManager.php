@@ -10,7 +10,7 @@ class CommentManager extends BaseManager
     }
 
     /**
-     * Retrieve comments related to a specific article based on its identifier (post_id).
+     * Retrieve comments related to a specific article based on its identifier (postId).
      *
      * @param int $postId The identifier of the article for which to retrieve comments.
      * @return array An array of Comment objects representing the comments for the specified article.
@@ -27,6 +27,5 @@ class CommentManager extends BaseManager
         // Return an array of Comment objects representing the comments
         return $req->fetchAll();
     }
-    
 
 }

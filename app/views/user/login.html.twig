@@ -1,0 +1,70 @@
+{% extends 'templates/layout.html.twig' %}
+
+{% set page = 'login' %}
+
+{% block header_title %}
+    {# Connexion #}
+{% endblock %}
+
+{% block header_description %}
+    {# Découvrez nos derniers articles et restez informé de nos activités. #}
+{% endblock %}
+
+{% block content %}
+        <div id="layoutAuthentication">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-5">
+                                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Connexion</h3></div>
+                                    <div class="card-body">
+                                        <form class="needs-validation" novalidate action="login" method="POST">
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control" id="inputEmail" type="email" required/>
+                                                <label for="inputEmail">Adresse Email</label>
+                                                <div class="invalid-feedback">
+                                                    Adresse email incorrect
+                                                </div>
+                                                <div class="valid-feedback">
+                                                </div>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control" id="inputPassword" type="password"/>
+                                                <label for="inputPassword">Password</label>
+                                                <div class="invalid-feedback">
+                                                    Mot de passe incorrect
+                                                </div>
+                                                <div class="valid-feedback">
+                                                </div>
+                                            </div>
+                                            <div class="form-check mb-3">
+                                                <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
+                                                <label class="form-check-label" for="inputRememberPassword"></label>
+                                            </div>
+                                            <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                                                <a class="text-success" href="#">Mot de passe oublié ?</a>
+                                                <button type="submit" class="btn btn-dark">Connexion</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="card-footer text-center py-3">
+                                        <div class=""><a class="text-success" href="http://localhost/mon-blog/register">Je n'ai pas de compte je m'inscris!</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+            <div id="layoutAuthentication_footer">
+                <footer class="py-5 bg-light mt-5">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+{% endblock %}
