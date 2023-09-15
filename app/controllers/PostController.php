@@ -1,5 +1,6 @@
 <?php
 namespace App\Controllers;
+
 use App\Manager\PostManager;
 use App\Manager\CommentManager;
 
@@ -31,6 +32,7 @@ class PostController extends BaseController
         // Use the identifier to retrieve article information from your article manager (PostManager)
         $post = $this->getManager(PostManager::class)->getById($id);
 
+        // var_dump($post);
         if (!$post) {
             // Handle the case where the article does not exist (e.g., redirect, display an error, etc.)
             header("Location: {$this->baseUrl}../404");

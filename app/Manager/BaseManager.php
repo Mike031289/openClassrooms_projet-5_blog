@@ -44,28 +44,53 @@ class BaseManager
   /**
    * @create is used to insert a new record into the table associated with the current class using a specified object. It takes an object containing the data to be inserted in the database
    */
+  // public function create($object)
+  // {
+  //   $paramNumber = count($param);
+  //   $valueArray = array_fill(1,$paramNumber,"?");
+  //   $valueString = implode($valueArray,", ");
+  //   $sql = "INSERT INTO " . $this->_table . "(" . implode($param,", ") . ") VALUES(" . $valueString . ")";
+  //   $req = $this->_db->prepare($sql);
+  //   $boundParam = array();
+	// 		foreach($param as $paramName)
+	// 		{
+	// 			if(property_exists($object,$paramName))
+	// 			{
+	// 				$boundParam[$paramName] = $object->$paramName;	
+	// 			}
+	// 			else
+	// 			{
+	// 				throw new PropertyNotFoundException($this->_object,$paramName);	
+	// 			}
+	// 		}
+	// 		$req->execute($boundParam);
+  // }
+  
   public function create($object)
   {
-    $paramNumber = count($param);
-    $valueArray = array_fill(1,$paramNumber,"?");
-    $valueString = implode($valueArray,", ");
-    $sql = "INSERT INTO " . $this->_table . "(" . implode($param,", ") . ") VALUES(" . $valueString . ")";
-    $req = $this->_db->prepare($sql);
-    $boundParam = array();
-			foreach($param as $paramName)
-			{
-				if(property_exists($object,$paramName))
-				{
-					$boundParam[$paramName] = $object->$paramName;	
-				}
-				else
-				{
-					throw new PropertyNotFoundException($this->_object,$paramName);	
-				}
-			}
-			$req->execute($boundParam);
+      $columns = array_keys($object);
+      $columnString = implode(", ", $columns);
+  
+      // Créez des placeholders pour les valeurs
+      $valuePlaceholders = ":" . implode(", :", $columns);
+  
+      $sql = "INSERT INTO " . $this->_table . " ($columnString) VALUES ($valuePlaceholders)";
+      $req = $this->_db->prepare($sql);
+  
+      // Liaison des valeurs aux paramètres
+      foreach ($columns as $column) {
+          $req->bindValue(":" . $column, $object[$column]);
+      }
+  
+      // Exécution de la requête une fois après la liaison des paramètres
+      $req->execute();
+  
+      // Retournez l'objet après l'insertion
+      return $object;
   }
   
+
+
   /**
    * @update is used to update an existing record in the table associated with the current class using data supplied in a specified object. It performs an update by using the SQL UPDATE clause and binding the values of the object's properties to the columns of the table
    */

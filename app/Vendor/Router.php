@@ -1,5 +1,6 @@
 <?php
 namespace App\Vendor;
+
 use App\Exceptions\MultipleRouteFoundException;
 use App\Exceptions\NoRouteFoundException;
 
@@ -8,10 +9,9 @@ use App\Exceptions\NoRouteFoundException;
 		private $_listRoute;
 		private $_baseUrl;
 		
-		public function __construct($_baseUrl)
+		public function __construct($configRoutes,$_baseUrl)
 		{
-			$stringRoute = file_get_contents('config/routes.json');
-			$this->listRoute = json_decode($stringRoute);
+			$this->listRoute = $configRoutes;
 			$this->baseUrl = $_baseUrl;
 		}
 		
