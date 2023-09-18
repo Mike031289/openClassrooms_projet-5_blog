@@ -42,12 +42,10 @@ use App\Manager\UserManager;
                 'passWord' => $hashedPassword,
                 'createdAt' => $createdAt,
             ];
-            // var_dump($userData);die;
 
             // Utilisez la méthode create de UserManager pour créer l'objet User
             $user = $this->getManager(UserManager::class)->create( $userData);
-
-            // var_dump($user);die;
+// var_dump($user); die;
             // Enregistrez l'utilisateur dans la base de données (votre mise en œuvre ici)
 
             // Rediriger vers la page de connexion
@@ -61,35 +59,42 @@ use App\Manager\UserManager;
 
     // User login
     public function login() {
-         // $users = $this->getManager(UserManager::class)->getAll();
-
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
             $passWord = $_POST['passWord'];
+    
+            // Utilisez la méthode getUserByEmail de UserManager pour obtenir l'utilisateur par email
+            $user = $this->getManager(UserManager::class)->getUserByEmail($email);
 
-            // Retrieve user from the database by email (your implementation here)
+            if ($user) {
+                var_dump($user);
 
-            if ($user && passWord_verify($passWord, $user->getPassWord())) {
-                // Start a session and log the user in
-                session_start();
-                $_SESSION['user'] = $user;
-
-                // Redirect to a protected page
-                // header('Location: {$config->baseUrl} /dashboard');
-                echo "espace Admin";
-                exit;
+                // Vérifiez le mot de passe en utilisant password_verify
+                if (password_verify($passWord, $user->getPassWord())) {
+                    // Mot de passe correct, connectez l'utilisateur
+                    session_start();
+                    $_SESSION['user'] = $user;
+                    echo "salut mike"; die;
+                    // Rediriger vers une page protégée (par exemple, le tableau de bord)
+                    header('Location: ' . $this->_config->baseUrl . '/mon-blog/dashboard');
+                    exit;
+                } else {
+                    // Mot de passe incorrect, afficher une erreur
+                    $errorMessage = "Mot de passe incorrect.";
+                    $this->view('user/login.html.twig', ['error' => $errorMessage]);
+                    exit;
+                }
             } else {
-                // Invalid credentials, show error
-                $error = 'Invalid email or passWord';
-                $this->view('user/login.html.twig', []);
-
+                // Utilisateur non trouvé, afficher une erreur
+                $errorMessage = "Ce compte n'existe pas";
+                $this->view('user/login.html.twig', ['error' => $errorMessage]);
                 exit;
             }
         }
-
+    
         $this->view('user/login.html.twig', []);
-
     }
+    
 
     // User logout
     public function logout() {

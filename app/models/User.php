@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-class Post
+class User
 {
     private $id;
     private $userName;
@@ -67,7 +67,7 @@ class Post
     /**
      * Get the value of passWord
      */
-    public function getPassWord()
+    public function getPassWord() 
     {
         return $this->passWord;
     }

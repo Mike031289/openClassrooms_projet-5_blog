@@ -19,13 +19,15 @@
                             <div class="col-lg-5">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Se connecter</h3></div>
-                                        {% if error is defined %}
-                                            <p>{{ error }}</p>
-                                        {% endif %}
                                     <div class="card-body">
                                         <form class="needs-validation" novalidate action="login" method="POST">
+                                            {% if error %}
+                                                <div class="alert alert-danger" role="alert">
+                                                    {{ error }}
+                                                </div>
+                                            {% endif %}
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputEmail" type="email" required/>
+                                                <input class="form-control" id="inputEmail" type="email" name="email"  required/>
                                                 <label for="inputEmail">Adresse Email</label>
                                                 <div class="invalid-feedback">
                                                     Adresse email incorrect
@@ -34,7 +36,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputPassword" type="password"/>
+                                                <input class="form-control" id="inputPassword" type="password" name="passWord" required/>
                                                 <label for="inputPassword">Password</label>
                                                 <div class="invalid-feedback">
                                                     Mot de passe incorrect
