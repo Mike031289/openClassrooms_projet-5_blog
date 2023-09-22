@@ -34,7 +34,7 @@
 	{
 			"path": "/login",
 			"controller": "App\\Controllers\\UserController",
-			"action": "login",
+			"action": "displayLoginForm",
 			"method": "GET",
 			"param": [],
 			"managers":  ["App\\Manager\\UserManager"]
@@ -50,7 +50,7 @@
 	{
 			"path": "/register",
 			"controller":"App\\Controllers\\UserController",
-			"action": "register",
+			"action": "displayRegisterForm",
 			"method": "GET",
 			"param": [],
 			"managers": ["App\\Manager\\UserManager"]
@@ -60,6 +60,14 @@
 			"controller":"App\\Controllers\\UserController",
 			"action": "register",
 			"method": "POST",
+			"param": [],
+			"managers": ["App\\Manager\\UserManager"]
+	},
+	{
+			"path": "/adminDashboard",
+			"controller":"App\\Controllers\\UserController",
+			"action": "admin",
+			"method": "GET",
 			"param": [],
 			"managers": ["App\\Manager\\UserManager"]
 	},

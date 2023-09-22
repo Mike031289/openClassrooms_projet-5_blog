@@ -17,7 +17,7 @@ class BaseManager
   /**
    * @getById retrieve a specific record from the table associated with the current class based on its identifier (ID). It returns the record in the form of an object corresponding to the class of the current object
    */
-  public function getById($id)
+  public function getById(int $id)
   {
     $req = $this->_db->prepare("SELECT * FROM " . $this->_table . " WHERE id = :id");
     $req->bindValue(':id', $id, \PDO::PARAM_INT);
@@ -33,7 +33,7 @@ class BaseManager
   /**
    * @getAll() retrieve all the rows in the table associated(_table) with the current class from the database. It returns an array containing the records in the form of objects corresponding to the class of the current object ($this->_object)
    */
-  public function getAll()
+  public function getAll() 
   {
     $req = $this->_db->prepare("SELECT * FROM " . $this->_table);
     $req->execute();
@@ -70,45 +70,45 @@ class BaseManager
   /**
    * @update is used to update an existing record in the table associated with the current class using data supplied in a specified object. It performs an update by using the SQL UPDATE clause and binding the values of the object's properties to the columns of the table
    */
-  public function update($object)
-  {
-    $sql = "UPDATE " . $this->_table . " SET ";
-			foreach($param as $paramName)
-			{
-				$sql = $sql . $paramName . " = ?, ";
-			}
-			$sql = $sql . " WHERE id = ? ";
-			$req = $this->_db->prepare($sql);
+  // public function update($object)
+  // {
+  //   $sql = "UPDATE " . $this->_table . " SET ";
+	// 		foreach($param as $paramName)
+	// 		{
+	// 			$sql = $sql . $paramName . " = ?, ";
+	// 		}
+	// 		$sql = $sql . " WHERE id = ? ";
+	// 		$req = $this->_db->prepare($sql);
 			
-			$param[] = 'id';
-			$boundParam = array();
-			foreach($param as $paramName)
-			{
-				if(property_exists($object,$paramName))
-				{
-					$boundParam[$paramName] = $object->$paramName;	
-				}
-				else
-				{
-					throw new PropertyNotFoundException($this->_object,$paramName);	
-				}
-			}
-			$req->execute($boudParam);
-  }
+	// 		$param[] = 'id';
+	// 		$boundParam = array();
+	// 		foreach($param as $paramName)
+	// 		{
+	// 			if(property_exists($object,$paramName))
+	// 			{
+	// 				$boundParam[$paramName] = $object->$paramName;	
+	// 			}
+	// 			else
+	// 			{
+	// 				throw new PropertyNotFoundException($this->_object,$paramName);	
+	// 			}
+	// 		}
+	// 		$req->execute($boudParam);
+  // }
   
   /**
    * @delete is used to delete a specific record from the table associated with the current class using a specified object. It performs a delete using the SQL DELETE clause with a condition based on the object's id property
    */
-  public function delete($object)
-  {
-    if(property_exists($object,"id"))
-    {
-      $req = $this->_db->prepare("DELETE FROM " . $this->_table . " WHERE id=?");
-      return $req->execute(array($object->id));
-    }
-    else
-    {
-      throw new PropertyNotFoundException($this->_object,"id");	
-    }
-  }
+  // public function delete($object)
+  // {
+  //   if(property_exists($object,"id"))
+  //   {
+  //     $req = $this->_db->prepare("DELETE FROM " . $this->_table . " WHERE id=?");
+  //     return $req->execute(array($object->id));
+  //   }
+  //   else
+  //   {
+  //     throw new PropertyNotFoundException($this->_object,"id");	
+  //   }
+  // }
 }

@@ -3,15 +3,26 @@ namespace App\Controllers;
 
 use App\Manager\UserManager;
 
-  class UserController extends BaseController
+class UserController extends BaseController
 {
     public function __construct($httpRequest, $config)
     {
         parent::__construct($httpRequest, $config);
     }
 
-    // User registration
-    public function register() 
+    /**
+     * User registration form
+     */
+    public function displayRegisterForm(): void
+    {
+        // Afficher le formulaire d'inscription
+        $this->view('user/register.html.twig', []);
+    }
+
+     /**
+     * User registration function
+     */
+    public function register(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -20,7 +31,7 @@ use App\Manager\UserManager;
             $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
             $passWord = $_POST['passWord'];
             $passWordConfirm = $_POST['passWordConfirm'];
-
+            
             // Vérifier si les champs ne sont pas vides et si les mots de passe correspondent
             if (empty($userName) || empty($email) || empty($passWord) || empty($passWordConfirm) || $passWord !== $passWordConfirm) {
                 // Gérer l'erreur, par exemple, afficher un message à l'utilisateur
@@ -44,39 +55,45 @@ use App\Manager\UserManager;
             ];
 
             // Utilisez la méthode create de UserManager pour créer l'objet User
-            $user = $this->getManager(UserManager::class)->create( $userData);
-// var_dump($user); die;
+            $user = $this->getManager(UserManager::class)->create($userData);
+            // var_dump($user); die;
             // Enregistrez l'utilisateur dans la base de données (votre mise en œuvre ici)
 
             // Rediriger vers la page de connexion
-            header('Location: ' . $this->baseUrl . '/mon-blog/login');
+            header('Location: mon-blog/login');
             exit;
         }
 
-        // Afficher le formulaire d'inscription
-        $this->view('user/register.html.twig', []);
     }
 
-    // User login
-    public function login() {
+    /**
+     * User  User login form
+     */
+    public function displayLoginForm(): void
+    {
+        $this->view('user/login.html.twig', []);
+    }
+
+    /**
+     * User  User login function
+     */
+    public function login(): void
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
             $passWord = $_POST['passWord'];
-    
+
             // Utilisez la méthode getUserByEmail de UserManager pour obtenir l'utilisateur par email
             $user = $this->getManager(UserManager::class)->getUserByEmail($email);
-
             if ($user) {
-                var_dump($user);
-
                 // Vérifiez le mot de passe en utilisant password_verify
                 if (password_verify($passWord, $user->getPassWord())) {
                     // Mot de passe correct, connectez l'utilisateur
                     session_start();
                     $_SESSION['user'] = $user;
-                    echo "salut mike"; die;
                     // Rediriger vers une page protégée (par exemple, le tableau de bord)
-                    header('Location: ' . $this->_config->baseUrl . '/mon-blog/dashboard');
+                    header('Location: mon-blog/posts');
+                    // $this->view('blog/post.html.twig', ['user' => $user]);
                     exit;
                 } else {
                     // Mot de passe incorrect, afficher une erreur
@@ -91,13 +108,14 @@ use App\Manager\UserManager;
                 exit;
             }
         }
-    
-        $this->view('user/login.html.twig', []);
     }
-    
 
-    // User logout
-    public function logout() {
+
+    /**
+     * User logout function
+     */ 
+    public function logout(): void
+    {
         session_start();
         unset($_SESSION['user']);
         session_destroy();

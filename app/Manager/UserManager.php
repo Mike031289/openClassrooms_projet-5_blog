@@ -1,6 +1,8 @@
 <?php
 namespace App\Manager;
+
 use App\Models\User;
+
 class UserManager extends BaseManager
 {
 
@@ -12,11 +14,9 @@ class UserManager extends BaseManager
     /**
      * Get a user by their email from the database.
      *
-     * @param string $email The email address of the user to retrieve.
-     *
-     * @return User|false An instance of the User class representing the user, or false if not found.
      */
-    public function getUserByEmail($email) {
+    public function getUserByEmail(string $email): ?User
+    {
         // SQL query to retrieve the user by email from the database
         $sql = "SELECT * FROM user WHERE email = :email";
 
@@ -36,7 +36,7 @@ class UserManager extends BaseManager
         $user = $stmt->fetchObject(User::class);
 
         // Return the User object or false if not found
-        return $user ? $user : false;
+        return $user ? $user : null;
     }
 
 
@@ -61,6 +61,6 @@ class UserManager extends BaseManager
     //         return null;
     //     }
     // }
-    
-    
+
+
 }
