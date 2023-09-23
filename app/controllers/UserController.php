@@ -8,6 +8,7 @@ class UserController extends BaseController
     public function __construct($httpRequest, $config)
     {
         parent::__construct($httpRequest, $config);
+        
     }
 
     /**
@@ -60,7 +61,7 @@ class UserController extends BaseController
             // Enregistrez l'utilisateur dans la base de données (votre mise en œuvre ici)
 
             // Rediriger vers la page de connexion
-            header('Location: mon-blog/login');
+            header('Location: /mon-blog/login');
             exit;
         }
 
@@ -79,6 +80,7 @@ class UserController extends BaseController
      */
     public function login(): void
     {
+        // header($_SERVER["SERVER_PROTOCOL"]
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
             $passWord = $_POST['passWord'];
@@ -92,7 +94,7 @@ class UserController extends BaseController
                     session_start();
                     $_SESSION['user'] = $user;
                     // Rediriger vers une page protégée (par exemple, le tableau de bord)
-                    header('Location: mon-blog/posts');
+                    header('Location: /mon-blog/posts');
                     // $this->view('blog/post.html.twig', ['user' => $user]);
                     exit;
                 } else {
@@ -119,7 +121,7 @@ class UserController extends BaseController
         session_start();
         unset($_SESSION['user']);
         session_destroy();
-        header('Location: {$config->baseUrl}/login');
+        header('Location: /mon-blog/login');
         exit;
     }
 }

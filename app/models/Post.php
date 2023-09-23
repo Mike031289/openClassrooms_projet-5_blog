@@ -1,148 +1,193 @@
 <?php
 namespace App\Models;
 
+/**
+ * Class Post
+ *
+ * Represents a post in your application.
+ */
 class Post
 {
-    private $id;
-    private $title;
-    private $content;
-    private $imageUrl;
-    private $categoryId; 
-    private $authorId;
-    private $createdAt;
-    private $updatedAt;
+    private int $id;
+    private string $title;
+    private string $content;
+    private ?string $imageUrl;
+    private int $categoryId; 
+    private int $authorId;
+    private \DateTime $createdAt;
+    private \DateTime $updatedAt;
 
     /**
-     * Get the value of id
+     * Get the ID of the post.
+     *
+     * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
     /**
-     * Set the value of id
+     * Set the ID of the post.
+     *
+     * @param int $id
+     * @return self
      */
-    public function setId($id): self
+    public function setId(int $id): self
     {
         $this->id = $id;
         return $this;
     }
 
     /**
-     * Get the value of title
+     * Get the title of the post.
+     *
+     * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
     /**
-     * Set the value of title
+     * Set the title of the post.
+     *
+     * @param string $title
+     * @return self
      */
-    public function setTitle($title): self
+    public function setTitle(string $title): self
     {
         $this->title = $title;
         return $this;
     }
 
     /**
-     * Get the value of content
+     * Get the content of the post.
+     *
+     * @return string
      */
-    public function getContent()
+    public function getContent(): string
     {
         return $this->content;
     }
 
     /**
-     * Set the value of content
+     * Set the content of the post.
+     *
+     * @param string $content
+     * @return self
      */
-    public function setContent($content): self
+    public function setContent(string $content): self
     {
         $this->content = $content;
         return $this;
     }
 
     /**
-     * Get the value of imageUrl
+     * Get the image URL of the post.
+     *
+     * @return string|null
      */
-    public function getImageUrl()
+    public function getImageUrl(): ?string
     {
         return $this->imageUrl;
     }
 
     /**
-     * Set the value of imageUrl
+     * Set the image URL of the post.
+     *
+     * @param string|null $imageUrl
+     * @return self
      */
-    public function setImageUrl($imageUrl): self
+    public function setImageUrl(?string $imageUrl): self
     {
         $this->imageUrl = $imageUrl;
         return $this;
     }
 
     /**
-     * Get the value of categoryId
+     * Get the category ID of the post.
+     *
+     * @return int
      */
-    public function getCategoryId()
+    public function getCategoryId(): int
     {
         return $this->categoryId;
     }
 
     /**
-     * Set the value of categoryId
+     * Set the category ID of the post.
+     *
+     * @param int $categoryId
+     * @return self
      */
-    public function setCategoryId($categoryId): self
+    public function setCategoryId(int $categoryId): self
     {
         $this->categoryId = $categoryId;
         return $this;
     }
 
     /**
-     * Get the value of authorId
+     * Get the author ID of the post.
+     *
+     * @return int
      */
-    public function getAuthorId()
+    public function getAuthorId(): int
     {
         return $this->authorId;
     }
 
     /**
-     * Set the value of authorId
+     * Set the author ID of the post.
+     *
+     * @param int $authorId
+     * @return self
      */
-    public function setAuthorId($authorId): self
+    public function setAuthorId(int $authorId): self
     {
         $this->authorId = $authorId;
         return $this;
     }
 
     /**
-     * Get the value of createdAt
+     * Get the creation date and time of the post.
+     *
+     * @return \DateTime
      */
-    public function getCreatedAt()
+    public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
     }
 
     /**
-     * Set the value of createdAt
+     * Set the creation date and time of the post.
+     *
+     * @param \DateTime $createdAt
+     * @return self
      */
-    public function setCreatedAt($createdAt): self
+    public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
         return $this;
     }
 
     /**
-     * Get the value of updatedAt
+     * Get the last update date and time of the post.
+     *
+     * @return \DateTime
      */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): \DateTime
     {
         return $this->updatedAt;
     }
 
     /**
-     * Set the value of updatedAt
+     * Set the last update date and time of the post.
+     *
+     * @param \DateTime $updatedAt
+     * @return self
      */
-    public function setUpdatedAt($updatedAt): self
+    public function setUpdatedAt(\DateTime $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
         return $this;

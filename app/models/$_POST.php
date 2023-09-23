@@ -1,23 +1,54 @@
 <?php
-class PostData {
-    private $data;
+class PostData
+{
+    /**
+     * @var array The POST data.
+     */
+    private array $data;
 
-    public function __construct() {
+    /**
+     * Constructor for the class.
+     */
+    public function __construct()
+    {
         $this->data = $_POST;
     }
 
-    public function get($key, $default = null) {
+    /**
+     * Get a POST value by its key.
+     *
+     * @param string $key The key of the POST value.
+     * @param mixed $default The default value to return if the key does not exist.
+     * @return mixed The POST value associated with the key or the default value.
+     */
+    public function get(string $key, mixed $default = null): mixed
+    {
         return isset($this->data[$key]) ? $this->data[$key] : $default;
     }
 
-    public function set($key, $value) {
+    /**
+     * Set a POST value.
+     *
+     * @param string $key The key of the POST value.
+     * @param mixed $value The value to set.
+     */
+    public function set(string $key, mixed $value):void
+    {
         $this->data[$key] = $value;
     }
 
-    public function remove($key) {
+    /**
+     * Remove a POST value by its key.
+     *
+     * @param string $key The key of the POST value to remove.
+     */
+    public function remove(string $key): void
+    {
         unset($this->data[$key]);
     }
 }
+
+
 // // Instanciation de la classe PostData
 // $postData = new PostData();
 

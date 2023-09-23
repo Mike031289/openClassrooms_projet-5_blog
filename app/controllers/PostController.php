@@ -35,7 +35,7 @@ class PostController extends BaseController
         // var_dump($post);
         if (!$post) {
             // Handle the case where the article does not exist (e.g., redirect, display an error, etc.)
-            header("Location: {$this->baseUrl}../404");
+            header("Location: /mon-blog/404");
             exit; // Stop execution to prevent displaying page content
         }
 

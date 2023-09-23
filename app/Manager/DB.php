@@ -4,7 +4,7 @@ namespace App\Manager;
 	class DB
 	{
 		private \PDO $_db;
-		private static $_instance;
+		private static DB $_instance;
 
 		/**
 		 * this function instantiates the DB object (with DB connection parameters) in order to connect to dataBase
