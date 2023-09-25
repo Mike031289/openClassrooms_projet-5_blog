@@ -1,15 +1,21 @@
 <?php
 namespace App\Controllers;
 
-use App\Manager\CommentManager;
-
+/**
+ * Class CommentController
+ *
+ * Controller responsible for handling comments-related actions.
+ */
 class CommentController extends BaseController
 {
-    public function __construct($httpRequest, $config)
+    /**
+     * CommentController constructor.
+     *
+     * @param object $httpRequest The HTTP request object.
+     * @param mixed $config      The application configuration.
+     */
+    public function __construct(object $httpRequest, mixed $config)
     {
         parent::__construct($httpRequest, $config);
-
     }
-
-
 }

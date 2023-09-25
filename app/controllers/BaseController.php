@@ -1,46 +1,70 @@
 <?php
-
 namespace App\Controllers;
+
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
-use Twig\TwigFunction;
 
+/**
+ * Class BaseController
+ *
+ * Base controller for handling common functionality in controllers.
+ */
 class BaseController
 {
-    private $_param;
-    private $_httpRequest;
-    private $_twig;
-    private $_config;
-    protected $_managers = [];
+    private array $_param;
+    protected object $httpRequest;
+    private Environment $_twig;
+    private $config;
+    protected array $_managers = [];
 
-    public function __construct($httpRequest, $config){
-        $this->_httpRequest = $httpRequest;
-        $this->_config = $config;
-        $_loader = new FilesystemLoader(__DIR__ . '/../Views');
-        $this->_twig = new Environment($_loader);
+    /**
+     * BaseController constructor.
+     *
+     * @param object $httpRequest The HTTP request object.
+     * @param mixed $config      The application configuration.
+     */
+    public function __construct($httpRequest, $config)
+    {
+        $this->httpRequest = $httpRequest;
+        $this->config = $config;
+        $loader = new FilesystemLoader(__DIR__ . '/../Views');
+        $this->_twig = new Environment($loader);
         $this->bindManager();
-
     }
 
-    // ... Autres méthodes ...
-
-    protected function view($fileName, $viewContent = [])
+    /**
+     * Render a view.
+     *
+     * @param string $fileName    The name of the Twig template file.
+     * @param array  $viewContent An associative array of data to pass to the view.
+     */
+    protected function view(string $fileName, array $viewContent = []): void
     {
         ob_start();
-        extract($this->_param);
-        $content = ob_get_clean();
+        extract($this->_param[]);
+        ob_get_clean();
         echo $this->_twig->render($fileName, $viewContent);
     }
 
-    private function bindManager()
+    /**
+     * Bind managers based on the route configuration.
+     */
+    private function bindManager(): void
     {
-        foreach($this->_httpRequest->getRoute()->getManagers() as $manager)
-        {
-            $this->_managers[$manager] = new $manager($this->_config->database);
+        foreach ($this->httpRequest->getRoute()->getManagers() as $manager) {
+            $this->_managers[$manager] = new $manager($this->config->database);
         }
     }
 
-    protected function getManager(string $className){
+    /**
+     * Get a manager instance.
+     *
+     * @param string $className The class name of the manager.
+     *
+     * @return mixed The manager instance.
+     */
+    protected function getManager(string $className)
+    {
         return $this->_managers[$className];
     }
 }
