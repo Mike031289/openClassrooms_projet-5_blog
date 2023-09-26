@@ -3,96 +3,93 @@
 {% set page = 'register' %}
 
 {% block header_title %}
-    {# Créer un compte #}
+  {# Créer un compte #}
 {% endblock %}
 
 {% block header_description %}
-    {# Découvrez nos derniers articles et restez informé de nos activités. #}
+  {# Découvrez nos derniers articles et restez informé de nos activités. #}
 {% endblock %}
 
 {% block content %}
-        <div id="layoutAuthentication">
-            <div id="layoutAuthentication_content">
-                <main>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-7">
-                                <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Créer un compte</h3></div>
-                                    <div class="card-body">
-                                    <form class="needs-validation" novalidate  action="register" method="POST">
-                                        {% if error %}
-                                            <div class="alert alert-danger" role="alert">
-                                                {{ error }}
-                                            </div>
-                                        {% endif %}
-                                        <div class="row mb-3"> 
-                                            <div class="col-md-6">
-                                                <div class="form-floating">
-                                                    <input class="form-control" id="inputUserName" type="text" name="userName" required/>
-                                                    <label for="inputUserName">Nom utilisateur</label>
-                                                    <div class="invalid-feedback">
-                                                        Champ nom d'utilisateur obligatoire
-                                                    </div>
-                                                    <div class="valid-feedback">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-floating mb-3">
-                                            <input class="form-control" id="inputEmail" type="email" name="email" required/>
-                                            <label for="inputEmail">Adresse email</label>
-                                            <div class="invalid-feedback">
-                                                Adresse email incorrect
-                                            </div>
-                                            <div class="valid-feedback">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <div class="col-md-6">
-                                                <div class="form-floating mb-3 mb-md-0">
-                                                    <input class="form-control" id="inputPassWord" type="passWord" name="passWord" required/>
-                                                    <label for="inputPassWord">Mot de passe</label>
-                                                    <div class="invalid-feedback">
-                                                        Mot de passe incorrect
-                                                    </div>
-                                                    <div class="valid-feedback">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-floating mb-3 mb-md-0">
-                                                    <input class="form-control" id="inputPassWordConfirm" type="passWord" name="passWordConfirm" required/>
-                                                    <label for="inputPassWordConfirm">Confirmez mot de passe</label>
-                                                    <div class="invalid-feedback">
-                                                        Veuillez ressaisir le même mot de passe !
-                                                    </div>
-                                                    <div class="valid-feedback">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mt-4 mb-0">
-                                            <div class="d-grid"><button type="submit" class="btn btn-dark btn-block">Créer un compte</button></div>
-                                        </div>
-                                    </form>
-                                    </div>
-                                    <div class="card-footer text-center py-3">
-                                        <div class="small"><a class="text-success" href="http://localhost/mon-blog/login">Vous avez un compte? Connectez-vous</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+  <div id="layoutAuthentication">
+    <div id="layoutAuthentication_content">
+      <main>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-7">
+              <div class="card shadow-lg border-0 rounded-lg mt-5">
+                <div class="card-header">
+                  <h3 class="text-center font-weight-light my-4">Créer un compte</h3>
+                </div>
+                <div class="card-body">
+                  <form class="needs-validation" novalidate="novalidate" action="register" method="POST">
+                    {% if error %}
+                      <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                      </div>
+                    {% endif %}
+                    <div class="form-floating mb-3">
+                      <input class="form-control" id="inputUserName" type="text" name="userName" required="required"/>
+                      <label for="inputUserName">Nom utilisateur</label>
+                      <div class="invalid-feedback">
+                        Champ nom d'utilisateur obligatoire
+                      </div>
+                      <div class="valid-feedback"></div>
                     </div>
-                </main>
-            </div>
-            <div id="layoutAuthentication_footer">
-                <footer class="py-5 bg-light mt-5">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                        </div>
+                    <div class="form-floating mb-3">
+                      <input class="form-control" id="inputEmail" type="email" name="email" required="required"/>
+                      <label for="inputEmail">Adresse email</label>
+                      <div class="invalid-feedback">
+                        Adresse email incorrect
+                      </div>
+                      <div class="valid-feedback"></div>
                     </div>
-                </footer>
+                    <div class="row mb-3">
+                      <div class="col-md-6">
+                        <div class="form-floating mb-3 mb-md-0">
+                          <input class="form-control" id="inputPassWord" type="passWord" name="passWord" required="required"/>
+                          <label for="inputPassWord">Mot de passe</label>
+                          <div class="invalid-feedback">
+                            Mot de passe incorrect
+                          </div>
+                          <div class="valid-feedback"></div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-floating mb-3 mb-md-0">
+                          <input class="form-control" id="inputPassWordConfirm" type="passWord" name="passWordConfirm" required="required"/>
+                          <label for="inputPassWordConfirm">Confirmez mot de passe</label>
+                          <div class="invalid-feedback">
+                            Veuillez ressaisir le même mot de passe !
+                          </div>
+                          <div class="valid-feedback"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mt-4 mb-0">
+                      <div class="d-grid">
+                        <button type="submit" class="btn btn-dark btn-block">Créer un compte</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="card-footer text-center py-3">
+                  <div class="small">
+                    <a class="text-success" href="http://localhost/mon-blog/login">Vous avez un compte? Connectez-vous</a>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+      </main>
+    </div>
+    <div id="layoutAuthentication_footer">
+      <footer class="py-5 bg-light mt-5">
+        <div class="container-fluid px-4">
+          <div class="d-flex align-items-center justify-content-between small"></div>
+        </div>
+      </footer>
+    </div>
+  </div>
 {% endblock %}

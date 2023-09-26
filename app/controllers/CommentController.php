@@ -12,9 +12,9 @@ class CommentController extends BaseController
      * CommentController constructor.
      *
      * @param object $httpRequest The HTTP request object.
-     * @param mixed $config      The application configuration.
+     * @param object  $config      The application configuration object (JSON decode Object).
      */
-    public function __construct(object $httpRequest, mixed $config)
+    public function __construct(object $httpRequest, object $config)
     {
         parent::__construct($httpRequest, $config);
     }

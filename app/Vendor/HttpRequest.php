@@ -104,9 +104,9 @@ class HttpRequest
     /**
      * Run the route processing configuration settings.
      *
-     * @param mixed $config The application configuration.
+     * @param object $config The application configuration.
      */
-    public function run($config): void
+    public function run(object $config): void
     {
         if ($this->_route) {
             $this->_route->run($this, $config);

@@ -6,7 +6,7 @@ use App\Models\User;
 class UserManager extends BaseManager
 {
 
-    public function __construct($dataSource)
+    public function __construct(object $dataSource)
     {
         parent::__construct("user", "User", $dataSource);
     }

@@ -14,16 +14,16 @@ class BaseController
     private array $_param;
     protected object $httpRequest;
     private Environment $_twig;
-    private $config;
+    private object $config;
     protected array $_managers = [];
 
     /**
      * BaseController constructor.
      *
-     * @param object $httpRequest The HTTP request object.
-     * @param mixed $config      The application configuration.
+     * @param  object $httpRequest The HTTP request object.
+     * @param object $config      The application configuration object (JSON decode Object).
      */
-    public function __construct($httpRequest, $config)
+    public function __construct(object $httpRequest, object $config)
     {
         $this->httpRequest = $httpRequest;
         $this->config = $config;

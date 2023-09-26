@@ -15,9 +15,9 @@ class PostController extends BaseController
      * PostController constructor.
      *
      * @param object $httpRequest The HTTP request object.
-     * @param mixed $config      The application configuration.
+     * @param object $config      The application configuration.
      */
-    public function __construct($httpRequest, $config)
+    public function __construct(object $httpRequest, object $config)
     {
         parent::__construct($httpRequest, $config);
     }

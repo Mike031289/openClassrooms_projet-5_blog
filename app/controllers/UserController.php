@@ -13,10 +13,10 @@ class UserController extends BaseController
     /**
      * UserController constructor.
      *
-     * @param mixed $httpRequest The HTTP request object.
-     * @param mixed $config      The application configuration.
+     * @param object $httpRequest The HTTP request object.
+     * @param object $config      The application configuration.
      */
-    public function __construct($httpRequest, $config)
+    public function __construct(object $httpRequest, object $config)
     {
         parent::__construct($httpRequest, $config);
     }
@@ -34,7 +34,8 @@ class UserController extends BaseController
      */
     public function register(): void
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        if ($this->httpRequest->getMethod() === 'POST') {
 
             // Retrieve data from the form
             $userName = filter_input(INPUT_POST, 'userName', FILTER_SANITIZE_STRING);
@@ -89,7 +90,7 @@ class UserController extends BaseController
      */
     public function login(): void
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($this->httpRequest->getMethod() === 'POST') {
             $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
             $passWord = $_POST['passWord'];
 

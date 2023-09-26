@@ -1,10 +1,21 @@
 <?php
 namespace App\Manager;
 
+/**
+ * Class AdminManager
+ *
+ * This class represents the manager for the 'admin' entity.
+ *
+ * @package App\Manager
+ */
 class AdminManager extends BaseManager
 {
-
-    public function __construct($dataSource)
+    /**
+     * AdminManager constructor.
+     *
+     * @param object $dataSource The data source for the manager.
+     */
+    public function __construct(object $dataSource)
     {
         parent::__construct("admin", "Admin", $dataSource);
     }

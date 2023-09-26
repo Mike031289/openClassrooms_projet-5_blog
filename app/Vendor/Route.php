@@ -98,12 +98,12 @@ class Route
      * Run the route and execute the associated controller action.
      *
      * @param object $httpRequest The HTTP request object.
-     * @param mixed  $config      The application configuration.
+     * @param object  $config      The application configuration.
      *
      * @throws ActionNotFoundException   If the action does not exist in the controller.
      * @throws ControllerNotFoundException If the controller class does not exist.
      */
-    public function run($httpRequest, $config): void
+    public function run(object $httpRequest, object $config): void
     {
         $controller = null;
         $controllerName = $this->_controller;

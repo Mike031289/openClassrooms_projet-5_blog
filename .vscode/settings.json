@@ -2,5 +2,11 @@
   "editor.wordWrap": "on",
   "editor.bracketPairColorization.independentColorPoolPerBracketType": false,
   "editor.defaultFormatter": "DEVSENSE.composer-php-vscode",
-  "php.validate.executablePath": ""
+  "php.validate.executablePath": "",
+  "[twig]": {
+    "editor.defaultFormatter": "Glavin001.unibeautify-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  }
 }
