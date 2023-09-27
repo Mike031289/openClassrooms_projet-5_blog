@@ -8,5 +8,5 @@ class PostManager extends BaseManager
     {
         parent::__construct("post", "Post", $dataSource);
     }
-
+    
 }

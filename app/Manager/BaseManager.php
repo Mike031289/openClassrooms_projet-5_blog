@@ -11,12 +11,12 @@ namespace App\Manager;
 class BaseManager
 {
     /**
-     * @var string The name of the database table associated with this manager.
+     * The name of the database table associated with this manager.
      */
     private string $_table;
 
     /**
-     * @var string The name of the object class associated with this manager.
+     * The name of the object class associated with this manager.
      */
     private string $_object;
 
@@ -30,13 +30,13 @@ class BaseManager
      *
      * @param string $table The name of the database table.
      * @param string $object The name of the object class.
-     * @param object $dataSource The data source for the manager.
+     * @param mixed $dataSource The data source for the manager.
      */
-    public function __construct(string $table, string $object, object $dataSource)
+    public function __construct(string $table, string $object, mixed $dataSource)
     {
-        $this->_table = $table;
+        $this->_table  = $table;
         $this->_object = $object;
-        $this->_db = DB::getInstance($dataSource);
+        $this->_db     = DB::getInstance($dataSource);
     }
 
     /**
@@ -46,13 +46,13 @@ class BaseManager
      * @param int $id The identifier of the record to retrieve.
      * @return mixed|null The retrieved object or null if not found.
      */
-    public function getById(int $id)
+    public function getById(int $id): mixed
     {
         $req = $this->_db->prepare("SELECT * FROM " . $this->_table . " WHERE id = :id");
         $req->bindValue(':id', $id, \PDO::PARAM_INT);
         $req->execute();
 
-        $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $this->_object);
+        // $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $this->_object);
         return $req->fetch();
     }
 
@@ -62,23 +62,24 @@ class BaseManager
      *
      * @return array The array of retrieved objects.
      */
-    public function getAll()
+    public function getAll(): array
     {
         $req = $this->_db->prepare("SELECT * FROM " . $this->_table);
         $req->execute();
-        $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $this->_object);
+
+        // $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $this->_object);
         return $req->fetchAll();
     }
 
     /**
      * Insert a new record into the table associated with the current class using a specified object.
      *
-     * @param array $object An associative array containing the data to be inserted in the database.
-     * @return array The object after insertion.
+     * @param array<string, mixed> $object An associative array containing the data to be inserted in the database.
+     * @return array<string, mixed> The object after insertion.
      */
-    public function create($object)
+    public function create(array $object)
     {
-        $columns = array_keys($object);
+        $columns      = array_keys($object);
         $columnString = implode(", ", $columns);
 
         // Create placeholders for the values
@@ -98,6 +99,7 @@ class BaseManager
         // Return the object after insertion
         return $object;
     }
+
 
     /**
      * Update an existing record in the table associated with the current class using data supplied in a specified object.

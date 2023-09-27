@@ -26,7 +26,12 @@
                                                     {{ error }}
                                                 </div>
                                             {% endif %}
-                                            <div class="form-floating mb-3">
+                                            {% if success is defined %}
+                                                <div class="alert alert-success" role="alert">
+                                                    {{ success }}
+                                                </div>
+                                            {% endif %}
+                                           <div class="form-floating mb-3">
                                                 <input class="form-control" id="inputEmail" type="email" name="email"  required/>
                                                 <label for="inputEmail">Adresse Email</label>
                                                 <div class="invalid-feedback">

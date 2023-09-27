@@ -11,7 +11,7 @@ use Twig\Environment;
  */
 class BaseController
 {
-    private array $_param;
+    private array $_param = [];
     protected object $httpRequest;
     private Environment $_twig;
     private object $config;
@@ -41,7 +41,7 @@ class BaseController
     protected function view(string $fileName, array $viewContent = []): void
     {
         ob_start();
-        extract($this->_param[]);
+        extract($this->_param);
         ob_get_clean();
         echo $this->_twig->render($fileName, $viewContent);
     }

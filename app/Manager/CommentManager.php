@@ -22,7 +22,7 @@ class CommentManager extends BaseManager
         $req->execute();
     
         // Assuming you have a Comment model, you can set the fetch mode accordingly:
-        $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Comment::class);
+        // $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Comment::class);
     
         // Return an array of Comment objects representing the comments
         return $req->fetchAll();
