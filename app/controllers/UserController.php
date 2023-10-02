@@ -2,7 +2,6 @@
 namespace App\Controllers;
 
 use App\Manager\UserManager;
-use App\Models\PostData;
 use App\Core\Functions\FormHelper;
 
 /**
@@ -35,12 +34,11 @@ class UserController extends BaseController
     public function register(): void
     {
         if ($this->httpRequest->getMethod() === 'POST') {
-            // $postData = new PostData(); // Create an instance of PostData
 
             // Retrieve data from the form
-            $userName = FormHelper::post('userName');
-            $email = FormHelper::post('email');
-            $passWord = FormHelper::post('passWord');
+            $userName        = FormHelper::post('userName');
+            $email           = FormHelper::post('email');
+            $passWord        = FormHelper::post('passWord');
             $passWordConfirm = FormHelper::post('passWordConfirm');
 
             // Validate the fields using regex patterns
@@ -68,6 +66,39 @@ class UserController extends BaseController
                 return;
             }
 
+            $userEmail = $this->getManager(UserManager::class)->getUserByEmail($email);
+
+            // Check if the email already exists in the database
+            if ($userEmail !== null) {
+                $errorMessage = "Cette adresse mail existe déjà";
+                $this->view('user/register.html.twig', ['error' => $errorMessage]);
+                return;
+            }
+
+            $user = $this->getManager(UserManager::class)->getUserByName($userName);
+
+            // Check if the user name already exists in the database
+            if ($user !== null) {
+                $errorMessage = "Ce nom d'utilisateur est déjà pris";
+                $this->view('user/register.html.twig', ['error' => $errorMessage]);
+                return;
+            }
+
+            // // Check if the email already exists in the database
+            // $userManager = $this->getManager(UserManager::class);
+            // if ($userManager->emailExists($email)) {
+            //     $errorMessage = "Cet email est déjà enregistré";
+            //     $this->view('user/register.html.twig', ['error' => $errorMessage]);
+            //     return;
+            // }
+
+            // // Check if the user name already exists in the database
+            // if ($userManager->userNameExists($userName)) {
+            //     $errorMessage = "Ce nom d'utilisateur est déjà pris";
+            //     $this->view('user/register.html.twig', ['error' => $errorMessage]);
+            //     return;
+            // }
+
             // Hash the password
             $hashedPassword = password_hash($passWord, PASSWORD_DEFAULT);
 
@@ -86,9 +117,12 @@ class UserController extends BaseController
             $this->getManager(UserManager::class)->create($userData);
 
             // Redirect to the login page
-            $successMessage = "Votre compte a été bien créé";
+            $successMessage = "Votre compte a été bien créé ! Connectez vous et commentez nos articles";
+            // Définir un cookie avec le message de succès
+            setcookie('success', $successMessage, time() + 3600, '/mon-blog/login');
             header('Location: /mon-blog/login');
             exit;
+
         }
     }
 
@@ -97,18 +131,25 @@ class UserController extends BaseController
      */
     public function displayLoginForm(): void
     {
-        $this->view('user/login.html.twig', []);
+        if (isset($_COOKIE['success'])) {
+            $successMessage = $_COOKIE['success'];
+            // Delete the cookie so that it is not displayed again
+            setcookie('success', '', time() - 3600, '/mon-blog/login');
+            // Pass on the message of success to Twig
+            $this->view('user/login.html.twig', ['success' => $successMessage]);
+        } else {
+            $this->view('user/login.html.twig', []); // default display : No success message to display
+        }
     }
+
 
     /**
      * Handle user login.
      */
     public function login(): void
     {
-        $postData = new PostData();
-
         if ($this->httpRequest->getMethod() === 'POST') {
-            $email = FormHelper::post('email');
+            $email    = FormHelper::post('email');
             $passWord = FormHelper::post('passWord');
 
             if (!FormHelper::validateField($email, FormHelper::EMAIL_REGEX)) {

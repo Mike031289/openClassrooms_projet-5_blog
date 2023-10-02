@@ -3,7 +3,6 @@ namespace App\Models;
 
 class PostData
 {
-
     public function __construct()
     {
     }

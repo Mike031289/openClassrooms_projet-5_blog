@@ -38,7 +38,7 @@ class PostController extends BaseController
     /**
      * Display a specific article based on its identifier.
      *
-     * @param int $id The identifier of the article to display.
+     * @param $id The identifier of the article to display.
      */
     public function showPostWithComments(int $id): void
     {

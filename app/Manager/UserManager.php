@@ -5,7 +5,6 @@ use App\Models\User;
 
 class UserManager extends BaseManager
 {
-
     public function __construct(object $dataSource)
     {
         parent::__construct("user", "User", $dataSource);
@@ -25,6 +24,34 @@ class UserManager extends BaseManager
 
         // Bind the email parameter
         $stmt->bindParam(':email', $email);
+
+        // Execute the query
+        $stmt->execute();
+
+        // Use setFetchMode to specify the class and fetch mode
+        $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, User::class);
+
+        // Use fetchObject to retrieve the result as an object of the User class
+        $user = $stmt->fetchObject(User::class);
+
+        // Return the User object or false if not found
+        return $user ? $user : null;
+    }
+
+    /**
+     * Get a user by their name from the database.
+     *
+     */
+    public function getUserByName(string $userName): ?User
+    {
+        // SQL query to retrieve the user by name from the database
+        $sql = "SELECT * FROM user WHERE userName = :userName";
+
+        // Prepare the SQL statement
+        $stmt = $this->_db->prepare($sql);
+
+        // Bind the userName parameter
+        $stmt->bindParam(':userName', $userName);
 
         // Execute the query
         $stmt->execute();

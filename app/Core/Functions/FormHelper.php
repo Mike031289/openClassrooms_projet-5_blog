@@ -11,9 +11,9 @@ class FormHelper
   /**
    * Get a value from the $_POST superglobal.
    *
-   * @param string $key The key to retrieve.
-   * @param mixed $default The default value to return if the key does not exist.
-   * @return mixed The value associated with the key or the default value.
+   * @param $key The key to retrieve.
+   * @param $default The default value to return if the key does not exist.
+   * @return, the value associated with the key or the default value.
    */
   public static function post(string $key, mixed $default = null): mixed
   {
@@ -23,9 +23,9 @@ class FormHelper
   /**
    * Get a value from the $_GET superglobal.
    *
-   * @param string $key The key to retrieve.
-   * @param mixed $default The default value to return if the key does not exist.
-   * @return mixed The value associated with the key or the default value.
+   * @param $key The key to retrieve.
+   * @param $default The default value to return if the key does not exist.
+   * @return, the value associated with the key or the default value.
    */
   public static function get(string $key, mixed $default = null): mixed
   {
@@ -35,9 +35,9 @@ class FormHelper
   /**
    * Validate a field using a regular expression pattern.
    *
-   * @param string $field The field value to validate.
-   * @param string $regex The regular expression pattern to use for validation.
-   * @return bool True if the field is valid, false otherwise.
+   * @param $field The field value to validate.
+   * @param $regex The regular expression pattern to use for validation.
+   * @return, true if the field is valid, false otherwise.
    */
   public static function validateField(string $field, string $regex): bool
   {
