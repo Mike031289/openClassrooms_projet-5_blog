@@ -67,4 +67,20 @@ class BaseController
     {
         return $this->_managers[$className];
     }
+
+     /**
+     * Validate an email address.
+     *
+     * @param string $email The email address to validate.
+     * @return bool True if the email is valid, false otherwise.
+     */
+    private function validateEmail(string $email): bool
+    {
+        // Define the regex pattern for email validation
+        $emailRegex = '/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/';
+
+        // Use preg_match to check if the email matches the pattern
+        return (bool)preg_match($emailRegex, $email);
+    }
+
 }

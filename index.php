@@ -1,8 +1,8 @@
 <?php
 require 'vendor/autoload.php';
 
-use App\Vendor\HttpRequest;
-use App\Vendor\Router;
+use App\Core\HttpRequest;
+use App\Core\Router;
 use App\Exceptions\NoRouteFoundException;
 
 /**

@@ -12,7 +12,8 @@
             "App\\Manager\\": "app/Manager",
             "App\\Controllers\\": "app/Controllers",
             "App\\Exceptions\\": "app/Exceptions",
-            "App\\Vendor\\": "app/Vendor"
+            "App\\Core\\": "app/Core",
+            "App\\Core\\Functions\\": "app/Core/Functions"
         }
     },
     "authors": [

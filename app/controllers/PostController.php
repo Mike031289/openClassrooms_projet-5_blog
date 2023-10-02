@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use App\Manager\PostManager;
 use App\Manager\CommentManager;
+use App\Manager\CategoryManager;
 
 /**
  * Class PostController
@@ -28,8 +29,10 @@ class PostController extends BaseController
     public function listPosts(): void
     {
         $posts  = $this->getManager(PostManager::class)->getAll();
+        $categories = $this->getManager(CategoryManager::class)->getAll();
 
-        $this->view('blog/posts.html.twig', ['posts' => $posts]);
+
+        $this->view('blog/posts.html.twig', ['posts' => $posts, 'categories' => $categories]);
     }
 
     /**
@@ -51,4 +54,5 @@ class PostController extends BaseController
 
         $this->view('blog/post.html.twig', ['post' => $post, 'comments' => $comments]);
     }
+
 }

@@ -3,113 +3,129 @@
 {% set page = 'posts' %}
 
 {% block header_title %}
-    Liste des Articles
+  Liste des Articles
 {% endblock %}
 
 {% block header_description %}
-    Découvrez tous nos articles.
+  Découvrez tous nos articles.
 {% endblock %}
 
 {% block content %}
-<div class="container">
+  <div class="container">
     <div class="row">
-        <!-- Featured blog post -->
-        <h1 class="title mt-5">A la une !</h1>
-        <div class="card mb-4 col-lg-8 p-0">
-            {% if posts is empty %}
-                <p>Aucun post disponible.</p>
-            {% else %}
-                {% set latestPost = posts|last %}
-                <a href="#!">
-                    <img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." />
-                </a>
-                <div class="card-body">
-                    <div class="small text-muted">Date de publication: {{ latestPost.createdAt }}</div>
-                    <div class="small text-muted">Date de mise à jour: {{ latestPost.updatedAt }}</div>
-                    <h2 class="card-title h4">{{ latestPost.title }}</h2>
-                    <p class="card-text">{{ latestPost.content }}</p>
-                    <p>Auteur : {{ latestPost.authorId }}</p>
-                    <a class="btn btn-primary" href="http://localhost/mon-blog/post/{{ latestPost.id }}">Lire →</a>
-                    
-                </div>
-            {% endif %}
-        </div>
+      <!-- Featured blog post -->
+      <h1 class="title mt-5">A la une !</h1>
+      <div class="card mb-4 col-lg-8 p-0">
+        {% if posts is empty %}
+          <p>Aucun post disponible.</p>
+        {% else %}
+          {% set latestPost = posts | last %}
+          <a href="#!">
+            <img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..."/>
+          </a>
+          <div class="card-body">
+            <div class="small text-muted">Date de publication:
+              {{ latestPost.createdAt }}</div>
+            <div class="small text-muted">Date de mise à jour:
+              {{ latestPost.updatedAt }}</div>
+            <h2 class="card-title h4">{{ latestPost.title }}</h2>
+            <p class="card-text">{{ latestPost.content }}</p>
+            <p>Auteur :
+              {{ latestPost.authorId }}</p>
+            <a class="btn btn-primary" href="http://localhost/mon-blog/post/{{ latestPost.id }}">Lire →</a>
 
+          </div>
+        {% endif %}
+      </div>
+
+      {% if categories is empty %}
+        <p>Aucune catégories repertoriée</p>
+      {% else %}
         <!-- Sidebar -->
         <div class="col-lg-4">
-            <!-- Search widget -->
-            <div class="card mb-4">
-                <div class="card-header">Search</div>
-                <div class="card-body">
-                    <div class="input-group">
-                        <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
-                        <button class="btn btn-primary" id="button-search" type="button">Go!</button>
-                    </div>
-                </div>
+          <!-- Search widget -->
+          <div class="card mb-4">
+            <div class="card-header">Search</div>
+            <div class="card-body">
+              <div class="input-group">
+                <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search"/>
+                <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+              </div>
             </div>
-            <!-- Categories widget -->
-            <div class="card mb-4">
-                <div class="card-header">Categories</div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <ul class="list-unstyled mb-0">
-                                <li><a href="#!">Web Design</a></li>
-                                <li><a href="#!">HTML</a></li>
-                                <li><a href="#!">Freebies</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-6">
-                            <ul class="list-unstyled mb-0">
-                                <li><a href="#!">JavaScript</a></li>
-                                <li><a href="#!">CSS</a></li>
-                                <li><a href="#!">Tutorials</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+          </div>
+          <!-- Categories widget -->
+          <div class="card mb-4">
+            <div class="card-header">Categories</div>
+            <div class="card-body">
+              <ul class="list-unstyled">
+                {% for category in categories %}
+                  <li>
+                    <a href="http://localhost/mon-blog/posts/{{ category.id }}">{{ category.name }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
             </div>
-            <!-- Side widget -->
-            <div class="card mb-4">
-                <div class="card-header">Side Widget</div>
-                <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
-            </div>
+          </div>
+          <!-- Side widget -->
+          <div class="card mb-4">
+            <div class="card-header">Side Widget</div>
+            <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
+          </div>
         </div>
+      {% endif %}
+      {# Close the else statement properly here #}
     </div>
 
     <div class="container-fluid mt-5">
-        <h2 class="title ">Explorer nos derniers articles :</h2>
-        <div class="row mb-5">
-            {% for post in posts %}
-                <div class="card col-lg-3 p-0 m-5">
-                    <a href="#!">
-                        <img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." />
-                    </a>
-                    <div class="card-body">
-                        <div class="small text-muted">Date de publication: {{ post.createdAt }}</div>
-                        <div class="small text-muted">Date de mise à jour: {{ post.updatedAt }}</div>
-                        <h2 class="card-title h4">{{ post.title }}</h2>
-                        <p class="card-text">{{ post.content }}</p>
-                        <p>Auteur : {{ post.authorId }}</p>
-                        <a class="btn btn-primary" href="http://localhost/mon-blog/post/{{ post.id }}">Lire →</a>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
+      <h2 class="title ">Explorer nos derniers articles :</h2>
+      <div class="row mb-5">
+        {% for post in posts %}
+          <div class="card col-lg-3 p-0 m-5">
+            <a href="#!">
+              <img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..."/>
+            </a>
+            <div class="card-body">
+              <div class="small text-muted">Date de publication:
+                {{ post.createdAt }}</div>
+              <div class="small text-muted">Date de mise à jour:
+                {{ post.updatedAt }}</div>
+              <h2 class="card-title h4">{{ post.title }}</h2>
+              <p class="card-text">{{ post.content }}</p>
+              <p>Auteur :
+                {{ post.authorId }}</p>
+              <a class="btn btn-primary" href="http://localhost/mon-blog/post/{{ post.id }}">Lire →</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
     </div>
-    
+
     <!-- Pagination -->
     <nav aria-label="Pagination">
-        <hr class="my-0" />
-        <ul class="pagination justify-content-center my-4">
-            <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Newer</a></li>
-            <li class="page-item active" aria-current="page"><a class="page-link" href="#!">1</a></li>
-            <li class="page-item"><a class="page-link" href="#!">2</a></li>
-            <li class="page-item"><a class="page-link" href="#!">3</a></li>
-            <li class="page-item disabled"><a class="page-link" href="#!">...</a></li>
-            <li class="page-item"><a class="page-link" href="#!">15</a></li>
-            <li class="page-item"><a class="page-link" href="#!">Older</a></li>
-        </ul>
+      <hr class="my-0"/>
+      <ul class="pagination justify-content-center my-4">
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Newer</a>
+        </li>
+        <li class="page-item active" aria-current="page">
+          <a class="page-link" href="#!">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#!">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#!">3</a>
+        </li>
+        <li class="page-item disabled">
+          <a class="page-link" href="#!">...</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#!">15</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#!">Older</a>
+        </li>
+      </ul>
     </nav>
-</div>
+  </div>
 {% endblock %}

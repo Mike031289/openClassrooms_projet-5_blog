@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use App\Manager\PostManager;
+use App\Manager\CategoryManager;
 
 /**
  * Class HomeController
@@ -18,14 +19,10 @@ class HomeController extends BaseController
      */
     public function home(): void
     {
-			$posts = $this->getManager(PostManager::class)->getAll();
-			
-			$this->view("blog/home.html.twig", ['posts' => $posts]);
+        $posts      = $this->getManager(PostManager::class)->getAll();
+        $categories = $this->getManager(CategoryManager::class)->getAll();
+
+        $this->view("blog/home.html.twig", ['posts' => $posts, 'categories' => $categories]);
     }
+
 }
-
-
-
-
-
-

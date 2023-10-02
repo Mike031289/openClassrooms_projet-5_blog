@@ -5,7 +5,7 @@
 		"app/Models/Manager/",
 		"app/Exceptions",
 		"vendor/",
-		"Vendor/"
+		"Core/"
 	],
 	
 	"baseUrl": "/mon-blog",

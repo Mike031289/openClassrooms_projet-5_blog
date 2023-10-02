@@ -94,7 +94,7 @@ class BaseManager
         }
 
         // Execute the query after binding parameters
-        $req->execute();
+        $req->execute();    
 
         // Return the object after insertion
         return $object;

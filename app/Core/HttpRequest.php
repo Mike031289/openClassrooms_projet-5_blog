@@ -1,5 +1,5 @@
 <?php
-namespace App\Vendor;
+namespace App\Core;
 
 /**
  * Class HttpRequest
@@ -57,7 +57,7 @@ class HttpRequest
      *
      * @return Route|null
      */
-    public function getRoute(): ?Route
+    public function getRoute(): Route
     {
         return $this->_route;
     }
@@ -69,7 +69,7 @@ class HttpRequest
      *
      * @return self
      */
-    public function setRoute(?Route $_route): self
+    public function setRoute(Route $_route): self
     {
         $this->_route = $_route;
         return $this;

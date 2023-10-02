@@ -1,6 +1,6 @@
 #Directory Structure:
 
-project/
+monblog/
 │
 ├── app/
 │   ├── Controllers/
@@ -9,19 +9,47 @@ project/
 │   ├── Models/
 │   │   ├── User.php
 │   │   └── ...
+│   ├── View/
+│   │   ├── admin/
+│   │   ├── blog/
+│   │   ├── templates/
+│   │   └── ...
+│   ├── Manager/
+│   │   ├── AdminManager.php
+│   │   ├── UserManager.php
+│   │   ├── BaseManager.php
+│   │   └── ...
+│   ├── Core
+│   │   ├── HttpRequest.php
+│   │   ├── Router.php
+│   │   ├── Route.php
+│   │   └── ...
+│   ├── Exceptions
+│   │   ├── NoRouteFoundException.php
+│   │   ├── ...
+│   │   ├── ...
+│   │   └── ...
 │   └── ...
 │
 ├── public/
-│   ├── index.php
-│   ├── login.php
-│   ├── register.php
+│   ├── assets/
+│   ├── lcss/
+│   ├── js/
 │   └── ...
 │
-├── templates/
-│   ├── login.html.twig
-│   ├── register.html.twig
+├── config/
+│   ├── config.json
+│   ├── routes.json
+│   └── ...
+├── vendor/
+│   ├── composer/
+│   ├── twig/
+│   ├── autoload.php
 │   └── ...
 │
+├── .gitignore
 ├── .htaccess
 ├── composer.json
+├── composer.lock
+├── index.php
 └── ...

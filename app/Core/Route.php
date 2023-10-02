@@ -1,5 +1,5 @@
 <?php
-namespace App\Vendor;
+namespace App\Core;
 
 use App\Exceptions\ActionNotFoundException;
 use App\Exceptions\ControllerNotFoundException;
