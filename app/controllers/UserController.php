@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use App\Manager\UserManager;
 use App\Core\Functions\FormHelper;
+use App\Models\User;
 
 /**
  * UserController - Controller responsible for handling user-related actions.
@@ -152,16 +153,31 @@ class UserController extends BaseController
             $email    = FormHelper::post('email');
             $passWord = FormHelper::post('passWord');
 
-            if (!FormHelper::validateField($email, FormHelper::EMAIL_REGEX)) {
-                // Invalid email format
-                $errorMessage = "Format d'email invalide";
-                $this->view('user/login.html.twig', ['error' => $errorMessage]);
+            if (empty($email) || !FormHelper::validateField($email, FormHelper::EMAIL_REGEX)) {
+                $emailError = "Ce champ est obligatoir (format email@exemple.com)";
+                $this->view('user/login.html.twig', ['emailError' => $emailError]);
                 exit;
             }
+            if (empty($passWord) || !FormHelper::validateField($passWord, FormHelper::PASSWORD_REGEX)) {
+                $passwordError = "Mot de passe invalide";
+                $this->view('user/login.html.twig', ['passwordError' => $passwordError]);
+                exit;
+            }
+
+
+            // if (!FormHelper::validateField($email, FormHelper::EMAIL_REGEX)) {
+            //     // Invalid email format
+            //     $errorMessage = "Format d'email invalide";
+            //     $this->view('user/login.html.twig', ['error' => $errorMessage]);
+            //     exit;
+            // }
 
             $user = $this->getManager(UserManager::class)->getUserByEmail($email);
             if ($user) {
                 if (password_verify($passWord, $user->getPassWord())) {
+                    $user = New User;
+                    var_dump($user);
+                    die;
                     // Correct password, log in the user
                     session_start();
                     $_SESSION['user'] = $user;
