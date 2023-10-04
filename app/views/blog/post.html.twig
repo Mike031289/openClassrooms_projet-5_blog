@@ -41,14 +41,18 @@
                     </div>
                 </div>
 
-                <form class="mt-5" action="sendComment" method="POST">
-                    <div class="mb-3">
-                        <label for="validationTextarea" class="form-label">Laissez nous votre commentaire</label>
-                        <input type="hidden" name="article_id" value="{{ post.id }}">
-                        <textarea class="form-control" id="validationTextarea" name="comment_text" rows="3" cols="50" placeholder="Ajouter un commentaire" required></textarea>
-                        <button type="submit" class="btn btn-success mt-2" value="Envoyer">Envoyer</button>
-                    </div>
-                </form>
+                {% if user %}
+                    <form class="mt-5" action="sendComment" method="POST">
+                        <div class="mb-3">
+                            <label for="validationTextarea" class="form-label">Laissez nous votre commentaire</label>
+                            <input type="hidden" name="article_id" value="{{ post.id }}">
+                            <textarea class="form-control" id="validationTextarea" name="comment_text" rows="3" cols="50" placeholder="Ajouter un commentaire" required></textarea>
+                            <button type="submit" class="btn btn-success mt-2" value="Envoyer">Envoyer</button>
+                        </div>
+                    </form>
+                {% else %}
+                    <p>Vous devez être connecté pour laisser un commentaire.</p>
+                {% endif %}
             {% endif %}
             
             {# Comment rendering loop #}

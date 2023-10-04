@@ -37,6 +37,13 @@
 												<a class="nav-link {% if page == 'contact' %}active{% endif %}" href="http://localhost/mon-blog/contact">Contact</a>
 										</li>
 										<li class="nav-item">
+                                            {% if user is defined %}
+                                                {# User is logged in #}
+                                                <p>Welcome, {{ user.username }}!</p>
+                                            {% else %}
+                                                {# User is not logged in #}
+                                                <p>Please log in to access this feature.</p>
+                                            {% endif %}
 												<a class="nav-link {% if page == 'login' %}active{% endif %}" href="http://localhost/mon-blog/login">login</a>
 										</li>
 								</ul>

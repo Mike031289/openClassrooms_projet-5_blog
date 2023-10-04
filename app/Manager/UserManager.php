@@ -1,6 +1,8 @@
 <?php
 namespace App\Manager;
 
+use App\Core\Functions\FormHelper;
+
 use App\Models\User;
 
 class UserManager extends BaseManager
@@ -67,27 +69,54 @@ class UserManager extends BaseManager
     }
 
 
-    // public function create($object)
-    // {
-    //     // Utilisez une requête SQL préparée pour insérer les données dans la base de données
-    //     $sql = "INSERT INTO {$this->_table} (userName, email, passWord, createdAt) VALUES (?, ?, ?, ?)";
-    //     $stmt = $this->_db->prepare($sql);
+    /**
+     * Create a new user in the database.
+     *
+     * @param $userName The username of the new user.
+     * @param $email The email address of the new user.
+     * @param $passWord The password of the new user (plain text).
+     *
+     * @return User|null Returns a User object if the user was successfully created, or null on failure.
+     */
+    public function createUser(string $userName, string $email, string $passWord): ?User
+    {
+        // Hash the password
+        $hashedPassword = password_hash($passWord, PASSWORD_DEFAULT);
 
-    //     // Associez les valeurs aux paramètres de la requête
-    //     $stmt->bindParam(1, $object->getUserName(), \PDO::PARAM_STR);
-    //     $stmt->bindParam(2, $object->getEmail(), \PDO::PARAM_STR);
-    //     $stmt->bindParam(3, $object->getPassWord(), \PDO::PARAM_STR);
-    //     $stmt->bindParam(4, $object->getCreatedAt(), \PDO::PARAM_STR);
+        // Get the current date
+        $createdAt = date('Y-m-d H:i:s');
 
-    //     // Exécutez la requête d'insertion
-    //     if ($stmt->execute()) {
-    //         // Si l'insertion est réussie, retournez l'objet User
-    //         return $object;
-    //     } else {
-    //         // En cas d'échec, vous pouvez gérer l'erreur ici
-    //         return null;
-    //     }
-    // }
+        // Use a prepared SQL query to insert data into the database
+        $sql  = "INSERT INTO user (userName, email, passWord, createdAt) VALUES (?, ?, ?, ?)";
+        $stmt = $this->_db->prepare($sql);
+
+        // Bind values to query parameters
+        $stmt->bindParam(1, $userName, \PDO::PARAM_STR);
+        $stmt->bindParam(2, $email, \PDO::PARAM_STR);
+        $stmt->bindParam(3, $hashedPassword, \PDO::PARAM_STR);
+        $stmt->bindParam(4, $createdAt, \PDO::PARAM_STR);
+
+        // Execute the insertion query
+        if ($stmt->execute()) {
+            // Get the ID of the newly created user
+            $userId = $this->_db->lastInsertId();
+
+            // Create a new User object with the inserted data
+            $user = new User();
+            $user->setId($userId);
+            $user->setUserName($userName);
+            $user->setEmail($email);
+            $user->setPassWord($hashedPassword);
+            $user->setCreatedAt($createdAt);
+
+            // Return the User object
+            return $user;
+        } else {
+            // Handle the error in case of failure
+            return null;
+        }
+    }
+
 
 
 }
