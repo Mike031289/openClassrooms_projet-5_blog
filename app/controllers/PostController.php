@@ -42,6 +42,7 @@ class PostController extends BaseController
      */
     public function showPostWithComments(int $id): void
     {
+        // Retrieve post, comments, and user information as needed
         $post = $this->getManager(PostManager::class)->getById($id);
 
         if (!$post) {
@@ -50,9 +51,13 @@ class PostController extends BaseController
             exit; // Stop execution to prevent displaying page content
         }
 
+        // Check if the user is logged in and pass the user information to the template
+        session_start();
+        $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
+
         $comments = $this->getManager(CommentManager::class)->getCommentsByPostId($id);
 
-        $this->view('blog/post.html.twig', ['post' => $post, 'comments' => $comments]);
+        $this->view('blog/post.html.twig', ['post' => $post, 'comments' => $comments, 'user' => $user]);
     }
 
 }

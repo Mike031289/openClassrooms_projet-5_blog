@@ -137,13 +137,10 @@ class UserController extends BaseController
             $user = $this->getManager(UserManager::class)->getUserByEmail($email);
             if ($user) {
                 if (password_verify($passWord, $user->getPassWord())) {
-
                     $userObject = $user;
                     // Correct password, log in the user
                     session_start();
                     $_SESSION['user'] = $userObject;
-                    // var_dump($_SESSION);
-                    // die;
                     // Redirect to a protected page (e.g., dashboard)
                     header('Location: posts');
                     exit;

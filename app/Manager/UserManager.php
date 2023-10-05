@@ -1,8 +1,6 @@
 <?php
 namespace App\Manager;
 
-use App\Core\Functions\FormHelper;
-
 use App\Models\User;
 
 class UserManager extends BaseManager
