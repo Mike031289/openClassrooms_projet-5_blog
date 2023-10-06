@@ -21,8 +21,11 @@ class HomeController extends BaseController
     {
         $posts      = $this->getManager(PostManager::class)->getAll();
         $categories = $this->getManager(CategoryManager::class)->getAll();
+        // Check if the user is logged in and pass the user information to the template
+        session_start();
+        $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
 
-        $this->view("blog/home.html.twig", ['posts' => $posts, 'categories' => $categories]);
+        $this->view("blog/home.html.twig", ['posts' => $posts, 'categories' => $categories, 'user' => $user]);
     }
 
 }

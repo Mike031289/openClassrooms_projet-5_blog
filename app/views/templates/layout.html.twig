@@ -9,14 +9,18 @@
     <title>{{ title }}</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="public/assets/favicon.ico" />
+    <!-- font-awesome icon-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="public/css/styles.css" rel="stylesheet" />
+    <link href="public/css/booststrapStyles.css" rel="stylesheet" />
+    <link href="public/css/myStyles.css" rel="stylesheet" />
 </head>
 {% endblock %}
 <body>
 
 		<!-- Responsive navbar-->
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<nav id="myNavStyles" class="navbar navbar-expand-lg">
 				<div class="container">
 						<a class="navbar-brand" href="http://localhost/mon-blog/">Mon Blog</a>
 						<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,30 +40,36 @@
 										<li class="nav-item">
 												<a class="nav-link {% if page == 'contact' %}active{% endif %}" href="http://localhost/mon-blog/contact">Contact</a>
 										</li>
-										<li class="nav-item">
-                                            {% if user is defined %}
-                                                {# User is logged in #}
-                                                <p>Welcome, {{ user.username }}!</p>
-                                            {% else %}
-                                                {# User is not logged in #}
-                                                <p>Please log in to access this feature.</p>
+                                        {% if user is defined %}
+                                        <li class="nav-item">
+                                            <a class="nav-link {% if page == 'logOut' %}active{% endif %}" href="http://localhost/mon-blog/logout"><i class="fa fa-sign-out" aria-hidden="true">  logout</i></a>
+										</li>
+                                        {% else %}
+                                        <li class="nav-item">
+                                            <a class="nav-link {% if page == 'login' %}active{% endif %}" href="http://localhost/mon-blog/login"><i class="fa fa-sign-in" aria-hidden="true"> login</i></a>
                                             {% endif %}
-												<a class="nav-link {% if page == 'login' %}active{% endif %}" href="http://localhost/mon-blog/login">login</a>
+												
 										</li>
 								</ul>
 						</div>
 				</div>
 		</nav>
-
+        {% if user is defined %}
+        <div class="welcomeCard text-center">
+            <h4 class="card-header">
+                Bonjour cher {{ user.userName }} !
+            </h4>
+        </div>
+        {% endif %}
+    
     <!-- Page header with logo and tagline-->
     {% block header %}
     <header class="py-5 bg-light border-bottom">
-        <div class="container">
+          <div class="container">
             <div class="text-center my-5">
                 <h1 class="fw-bolder">{{ block('header_title') }}</h1>
                 <p class="lead mb-0">{{ block('header_description') }}</p>
             </div>
-        </div>
     </header>
     {% endblock %}
     

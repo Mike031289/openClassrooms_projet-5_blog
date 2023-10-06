@@ -1,0 +1,25 @@
+#myNavStyles .nav-link .fa,
+#myNavStyles .nav-link .fa{
+  /* color: #FFF; */
+  font-size: 20px;
+  border-left: #FFF 3px solid;
+  padding-left: 10px;
+}
+#myNavStyles .nav-link{
+  color: #000;
+}
+#myNavStyles .nav-link.active{
+    font-weight: bolder;
+}
+#myNavStyles{
+  background-color: #eda012;
+}
+#myNavStyles .navbar-brand{
+  color: #000;
+  font-weight: bolder;
+}
+.welcomeCard{
+  font-size: larger;
+  padding: 50px;
+  background-color: #dee2e62a;
+}

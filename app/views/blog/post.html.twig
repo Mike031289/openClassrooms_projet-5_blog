@@ -8,9 +8,13 @@
         <title>{{ title }}</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="../public/assets/favicon.ico" />
+
+        <!-- font-awesome icon-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="../public/css/styles.css" rel="stylesheet" />
-    </head>
+        <link href="../public/css/booststrapStyles.css" rel="stylesheet"/>
+        <link href="../public/css/myStyles.css" rel="stylesheet"/>
 {% endblock %}
 
 {% block header_title %}
@@ -23,7 +27,7 @@
 
 {% block content %}
     <div class="container-fluid p-0">
-        <img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." />
+        <img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="Post image" />
         <div class="container mt-5">
             {% if post %}
                 <div class="mb-4">
