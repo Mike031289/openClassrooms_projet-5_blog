@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use App\Manager\PostManager;
 use App\Manager\CategoryManager;
+use App\Manager\UserManager;
 
 /**
  * Class HomeController
@@ -23,8 +24,11 @@ class HomeController extends BaseController
         $categories = $this->getManager(CategoryManager::class)->getAll();
         // Check if the user is logged in and pass the user information to the template
         session_start();
-        $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
-
+        $email = $_SESSION['userEmail'] ?? null;
+        $user = null;
+        if($email !== null){
+            $user = $this->getManager(UserManager::class)->getUserByEmail($email);
+        }
         $this->view("blog/home.html.twig", ['posts' => $posts, 'categories' => $categories, 'user' => $user]);
     }
 

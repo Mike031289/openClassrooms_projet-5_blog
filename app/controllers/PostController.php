@@ -4,6 +4,8 @@ namespace App\Controllers;
 use App\Manager\PostManager;
 use App\Manager\CommentManager;
 use App\Manager\CategoryManager;
+use App\Manager\UserManager;
+
 
 /**
  * Class PostController
@@ -32,8 +34,12 @@ class PostController extends BaseController
         $categories = $this->getManager(CategoryManager::class)->getAll();
 
         // Check if the user is logged in and pass the user information to the template
-        session_start();
-        $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
+          session_start();
+        $email = $_SESSION['userEmail'] ?? null;
+        $user = null;
+        if($email !== null){
+            $user = $this->getManager(UserManager::class)->getUserByEmail($email);
+        }
 
         $this->view('blog/posts.html.twig', ['posts' => $posts, 'categories' => $categories, 'user' => $user]);
     }
@@ -56,7 +62,11 @@ class PostController extends BaseController
 
         // Check if the user is logged in and pass the user information to the template
         session_start();
-        $user = isset($_SESSION['user']) ? $_SESSION['user'] : null;
+        $email = $_SESSION['userEmail'] ?? null;
+        $user = null;
+        if($email !== null){
+            $user = $this->getManager(UserManager::class)->getUserByEmail($email);
+        }
 
         $comments = $this->getManager(CommentManager::class)->getCommentsByPostId($id);
 

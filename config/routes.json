@@ -5,7 +5,7 @@
 			"action": "home",
 			"method": "GET",
 			"param": [],
-			"managers": ["App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
+			"managers": ["App\\Manager\\PostManager", "App\\Manager\\CategoryManager", "App\\Manager\\UserManager" ]
 	},
 	{
 			"path": "/posts",
@@ -13,7 +13,7 @@
 			"action": "listPosts",
 			"method": "GET",
 			"param": [],
-			"managers": ["App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
+			"managers": ["App\\Manager\\PostManager", "App\\Manager\\CategoryManager", "App\\Manager\\UserManager"]
 	},
 	{
 		"path": "/post/{id}",
@@ -21,7 +21,7 @@
 		"action": "showPostWithComments",
 		"method": "GET",
 		"param": ["id"],
-		"managers": ["App\\Manager\\PostManager", "App\\Manager\\CommentManager"]
+		"managers": ["App\\Manager\\PostManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager"]
 	},
 	{
 			"path": "/contact",
@@ -44,6 +44,14 @@
 			"controller": "App\\Controllers\\UserController",
 			"action": "login",
 			"method": "POST",
+			"param": [],
+			"managers":  ["App\\Manager\\UserManager"]
+	},
+	{
+			"path": "/logout",
+			"controller": "App\\Controllers\\UserController",
+			"action": "logout",
+			"method": "GET",
 			"param": [],
 			"managers":  ["App\\Manager\\UserManager"]
 	},

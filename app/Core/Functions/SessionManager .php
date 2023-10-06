@@ -1,12 +1,12 @@
 <?php
-namespace App\Models;
+namespace App\Core\Functions;
 
 /**
  * Class SessionWrapper
  *
  * A simple wrapper for handling PHP sessions.
  */
-class SessionWrapper
+class SessionManager
 {
     /**
      * SessionWrapper constructor.
@@ -40,6 +40,16 @@ class SessionWrapper
     public function get(string $key, $default = null)
     {
         return isset($_SESSION[$key]) ? $_SESSION[$key] : $default;
+    }
+
+    /**
+     * Remove a session variable.
+     *
+     * @param string $key The session variable name to remove.
+     */
+    public function isLoggegIn(string $key): void
+    {
+        isset($_SESSION[$key]);
     }
 
     /**

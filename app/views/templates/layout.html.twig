@@ -40,9 +40,9 @@
 										<li class="nav-item">
 												<a class="nav-link {% if page == 'contact' %}active{% endif %}" href="http://localhost/mon-blog/contact">Contact</a>
 										</li>
-                                        {% if user is defined %}
+                                        {% if user is defined and user is not null %}
                                         <li class="nav-item">
-                                            <a class="nav-link {% if page == 'logOut' %}active{% endif %}" href="http://localhost/mon-blog/logout"><i class="fa fa-sign-out" aria-hidden="true">  logout</i></a>
+                                            <a class="nav-link" href="http://localhost/mon-blog/logout"><i class="fa fa-sign-out" aria-hidden="true">  logout</i></a>
 										</li>
                                         {% else %}
                                         <li class="nav-item">
@@ -54,10 +54,10 @@
 						</div>
 				</div>
 		</nav>
-        {% if user is defined %}
-        <div class="welcomeCard text-center">
+        {% if user is defined and user is not null %}
+            <div class="welcomeCard text-center">
             <h4 class="card-header">
-                Bonjour cher {{ user.userName }} !
+                Bonjour {{ user.userName }} !
             </h4>
         </div>
         {% endif %}

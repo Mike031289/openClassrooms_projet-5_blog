@@ -45,7 +45,7 @@
                     </div>
                 </div>
 
-                {% if user %}
+                {% if user is defined and user is not null %}
                     <form class="mt-5" action="sendComment" method="POST">
                         <div class="mb-3">
                             <label for="validationTextarea" class="form-label">Laissez nous votre commentaire</label>
