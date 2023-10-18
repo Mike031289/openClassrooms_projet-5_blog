@@ -83,7 +83,7 @@ class UserController extends BaseController
         }
 
         // Use the create method of UserManager to create the User object
-        $this->getManager(UserManager::class)->createUser($userName, $email,$passWord);
+        $this->getManager(UserManager::class)->createUser($userName, $email, $passWord);
 
         // Redirect to the login page
         $successMessage = "Votre compte a été bien créé ! Connectez vous et commentez nos articles";
@@ -113,45 +113,63 @@ class UserController extends BaseController
     /**
      * Handle user login.
      */
-    public function login(): void
+public function login(): void
     {
-        if ($this->httpRequest->getMethod() === 'POST') {
-            $email    = FormHelper::post('email');
-            $passWord = FormHelper::post('passWord');
+        $email    = FormHelper::post('email');
+        $passWord = FormHelper::post('passWord');
+        $errors   = [];
 
-            if (empty($email) || !FormHelper::validateField($email, FormHelper::EMAIL_REGEX)) {
-                $emailError = "Ce champ est obligatoir (format email@exemple.com)";
-                $this->view('user/login.html.twig', ['emailError' => $emailError]);
-                exit;
-            }
-            if (empty($passWord) || !FormHelper::validateField($passWord, FormHelper::PASSWORD_REGEX)) {
-                $passwordError = "Mot de passe invalide";
-                $this->view('user/login.html.twig', ['passwordError' => $passwordError]);
-                exit;
-            }
+        // Validate email fields
+        if (empty($email)) {
+            $errors['email'] = "Adresse email requis";
 
-            $user = $this->getManager(UserManager::class)->getUserByEmail($email);
-            if ($user) {
-                if (password_verify($passWord, $user->getPassWord())) {
-                    // Correct password, log in the user
-                    session_start();
-                    $_SESSION['userEmail'] = $email;
-                    // Redirect to a protected page (e.g., dashboard)
-                    header('Location: posts');
-                    exit;
-                } else {
-                    // Incorrect password, display an error
-                    $errorMessage = "Mot de passe incorrect";
-                    $this->view('user/login.html.twig', ['error' => $errorMessage]);
-                    exit;
-                }
-            } else {
-                // User not found, display an error
-                $errorMessage = "Ce compte n'existe pas";
-                $this->view('user/login.html.twig', ['error' => $errorMessage]);
-                exit;
-            }
+        } else if (!FormHelper::validateField($email, FormHelper::EMAIL_REGEX)) {
+            $errors['email'] = "Email invalide (format requis : email@example.com)";
         }
+
+        // Validate password fields
+        if (empty($passWord)) {
+            $errors['password'] = "Mot de passe requis";
+
+        } else if (!FormHelper::validateField($passWord, FormHelper::PASSWORD_REGEX)) {
+            $errors['password'] = "Mot de passe invalide";
+        }
+
+        // If there are errors, display the Twig template with the errors
+        if (!empty($errors)) {
+            // Add the email and password values to the value array so the value will note be clear after submition
+            $value['emailValue']    = $email;
+            $value['passwordValue'] = $passWord;
+            $this->view('user/login.html.twig', ['errors' => $errors, 'value' => $value]);
+            exit;
+        }
+
+        // Attempt to retrieve the user based on the provided email
+        $user = $this->getManager(UserManager::class)->getUserByEmail($email);
+
+        if ($user) {
+            // If the password matches, log in the user
+            if (password_verify($passWord, $user->getPassWord())) {
+                session_start();
+                $_SESSION['userEmail'] = $email;
+                // Redirect to a protected page (e.g., dashboard)
+                header('Location: posts');
+                exit;
+            } else {
+                // Password is incorrect
+                $errors['password'] = "Mot de passe incorrect";
+                // Add the email value to the errors array
+                $value['emailValue'] = $email;
+            }
+        } else {
+            // User not found
+            $error = "Ce compte n'existe pas. Créer un compte pour se connecter";
+            $this->view('user/login.html.twig', ['error' => $error]);
+        }
+
+        // Display the Twig template with the errors
+        $this->view('user/login.html.twig', ['errors' => $errors, 'value' => $value]);
+        exit;
     }
 
     /**

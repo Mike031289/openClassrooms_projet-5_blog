@@ -2534,7 +2534,9 @@ textarea.form-control-lg {
   white-space: nowrap;
   background-color: #e9ecef;
   border: 1px solid #ced4da;
-  border-radius: 0.375rem;
+  border-radius: 0 0.375rem 0.375rem 0;
+  cursor: pointer;
+  height: 100%;
 }
 
 .input-group-lg > .form-control,

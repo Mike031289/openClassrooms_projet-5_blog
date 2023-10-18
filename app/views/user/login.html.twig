@@ -23,7 +23,7 @@
                 </div>
                 <div class="card-body">
                   <form class="" novalidate="novalidate" action="login" method="POST">
-                    {% if error %}
+                    {% if error is defined %}
                       <div class="alert alert-danger" role="alert">
                         {{ error }}
                       </div>
@@ -33,17 +33,28 @@
                         {{ success }}
                       </div>
                     {% endif %}
-                    <div class="form-floating mb-3 {% if emailError %}has-error{% endif %}">
-                      <input class="form-control {% if emailError %}is-invalid{% endif %}" id="inputEmail" type="email" name="email" required="required" value="{{ email }}"/>
-                      <label for="inputEmail">Adresse Email *</label>
-                      {% if emailError %}
-                        <span class="error-message text-danger">{{ emailError }}</span>{% endif %}
+                    <div class="mb-3 {% if errors.email %}has-error{% endif %}">
+                      <div class="form-floating">
+                        <input class="form-control {% if errors.email %}is-invalid{% endif %}" id="inputEmail" type="email" name="email" required="required" value="{{ value.emailValue ?? '' }}"/>
+                        <label for="inputEmail">Adresse Email *</label>
+                        {% if errors.email %}
+                          <div class="invalid-feedback">{{ errors.email }}</div>
+                        {% endif %}
+                      </div>
                     </div>
-                    <div class="form-floating mb-3 {% if passwordError %}has-error{% endif %}">
-                      <input class="form-control {% if passwordError %}is-invalid{% endif %}" id="inputPassword" type="password" name="passWord" required="required"/>
-                      <label for="inputPassword">Mot de passe *</label>
-                      {% if passwordError %}
-                        <span class="error-message text-danger">{{ passwordError }}</span>{% endif %}
+                    <div class="mb-3 {% if errors.password %}has-error{% endif %}">
+                      <div class="form-floating  input-group">
+                        <input class="form-control {% if errors.password %}is-invalid{% endif %}" id="inputPassword" type="password" name="passWord" required="required" value="{{ value.passwordValue ?? '' }}"/>
+                        <label for="inputPassword">Mot de passe *</label>
+                        <div class="input-group-append" id="show-password">
+                          <span class="input-group-text">
+                            <i class="fa fa-eye" id="password-icon"></i>
+                          </span>
+                        </div>
+                        {% if errors.password %}
+                          <div class="invalid-feedback">{{ errors.password }}</div>
+                        {% endif %}
+                      </div>
                     </div>
 
                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
