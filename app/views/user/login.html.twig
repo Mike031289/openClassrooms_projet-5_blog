@@ -33,8 +33,8 @@
                         {{ success }}
                       </div>
                     {% endif %}
-                    <div class="mb-3 {% if errors.email %}has-error{% endif %}">
-                      <div class="form-floating">
+                    <div class="{% if errors.email %}has-error{% endif %}">
+                      <div class="form-floating mb-3 ">
                         <input class="form-control {% if errors.email %}is-invalid{% endif %}" id="inputEmail" type="email" name="email" required="required" value="{{ value.emailValue ?? '' }}"/>
                         <label for="inputEmail">Adresse Email *</label>
                         {% if errors.email %}
@@ -42,8 +42,8 @@
                         {% endif %}
                       </div>
                     </div>
-                    <div class="mb-3 {% if errors.password %}has-error{% endif %}">
-                      <div class="form-floating  input-group">
+                    <div class="{% if errors.password %}has-error{% endif %}">
+                      <div class="form-floating  input-group mb-3 ">
                         <input class="form-control {% if errors.password %}is-invalid{% endif %}" id="inputPassword" type="password" name="passWord" required="required" value="{{ value.passwordValue ?? '' }}"/>
                         <label for="inputPassword">Mot de passe *</label>
                         <div class="input-group-append" id="show-password">

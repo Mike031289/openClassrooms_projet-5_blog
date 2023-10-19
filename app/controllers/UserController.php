@@ -39,47 +39,65 @@ class UserController extends BaseController
         $passWord        = FormHelper::post('passWord');
         $passWordConfirm = FormHelper::post('passWordConfirm');
 
+        $errors = [];
+
         // Validate the fields using regex patterns
-        if (!FormHelper::validateField($userName, FormHelper::USERNAME_REGEX)) {
-            $errorMessage = "Nom d'utilisateur invalide";
-            $this->view('user/register.html.twig', ['error' => $errorMessage]);
-            return;
+        if (empty($userName)) {
+            $errors['userName'] = "Nom d'utilisateur requis";
+
+        } else if (!FormHelper::validateField($userName, FormHelper::USERNAME_REGEX)) {
+            $errors['userName'] = "Nom invalide(minimum 3 caractères maximum 20 et pas de caractères spéciaux)";
         }
 
-        if (!FormHelper::validateField($email, FormHelper::EMAIL_REGEX)) {
-            $errorMessage = "Email invalide";
-            $this->view('user/register.html.twig', ['error' => $errorMessage]);
-            return;
+        // Validate email fields
+        if (empty($email)) {
+            $errors['email'] = "Adresse email requis";
+
+        } else if (!FormHelper::validateField($email, FormHelper::EMAIL_REGEX)) {
+            $errors['email'] = "Email invalide (format requis : email@example.com)";
         }
 
-        if (!FormHelper::validateField($passWord, FormHelper::PASSWORD_REGEX)) {
-            $errorMessage = "Mot de passe invalide";
-            $this->view('user/register.html.twig', ['error' => $errorMessage]);
-            return;
+        // Validate password fields
+        if (empty($passWord)) {
+            $errors['password'] = "Mot de passe requis";
+
+        } else if (!FormHelper::validateField($passWord, FormHelper::PASSWORD_REGEX)) {
+            $errors['password'] = "Mot de passe invalide";
         }
 
-        if ($passWord !== $passWordConfirm) {
-            $errorMessage = "Les mots de passe ne correspondent pas";
-            $this->view('user/register.html.twig', ['error' => $errorMessage]);
-            return;
+        // Validate password fields
+        if (empty($passWordConfirm)) {
+            $errors['password2'] = "Confirmez le mot de passe";
+
+        } else if ($passWord !== $passWordConfirm) {
+            $errors['password2'] = "Le mot de passe doit correspondre au premier";
         }
 
         $userEmailExist = $this->getManager(UserManager::class)->getUserByEmail($email);
 
         // Check if the email already exists in the database
         if ($userEmailExist !== null) {
-            $errorMessage = "Cette adresse mail existe déjà";
-            $this->view('user/register.html.twig', ['error' => $errorMessage]);
-            return;
+            $errors['email'] = "Cette adresse email existe déjà";
+
         }
 
         $userNameExist = $this->getManager(UserManager::class)->getUserByName($userName);
 
         // Check if the user name already exists in the database
         if ($userNameExist !== null) {
-            $errorMessage = "Ce nom d'utilisateur est déjà pris";
-            $this->view('user/register.html.twig', ['error' => $errorMessage]);
-            return;
+            $errors['userName'] = "Ce nom d'utilisateur est déjà pris";
+
+        }
+
+        // If there are errors, display the Twig template with the errors
+        if (!empty($errors)) {
+            // Add the email and password values to the value array so the value will note be clear after submition
+            $value['userNameValue']      = $userName;
+            $value['emailValue']    = $email;
+            $value['passwordValue'] = $passWord;
+            $value['passwordValue2'] = $passWordConfirm;
+            $this->view('user/register.html.twig', ['errors' => $errors, 'value' => $value]);
+            exit;
         }
 
         // Use the create method of UserManager to create the User object
@@ -113,7 +131,7 @@ class UserController extends BaseController
     /**
      * Handle user login.
      */
-public function login(): void
+    public function login(): void
     {
         $email    = FormHelper::post('email');
         $passWord = FormHelper::post('passWord');

@@ -23,49 +23,61 @@
                 </div>
                 <div class="card-body">
                   <form class="needs-validation" novalidate="novalidate" action="register" method="POST">
-                    {% if error %}
+                    {% if error is defined%}
                       <div class="alert alert-danger" role="alert">
                         {{ error }}
                       </div>
                     {% endif %}
-                    <div class="form-floating mb-3">
-                      <input class="form-control" id="inputUserName" type="text" name="userName" required="required"/>
-                      <label for="inputUserName">Nom utilisateur</label>
-                      <div class="invalid-feedback">
-                        Champ nom d'utilisateur obligatoire
+                    <div class="{% if errors.userName %}has-error{% endif %}">
+                      <div class="form-floating mb-3">
+                        <input class="form-control {% if errors.userName %}is-invalid{% endif %}" id="inputUserName" type="text" name="userName" required="required" value="{{ value.userNameValue ?? '' }}"/>
+                        <label for="inputUserName">Nom utilisateur *</label>
+                       {% if errors.userName %}
+                          <div class="invalid-feedback">{{ errors.userName }}</div>
+                        {% endif %}
                       </div>
-                      <div class="valid-feedback"></div>
                     </div>
-                    <div class="form-floating mb-3">
-                      <input class="form-control" id="inputEmail" type="email" name="email" required="required"/>
-                      <label for="inputEmail">Adresse email</label>
-                      <div class="invalid-feedback">
-                        Adresse email incorrect
+                    <div class="{% if errors.email %}has-error{% endif %}">
+                      <div class="form-floating mb-3">
+                        <input class="form-control {% if errors.email %}is-invalid{% endif %}" id="inputEmail" type="email" name="email" required="required" value="{{ value.emailValue ?? '' }}"/>
+                        <label for="inputEmail">Adresse email *</label>
+                        {% if errors.email %}
+                          <div class="invalid-feedback">{{ errors.email }}</div>
+                        {% endif %}
                       </div>
-                      <div class="valid-feedback"></div>
                     </div>
-                    <div class="row mb-3">
-                      <div class="col-md-6">
-                        <div class="form-floating mb-3 mb-md-0">
-                          <input class="form-control" id="inputPassWord" type="passWord" name="passWord" required="required"/>
-                          <label for="inputPassWord">Mot de passe</label>
-                          <div class="invalid-feedback">
-                            Mot de passe incorrect
-                          </div>
-                          <div class="valid-feedback"></div>
+                    <div class="{% if errors.password %}has-error{% endif %}">
+                      <div class="row mb-3">
+                        <div class="col-md-6">
+                          <div class="form-floating mb-3 mb-md-0">
+                            <input class="form-control {% if errors.password %}is-invalid{% endif %}" id="inputPassWord" type="password" name="passWord" required="required" value="{{ value.passwordValue ?? '' }}"/>
+                            <label for="inputPassWord">Mot de passe *</label>
+                            {# <div class="input-group-append" id="show-password1">
+                              <span class="input-group-text">
+                                <i class="fa fa-eye" id="password-icon"></i>
+                              </span>
+                            </div> #}
+                            {% if errors.password %}
+                              <div class="invalid-feedback">{{ errors.password }}</div>
+                            {% endif %}
+                            </div>
                         </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-floating mb-3 mb-md-0">
-                          <input class="form-control" id="inputPassWordConfirm" type="passWord" name="passWordConfirm" required="required"/>
-                          <label for="inputPassWordConfirm">Confirmez mot de passe</label>
-                          <div class="invalid-feedback">
-                            Veuillez ressaisir le même mot de passe !
+                        <div class="col-md-6">
+                          <div class="form-floating input-group mb-3 mb-md-0">
+                            <input class="form-control {% if errors.password2 %}is-invalid{% endif %}" id="inputPassWordConfirm" type="password" name="passWordConfirm" required="required" value="{{ value.passwordValue2 ?? '' }}"/>
+                            <label for="inputPassWordConfirm">Confirmez mot de passe *</label>
+                             <div class="input-group-append" id="show-passWord">
+                              <span class="input-group-text">
+                                <i class="fa fa-eye" id="passWord-icon"></i>
+                              </span>
+                            </div>
+                            {% if errors.password2 %}
+                              <div class="invalid-feedback">{{ errors.password2 }}</div>
+                            {% endif %}
                           </div>
-                          <div class="valid-feedback"></div>
                         </div>
+                        <div class="text-muted small mt-1">* Le mot de passe doit contenir au moins : 8 caractères, une majuscule, un nombre et un caractère spécial (&, $, ...)</div>
                       </div>
-                      <div class="text-muted small"> Le mot de passe doit contenir au moins 8 caractères, un nombre et un caractère spécial (&, $, ...)</div>
                     </div>
                     <div class="mt-4 mb-0">
                       <div class="d-grid">
