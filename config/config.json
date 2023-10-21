@@ -4,8 +4,9 @@
 		"app/Models",
 		"app/Models/Manager/",
 		"app/Exceptions",
-		"vendor/",
-		"Core/"
+		"app/Core/Functions",
+		"app/Core/",
+		"vendor/"
 	],
 	
 	"baseUrl": "/mon-blog",

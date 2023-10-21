@@ -1,0 +1,25 @@
+{% extends 'templates/layout.html.twig' %}
+
+{% block header %}{% endblock %}
+
+{% block content %}
+  <!-- Contenu spécifique de la page 404 -->
+  <div id="layoutError">
+    <div id="layoutError_content">
+      <main>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-6">
+              <div class="text-center mt-4">
+                <img class="mb-4 img-error" src="/mon-blog/public/assets/error-500-monochrome.svg"/>
+                <p class="lead">
+                  Oupss !! Votre requête a échouée veuillez contacter l'administrateur
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+{% endblock %}

@@ -66,23 +66,39 @@
 	{
 			"path": "/register",
 			"controller":"App\\Controllers\\UserController",
-			"action": "register",
+			"action": "creatUser",
 			"method": "POST",
 			"param": [],
 			"managers": ["App\\Manager\\UserManager"]
 	},
 	{
 			"path": "/adminDashboard",
-			"controller":"App\\Controllers\\UserController",
+			"controller":"App\\Controllers\\AdminController",
 			"action": "admin",
 			"method": "GET",
 			"param": [],
-			"managers": ["App\\Manager\\UserManager"]
+			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager"]
+	},
+	{
+			"path": "/adminDashboard",
+			"controller":"App\\Controllers\\AdminController",
+			"action": "admin",
+			"method": "POST",
+			"param": [],
+			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager"]
 	},
 	{
 			"path": "/404",
 			"controller": "App\\Controllers\\ErrorController",
-			"action": "notFound",
+			"action": "routeNotFound",
+			"method": "GET",
+			"param": [],
+			"managers": []
+	},
+	{
+			"path": "/500",
+			"controller": "App\\Controllers\\ErrorController",
+			"action": "actionNotFound",
 			"method": "GET",
 			"param": [],
 			"managers": []

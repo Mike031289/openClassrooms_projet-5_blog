@@ -2,19 +2,24 @@
 namespace App\Core\Functions;
 
 /**
- * Class SessionWrapper
+ * Class SessionManager
  *
  * A simple wrapper for handling PHP sessions.
  */
 class SessionManager
 {
     /**
-     * SessionWrapper constructor.
+     * SessionManager constructor.
      *
      * Starts the session.
      */
-    public function __construct()
-    {
+    // public function __construct()
+    // {
+    //     if (session_status() == PHP_SESSION_NONE) {
+    //         session_start();
+    //     }
+    // }
+    public function start(){
         session_start();
     }
 
@@ -43,13 +48,14 @@ class SessionManager
     }
 
     /**
-     * Remove a session variable.
+     * Check if a user is logged in (example method).
      *
-     * @param string $key The session variable name to remove.
+     * @param string $key The session variable name for checking login status.
+     * @return bool True if the user is logged in, false otherwise.
      */
-    public function isLoggegIn(string $key): void
+    public function isLoggedIn(string $key): bool
     {
-        isset($_SESSION[$key]);
+        return isset($_SESSION[$key]);
     }
 
     /**
@@ -70,18 +76,3 @@ class SessionManager
         session_destroy();
     }
 }
-
-// // Instanciation de la classe SessionWrapper
-// $session = new SessionWrapper();
-
-// // Définition d'une variable de session
-// $session->set('user_id', 123);
-
-// // Récupération de la variable de session
-// $user_id = $session->get('user_id');
-
-// // Suppression de la variable de session
-// $session->remove('user_id');
-
-// // Destruction de la session
-// $session->destroy();

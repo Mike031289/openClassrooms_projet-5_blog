@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
+// use App\Core\Functions\SessionManager;
 
 /**
  * Class BaseController
@@ -17,6 +18,9 @@ class BaseController
     private object $config;
     protected array $_managers = [];
 
+    // Declare a property for SessionManager
+    // private object $sessionManager;
+
     /**
      * BaseController constructor.
      *
@@ -30,7 +34,21 @@ class BaseController
         $loader = new FilesystemLoader(__DIR__ . '/../Views');
         $this->_twig = new Environment($loader);
         $this->bindManager();
+        // $this->sessionManager = new SessionManager; // Initialize the session manager
     }
+
+    /**
+     * Create and return an instance of the SessionManager.
+     *
+     * @return SessionManager
+     */
+    // public function sessionManager(): object
+    // {
+    //     // $sessionManager = new SessionManager;
+    //     $sessionManager = $this->sessionManager;
+    //     return $sessionManager;
+        
+    // }
 
     /**
      * Render a view.
@@ -66,21 +84,6 @@ class BaseController
     protected function getManager(string $className)
     {
         return $this->_managers[$className];
-    }
-
-     /**
-     * Validate an email address.
-     *
-     * @param string $email The email address to validate.
-     * @return bool True if the email is valid, false otherwise.
-     */
-    private function validateEmail(string $email): bool
-    {
-        // Define the regex pattern for email validation
-        $emailRegex = '/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/';
-
-        // Use preg_match to check if the email matches the pattern
-        return (bool)preg_match($emailRegex, $email);
     }
 
 }

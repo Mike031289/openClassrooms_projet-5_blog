@@ -2,6 +2,7 @@
 namespace App\Manager;
 
 use App\Models\User;
+use App\Exceptions\ActionNotFoundException;
 
 class UserManager extends BaseManager
 {
@@ -76,7 +77,7 @@ class UserManager extends BaseManager
      *
      * @return User|null Returns a User object if the user was successfully created, or null on failure.
      */
-    public function createUser(string $userName, string $email, string $passWord): ?User
+    public function createUserWithRole(string $userName, string $email, string $passWord): ?User
     {
         // Hash the password
         $hashedPassword = password_hash($passWord, PASSWORD_DEFAULT);
@@ -84,20 +85,54 @@ class UserManager extends BaseManager
         // Get the current date
         $createdAt = date('Y-m-d H:i:s');
 
-        // Use a prepared SQL query to insert data into the database
-        $sql  = "INSERT INTO user (userName, email, passWord, createdAt) VALUES (?, ?, ?, ?)";
-        $stmt = $this->_db->prepare($sql);
+        // Use a transaction to ensure data consistency
+        $this->_db->beginTransaction();
 
-        // Bind values to query parameters
-        $stmt->bindParam(1, $userName, \PDO::PARAM_STR);
-        $stmt->bindParam(2, $email, \PDO::PARAM_STR);
-        $stmt->bindParam(3, $hashedPassword, \PDO::PARAM_STR);
-        $stmt->bindParam(4, $createdAt, \PDO::PARAM_STR);
+        try {
+            // Step 1: Insert the user into the 'user' table
+            $sql  = "INSERT INTO user (userName, email, passWord, createdAt) VALUES (?, ?, ?, ?)";
+            $stmt = $this->_db->prepare($sql);
+            $stmt->bindParam(1, $userName, \PDO::PARAM_STR);
+            $stmt->bindParam(2, $email, \PDO::PARAM_STR);
+            $stmt->bindParam(3, $hashedPassword, \PDO::PARAM_STR);
+            $stmt->bindParam(4, $createdAt, \PDO::PARAM_STR);
 
-        // Execute the insertion query
-        if ($stmt->execute()) {
-            // Get the ID of the newly created user
+            if (!$stmt->execute()) {
+                throw new ActionNotFoundException;
+            }
+
+            // Step 2: Get the ID of the newly created user
             $userId = $this->_db->lastInsertId();
+
+            // Step 3: Retrieve the roleId from the 'role' table (adjust the SQL query as needed)
+            $roleName = 'Visitor'; // Replace with the actual role name
+            $sql      = "SELECT roleId FROM role WHERE roleName = ?";
+            $stmt     = $this->_db->prepare($sql);
+            $stmt->bindParam(1, $roleName, \PDO::PARAM_STR);
+
+            if ($stmt->execute()) {
+                $roleRow = $stmt->fetch(\PDO::FETCH_ASSOC);
+                if ($roleRow) {
+                    $roleId = $roleRow['roleId'];
+                } else {
+                    throw new ActionNotFoundException;
+                }
+            } else {
+                throw new ActionNotFoundException;
+            }
+
+            // Step 4: Insert the user ID and role into the 'userrole' table
+            $sql  = "INSERT INTO userrole (userId, roleId) VALUES (?, ?)";
+            $stmt = $this->_db->prepare($sql);
+            $stmt->bindParam(1, $userId, \PDO::PARAM_INT);
+            $stmt->bindParam(2, $roleId, \PDO::PARAM_INT);
+
+            if (!$stmt->execute()) {
+                throw new ActionNotFoundException;
+            }
+
+            // Commit the transaction
+            $this->_db->commit();
 
             // Create a new User object with the inserted data
             $user = new User();
@@ -109,12 +144,14 @@ class UserManager extends BaseManager
 
             // Return the User object
             return $user;
-        } else {
-            // Handle the error in case of failure
+        }
+        catch (ActionNotFoundException $e) {
+            // Redirect to a 404 error page if no matching route is found
+            header("Location: 500");
+            // Handle the error in case of failure and roll back the transaction
+            $this->_db->rollBack();
             return null;
         }
     }
-
-
 
 }

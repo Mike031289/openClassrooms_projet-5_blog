@@ -31,7 +31,7 @@ class UserController extends BaseController
     /**
      * Handle user registration.
      */
-    public function register(): void
+    public function creatUser(): void
     {
         // Retrieve data from the form
         $userName        = FormHelper::post('userName');
@@ -101,7 +101,7 @@ class UserController extends BaseController
         }
 
         // Use the create method of UserManager to create the User object
-        $this->getManager(UserManager::class)->createUser($userName, $email, $passWord);
+        $this->getManager(UserManager::class)->createUserWithRole($userName, $email, $passWord);
 
         // Redirect to the login page
         $successMessage = "Votre compte a été bien créé ! Connectez vous et commentez nos articles";
