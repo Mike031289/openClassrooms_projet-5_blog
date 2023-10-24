@@ -45,7 +45,7 @@
 			"action": "login",
 			"method": "POST",
 			"param": [],
-			"managers":  ["App\\Manager\\UserManager"]
+			"managers":  ["App\\Manager\\UserManager", "App\\Manager\\AdminManager"]
 	},
 	{
 			"path": "/logout",
@@ -74,10 +74,10 @@
 	{
 			"path": "/adminDashboard",
 			"controller":"App\\Controllers\\AdminController",
-			"action": "admin",
+			"action": "adminDashboard",
 			"method": "GET",
 			"param": [],
-			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager"]
+			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
 	},
 	{
 			"path": "/adminDashboard",

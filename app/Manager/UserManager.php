@@ -18,13 +18,13 @@ class UserManager extends BaseManager
     public function getUserByEmail(string $email): ?User
     {
         // SQL query to retrieve the user by email from the database
-        $sql = "SELECT * FROM user WHERE email = :email";
+        $sql = "SELECT * FROM user WHERE email = ?";
 
         // Prepare the SQL statement
         $stmt = $this->_db->prepare($sql);
 
         // Bind the email parameter
-        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(1, $email, \PDO::PARAM_STR);
 
         // Execute the query
         $stmt->execute();
@@ -46,13 +46,13 @@ class UserManager extends BaseManager
     public function getUserByName(string $userName): ?User
     {
         // SQL query to retrieve the user by name from the database
-        $sql = "SELECT * FROM user WHERE userName = :userName";
+        $sql = "SELECT * FROM user WHERE userName = ?";
 
         // Prepare the SQL statement
         $stmt = $this->_db->prepare($sql);
 
         // Bind the userName parameter
-        $stmt->bindParam(':userName', $userName);
+        $stmt->bindParam(1, $userName, \PDO::PARAM_STR);
 
         // Execute the query
         $stmt->execute();
@@ -90,12 +90,13 @@ class UserManager extends BaseManager
 
         try {
             // Step 1: Insert the user into the 'user' table
-            $sql  = "INSERT INTO user (userName, email, passWord, createdAt) VALUES (?, ?, ?, ?)";
+            $sql  = "INSERT INTO user (roleId, userName, email, passWord, createdAt) VALUES (?, ?, ?, ?, ?)";
             $stmt = $this->_db->prepare($sql);
-            $stmt->bindParam(1, $userName, \PDO::PARAM_STR);
-            $stmt->bindParam(2, $email, \PDO::PARAM_STR);
-            $stmt->bindParam(3, $hashedPassword, \PDO::PARAM_STR);
-            $stmt->bindParam(4, $createdAt, \PDO::PARAM_STR);
+            $stmt->bindParam("3", $roleId, \PDO::PARAM_STR);
+            $stmt->bindParam(2, $userName, \PDO::PARAM_STR);
+            $stmt->bindParam(3, $email, \PDO::PARAM_STR);
+            $stmt->bindParam(4, $hashedPassword, \PDO::PARAM_STR);
+            $stmt->bindParam(5, $createdAt, \PDO::PARAM_STR);
 
             if (!$stmt->execute()) {
                 throw new ActionNotFoundException;
@@ -135,7 +136,7 @@ class UserManager extends BaseManager
             $this->_db->commit();
 
             // Create a new User object with the inserted data
-            $user = new User();
+            $user = new User;
             $user->setId($userId);
             $user->setUserName($userName);
             $user->setEmail($email);
@@ -153,5 +154,31 @@ class UserManager extends BaseManager
             return null;
         }
     }
+
+    /**
+     * Retrieve the role of a user by their email.
+     *
+     * @param string $email The email of the user.
+     * @return string|null The user's role or null if not found.
+     */
+    public function getUserRoleByEmail(string $email): ?string
+    {
+        $sql = "SELECT r.roleName
+            FROM user AS u
+            JOIN userrole AS ur ON u.id = ur.userId
+            JOIN role AS r ON ur.roleId = r.roleId
+            WHERE u.email = :email";
+
+        $req = $this->_db->prepare($sql);
+        $req->bindValue(':email', $email, \PDO::PARAM_STR);
+        $req->execute();
+
+        $result = $req->fetch(\PDO::FETCH_ASSOC);
+
+        return ($result) ? $result['roleName'] : null;
+    }
+
+
+
 
 }

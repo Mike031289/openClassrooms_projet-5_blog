@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use App\Manager\UserManager;
+use App\Manager\AdminManager;
 use App\Core\Functions\FormHelper;
 
 /**
@@ -131,6 +132,91 @@ class UserController extends BaseController
     /**
      * Handle user login.
      */
+    // public function login(): void
+    // {
+    //     $email    = FormHelper::post('email');
+    //     $passWord = FormHelper::post('passWord');
+    //     $errors   = [];
+
+    //     // Validate email fields
+    //     if (empty($email)) {
+    //         $errors['email'] = "Adresse email requis";
+
+    //     } else if (!FormHelper::validateField($email, FormHelper::EMAIL_REGEX)) {
+    //         $errors['email'] = "Email invalide (format requis : email@example.com)";
+    //     }
+
+    //     // Validate password fields
+    //     if (empty($passWord)) {
+    //         $errors['password'] = "Mot de passe requis";
+
+    //     } else if (!FormHelper::validateField($passWord, FormHelper::PASSWORD_REGEX)) {
+    //         $errors['password'] = "Mot de passe invalide";
+    //     }
+
+    //     // If there are errors, display the Twig template with the errors
+    //     if (!empty($errors)) {
+    //         // Add the email and password values to the value array so the value will note be clear after submition
+    //         $value['emailValue']    = $email;
+    //         $value['passwordValue'] = $passWord;
+    //         $this->view('user/login.html.twig', ['errors' => $errors, 'value' => $value]);
+    //         exit;
+    //     }
+
+    //     // Attempt to retrieve the user based on the provided email
+    //     $admin = $this->getManager(UserManager::class)->getUserByRole();
+    //     $user  = $this->getManager(UserManager::class)->getUserByEmail($email);
+    //     // var_dump($admin);
+    //     // die;
+    //     if ($admin || $user) {
+    //         $foundUser = $admin ?? $user; // Utilisez l'administrateur s'il existe, sinon l'utilisateur
+            
+    //         // Vérifiez si l'utilisateur est un administrateur en fonction de son rôle
+    //         if ($foundUser->getUserByRole() === "admin") {
+    //             // Si le mot de passe correspond, connectez l'administrateur
+    //             if (password_verify($passWord, $foundUser->getPassWord())) {
+    //                 session_start();
+    //                 $_SESSION['roleName'] = $foundUser->getRoleName();
+    //                 // Rediriger vers la page protégée de l'administrateur (par exemple, le tableau de bord de l'administrateur)
+    //                 header('Location: adminDashboard');
+    //                 exit;
+    //             } else {
+    //                 // Mot de passe incorrect
+    //                 $errors['password'] = "Mot de passe incorrect";
+    //                 // Ajouter la valeur de l'email aux erreurs
+    //                 $value['emailValue'] = $email;
+    //             }
+    //         } else {
+    //             // L'utilisateur n'est pas un administrateur
+    //             // Si le mot de passe correspond, connectez l'utilisateur normal
+    //             if (password_verify($passWord, $foundUser->getPassWord())) {
+    //                 session_start();
+    //                 $_SESSION['userEmail'] = $email;
+    //                 // Rediriger vers la page protégée de l'utilisateur (par exemple, les publications)
+    //                 header('Location: posts');
+    //                 exit;
+    //             } else {
+    //                 // Mot de passe incorrect
+    //                 $errors['password'] = "Mot de passe incorrect";
+    //                 // Ajouter la valeur de l'email aux erreurs
+    //                 $value['emailValue'] = $email;
+    //             }
+    //         }
+    //     } else {
+    //         // Utilisateur non trouvé
+    //         $error = "Ce compte n'existe pas. Créez un compte pour vous connecter.";
+    //         $this->view('user/login.html.twig', ['error' => $error]);
+    //     }
+
+    //     // Afficher le modèle Twig avec les erreurs
+    //     $this->view('user/login.html.twig', ['errors' => $errors, 'value' => $value]);
+    //     exit;
+    // }
+
+
+    /**
+     * Handle user login.
+     */
     public function login(): void
     {
         $email    = FormHelper::post('email');
@@ -140,7 +226,6 @@ class UserController extends BaseController
         // Validate email fields
         if (empty($email)) {
             $errors['email'] = "Adresse email requis";
-
         } else if (!FormHelper::validateField($email, FormHelper::EMAIL_REGEX)) {
             $errors['email'] = "Email invalide (format requis : email@example.com)";
         }
@@ -148,14 +233,13 @@ class UserController extends BaseController
         // Validate password fields
         if (empty($passWord)) {
             $errors['password'] = "Mot de passe requis";
-
         } else if (!FormHelper::validateField($passWord, FormHelper::PASSWORD_REGEX)) {
             $errors['password'] = "Mot de passe invalide";
         }
 
         // If there are errors, display the Twig template with the errors
         if (!empty($errors)) {
-            // Add the email and password values to the value array so the value will note be clear after submition
+            // Add the email and password values to the value array so the value will not be cleared after submission
             $value['emailValue']    = $email;
             $value['passwordValue'] = $passWord;
             $this->view('user/login.html.twig', ['errors' => $errors, 'value' => $value]);
@@ -164,30 +248,49 @@ class UserController extends BaseController
 
         // Attempt to retrieve the user based on the provided email
         $user = $this->getManager(UserManager::class)->getUserByEmail($email);
-
+        // $roleName = [""];
         if ($user) {
             // If the password matches, log in the user
             if (password_verify($passWord, $user->getPassWord())) {
+                // $userManager = $this->getManager(UserManager::class);
+                // $userRole    = $userManager->getUserByRole('Admin');
                 session_start();
                 $_SESSION['userEmail'] = $email;
-                // Redirect to a protected page (e.g., dashboard)
-                header('Location: posts');
-                exit;
+//                 $userAdmin = $this->getManager(AdminManager::class)->getAdmin($roleName);
+//  var_dump($userAdmin);
+// $userVisitor = $this->getManager(UserManager::class)->getVisitor($roleName);
+
+                $userRole = $this->getManager(UserManager::class)->getUserRoleByEmail($email);
+//  var_dump($userRole);
+//                 die;
+                if ($userRole === 'Admin') {
+                    // session_start();
+                    // $_SESSION['userEmail'] = $email;
+                    // Redirect to the admin dashboard
+                    header('Location: adminDashboard');
+                    exit;
+                } else if ($userRole == "Visitor"){
+                    // session_start();
+                    // $_SESSION['userEmail'] = $email;
+                    // Redirect to the user dashboard
+                    header('Location: posts');
+                    exit;
+                }
             } else {
                 // Password is incorrect
-                $errors['password'] = "Mot de passe incorrect";
-                // Add the email value to the errors array
+                $errors['password']  = "Mot de passe incorrect";
                 $value['emailValue'] = $email;
             }
         } else {
             // User not found
-            $error = "Ce compte n'existe pas. Créer un compte pour se connecter";
+            $error = "Ce compte n'existe pas. Créez un compte pour vous connecter.";
             $this->view('user/login.html.twig', ['error' => $error]);
         }
 
         // Display the Twig template with the errors
         $this->view('user/login.html.twig', ['errors' => $errors, 'value' => $value]);
         exit;
+
     }
 
     /**
@@ -201,4 +304,5 @@ class UserController extends BaseController
         header('Location: /mon-blog/login');
         exit;
     }
+
 }

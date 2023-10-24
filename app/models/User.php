@@ -1,38 +1,67 @@
 <?php
 namespace App\Models;
 
+/**
+ * Class User
+ * @package App\Models
+ */
 class User
 {
     const PASSWORD_FORMAT = '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/';
-    const EMAIL_FORMAT = '/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/';
-    const NAME_FORMAT = '/^[a-zA-Z0-9_-]{3,20}$/';
-    private $id;
-    private $userName;
-    private $email;
-    private $passWord;
-    private $createdAt; 
-
+    const EMAIL_FORMAT    = '/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/';
+    const NAME_FORMAT     = '/^[a-zA-Z0-9_-]{3,20}$/';
 
     /**
-     * Get the value of id
+     * @var int|null The user's unique identifier.
      */
-    public function getId()
+    private $id;
+
+    /**
+     * @var string|null The user's username.
+     */
+    private $userName;
+
+    /**
+     * @var string|null The user's email address.
+     */
+    private $email;
+
+    /**
+     * @var string|null The hashed password of the user.
+     */
+    private $passWord;
+
+    /**
+     * @var string|null The creation date of the user.
+     */
+    private $createdAt;
+    
+    /**
+     * Get the value of id.
+     *
+     * @return int|null
+     */
+    public function getId(): ?int
     {
         return $this->id;
     }
 
     /**
-     * Set the value of id
+     * Set the value of id.
+     *
+     * @param int $id
+     * @return self
      */
-    public function setId($id): self
+    public function setId(int $id): self
     {
         $this->id = $id;
-
         return $this;
     }
 
     /**
-     * Get the value of userName
+     * Get the value of userName.
+     *
+     * @return string|null
      */
     public function getUserName()
     {
@@ -40,17 +69,21 @@ class User
     }
 
     /**
-     * Set the value of userName
+     * Set the value of userName.
+     *
+     * @param string $userName
+     * @return self
      */
     public function setUserName($userName): self
     {
         $this->userName = $userName;
-
         return $this;
     }
 
     /**
-     * Get the value of email
+     * Get the value of email.
+     *
+     * @return string|null
      */
     public function getEmail()
     {
@@ -58,35 +91,43 @@ class User
     }
 
     /**
-     * Set the value of email
+     * Set the value of email.
+     *
+     * @param string $email
+     * @return self
      */
     public function setEmail($email): self
     {
         $this->email = $email;
-
         return $this;
     }
 
     /**
-     * Get the value of passWord
+     * Get the value of passWord.
+     *
+     * @return string|null
      */
-    public function getPassWord() 
+    public function getPassWord()
     {
         return $this->passWord;
     }
 
     /**
-     * Set the value of passWord
+     * Set the value of passWord.
+     *
+     * @param string $passWord
+     * @return self
      */
     public function setPassWord($passWord): self
     {
         $this->passWord = $passWord;
-
         return $this;
     }
 
     /**
-     * Get the value of createdAt
+     * Get the value of createdAt.
+     *
+     * @return string|null
      */
     public function getCreatedAt()
     {
@@ -94,12 +135,15 @@ class User
     }
 
     /**
-     * Set the value of createdAt
+     * Set the value of createdAt.
+     *
+     * @param string $createdAt
+     * @return self
      */
     public function setCreatedAt($createdAt): self
     {
         $this->createdAt = $createdAt;
-
         return $this;
     }
+
 }

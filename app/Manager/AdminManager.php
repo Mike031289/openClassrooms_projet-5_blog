@@ -1,6 +1,8 @@
 <?php
 namespace App\Manager;
-
+use App\Models\Admin;
+use App\Exceptions\ActionNotFoundException;
+use App\Manager\UserManager;;
 /**
  * Class AdminManager
  *
@@ -17,7 +19,13 @@ class AdminManager extends BaseManager
      */
     public function __construct(object $dataSource)
     {
-        parent::__construct("admin", "Admin", $dataSource);
+        parent::__construct("user", "Admin", $dataSource);
+
     }
+
+    // public function getAdmin($roleName): string{
+    //     $this->getById($roleName);
+    //     return $roleName;
+    // }
 
 }
