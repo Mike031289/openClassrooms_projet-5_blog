@@ -23,9 +23,4 @@ class AdminManager extends BaseManager
 
     }
 
-    // public function getAdmin($roleName): string{
-    //     $this->getById($roleName);
-    //     return $roleName;
-    // }
-
 }

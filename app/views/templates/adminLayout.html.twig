@@ -211,12 +211,14 @@
               </div>
               Account
             </a>
-            <a class="dropdown-item" href="#!">
+            {% if user is defined and user is not null %}
+            <a class="dropdown-item" href="http://localhost/mon-blog/logout">
               <div class="dropdown-item-icon">
                 <i data-feather="log-out"></i>
               </div>
-              Logout
+              Déconexion
             </a>
+            {% endif %}
           </div>
         </li>
       </ul>

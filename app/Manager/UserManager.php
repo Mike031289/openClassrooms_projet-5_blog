@@ -158,7 +158,7 @@ class UserManager extends BaseManager
     /**
      * Retrieve the role of a user by their email.
      *
-     * @param string $email The email of the user.
+     * @param $email The email of the user.
      * @return string|null The user's role or null if not found.
      */
     public function getUserRoleByEmail(string $email): ?string

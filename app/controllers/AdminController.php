@@ -25,20 +25,35 @@ class AdminController extends BaseController
     // Par exemple, si AdminController a une action "adminDashboard", vous pouvez l'ajouter ici.
     public function adminDashboard(): void
     {
-        /**
-         * Handle Admin Dashboard.
-         */
+        // Start the session
+        session_start();
+
+        // Check if the user is not logged in, redirect to the login page
+        if (!isset($_SESSION['userEmail'])) {
+            header('Location: login');
+            exit;
+        }
+
+        // Check if the user does not have the 'Admin' role, redirect to a restricted page
+        if ($_SESSION['userRole'] !== 'Admin') {
+            header('Location: login'); // Replace 'restricted-page' with the actual URL
+            exit;
+        }
+
+        // User is logged in and has the 'Admin' role, proceed to the admin dashboard
         $posts      = $this->getManager(PostManager::class)->getAll();
         $categories = $this->getManager(CategoryManager::class)->getAll();
 
-        // Check if the user is logged in and pass the user information to the template
-        session_start();
+        // Retrieve user information from the session
         $email = $_SESSION['userEmail'] ?? null;
         $user  = null;
         if ($email !== null) {
             $user = $this->getManager(UserManager::class)->getUserByEmail($email);
         }
 
+        // Render the admin dashboard view
         $this->view('admin/dashboard.html.twig', ['posts' => $posts, 'categories' => $categories, 'user' => $user]);
     }
+
+
 }
