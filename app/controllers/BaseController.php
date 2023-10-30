@@ -3,7 +3,8 @@ namespace App\Controllers;
 
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
-// use App\Core\Functions\SessionManager;
+use App\Core\Functions\SessionManager;
+use App\Core\HttpRequest;
 
 /**
  * Class BaseController
@@ -13,10 +14,12 @@ use Twig\Environment;
 class BaseController
 {
     private array $_param = [];
-    protected object $httpRequest;
+    protected HttpRequest $httpRequest;
     private Environment $_twig;
     private object $config;
     protected array $_managers = [];
+
+    // protected SessionManager $sessionManager;
 
     // Declare a property for SessionManager
     // private object $sessionManager;
@@ -27,7 +30,7 @@ class BaseController
      * @param  object $httpRequest The HTTP request object.
      * @param object $config      The application configuration object (JSON decode Object).
      */
-    public function __construct(object $httpRequest, object $config)
+    public function __construct(HttpRequest $httpRequest, object $config)
     {
         $this->httpRequest = $httpRequest;
         $this->config = $config;
@@ -36,19 +39,6 @@ class BaseController
         $this->bindManager();
         // $this->sessionManager = new SessionManager; // Initialize the session manager
     }
-
-    /**
-     * Create and return an instance of the SessionManager.
-     *
-     * @return SessionManager
-     */
-    // public function sessionManager(): object
-    // {
-    //     // $sessionManager = new SessionManager;
-    //     $sessionManager = $this->sessionManager;
-    //     return $sessionManager;
-        
-    // }
 
     /**
      * Render a view.

@@ -1,0 +1,70 @@
+{% extends 'templates/adminLayout.html.twig' %}
+{% block mainHeader %}
+  <div class="container-fluid px-4">
+    <div class="page-header-content">
+      <div class="row align-items-center justify-content-between pt-3">
+        <div class="col-auto mb-3">
+          <h1 class="page-header-title">
+            <div class="page-header-icon">
+              <i data-feather="list"></i>
+            </div>
+            Gestion des Posts
+          </h1>
+        </div>
+        <div class="col-12 col-xl-auto mb-3">
+          <a class="btn btn-sm btn-light text-primary" href="blog-management-create-post.html">
+            <i class="me-1" data-feather="plus"></i>
+            Créer un Post
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+<!-- Main page content-->
+<div class="container-fluid px-4">
+  <div class="row gx-4">
+    <div class="col-lg-8">
+      <div class="card mb-4">
+        <div class="card-header">Post Title</div>
+        <div class="card-body"><input class="form-control" id="postTitleInput" type="text" placeholder="Enter your post title..."/></div>
+      </div>
+      <div class="card card-header-actions mb-4">
+        <div class="card-header">
+          Post Preview
+          <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="The post preview text shows below the post title, and is the post summary on blog pages."></i>
+        </div>
+        <div class="card-body">
+          <textarea class="lh-base form-control" type="text" placeholder="Enter your post preview text..." rows="4"></textarea>
+        </div>
+      </div>
+      <div class="card card-header-actions mb-4 mb-lg-0">
+        <div class="card-header">
+          Post Content
+          <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="Markdown is supported within the post content editor."></i>
+        </div>
+        <div class="card-body">
+          <textarea id="postEditor">
+            ## Post Subheading This is the content for your post.</textarea >
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card card-header-actions">
+        <div class="card-header">
+          Publish
+          <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="After submitting, your post will be published once it is approved by a moderator."></i>
+        </div>
+        <div class="card-body">
+          <div class="d-grid mb-3">
+            <button class="fw-500 btn btn-primary-soft text-primary">Save as Draft</button>
+          </div>
+          <div class="d-grid">
+            <button class="fw-500 btn btn-primary">Submit for Approval</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</main>

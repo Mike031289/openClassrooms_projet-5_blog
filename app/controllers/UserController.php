@@ -164,6 +164,13 @@ class UserController extends BaseController
         $user     = $this->getManager(UserManager::class)->getUserByEmail($email);
         $userRole = $this->getManager(UserManager::class)->getUserRoleByEmail($email);
 
+        //   $userRole = $this->getManager(UserManager::class)->getUserRoleByEmail($user->getId());
+        //     if (!empty($userRole)) {
+        //         // If the password matches, log in the user
+        //         if (password_verify($passWord, $user->getPassWord())) {
+                    
+        //             $this->sessionManager->connect($user, $userRole);
+
         if ($user) {
             if (!empty($userRole)) {
                 // If the password matches, log in the user

@@ -17193,11 +17193,11 @@ body {
 }
 
 .card-waves .card-body {
-  background-image: url("../assets/img/backgrounds/bg-waves.svg");
+  background-image: url("../public/assets/img/backgrounds/bg-waves.svg");
 }
 
 .card-angles .card-body {
-  background-image: url("../assets/img/backgrounds/bg-angles.svg");
+  background-image: url("../public/assets/img/backgrounds/bg-angles.svg");
 }
 
 .card-flag {

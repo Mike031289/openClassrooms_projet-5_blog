@@ -1,5 +1,5 @@
 {% extends 'templates/adminLayout.html.twig' %}
-{# {% block mainHeader %}
+{% block mainHeader %}
   <div class="container-fluid px-4">
     <div class="page-header-content">
       <div class="row align-items-center justify-content-between pt-3">
@@ -20,95 +20,28 @@
       </div>
     </div>
   </div>
-{% endblock %} #}
+{% endblock %}
 {% block mainHeaderContainer %}
   <!-- Main page content-->
-  <div class="container-xl px-4 mt-n10">
-    <div class="row">
-      <div class="col-xl-4 mb-4">
-        <!-- Dashboard example card 1-->
-        <a class="card lift h-100">
-          <div class="card-body d-flex justify-content-center flex-column">
-            <div class="d-flex align-items-center justify-content-between">
-              <div class="me-3">
-                <i class="feather-xl text-primary mb-3" data-feather="package"></i>
-                <h5>Gérer les posts</h5>
-                <div class="text-muted small">Vous pouvez créer vos posts, les modifier, ou les supprimer</div>
-              </div>
-              <img src="public/assets/img/illustrations/browser-stats.svg" alt="images de d'illustration" style="width: 8rem"/>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="col-xl-4 mb-4">
-        <!-- Dashboard example card 2-->
-        <a class="card lift h-100">
-          <div class="card-body d-flex justify-content-center flex-column">
-            <div class="d-flex align-items-center justify-content-between">
-              <div class="me-3">
-                <i class="feather-xl text-secondary mb-3" data-feather="settings"></i>
-                <h5>Gérer les profils</h5>
-                <div class="text-muted small">Ajoutez et modifiez les profils d'autres administrateurs</div>
-              </div>
-              <img src="public/assets/img/illustrations/processing.svg" alt="images de d'illustration" style="width: 8rem"/>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="col-xl-4 mb-4">
-        <!-- Dashboard example card 3-->
-        <a class="card lift h-100">
-          <div class="card-body d-flex justify-content-center flex-column">
-            <div class="d-flex align-items-center justify-content-between">
-              <div class="me-3">
-                <i class="feather-xl text-info mb-3" data-feather="mail"></i>
-                <h5>Gérer les messages</h5>
-                <div class="text-muted small">Consultez les messages laissés par les internautes</div>
-              </div>
-              <img src="public/assets/img/illustrations/mails-1.svg" alt="images de d'illustration" style="width: 8rem"/>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
+  <div class="container-fluid px-4">
     <div class="card">
       <div class="card-body">
-        <div class="container-fluid px-4">
-          <div class="page-header-content">
-            <div class="row align-items-center justify-content-between pt-3">
-              <div class="col-auto mb-3">
-                <h1 class="page-header-title">
-                  <div class="page-header-icon">
-                    <i data-feather="list"></i>
-                  </div>
-                  Gestion des Posts
-                </h1>
-              </div>
-              <div class="col-12 col-xl-auto mb-3">
-                <a class="btn btn-sm btn-light text-primary" href="blog-management-create-post.html">
-                  <i class="me-1" data-feather="plus"></i>
-                  Créer un Post
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
         <table id="datatablesSimple">
           <thead>
             <tr>
-              <th>Titre du Post</th>
+              <th>Post Title</th>
               <th>Date</th>
               <th>Status</th>
-              <th>Auteur</th>
+              <th>Author</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tfoot>
             <tr>
-              <th>Titre du Post</th>
+              <th>Post Title</th>
               <th>Date</th>
               <th>Status</th>
-              <th>Auteur</th>
+              <th>Author</th>
               <th>Actions</th>
             </tr>
           </tfoot>
@@ -117,7 +50,7 @@
               <td>Boots on the Ground, Inclusive Thought Provoking Ideas</td>
               <td>20 Jun 2021</td>
               <td>
-                <div class="badge bg-gray-200 text-dark">Supprimé</div>
+                <div class="badge bg-gray-200 text-dark">Draft</div>
               </td>
               <td>Valerie Luna</td>
               <td>
@@ -133,7 +66,7 @@
               <td>Invest In Social Impact</td>
               <td>19 Jun 2021</td>
               <td>
-                <div class="badge bg-yellow-soft text-yellow">En attente de validation</div>
+                <div class="badge bg-yellow-soft text-yellow">Awaiting Approval</div>
               </td>
               <td>Aariz Fischer</td>
               <td>
@@ -149,7 +82,7 @@
               <td>Save the World, Social Entrepreneur</td>
               <td>18 Jun 2021</td>
               <td>
-                <div class="badge bg-green-soft text-green">Publié</div>
+                <div class="badge bg-green-soft text-green">Published</div>
               </td>
               <td>Alicia Allen</td>
               <td>
@@ -165,7 +98,7 @@
               <td>Design Thinking Benefits Corporation Thought Leadership</td>
               <td>17 Jun 2021</td>
               <td>
-                <div class="badge bg-green-soft text-green">Publié</div>
+                <div class="badge bg-green-soft text-green">Published</div>
               </td>
               <td>Mahesh Kumar</td>
               <td>
@@ -181,7 +114,7 @@
               <td>Collaborative Consumption, Human-Centered Technology Thought Leader Systems</td>
               <td>16 Jun 2021</td>
               <td>
-                <div class="badge bg-green-soft text-green">Publié</div>
+                <div class="badge bg-green-soft text-green">Published</div>
               </td>
               <td>William Cole</td>
               <td>
@@ -197,7 +130,7 @@
               <td>Co-create, Empower - Moving the Needle on Investor Interests</td>
               <td>14 Jun 2021</td>
               <td>
-                <div class="badge bg-green-soft text-green">Publié</div>
+                <div class="badge bg-green-soft text-green">Published</div>
               </td>
               <td>Valerie Luna</td>
               <td>
@@ -213,7 +146,7 @@
               <td>Inclusive Shared Units of Analysis</td>
               <td>13 Jun 2021</td>
               <td>
-                <div class="badge bg-green-soft text-green">Publié</div>
+                <div class="badge bg-green-soft text-green">Published</div>
               </td>
               <td>Amy Love</td>
               <td>

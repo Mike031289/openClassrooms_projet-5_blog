@@ -1,5 +1,6 @@
 <?php
 namespace App\Core\Functions;
+use App\Models\User;
 
 /**
  * Class SessionManager
@@ -13,14 +14,22 @@ class SessionManager
      *
      * Starts the session.
      */
-    // public function __construct()
-    // {
-    //     if (session_status() == PHP_SESSION_NONE) {
-    //         session_start();
-    //     }
-    // }
-    public function start(){
-        session_start();
+    public function __construct()
+    {
+            session_start();
+    }
+
+    public function connect(User $user, $userRole): void 
+    {
+        // Set the user in the session
+        $_SESSION['userEmail'] = $user->getEmail();
+
+        // Set the user's role in the session
+        $_SESSION['userRole'] = $userRole;
+    }
+    public function getUser(User $user, $userRole): void
+    {
+        
     }
 
     /**
