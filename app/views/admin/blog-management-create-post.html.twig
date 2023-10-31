@@ -23,12 +23,12 @@
             </div>
             Créer un Post
           </h1>
-          <div class="page-header-subtitle">Administration du Blog</div>
+          <div class="page-header-subtitle">Créez vos posts via le formulaire ci-dessous</div>
         </div>
         <div class="col-12 col-xl-auto mb-3">
-          <a class="btn btn-sm btn-light text-primary p-3" href="http://localhost/mon-blog/adminDashboard">
-            <i class="me-2" data-feather="home"></i>
-            Tableau de Bord
+          <a class="btn btn-sm btn-light text-primary" href="http://localhost/mon-blog/adminDashboard">
+            <i class="me-1" data-feather="arrow-left"></i>
+            Liste des Posts
           </a>
         </div>
       </div>
@@ -37,58 +37,47 @@
 {% endblock %}
 {% block mainPageContent %}
   <div class="container-fluid px-4">
-  <div class="row gx-4">
-    <div class="col-lg-8">
-      <div class="card mb-4">
-        <div class="card-header">Post Title</div>
-        <div class="card-body"><input class="form-control" id="postTitleInput" type="text" placeholder="Enter your post title..."/></div>
-      </div>
-      <div class="card card-header-actions mb-4">
-        <div class="card-header">
-          Post Preview
-          <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="The post preview text shows below the post title, and is the post summary on blog pages."></i>
+    <div class="row gx-4">
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-header">Post Title</div>
+          <div class="card-body"><input class="form-control" id="postTitleInput" type="text" placeholder="Enter your post title..."/></div>
         </div>
-        <div class="card-body">
-          <textarea class="lh-base form-control" type="text" placeholder="Enter your post preview text..." rows="4"></textarea>
-        </div>
-      </div>
-      <div class="card card-header-actions mb-4 mb-lg-0">
-        <div class="card-header">
-          Post Content
-          <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="Markdown is supported within the post content editor."></i>
-        </div>
-        <div class="card-body">
-          <textarea id="postEditor" class="lh-base form-control editor-toolbar" type="text" rows="4">## Post Subheading This is the content for your post.</textarea >
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4">
-      <div class="card card-header-actions">
-        <div class="card-header">
-          Publish
-          <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="After submitting, your post will be published once it is approved by a moderator."></i>
-        </div>
-        <div class="card-body">
-          <div class="d-grid mb-3">
-            <button class="fw-500 btn btn-primary-soft text-primary">Save as Draft</button>
+        <div class="card card-header-actions mb-4">
+          <div class="card-header">
+            Post Preview
+            <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="The post preview text shows below the post title, and is the post summary on blog pages."></i>
           </div>
-          <div class="d-grid">
-            <button class="fw-500 btn btn-primary">Submit for Approval</button>
+          <div class="card-body">
+            <textarea class="lh-base form-control" type="text" placeholder="Enter your post preview text..." rows="4"></textarea>
+          </div>
+        </div>
+        <div class="card card-header-actions mb-4 mb-lg-0">
+          <div class="card-header">
+            Post Content
+            <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="Markdown is supported within the post content editor."></i>
+          </div>
+          <div class="card-body">
+            <textarea id="postEditor" class="lh-base form-control editor-toolbar" type="text" rows="4">## Post Subheading This is the content for your post.</textarea >
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card card-header-actions">
+          <div class="card-header">
+            Publish
+            <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="After submitting, your post will be published once it is approved by a moderator."></i>
+          </div>
+          <div class="card-body">
+            <div class="d-grid mb-3">
+              <button class="fw-500 btn btn-primary-soft text-primary">Save as Draft</button>
+            </div>
+            <div class="d-grid">
+              <button class="fw-500 btn btn-primary">Submit for Approval</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 {% endblock %}
-{# {% block AdminJsLink %}
-  <script src="../public/js/boostrapBundleMinScripts.js"></script>
-  <script src="../public/js/adminJs/adminScripts.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-  <script src="../public/js/adminJs/datatables/datatables-simple-demo.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
-  <script src="../public/js/adminJs/litepicker.js"></script>
-{% endblock %} #}
-

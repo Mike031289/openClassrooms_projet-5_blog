@@ -85,5 +85,35 @@ class AdminController extends BaseController
         $this->view('admin/blog-management-create-post.html.twig', ['posts' => $posts, 'categories' => $categories, 'user' => $user]);
     }
 
+    public function editPost(): void
+    {
+        // Start the session
+        session_start();
+
+        // Check if the user is not logged in, redirect to the login page
+        if (!isset($_SESSION['userEmail'])) {
+            header('Location: login');
+            exit;
+        }
+
+        // Check if the user does not have the 'Admin' role, redirect to a restricted page
+        if ($_SESSION['userRole'] !== 'Admin') {
+            header('Location: login'); // Replace 'restricted-page' with the actual URL
+            exit;
+        }
+
+        // User is logged in and has the 'Admin' role, proceed to the admin dashboard
+        $posts      = $this->getManager(PostManager::class)->getAll();
+        $categories = $this->getManager(CategoryManager::class)->getAll();
+
+        // Retrieve user information from the session
+        $email = $_SESSION['userEmail'] ?? null;
+        $user  = null;
+        if ($email !== null) {
+            $user = $this->getManager(UserManager::class)->getUserByEmail($email);
+        }
+        $this->view('admin/blog-management-edit-post.html.twig', ['posts' => $posts, 'categories' => $categories, 'user' => $user]);
+    }
+
 
 }

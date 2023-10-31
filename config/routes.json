@@ -88,6 +88,14 @@
 			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
 	},
 	{
+			"path": "/blog-management-edit-post",
+			"controller":"App\\Controllers\\AdminController",
+			"action": "editPost",
+			"method": "GET",
+			"param": [],
+			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
+	},
+	{
 			"path": "/adminDashboard",
 			"controller":"App\\Controllers\\AdminController",
 			"action": "admin",
