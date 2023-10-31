@@ -11,6 +11,7 @@ window.addEventListener('DOMContentLoaded', event => {
                 info: "Affichage des posts {start} à {end} sur un total de {rows} posts", // Modify the datatable-info label
                 placeholder: "Recherche", //Modiy The label for search area
             }
+            
         });
     }
 });

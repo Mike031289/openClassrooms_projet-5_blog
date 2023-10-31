@@ -1,4 +1,17 @@
 {% extends 'templates/adminLayout.html.twig' %}
+{% set page = 'create-post' %}
+{# {% block head %}
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Mon Blog</title>
+    <link href="../public/css/adminStyles" rel="stylesheet"/>
+    <link rel="icon" type="image/x-icon" href="../public/assets/img/logo.png"/>
+  </head>
+{% endblock %} #}
 {% block mainHeader %}
   <div class="container-fluid px-4">
     <div class="page-header-content">
@@ -8,21 +21,22 @@
             <div class="page-header-icon">
               <i data-feather="list"></i>
             </div>
-            Gestion des Posts
+            Créer un Post
           </h1>
+          <div class="page-header-subtitle">Administration du Blog</div>
         </div>
         <div class="col-12 col-xl-auto mb-3">
-          <a class="btn btn-sm btn-light text-primary" href="blog-management-create-post.html">
-            <i class="me-1" data-feather="plus"></i>
-            Créer un Post
+          <a class="btn btn-sm btn-light text-primary p-3" href="http://localhost/mon-blog/adminDashboard">
+            <i class="me-2" data-feather="home"></i>
+            Tableau de Bord
           </a>
         </div>
       </div>
     </div>
   </div>
 {% endblock %}
-<!-- Main page content-->
-<div class="container-fluid px-4">
+{% block mainPageContent %}
+  <div class="container-fluid px-4">
   <div class="row gx-4">
     <div class="col-lg-8">
       <div class="card mb-4">
@@ -44,8 +58,7 @@
           <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="Markdown is supported within the post content editor."></i>
         </div>
         <div class="card-body">
-          <textarea id="postEditor">
-            ## Post Subheading This is the content for your post.</textarea >
+          <textarea id="postEditor" class="lh-base form-control editor-toolbar" type="text" rows="4">## Post Subheading This is the content for your post.</textarea >
         </div>
       </div>
     </div>
@@ -67,4 +80,15 @@
     </div>
   </div>
 </div>
-</main>
+{% endblock %}
+{# {% block AdminJsLink %}
+  <script src="../public/js/boostrapBundleMinScripts.js"></script>
+  <script src="../public/js/adminJs/adminScripts.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+  <script src="../public/js/adminJs/datatables/datatables-simple-demo.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
+  <script src="../public/js/adminJs/litepicker.js"></script>
+{% endblock %} #}
+

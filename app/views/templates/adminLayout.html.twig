@@ -16,6 +16,7 @@
 {% endblock %}
 
   <body class="nav-fixed">
+  {% block body %}
     <nav class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white" id="sidenavAccordion">
       <!-- Sidenav Toggle Button-->
       <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 me-2 ms-lg-2 me-lg-0" id="sidebarToggle">
@@ -216,7 +217,7 @@
                     <!-- Nested Sidenav Accordion (Apps -> Posts Management)-->
                     <nav class="sidenav-menu-nested nav">
                       <a class="nav-link" href="blog-management-posts-list.html">Liste des Posts</a>
-                      <a class="nav-link" href="blog-management-create-post.html">Créer un Post</a>
+                      <a class="nav-link {% if page == 'create-post' %}active{% endif %}" href="http://localhost/mon-blog/blog-management-create-post">Créer un Post</a>
                       <a class="nav-link" href="blog-management-edit-post.html">Modifier un Post</a>
                     </nav>
                   </div>
@@ -291,7 +292,7 @@
             {% endblock %}
           </header>
           <!-- Main page content-->
-          {% block mainHeaderContainer %}
+          {% block mainPageContent %}
           {% endblock %}
     
         {% endblock %}
@@ -310,13 +311,17 @@
         </footer>
       </div>
     </div>
-    <script src="public/js/boostrapBundleMinScripts.js"></script>
-    <script src="public/js/adminJs/adminScripts.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-    <script src="public/js/adminJs/datatables/datatables-simple-demo.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
-    <script src="public/js/adminJs/litepicker.js"></script>
+    {% block AdminJsLink %}
+      <script src="public/js/boostrapBundleMinScripts.js"></script>
+      <script src="public/js/adminJs/adminScripts.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+      <script src="public/js/adminJs/datatables/datatables-simple-demo.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
+      <script src="public/js/adminJs/litepicker.js"></script>
+    {% endblock %}
+{% endblock %}
 </body>
+
 </html>
