@@ -12,11 +12,14 @@
       <link rel="icon" type="image/x-icon" href="public/assets/img/logo.png"/>
       <script data-search-pseudo-elements="data-search-pseudo-elements" defer="defer" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/easymde@2.18.0/dist/easymde.min.js"></script>
+      <link href="https://cdn.jsdelivr.net/npm/easymde@2.18.0/dist/easymde.min.css" rel="stylesheet">
     </head>
   {% endblock %}
 
   <body class="nav-fixed">
     {% block body %}
+      {% block nav %}
       <nav class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white" id="sidenavAccordion">
         <!-- Sidenav Toggle Button-->
         <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 me-2 ms-lg-2 me-lg-0" id="sidebarToggle">
@@ -135,6 +138,7 @@
           </li>
         </ul>
       </nav>
+    {% endblock %}
       <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
           <nav class="sidenav shadow-right sidenav-dark">
@@ -221,7 +225,6 @@
                   <nav class="sidenav-menu-nested nav">
                     <a class="nav-link {% if page == 'list-post' %}active{% endif %}" href="http://localhost/mon-blog/adminDashboard">Liste des Posts</a>
                     <a class="nav-link {% if page == 'create-post' %}active{% endif %}" href="http://localhost/mon-blog/blog-management-create-post">Créer un Post</a>
-                    <a class="nav-link {% if page == 'edit-post' %}active{% endif %}" href="http://localhost/mon-blog/blog-management-edit-post">Modifier un Post</a>
                   </nav>
                 </div>
                 <!-- Sidenav Heading (Addons)-->
@@ -320,12 +323,13 @@
         {% block AdminJsLink %}
           <script src="public/js/boostrapBundleMinScripts.js"></script>
           <script src="public/js/adminJs/adminScripts.js"></script>
-          <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+          <script src="public/js/adminJs/markdown.js"></script>
+          <script src="public/js/adminJs/litepicker.js"></script>
           <script src="public/js/adminJs/datatables/datatables-simple-demo.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" crossorigin="anonymous"></script>
           <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
           <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
-          <script src="public/js/adminJs/litepicker.js"></script>
         {% endblock %}
       {% endblock %}
     </body>
