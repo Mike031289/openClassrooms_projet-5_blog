@@ -80,18 +80,34 @@
 			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
 	},
 	{
-			"path": "/blog-management-create-post",
+			"path": "/blog-management&create-post",
+			"controller":"App\\Controllers\\AdminController",
+			"action": "postForm",
+			"method": "GET",
+			"param": [],
+			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
+	},
+	{
+			"path": "/blog-management&create-post",
 			"controller":"App\\Controllers\\AdminController",
 			"action": "creatPost",
-			"method": "GET",
+			"method": "POST",
 			"param": [],
 			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
 	},
 	{
 			"path": "/blog-management-edit-post/{id}",
 			"controller":"App\\Controllers\\AdminController",
-			"action": "editPost",
+			"action": "editePost",
 			"method": "GET",
+			"param": ["id"],
+			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
+	},
+	{
+			"path": "/blog-management-edit-post/{id}",
+			"controller":"App\\Controllers\\AdminController",
+			"action": "updatePost",
+			"method": "POST",
 			"param": ["id"],
 			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
 	},

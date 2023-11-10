@@ -37,8 +37,63 @@
 {% endblock %}
 {% block mainPageContent %}
   <div class="container-fluid px-4">
-    <div class="row gx-4">
-      <div class="col-lg-8">
+    <form class="row gx-4 mt-2" action="blog-management&create-post" method="POST" enctype="multipart/form-data">
+      <div class="col-lg-12 mb-4">
+        {% if success is defined %}
+          <div class="alert alert-success" role="alert">
+            {{ success }}
+          </div>
+        {% endif %}
+        <div class="card card-header-actions mb-4">
+          <div class="card-header">
+            Catégorie du Post
+            <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="Veuillez choisir la catégorie corespondante dans la liste"></i>
+          </div>
+          <div class="card-body">
+            <select class="form-select" name="category" required>
+            <option></option>
+              {% for category in categories %}
+              <option value="{{ category.id }}">{{ category.id }} - {{ category.name }} </option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div class="card mb-4">
+          <div class="card-header">Titre du Post</div>
+          <div class="card-body"><input class="form-control" id="postTitleInput" type="text" name="title" required/></div>
+        </div>
+        <div class="card card-header-actions mb-4">
+          <div class="card-header">
+            Aperçu du Post
+            <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="petit extrait du post"></i>
+          </div>
+          <div class="card-body">
+           <textarea class="form-control" id="postpreview" name="postPreview" rows="3" required></textarea>
+          </div>
+        </div>
+        <div class="card card-header-actions mb-4">
+          <div class="card-header">
+            Image Principal du Post
+            <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="L'image de couverture du Post en format JPEG"></i>
+          </div>
+          <div class="card-body">
+            <input type="file" name="postImage" class="form-control" id="inputGroupFile" required="required" placeholder="Format Jpg requis*" title="Veuillez importer une image jpeg (* format .jpg)" accept=".jpg"></input>
+            <label for="postImage" class="file-label">
+              <small class="text-muted">Format requis : (* .jpg)</small>
+            </label>
+          </div>
+        </div>
+        <div class="card card-header-actions mb-4 mb-lg-0">
+          <div class="card-header">
+            Contenu du Post
+            <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="Contenu du post (tous les paragraphes etc)"></i>
+          </div>
+          <div class="card-body">
+            <textarea class="form-control" id="contenu" name="content" rows="20" required></textarea >
+          </div>
+        </div>
+      </div>
+      {# <div class="col-lg-8">
         <div class="card mb-4">
           <div class="card-header">Post Title</div>
           <div class="card-body"><input class="form-control" id="postTitleInput" type="text" placeholder="Enter your post title..."/></div>
@@ -61,23 +116,20 @@
             <textarea id="postEditor" class="lh-base form-control editor-toolbar" type="text" rows="4">## Post Subheading This is the content for your post.</textarea >
           </div>
         </div>
-      </div>
-      <div class="col-lg-4">
+      </div> #}
+      <div class="container col-lg">
         <div class="card card-header-actions">
           <div class="card-header">
-            Publish
-            <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="After submitting, your post will be published once it is approved by a moderator."></i>
+            Publier
+            <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="Après publication votre poste serait visible sur le blog dans la page Atricle"></i>
           </div>
           <div class="card-body">
-            <div class="d-grid mb-3">
-              <button class="fw-500 btn btn-primary-soft text-primary">Save as Draft</button>
-            </div>
-            <div class="d-grid">
-              <button class="fw-500 btn btn-primary">Submit for Approval</button>
+            <div class="container d-grid col-lg-6">
+              <button type="submit" class="fw-500 btn btn-primary">Publier</button>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </form>
   </div>
 {% endblock %}

@@ -87,7 +87,7 @@
                 </h1>
               </div>
               <div class="col-12 col-xl-auto mb-3">
-                <a class="btn btn-sm btn-light text-primary" href="http://localhost/mon-blog/blog-management-create-post">
+                <a class="btn btn-sm btn-light text-primary" href="http://localhost/mon-blog/blog-management&create-post">
                   <i class="me-1" data-feather="plus"></i>
                   Créer un Post
                 </a>
@@ -95,12 +95,12 @@
             </div>
           </div>
         </div>
-        {# <table id="datatablesSimple">
+        <table id="datatablesSimple">
           <thead>
             <tr>
               <th>Titre du Post</th>
-              <th>Date</th>
-              <th>Status</th>
+              <th>Aperçu du Post</th>
+              <th>Date / Heure</th>
               <th>Auteur</th>
               <th>Actions</th>
             </tr>
@@ -108,64 +108,31 @@
           <tfoot>
             <tr>
               <th>Titre du Post</th>
-              <th>Date</th>
-              <th>Status</th>
+              <th>Aperçu du Post</th>
+              <th>Date / Heure</th>
               <th>Auteur</th>
               <th>Actions</th>
             </tr>
           </tfoot>
           <tbody>
-          {% if post %}
-            <tr>
-              <td>{{ post.title }}</td>
-              <td>{{ post.createdAt }}</td>
-              <td>
-                <div class="badge bg-gray-200 text-dark">Supprimé</div>
-              </td>
-              <td>{{ user.userName }}</td>
-              <td>
-                <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="http://localhost/mon-blog/blog-management-edit-post">
-                  <i data-feather="edit"></i>
-                </a>
-                <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#!">
-                  <i data-feather="trash-2"></i>
-                </a>
-              </td>
-            </tr>
-          {% endif %}
-       
+            {% for post in posts %}
+              <tr>
+                <td>{{ post.title }}</td>
+                <td>{{ post.postpreview}}</td>
+                <td>{{ post.updatedAt}}</td>
+                <td>{{ user.userName }}</td>
+                <td>
+                  <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="http://localhost/mon-blog/blog-management-edit-post/{{ post.id }}">
+                    <i data-feather="edit"></i>
+                  </a>
+                  <a class="btn btn-datatable btn-icon btn-transparent-dark" href="http://localhost/mon-blog/blog-management-edit-post/">
+                    <i data-feather="trash-2"></i>
+                  </a>
+                </td>
+              </tr>
+            {% endfor %}
           </tbody>
-        </table> #}
-        <table class="table">
-    <the  <thead>
-    <tr>
-      <th>Titre du Post</th>
-      <th>Contenu</th>
-      <th>Date</th>
-      <th>Auteur</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for post in posts %}
-      <tr>
-        <td>{{ post.title }}</td>
-        <td>{{ post.content}}</td>
-        <td>{{ post.updatedAt}}</td>
-        <td>{{  user.userName }}</td>
-        <td>
-          <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="http://localhost/mon-blog/blog-management-edit-post/{{ post.id }}">
-            <i data-feather="edit"></i>
-          </a>
-          <a class="btn btn-datatable btn-icon btn-transparent-dark" href="supprimer_post.php?id={{ post.id }}">
-            <i data-feather="trash-2"></i>
-          </a>
-        </td>
-      </tr>
-    {% endfor %}
-  </tbody>
-</table>
-
+        </table>
       </div>
     </div>
   </div>

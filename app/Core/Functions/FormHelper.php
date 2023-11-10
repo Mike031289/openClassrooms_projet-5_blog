@@ -33,6 +33,19 @@ class FormHelper
   }
 
   /**
+   * Get a value from the $_FILES superglobal.
+   *
+   * @param string $key The key to retrieve.
+   * @param mixed $default The default value to return if the key does not exist.
+   * @return mixed The value associated with the key or the default value.
+   */
+  public static function files(string $key, mixed $default = null): mixed
+  {
+    return isset($_FILES[$key]) ? $_FILES[$key] : $default;
+  }
+
+
+  /**
    * Validate a field using a regular expression pattern.
    *
    * @param $field The field value to validate.

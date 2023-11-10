@@ -10,6 +10,7 @@ class Post
 {
     private int $id;
     private string $title;
+    private string $postPreview;
     private string $content;
     private ?string $imageUrl;
     private int $categoryId; 
@@ -152,7 +153,6 @@ class Post
     /**
      * Get the creation date and time of the post.
      *
-     * @return \DateTime
      */
     public function getCreatedAt(): \DateTime
     {
@@ -162,7 +162,6 @@ class Post
     /**
      * Set the creation date and time of the post.
      *
-     * @param \DateTime $createdAt
      * @return self
      */
     public function setCreatedAt(\DateTime $createdAt): self
@@ -174,7 +173,6 @@ class Post
     /**
      * Get the last update date and time of the post.
      *
-     * @return \DateTime
      */
     public function getUpdatedAt(): \DateTime
     {
@@ -184,12 +182,28 @@ class Post
     /**
      * Set the last update date and time of the post.
      *
-     * @param \DateTime $updatedAt
-     * @return self
      */
     public function setUpdatedAt(\DateTime $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+        return $this;
+    }
+
+    /**
+     * Get the value of postPreview
+     */
+    public function getPostPreview(): string
+    {
+        return $this->postPreview;
+    }
+
+    /**
+     * Set the value of postPreview
+     */
+    public function setPostPreview(string $postPreview): self
+    {
+        $this->postPreview = $postPreview;
+
         return $this;
     }
 }

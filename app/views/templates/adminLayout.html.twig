@@ -224,7 +224,7 @@
                   <!-- Nested Sidenav Accordion (Apps -> Posts Management)-->
                   <nav class="sidenav-menu-nested nav">
                     <a class="nav-link {% if page == 'list-post' %}active{% endif %}" href="http://localhost/mon-blog/adminDashboard">Liste des Posts</a>
-                    <a class="nav-link {% if page == 'create-post' %}active{% endif %}" href="http://localhost/mon-blog/blog-management-create-post">Créer un Post</a>
+                    <a class="nav-link {% if page == 'create-post' %}active{% endif %}" href="http://localhost/mon-blog/blog-management&create-post">Créer un Post</a>
                   </nav>
                 </div>
                 <!-- Sidenav Heading (Addons)-->
@@ -303,7 +303,6 @@
                 </header>
                 <!-- Main page content-->
                 {% block mainPageContent %}{% endblock %}
-
               {% endblock %}
             </main>
             <footer class="footer-admin mt-auto footer-light">

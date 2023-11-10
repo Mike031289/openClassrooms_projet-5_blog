@@ -1,8 +1,6 @@
 <?php
 namespace App\Manager;
-use App\Models\Admin;
-use App\Exceptions\ActionNotFoundException;
-use App\Manager\UserManager;;
+
 /**
  * Class AdminManager
  *
@@ -22,5 +20,5 @@ class AdminManager extends BaseManager
         parent::__construct("user", "Admin", $dataSource);
 
     }
-
+  
 }
