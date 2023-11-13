@@ -14,7 +14,7 @@ class Post
     private string $content;
     private ?string $imageUrl;
     private int $categoryId; 
-    private int $authorId;
+    private string $authorRole;
     private \DateTime $createdAt;
     private \DateTime $updatedAt;
 
@@ -131,22 +131,22 @@ class Post
     /**
      * Get the author ID of the post.
      *
-     * @return int
+     * @return string
      */
-    public function getAuthorId(): int
+    public function getAuthorRole(): string
     {
-        return $this->authorId;
+        return $this->authorRole;
     }
 
     /**
      * Set the author ID of the post.
      *
-     * @param int $authorId
+     * @param string $authorRole
      * @return self
      */
-    public function setAuthorId(int $authorId): self
+    public function setAuthorRole(string $authorRole): self
     {
-        $this->authorId = $authorId;
+        $this->authorRole = $authorRole;
         return $this;
     }
 

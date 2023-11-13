@@ -39,7 +39,7 @@
                         <br>
                         <blockquote class="blockquote mb-0">
                             <footer class="blockquote-footer">Auteur :
-                                <cite title="Source Title">{{ post.authorId }}</cite>
+                                <cite title="Source Title">{{ post.authorRole }}</cite>
                             </footer>
                         </blockquote>
                     </div>
@@ -65,7 +65,7 @@
                     <div class="list-group mb-3">
                         <div class="list-group-item list-group-item-action">
                             <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">{{ comment.authorId }}</h5>
+                                <h5 class="mb-1">{{ comment.authorRole }}</h5>
                                 <small class="text-body-secondary">{{ comment.postId }}</small>
                             </div>
                             <p class="mb-1">{{ comment.content }}</p>

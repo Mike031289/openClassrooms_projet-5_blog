@@ -22,7 +22,7 @@
         {% else %}
           {% set latestPost = posts | last %}
           <a href="#!">
-            <img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..."/>
+            <img class="card-img-top" src="http://localhost/mon-blog/public/assets/img/postImg/{{ latestPost.imageUrl }}" alt="post image"/>
           </a>
           <div class="card-body">
             <div class="small text-muted">Date de publication:
@@ -32,7 +32,7 @@
             <h2 class="card-title h4">{{ latestPost.title }}</h2>
             <p class="card-text">{{ latestPost.postpreview }}</p>
             <p>Auteur :
-              {{ latestPost.authorId }}</p>
+              {{ latestPost.authorRole }}</p>
             <a class="btn btn-primary" href="http://localhost/mon-blog/post/{{ latestPost.id }}">Lire →</a>
 
           </div>
@@ -83,7 +83,7 @@
         {% for post in posts %}
           <div class="card col-lg-3 p-0 m-5">
             <a href="#!">
-              <img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..."/>
+              <img class="card-img-top" src="http://localhost/mon-blog/public/assets/img/postImg/{{ post.imageUrl }}" alt="post image"/>
             </a>
             <div class="card-body">
               <div class="small text-muted">Date de publication:
@@ -93,7 +93,7 @@
               <h2 class="card-title h4">{{ post.title }}</h2>
               <p class="card-text">{{ post.postpreview }}</p>
               <p>Auteur :
-                {{ post.authorId }}</p>
+                {{ post.authorRole }}</p>
               <a class="btn btn-primary" href="http://localhost/mon-blog/post/{{ post.id }}">Lire →</a>
             </div>
           </div>

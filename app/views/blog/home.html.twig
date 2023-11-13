@@ -23,7 +23,7 @@
         <!-- A la une -->
         <div class="card mb-4 p-0">
           <a href="http://localhost/mon-blog/post/{{ latestPost.id }}">
-            <img class="card-img-top" src="http://localhost/mon-blog/public/assets/img/postImg/{{ post.imageUrl }}" alt="post image"/>
+            <img class="card-img-top" src="http://localhost/mon-blog/public/assets/img/postImg/{{ latestPost.imageUrl }}" alt="post image"/>
           </a>
           <div class="card-body">
             <div class="small text-muted">Date de publication:
@@ -33,7 +33,7 @@
             <h2 class="card-title h4">{{ latestPost.title }}</h2>
             <p class="card-text">{{ latestPost.postpreview }}</p>
             <p>Auteur :
-              {{ latestPost.authorId }}</p>
+              {{ latestPost.authorRole }}</p>
             <p>id :
               {{ latestPost.id }}</p>
             <a class="btn btn-primary" href="http://localhost/mon-blog/post/{{ latestPost.id }}">Lire →</a>
@@ -58,7 +58,7 @@
                 <h2 class="card-title h4">{{ post.title }}</h2>
                 <p class="card-text">{{ post.postpreview }}</p>
                 <p>Auteur :
-                  {{ post.authorId }}</p>
+                  {{ post.authorRole }}</p>
                 <p>id :
                   {{ post.id }}</p>
                 <a class="btn btn-primary" href="http://localhost/mon-blog/post/{{ post.id }}">Lire →</a>

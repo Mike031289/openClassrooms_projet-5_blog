@@ -38,7 +38,7 @@
 {% block mainPageContent %}
   <div class="container-fluid px-4">
     <form class="row gx-4 mt-2" action="blog-management&create-post" method="POST" enctype="multipart/form-data">
-      <div class="col-lg-12 mb-4">
+      <div class="col-lg-8 mb-4">
         {% if success is defined %}
           <div class="alert alert-success" role="alert">
             {{ success }}
@@ -50,7 +50,7 @@
             <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="Veuillez choisir la catégorie corespondante dans la liste"></i>
           </div>
           <div class="card-body">
-            <select class="form-select" name="category" required>
+            <select class="form-select" name="category" required="required">
             <option></option>
               {% for category in categories %}
               <option value="{{ category.id }}">{{ category.id }} - {{ category.name }} </option>
@@ -60,7 +60,7 @@
         </div>
         <div class="card mb-4">
           <div class="card-header">Titre du Post</div>
-          <div class="card-body"><input class="form-control" id="postTitleInput" type="text" name="title" required/></div>
+          <div class="card-body"><input class="form-control" id="postTitleInput" type="text" name="title" required="required"/></div>
         </div>
         <div class="card card-header-actions mb-4">
           <div class="card-header">
@@ -68,7 +68,7 @@
             <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="petit extrait du post"></i>
           </div>
           <div class="card-body">
-           <textarea class="form-control" id="postpreview" name="postPreview" rows="3" required></textarea>
+           <textarea class="form-control" id="postpreview" name="postPreview" rows="3" required="required"></textarea>
           </div>
         </div>
         <div class="card card-header-actions mb-4">
@@ -89,34 +89,10 @@
             <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="Contenu du post (tous les paragraphes etc)"></i>
           </div>
           <div class="card-body">
-            <textarea class="form-control" id="contenu" name="content" rows="20" required></textarea >
+            <textarea class="form-control" id="contenu" name="content" rows="20" required="required"></textarea >
           </div>
         </div>
       </div>
-      {# <div class="col-lg-8">
-        <div class="card mb-4">
-          <div class="card-header">Post Title</div>
-          <div class="card-body"><input class="form-control" id="postTitleInput" type="text" placeholder="Enter your post title..."/></div>
-        </div>
-        <div class="card card-header-actions mb-4">
-          <div class="card-header">
-            Post Preview
-            <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="The post preview text shows below the post title, and is the post summary on blog pages."></i>
-          </div>
-          <div class="card-body">
-            <textarea class="lh-base form-control" type="text" placeholder="Enter your post preview text..." rows="4"></textarea>
-          </div>
-        </div>
-        <div class="card card-header-actions mb-4 mb-lg-0">
-          <div class="card-header">
-            Post Content
-            <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="Markdown is supported within the post content editor."></i>
-          </div>
-          <div class="card-body">
-            <textarea id="postEditor" class="lh-base form-control editor-toolbar" type="text" rows="4">## Post Subheading This is the content for your post.</textarea >
-          </div>
-        </div>
-      </div> #}
       <div class="container col-lg">
         <div class="card card-header-actions">
           <div class="card-header">

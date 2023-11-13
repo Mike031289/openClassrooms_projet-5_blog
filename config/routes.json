@@ -98,7 +98,7 @@
 	{
 			"path": "/blog-management-edit-post/{id}",
 			"controller":"App\\Controllers\\AdminController",
-			"action": "editePost",
+			"action": "editPost",
 			"method": "GET",
 			"param": ["id"],
 			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
@@ -112,13 +112,14 @@
 			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
 	},
 	{
-			"path": "/adminDashboard",
+			"path": "/blog-management-edit-post/{id}",
 			"controller":"App\\Controllers\\AdminController",
-			"action": "admin",
+			"action": "updatePost",
 			"method": "POST",
-			"param": [],
-			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager"]
+			"param": ["id"],
+			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
 	},
+
 	{
 			"path": "/404",
 			"controller": "App\\Controllers\\ErrorController",

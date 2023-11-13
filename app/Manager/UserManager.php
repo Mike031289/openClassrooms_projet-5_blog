@@ -178,31 +178,27 @@ class UserManager extends BaseManager
         return ($result) ? $result['roleName'] : null;
     }
 
-    // public function getUserByName(string $userName): ?User
-    // {
-    //     // SQL query to retrieve the user by name from the database
-    //     $sql = "SELECT * FROM user WHERE userName = ?";
+    /**
+     * Retrieve the role of a user by their id.
+     *
+     * @param $id The id of the user.
+     * @return string|null The user's role or null if not found.
+     */
+    public function getAuthorRoleById(string $id): ?string
+    {
+        $sql = "SELECT r.roleName
+            FROM user AS u
+            JOIN userrole AS ur ON u.id = ur.userId
+            JOIN role AS r ON ur.roleId = r.roleId
+            WHERE u.id = :id";
 
-    //     // Prepare the SQL statement
-    //     $stmt = $this->_db->prepare($sql);
+        $req = $this->_db->prepare($sql);
+        $req->bindValue(':id', $id, \PDO::PARAM_STR);
+        $req->execute();
 
-    //     // Bind the userName parameter
-    //     $stmt->bindParam(1, $userName, \PDO::PARAM_STR);
+        $result = $req->fetch(\PDO::FETCH_ASSOC);
 
-    //     // Execute the query
-    //     $stmt->execute();
-
-    //     // Use setFetchMode to specify the class and fetch mode
-    //     $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, User::class);
-
-    //     // Use fetchObject to retrieve the result as an object of the User class
-    //     $user = $stmt->fetchObject(User::class);
-
-    //     // Return the User object or false if not found
-    //     return $user ? $user : null;
-    // }
-
-
-
+        return ($result) ? $result['roleName'] : null;
+    }
 
 }

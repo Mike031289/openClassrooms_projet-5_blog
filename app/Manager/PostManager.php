@@ -19,12 +19,12 @@ class PostManager extends BaseManager
      * @param string $content The content of the post.
      * @param array $postImg The image file for the post.
      * @param int $categoryId The category ID of the post.
-     * @param int $authorId The author ID of the post.
+     * @param string $authorRole The author ID of the post.
      * @param string $postPreview The preview of the post.
      *
      * @return Post|null The created Post object, or null on failure.
      */
-    public function createNewPost($title, $content, $postImg, $categoryId, $authorId, $postPreview): ?Post
+    public function createNewPost($title, $content, $postImg, $categoryId, $authorRole, $postPreview): ?Post
     {
         $this->_db->beginTransaction();
 
@@ -43,18 +43,15 @@ class PostManager extends BaseManager
             // Get the current date
             $createdAt = date('Y-m-d H:i:s');
             $updatedAt  = date('Y-m-d H:i:s');
-            // var_dump($imageFileName);
-            // echo 'Mike';
-            // die;
             // Step 2: Insert the post into the 'Post' table
-            $sql  = "INSERT INTO Post (title, content, imageUrl, categoryId, authorId, createdAt, updatedAt, postpreview) 
+            $sql  = "INSERT INTO Post (title, content, imageUrl, categoryId, authorRole, createdAt, updatedAt, postpreview) 
                  VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(1, $title, \PDO::PARAM_STR);
             $stmt->bindParam(2, $content, \PDO::PARAM_STR);
             $stmt->bindParam(3, $imageFileName, \PDO::PARAM_STR);
             $stmt->bindParam(4, $categoryId, \PDO::PARAM_INT);
-            $stmt->bindParam(5, $authorId, \PDO::PARAM_INT);
+            $stmt->bindParam(5, $authorRole, \PDO::PARAM_STR);
             $stmt->bindParam(6, $createdAt, \PDO::PARAM_STR);
             $stmt->bindParam(7, $updatedAt, \PDO::PARAM_STR);
             $stmt->bindParam(8, $postPreview, \PDO::PARAM_STR);
@@ -64,21 +61,21 @@ class PostManager extends BaseManager
             }
 
             // Step 3: Get the ID of the newly created post
-            $postId = $this->_db->lastInsertId();
+            $id = $this->_db->lastInsertId();
 
             // Commit the transaction
             $this->_db->commit();
 
             // Create a new Post object with the inserted data
             $post = new Post;
-            $post->setId($postId);
+            $post->setId($id);
             $post->setTitle($title);
             $post->setContent($content);
             $post->setImageUrl($imageFileName);
             $post->setCategoryId($categoryId);
-            $post->setAuthorId($authorId);
-            $post->setCreatedAt(new \DateTime(""));
-            $post->setUpdatedAt(new \DateTime(""));
+            $post->setAuthorRole($authorRole);
+            $post->setCreatedAt(new \DateTime($createdAt));
+            $post->setUpdatedAt(new \DateTime($updatedAt));
             $post->setPostPreview($postPreview);
 
             return $post;
@@ -127,6 +124,64 @@ class PostManager extends BaseManager
 
         return $uniqueFileName;
     }
+
+    public function updatePost(int $id, $title, $content, $postImg, $categoryId, $authorRole, $postPreview): ?Post
+    {
+        $this->_db->beginTransaction();
+
+        try {
+            // Step 1: Check if $postImg is not null before calling uploadImage
+            if ($postImg !== null) {
+                // Step 1: Move the image to the designated folder
+                $imageFileName = $this->uploadImage($postImg);
+            } else {
+                // Handle the case where $postImg is null (if needed)
+                // For example, you might want to keep the existing image or display an error message.
+                $imageFileName = null; // Set a default value or handle the null case accordingly
+            }
+
+            // Get the current date for updating the 'updatedAt' field
+            $updatedAt = date('Y-m-d H:i:s');
+
+            // Step 2: Update the post in the 'Post' table
+            $sql  = "UPDATE Post SET title = ?, content = ?, imageUrl = ?, categoryId = ?, authorRole = ?, updatedAt = ?, postpreview = ? WHERE id = ?";
+            $stmt = $this->_db->prepare($sql);
+            $stmt->bindParam(1, $title, \PDO::PARAM_STR);
+            $stmt->bindParam(2, $content, \PDO::PARAM_STR);
+            $stmt->bindParam(3, $imageFileName, \PDO::PARAM_STR);
+            $stmt->bindParam(4, $categoryId, \PDO::PARAM_INT);
+            $stmt->bindParam(5, $authorRole, \PDO::PARAM_STR);
+            $stmt->bindParam(6, $updatedAt, \PDO::PARAM_STR);
+            $stmt->bindParam(7, $postPreview, \PDO::PARAM_STR);
+            $stmt->bindParam(8, $id, \PDO::PARAM_INT);
+
+            if (!$stmt->execute()) {
+                throw new ActionNotFoundException;
+            }
+
+            // Commit the transaction
+            $this->_db->commit();
+
+            // Create a new Post object with the updated data
+            $post = new Post;
+            $post->setId($id);
+            $post->setTitle($title);
+            $post->setContent($content);
+            $post->setImageUrl($imageFileName);
+            $post->setCategoryId($categoryId);
+            $post->setAuthorRole($authorRole);
+            $post->setUpdatedAt(new \DateTime($updatedAt));
+            $post->setPostPreview($postPreview);
+
+            return $post;
+        }
+        catch (ActionNotFoundException $e) {
+            // Handle the error in case of failure and roll back the transaction
+            $this->_db->rollBack();
+            return null;
+        }
+    }
+
 
 
 }

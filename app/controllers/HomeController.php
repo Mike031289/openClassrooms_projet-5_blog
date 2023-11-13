@@ -29,6 +29,7 @@ class HomeController extends BaseController
         if($email !== null){
             $user = $this->getManager(UserManager::class)->getUserByEmail($email);
         }
+        
         $this->view("blog/home.html.twig", ['posts' => $posts, 'categories' => $categories, 'user' => $user]);
     }
 
