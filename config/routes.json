@@ -112,14 +112,21 @@
 			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
 	},
 	{
-			"path": "/blog-management-edit-post/{id}",
+			"path": "/blog-management-delete-post/{id}",
 			"controller":"App\\Controllers\\AdminController",
-			"action": "updatePost",
+			"action": "deletePost",
+			"method": "GET",
+			"param": ["id"],
+			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
+	},
+	{
+			"path": "/blog-management-delete-post/{id}",
+			"controller":"App\\Controllers\\AdminController",
+			"action": "delete",
 			"method": "POST",
 			"param": ["id"],
 			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
 	},
-
 	{
 			"path": "/404",
 			"controller": "App\\Controllers\\ErrorController",

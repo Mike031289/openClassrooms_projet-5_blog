@@ -15,12 +15,12 @@ class PostManager extends BaseManager
     /**
      * Create a new post and insert it into the database.
      *
-     * @param string $title The title of the post.
-     * @param string $content The content of the post.
-     * @param array $postImg The image file for the post.
-     * @param int $categoryId The category ID of the post.
-     * @param string $authorRole The author ID of the post.
-     * @param string $postPreview The preview of the post.
+     * @param $title The title of the post.
+     * @param $content The content of the post.
+     * @param $postImg The image file for the post.
+     * @param $categoryId The category ID of the post.
+     * @param $authorRole The author ID of the post.
+     * @param $postPreview The preview of the post.
      *
      * @return Post|null The created Post object, or null on failure.
      */
@@ -179,6 +179,34 @@ class PostManager extends BaseManager
             // Handle the error in case of failure and roll back the transaction
             $this->_db->rollBack();
             return null;
+        }
+    }
+
+    /**
+     * Delete a post from the database by its ID.
+     *
+     * @param $id The ID of the post to be deleted.
+     *
+     * @return bool True if the post was successfully deleted, false otherwise.
+     */
+    public function deletePost(int $id): bool
+    {
+        try {
+            // Prepare and execute a DELETE SQL query to remove the post by its ID
+            $sql  = "DELETE FROM Post WHERE id = ?";
+            $stmt = $this->_db->prepare($sql);
+            $stmt->bindParam(1, $id, \PDO::PARAM_INT);
+
+            // Check if the DELETE operation was successful
+            if ($stmt->execute()) {
+                return true; // Return true if the deletion was successful
+            } else {
+                return false; // Return false if the deletion failed
+            }
+        }
+        catch (ActionNotFoundException $e) {
+            // Handle any exceptions, e.g., log the error or return false
+            return false;
         }
     }
 
