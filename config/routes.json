@@ -25,11 +25,11 @@
 	},
 	{
 			"path": "/contact",
-			"controller": "Contact",
-			"action": "sendMessage",
-			"method": "POST",
+			"controller": "App\\Controllers\\ContactController",
+			"action": "contactForm",
+			"method": "GET",
 			"param": [],
-			"managers": ["ContactManager"]
+			"managers": ["App\\Manager\\ContactManager", "App\\Manager\\UserManager"]
 	},
 	{
 			"path": "/login",

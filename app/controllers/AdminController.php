@@ -242,6 +242,7 @@ class AdminController extends BaseController
 
         $this->view('admin/dashboard-delete-post.html.twig', ['post' => $post, 'categories' => $categories, 'user' => $user]);
     }
+    
     /**
      * Delete a post with the specified ID.
      *
@@ -263,10 +264,6 @@ class AdminController extends BaseController
             header('Location: login'); // Replace 'restricted-page' with the actual URL
             exit;
         }
-
-        // User is logged in and has the 'Admin' role, proceed to the admin dashboard
-        // Retrieve post, comments, and user information as needed
-        // $post = $this->getManager(PostManager::class)->getById($id);
 
         // Retrieve user information from the session
         $email = $_SESSION['userEmail'] ?? null;

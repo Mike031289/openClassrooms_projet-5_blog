@@ -2,7 +2,6 @@
 namespace App\Controllers;
 
 use App\Manager\UserManager;
-use App\Manager\AdminManager;
 use App\Core\Functions\FormHelper;
 
 /**

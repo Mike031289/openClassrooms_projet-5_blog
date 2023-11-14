@@ -39,7 +39,6 @@ class PostManager extends BaseManager
                 $imageFileName = null; // Set a default value or handle the null case accordingly
             }
 
-
             // Get the current date
             $createdAt = date('Y-m-d H:i:s');
             $updatedAt  = date('Y-m-d H:i:s');
