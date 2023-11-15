@@ -2,7 +2,7 @@
 
 {% set page = 'contact' %}
 
- {% block header %}
+{% block header %}
   <header class="page-header-ui page-header-ui-dark bg-gradient-primary-to-secondary">
     <div class="page-header-ui-content pt-10">
       <div class="container px-5 text-center">
@@ -24,46 +24,65 @@
 {% endblock %}
 
 {% block section %}
- <div class="container px-5">
-  <div class="row gx-5 justify-content-center">
-    <div class="col-lg-8 text-center">
-      <h2>Je reste joignable sur ces canneaux</h2>
-      <p class="lead mb-5">Pour toutes collaboration, n'hésitez pas à m'écrire ou m'appeler sur ma ligne directe</p>
-    </div>
-  </div>
-  <div class="row gx-5 align-items-center mb-10">
-    <div class="col-lg-4 text-center mb-5 mb-lg-0">
-      <div class="section-preheading">Contact Linkedin</div>
-      <a href="https://www.linkedin.com/in/mike-adjoukou-agbelou-23640098/">Adjoukou AGBELOU</a>
-    </div>
-    <div class="col-lg-4 text-center mb-5 mb-lg-0">
-      <div class="section-preheading">Appel direct</div>
-      <a href="tel:+33662272975">+33 662272975</a>
-    </div>
-    <div class="col-lg-4 text-center">
-      <div class="section-preheading">Contact par mail</div>
-      <a href="mailto:mike.agbelou@gmail.com">mike.agbelou@gmail.com</a>
-    </div>
-  </div>
-  <form novalidate="novalidate" method="POST">
-    <div class="row gx-5 mb-4">
-      <div class="col-md-6">
-        <label class="text-dark mb-2" for="inputName">Nom ou Raison Sociale</label>
-        <input class="form-control py-4" id="inputName" type="text" placeholder="Nom"/>
-      </div>
-      <div class="col-md-6">
-        <label class="text-dark mb-2" for="inputEmail">Adresse Email</label>
-        <input class="form-control py-4" id="inputEmail" type="email" placeholder="email@example.com"/>
+  <div class="container px-5">
+    <div class="row gx-5 justify-content-center">
+      {% if error is defined%}
+        <div class="alert alert-danger text-center col-lg-6 col-md-6" role="alert">
+          {{ error }}
+        </div>
+      {% endif %}
+      {% if success is defined %}
+        <div class="alert alert-success text-center col-lg-6 col-md-6" role="alert">
+          {{ success }}
+        </div>
+      {% endif %}
+      <div class="col-lg-8 text-center">
+        <h2>Je reste joignable sur ces canneaux</h2>
+        <p class="lead mb-5">Pour toutes collaboration, n'hésitez pas à m'écrire ou m'appeler sur ma ligne directe</p>
       </div>
     </div>
-    <div class="mb-4">
-      <label class="text-dark mb-2" for="inputMessage">Message</label>
-      <textarea class="form-control py-3" id="inputMessage" type="text" placeholder="Saisissez votre message..." rows="4"></textarea>
+    <div class="row gx-5 align-items-center mb-10">
+      <div class="col-lg-4 text-center mb-5 mb-lg-0">
+        <div class="section-preheading">Contact Linkedin</div>
+        <a href="https://www.linkedin.com/in/mike-adjoukou-agbelou-23640098/">Adjoukou AGBELOU</a>
+      </div>
+      <div class="col-lg-4 text-center mb-5 mb-lg-0">
+        <div class="section-preheading">Appel direct</div>
+        <a href="tel:+33662272975">+33 662272975</a>
+      </div>
+      <div class="col-lg-4 text-center">
+        <div class="section-preheading">Contact par mail</div>
+        <a href="mailto:mike.agbelou@gmail.com">mike.agbelou@gmail.com</a>
+      </div>
     </div>
-    <div class="text-center">
-      <button class="btn btn-primary mt-4" type="submit">Envoyer</button>
-    </div>
-  </form>
-</div>
+    <form id="contactForm" class="needs-validation" novalidate="novalidate" method="POST">
+      <div class="row gx-5 mb-4">
+        <div class="col-md-6 {% if errors.userName %}has-error{% endif %}">
+          <label class="text-dark mb-2" for="inputName">Nom ou Raison Sociale</label>
+          <input class="form-control py-4  {% if errors.userName %}is-invalid{% endif %}" id="inputUserName" type="text" name="userName" value="{{ value.userNameValue ?? '' }}" placeholder="Nom" required="required"/>
+          {% if errors.userName %}
+            <div class="invalid-feedback">{{ errors.userName }}</div>
+          {% endif %}
+        </div>
+        <div class="col-md-6 {% if errors.email %}has-error{% endif %}">
+          <label class="text-dark mb-2" for="inputEmail">Adresse Email</label>
+          <input class="form-control py-4 {% if errors.email %}is-invalid{% endif %}" id="inputEmail" type="email" name="email" value="{{ value.emailValue ?? '' }}" placeholder="email@example.com" required="required"/>
+          {% if errors.email %}
+            <div class="invalid-feedback">{{ errors.email }}</div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="mb-4 {% if errors.message %}has-error{% endif %}">
+        <label class="text-dark mb-2" for="inputMessage">Message</label>
+        <textarea class="form-control py-3 {% if errors.message %}is-invalid{% endif %}" id="inputMessage" type="text" name="message" placeholder="Saisissez votre message..." rows="10" required="required"></textarea>
+        {% if errors.message %}
+          <div class="invalid-feedback">{{ errors.message }}</div>
+        {% endif %}
+      </div>
+      <div class="text-center">
+        <button class="btn btn-primary mt-4" type="submit">Envoyer</button>
+      </div>
+    </form>
+  </div>
 
 {% endblock %}

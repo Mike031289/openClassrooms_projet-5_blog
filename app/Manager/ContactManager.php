@@ -8,4 +8,9 @@ class ContactManager extends BaseManager
     {
         parent::__construct("contact", "Contact", $dataSource);
     }
+
+    public function sendMail($userName, $email, $message): void
+    {
+        
+    }
 }

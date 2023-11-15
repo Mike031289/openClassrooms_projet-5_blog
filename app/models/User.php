@@ -7,9 +7,6 @@ namespace App\Models;
  */
 class User
 {
-    const PASSWORD_FORMAT = '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/';
-    const EMAIL_FORMAT    = '/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/';
-    const NAME_FORMAT     = '/^[a-zA-Z0-9_-]{3,20}$/';
 
     /**
      * @var int|null The user's unique identifier.
