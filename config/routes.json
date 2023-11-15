@@ -32,6 +32,14 @@
 			"managers": ["App\\Manager\\ContactManager", "App\\Manager\\UserManager"]
 	},
 	{
+			"path": "/contact",
+			"controller": "App\\Controllers\\ContactController",
+			"action": "sendMessage",
+			"method": "POST",
+			"param": [],
+			"managers": ["App\\Manager\\ContactManager", "App\\Manager\\UserManager"]
+	},
+	{
 			"path": "/login",
 			"controller": "App\\Controllers\\UserController",
 			"action": "displayLoginForm",

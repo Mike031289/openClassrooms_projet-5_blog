@@ -90,13 +90,13 @@ class UserManager extends BaseManager
 
         try {
             // Step 1: Insert the user into the 'user' table
-            $sql  = "INSERT INTO user (roleId, userName, email, passWord, createdAt) VALUES (?, ?, ?, ?, ?)";
+            $sql  = "INSERT INTO user (userName, email, passWord, createdAt) VALUES (?, ?, ?, ?)";
             $stmt = $this->_db->prepare($sql);
-            $stmt->bindParam("3", $roleId, \PDO::PARAM_STR);
-            $stmt->bindParam(2, $userName, \PDO::PARAM_STR);
-            $stmt->bindParam(3, $email, \PDO::PARAM_STR);
-            $stmt->bindParam(4, $hashedPassword, \PDO::PARAM_STR);
-            $stmt->bindParam(5, $createdAt, \PDO::PARAM_STR);
+            // $stmt->bindParam("3", $roleId, \PDO::PARAM_STR);
+            $stmt->bindParam(1, $userName, \PDO::PARAM_STR);
+            $stmt->bindParam(2, $email, \PDO::PARAM_STR);
+            $stmt->bindParam(3, $hashedPassword, \PDO::PARAM_STR);
+            $stmt->bindParam(4, $createdAt, \PDO::PARAM_STR);
 
             if (!$stmt->execute()) {
                 throw new ActionNotFoundException;

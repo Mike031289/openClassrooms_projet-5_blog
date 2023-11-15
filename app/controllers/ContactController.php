@@ -34,4 +34,18 @@ class ContactController extends BaseController
 
     $this->view("blog/contact.html.twig", ['user' => $user]);
   }
+  public function sendMessage(): void
+  {
+    echo "Contact";
+    die;
+    // Check if the user is logged in and pass the user information to the template
+    session_start();
+    $email = $_SESSION['userEmail'] ?? null;
+    $user  = null;
+    if ($email !== null) {
+      $user = $this->getManager(UserManager::class)->getUserByEmail($email);
+    }
+
+    $this->view("blog/contact.html.twig", ['user' => $user]);
+  }
 }
