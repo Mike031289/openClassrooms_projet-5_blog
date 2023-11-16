@@ -167,46 +167,45 @@ class UserController extends BaseController
         //     if (!empty($userRole)) {
         //         // If the password matches, log in the user
         //         if (password_verify($passWord, $user->getPassWord())) {
-                    
-        //             $this->sessionManager->connect($user, $userRole);
 
-        if ($user) {
-            if (!empty($userRole)) {
-                // If the password matches, log in the user
-                if (password_verify($passWord, $user->getPassWord())) {
-                    session_start();
 
-                    // Set the user in the session
-                    $_SESSION['userEmail'] = $email;
-
-                    // Set the user's role in the session
-                    $_SESSION['userRole'] = $userRole;
-
-                    if ($userRole === 'Admin') {
-                        header('Location: adminDashboard');
-                        exit;
-                    } else if ($userRole == "Visitor") {
-                        header('Location: posts');
-                        exit;
-                    }
-                } else {
-                    // Password is incorrect
-                    $errors['password']  = "Mot de passe incorrect";
-                    $value['emailValue'] = $email;
-                }
-            } else {
-                $error = "Votre compte est suspendu. Veuillez contacter l'administrateur";
-                $this->view('user/login.html.twig', ['error' => $error]);
-            }
-        } else {
+        if ($user === null) {
             // User not found
             $error = "Ce compte n'existe pas. Créez un compte pour vous connecter.";
             $this->view('user/login.html.twig', ['error' => $error]);
         }
 
-        // Display the Twig template with the errors
-        $this->view('user/login.html.twig', ['errors' => $errors]);
-        exit;
+        if (empty($userRole)) {
+            $error = "Votre compte est suspendu. Veuillez contacter l'administrateur";
+            $this->view('user/login.html.twig', ['error' => $error]);
+        }
+
+        // If the password matches, log in the user
+        if (!password_verify($passWord, $user->getPassWord())) {
+            // Password is incorrect
+            $errors['password']  = "Mot de passe incorrect";
+            $value['emailValue'] = $email;
+            
+            $this->view('user/login.html.twig', ['errors' => $errors]);
+
+        }
+
+        $this->session->connect($user, $userRole);
+
+        // // Set the user in the session
+        // $_SESSION['userEmail'] = $email;
+
+        // // Set the user's role in the session
+        // $_SESSION['userRole'] = $userRole;
+
+        if ($userRole === 'Admin') {
+            header('Location: adminDashboard');
+            exit;
+        } else if ($userRole == "Visitor") {
+            header('Location: posts');
+            exit;
+        }
+
 
     }
 
@@ -215,9 +214,9 @@ class UserController extends BaseController
      */
     public function logout(): void
     {
-        session_start();
-        unset($_SESSION['userEmail']);
-        session_destroy();
+        
+        $this->session->destroy();
+
         header('Location: /mon-blog/login');
         exit;
     }

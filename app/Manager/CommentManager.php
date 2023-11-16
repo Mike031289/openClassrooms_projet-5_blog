@@ -30,6 +30,20 @@ class CommentManager extends BaseManager
         return $req->fetchAll();
     }
 
+    public function getCommentsByPostId(int $postId, int $page = 1, int $pageSize = 10): array
+    {
+        $start = ($page - 1) * $pageSize; // Calcul du point de départ pour la pagination
+
+        $sql  = "SELECT * FROM comments WHERE post_id = :post_id ORDER BY created_at DESC LIMIT :start, :pageSize";
+        $stmt = $this->dataSource->prepare($sql);
+        $stmt->bindValue(':post_id', $postId, PDO::PARAM_INT);
+        $stmt->bindValue(':start', $start, PDO::PARAM_INT);
+        $stmt->bindValue(':pageSize', $pageSize, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     // public function commentCount($count)
     // {
     //     // Préparez la requête SQL pour vérifier si le nom d'utilisateur existe

@@ -82,7 +82,7 @@ class ContactController extends BaseController
       $error;
 
     } else if (!FormHelper::validateField($message, FormHelper::TEXTAREA_REGEX)) {
-      $errors['message'] = "Votre message doit contenir au minimum 50 caractères";
+      $errors['message'] = "Votre message doit contenir au minimum 5 caractères";
       $error;
     }
 
@@ -95,6 +95,9 @@ class ContactController extends BaseController
       $this->view('blog/contact.html.twig', ['user' => $user, 'errors' => $errors, 'value' => $value, 'error' => $error]);
       exit;
     }
+
+    // Use the create method of ContactManager to send message and mail
+    $this->getManager(ContactManager::class)->createContact($userName, $email, $message);
 
     // Use the sendMail method of ContactManager to send message and mail
     $this->getManager(ContactManager::class)->sendMail($userName, $email, $message);

@@ -74,7 +74,7 @@
       </div>
       <div class="mb-4 {% if errors.message %}has-error{% endif %}">
         <label class="text-dark mb-2" for="inputMessage">Message</label>
-        <textarea class="form-control py-3 {% if errors.message %}is-invalid{% endif %}" id="inputMessage" type="text" name="message" placeholder="Saisissez votre message..." rows="10" required="required"></textarea>
+        <textarea class="form-control py-3 {% if errors.message %}is-invalid{% endif %}" id="inputMessage" type="text" name="message" placeholder="Saisissez votre message..." rows="10" value="{{ value.message ?? ''}}" required="required"></textarea>
         {% if errors.message %}
           <div class="invalid-feedback">{{ errors.message }}</div>
         {% endif %}

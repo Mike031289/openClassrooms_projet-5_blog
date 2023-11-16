@@ -12,9 +12,9 @@ class Contact
   private int $id;
 
   /**
-   * @var string|null The name of the contact.
+   * @var string|null The userName of the contact.
    */
-  private string $name;
+  private string $userName;
 
   /**
    * @var string|null The user's email address.
@@ -26,24 +26,7 @@ class Contact
    */
   private string $message;
 
-  private \DateTime $sendAt;
-
-  /**
-   * Contact constructor.
-   *
-   * @param $id      The contact's ID.
-   * @param $name    The name of the contact.
-   * @param $email   The user's email address.
-   * @param $message The contact message.
-   */
-  public function __construct(int $id, string $name, string $email, string $message)
-  {
-    $this->id      = $id;
-    $this->name    = $name;
-    $this->email   = $email;
-    $this->message = $message;
-    $this->sendAt  = new \DateTime();
-  }
+  private \DateTime $createdAt;
 
   /**
    * Get the value of id
@@ -67,24 +50,24 @@ class Contact
   }
 
   /**
-   * Get the name of the contact.
+   * Get the userName of the contact.
    *
    * @return string
    */
-  public function getName(): string
+  public function getuserName(): string
   {
-    return $this->name;
+    return $this->userName;
   }
 
   /**
-   * Set the name of the contact.
+   * Set the userName of the contact.
    *
-   * @param string $name The name of the contact.
+   * @param string $userName The userName of the contact.
    * @return self
    */
-  public function setName(string $name): self
+  public function setUserName(string $userName): self
   {
-    $this->name = $name;
+    $this->userName = $userName;
 
     return $this;
   }
@@ -136,24 +119,24 @@ class Contact
   }
 
   /**
-   * Get the value of sendAt
+   * Get the value of createdAt
    *
    * @return \DateTime The date and time the message was sent.
    */
-  public function getSendAt(): \DateTime
+  public function getCreatedAt(): \DateTime
   {
-    return $this->sendAt;
+    return $this->createdAt;
   }
 
   /**
-   * Set the value of sendAt
+   * Set the value of createdAt
    *
-   * @param \DateTime $sendAt The date and time the message was sent.
+   * @param \DateTime $createdAt The date and time the message was sent.
    * @return self
    */
-  public function setSendAt(\DateTime $sendAt): self
+  public function setCreatedAt(\DateTime $createdAt): self
   {
-    $this->sendAt = $sendAt;
+    $this->createdAt = $createdAt;
 
     return $this;
   }

@@ -6,7 +6,7 @@ class FormHelper
   // Regex patterns for form field validation
   const USERNAME_REGEX = '/^[a-zA-Z0-9_-]{3,20}$/'; // Example pattern for username
   const EMAIL_REGEX    = '/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/'; // Example pattern for email
-  const TEXTAREA_REGEX   = '/^.{50,}$/'; // Example pattern for textarea
+  const TEXTAREA_REGEX = '/^.{5,}$/s'; // Example pattern for textarea
   const PASSWORD_REGEX = '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/'; // Example pattern for password (at least 8 characters, including at least one digit, one lowercase, and one uppercase letter)
 
   /**

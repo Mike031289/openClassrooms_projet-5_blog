@@ -86,6 +86,19 @@ class PostManager extends BaseManager
         }
     }
 
+    public function getPaginatedPosts(int $page, int $pageSize): array
+    {
+        $start = ($page - 1) * $pageSize; // Calcul du point de départ pour la pagination
+
+        $sql  = "SELECT * FROM posts ORDER BY created_at DESC LIMIT :start, :pageSize";
+        $stmt = $this->_db->prepare($sql);
+        $stmt->bindValue(':start', $start, \PDO::PARAM_INT);
+        $stmt->bindValue(':pageSize', $pageSize, \PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
 
     /**
      * Move the uploaded image file to the designated folder.
