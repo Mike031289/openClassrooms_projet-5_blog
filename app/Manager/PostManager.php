@@ -90,7 +90,7 @@ class PostManager extends BaseManager
     {
         $start = ($page - 1) * $pageSize; // Calcul du point de départ pour la pagination
 
-        $sql  = "SELECT * FROM posts ORDER BY created_at DESC LIMIT :start, :pageSize";
+        $sql  = "SELECT * FROM posts ORDER BY createdAt DESC LIMIT :start, :pageSize";
         $stmt = $this->_db->prepare($sql);
         $stmt->bindValue(':start', $start, \PDO::PARAM_INT);
         $stmt->bindValue(':pageSize', $pageSize, \PDO::PARAM_INT);

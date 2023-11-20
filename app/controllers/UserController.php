@@ -163,12 +163,6 @@ class UserController extends BaseController
         $user     = $this->getManager(UserManager::class)->getUserByEmail($email);
         $userRole = $this->getManager(UserManager::class)->getUserRoleByEmail($email);
 
-        //   $userRole = $this->getManager(UserManager::class)->getUserRoleByEmail($user->getId());
-        //     if (!empty($userRole)) {
-        //         // If the password matches, log in the user
-        //         if (password_verify($passWord, $user->getPassWord())) {
-
-
         if ($user === null) {
             // User not found
             $error = "Ce compte n'existe pas. Créez un compte pour vous connecter.";
@@ -191,12 +185,6 @@ class UserController extends BaseController
         }
 
         $this->session->connect($user, $userRole);
-
-        // // Set the user in the session
-        // $_SESSION['userEmail'] = $email;
-
-        // // Set the user's role in the session
-        // $_SESSION['userRole'] = $userRole;
 
         if ($userRole === 'Admin') {
             header('Location: adminDashboard');

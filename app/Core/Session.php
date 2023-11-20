@@ -19,7 +19,15 @@ class Session
     $this->userManager = $userManager;
   }
 
-  public function connect(User $user, $userRole): void
+  /**
+   * Connects the user and sets session information.
+   *
+   * @param $user The user object.
+   * @param $userRole The role of the user.
+   *
+   * @return void
+   */
+  public function connect(User $user, string $userRole): void
   {
     // Set the user in the session
     $_SESSION['userEmail'] = $user->getEmail();
@@ -46,14 +54,31 @@ class Session
     return isset($_SESSION['userEmail']);
   }
 
+  /**
+   * Retrieves the user object if logged in.
+   *
+   * @return User|null The user object, or null if not logged in.
+   */
   public function getUser(): ?User
   {
-    if (!$this->isLoggedIn()){
+    if (!$this->isLoggedIn()) {
       return null;
     }
-    
     return $this->userManager->getUserByEmail($_SESSION['userEmail']);
-
   }
+
+  /**
+   * Retrieves the role of the logged-in user.
+   *
+   * @return string The role of the user.
+   */
+  public function getUserRole(): string
+  {
+    if (!$this->isLoggedIn()) {
+      return ''; // Assuming an empty string is appropriate for an unauthenticated user
+    }
+    return $this->userManager->getUserRoleByEmail($_SESSION['userEmail']);
+  }
+
 
 }

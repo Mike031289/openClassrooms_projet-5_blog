@@ -29,12 +29,7 @@ class ContactController extends BaseController
   public function contactForm(): void
   {
     // Check if the user is logged in and pass the user information to the template
-    session_start();
-    $email = $_SESSION['userEmail'] ?? null;
-    $user  = null;
-    if ($email !== null) {
-      $user = $this->getManager(UserManager::class)->getUserByEmail($email);
-    }
+    $user = $this->session->getUser();
 
     $this->view("blog/contact.html.twig", ['user' => $user]);
   }
@@ -45,12 +40,7 @@ class ContactController extends BaseController
   public function sendMessage(): void
   {
     // Check if the user is logged in and pass the user information to the template
-    session_start();
-    $email = $_SESSION['userEmail'] ?? null;
-    $user  = null;
-    if ($email !== null) {
-      $user = $this->getManager(UserManager::class)->getUserByEmail($email);
-    }
+    $user = $this->session->getUser();
 
     // Retrieve data from the form
     $userName        = FormHelper::post('userName');
