@@ -40,6 +40,14 @@
 			"managers": ["App\\Manager\\ContactManager", "App\\Manager\\UserManager"]
 	},
 	{
+			"path": "/contacts",
+			"controller": "App\\Controllers\\AdminController",
+			"action": "showContacts",
+			"method": "GET",
+			"param": [],
+			"managers": ["App\\Manager\\ContactManager", "App\\Manager\\UserManager"]
+	},
+	{
 			"path": "/login",
 			"controller": "App\\Controllers\\UserController",
 			"action": "displayLoginForm",

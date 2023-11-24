@@ -83,14 +83,10 @@ class ContactController extends BaseController
       $value['emailValue']     = $email;
       $value['messageValue']  = $message;
       $this->view('blog/contact.html.twig', ['user' => $user, 'errors' => $errors, 'value' => $value, 'error' => $error]);
-      exit;
     }
 
     // Use the create method of ContactManager to send message and mail
     $this->getManager(ContactManager::class)->createContact($userName, $email, $message);
-
-    // Use the sendMail method of ContactManager to send message and mail
-    $this->getManager(ContactManager::class)->sendMail($userName, $email, $message);
 
     // Redirect to the contact page with success message
     $success = "Votre message a été transmit. 
@@ -98,5 +94,8 @@ class ContactController extends BaseController
     N'hésitez pas à l'appeler au 0662272975, ou à l'envoyer un mail à mike.agbelou@gmail.com   Merci :)";
 
     $this->view("blog/contact.html.twig", ['user' => $user, 'success' => $success,]);
+  
   }
+
+
 }

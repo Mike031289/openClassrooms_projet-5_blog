@@ -1,0 +1,61 @@
+{% extends 'templates/adminLayout.html.twig' %}
+{% set page = 'contacts' %}
+
+{% block mainHeader %}
+  <div class="container-fluid px-4">
+    <div class="page-header-content">
+      <div class="row align-items-center justify-content-between pt-3">
+        <div class="col-auto mb-3">
+          <h1 class="page-header-title">
+            <div class="page-header-icon">
+              <i data-feather="list"></i>
+            </div>
+            Messagerie
+          </h1>
+          <div class="page-header-subtitle">Consultez les messages reçu via la page contact du blog</div>
+        </div>
+        <div class="col-12 col-xl-auto mb-3">
+          <a class="btn btn-sm btn-light text-primary" href="http://localhost/mon-blog/adminDashboard">
+            <i class="me-1" data-feather="arrow-left"></i>
+            Liste des contacts
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% block mainPageContent %}
+  <div class="container-fluid px-4">
+
+    {% block content %}
+      <div class="container">
+        <h1>Messages</h1>
+
+        {% if contacts %}
+          <ul>
+            {% for contact in contacts %}
+              <li>
+                <h2>{{ contact.name }}</h2>
+                <p>{{ contact.message }}</p>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>No contacts available.</p>
+        {% endif %}
+
+        {# Ajouter des liens pour naviguer entre les pages #}
+        <div>
+          {% if page > 1 %}
+            <a href="?page={{ page }} - {{  1 }}">Previous Page</a>
+          {% endif %}
+          {% if contacts | length == perPage %}
+            <a href="?page={{ page }} + {{  1 }}">Next Page</a>
+          {% endif %}
+        </div>
+
+      </div>
+    {% endblock %}
+
+  </div>
+{% endblock %}

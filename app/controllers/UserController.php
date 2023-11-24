@@ -97,7 +97,6 @@ class UserController extends BaseController
             $value['passwordValue']  = $passWord;
             $value['passwordValue2'] = $passWordConfirm;
             $this->view('user/register.html.twig', ['errors' => $errors, 'value' => $value]);
-            exit;
         }
 
         // Use the create method of UserManager to create the User object
@@ -156,7 +155,6 @@ class UserController extends BaseController
             $value['emailValue']    = $email;
             $value['passwordValue'] = $passWord;
             $this->view('user/login.html.twig', ['errors' => $errors, 'value' => $value]);
-            exit;
         }
 
         // Attempt to retrieve the user based on the provided email
@@ -193,7 +191,6 @@ class UserController extends BaseController
             header('Location: posts');
             exit;
         }
-
 
     }
 

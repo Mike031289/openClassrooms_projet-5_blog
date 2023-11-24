@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use App\Manager\UserManager;
+use App\Manager\ContactManager;
 use App\Core\Functions\FormHelper;
 use App\Manager\PostManager;
 use App\Manager\CategoryManager;
@@ -224,6 +225,19 @@ class AdminController extends BaseController
         $this->getManager(PostManager::class)->deletePost($id);
         $success = "Poste supprimé avec succès !";
         $this->view('admin/dashboard-delete-post.html.twig', ['user' => $user, 'success' => $success]);
+    }
+
+    public function showContacts(): void
+    {
+        // Retrieve User from the session
+        $user = $this->session->getUser();
+
+        // Use the getContacts method of ContactManager to retrive contacts in admin side
+        $page    = 1;
+        $perPage = 5;
+        $contacts = $this->getManager(ContactManager::class)->getContacts($page, $perPage);
+
+        $this->view("admin/contacts.html.twig", ['user' => $user, 'contacts' => $contacts, 'page' => $page, 'parPage' => $perPage]);
     }
 
 }

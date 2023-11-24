@@ -4,6 +4,7 @@ require 'vendor/autoload.php';
 use App\Core\HttpRequest;
 use App\Core\Router;
 use App\Exceptions\NoRouteFoundException;
+use App\Exceptions\ActionNotFoundException;
 
 /**
  * Front Controller
