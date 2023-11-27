@@ -8,8 +8,8 @@
       <meta name="description" content=""/>
       <meta name="author" content=""/>
       <title>Adjoukou Dashboard</title>
-      <link href="public/css/adminStyles.css" rel="stylesheet"/>
-      <link rel="icon" type="image/x-icon" href="public/assets/img/logo.png"/>
+      <link href="/../mon-blog/public/css/adminStyles.css" rel="stylesheet"/>
+      <link rel="icon" type="image/x-icon" href="/../mon-blog/public/assets/img/logo.png"/>
       <script data-search-pseudo-elements="data-search-pseudo-elements" defer="defer" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/easymde@2.18.0/dist/easymde.min.js"></script>
@@ -187,10 +187,10 @@
                     </a>
                     <div class="collapse" id="pagesCollapseAccount" data-bs-parent="#accordionSidenavPagesMenu">
                       <nav class="sidenav-menu-nested nav">
-                        <a class="nav-link {% if page == 'account-detail' %}active{% endif %}" href="http://localhost/mon-blog/account-detail">Détails du Profile</a>
-                        <a class="nav-link {% if page == 'edit-account' %}active{% endif %}" href="http://localhost/mon-blog/edit-account">Modifier le Profile</a>
-                        <a class="nav-link {% if page == 'create-admin' %}active{% endif %}" href="http://localhost/mon-blog/create-admin">Créer un Admin</a>
-                        <a class="nav-link {% if page == 'admin-list' %}active{% endif %}" href="http://localhost/mon-blog/admin-list">Liste des Admin</a>
+                        <a class="nav-link {% if page == 'account-detail' %}active{% endif %}" href="/../mon-blog/mon-blog/account-detail">Détails du Profile</a>
+                        <a class="nav-link {% if page == 'edit-account' %}active{% endif %}" href="/../mon-blog/mon-blog/edit-account">Modifier le Profile</a>
+                        <a class="nav-link {% if page == 'create-admin' %}active{% endif %}" href="/../mon-blog/mon-blog/create-admin">Créer un Admin</a>
+                        <a class="nav-link {% if page == 'admin-list' %}active{% endif %}" href="/../mon-blog/mon-blog/admin-list">Liste des Admin</a>
                       </nav>
                     </div>
                     <!-- Nested Sidenav Accordion (Apps -> User Management)-->
@@ -202,7 +202,7 @@
                     </a>
                     <div class="collapse" id="appsCollapseUserManagement" data-bs-parent="#accordionSidenavAppsMenu">
                       <nav class="sidenav-menu-nested nav">
-                        <a class="nav-link {% if page == 'visitor-list' %}active{% endif %}" href="http://localhost/mon-blog/visitor-list">Liste des Visiteurs</a>
+                        <a class="nav-link {% if page == 'visitor-list' %}active{% endif %}" href="/../mon-blog/mon-blog/visitor-list">Liste des Visiteurs</a>
                       </nav>
                     </div>
                   </nav>
@@ -222,8 +222,8 @@
                 <div class="collapse" id="appsCollapsePostsManagement" data-bs-parent="#accordionSidenavAppsMenu">
                   <!-- Nested Sidenav Accordion (Apps -> Posts Management)-->
                   <nav class="sidenav-menu-nested nav">
-                    <a class="nav-link {% if page == 'list-post' %}active{% endif %}" href="http://localhost/mon-blog/adminDashboard">Liste des Posts</a>
-                    <a class="nav-link {% if page == 'create-post' %}active{% endif %}" href="http://localhost/mon-blog/blog-management&create-post">Créer un Post</a>
+                    <a class="nav-link {% if page == 'list-post' %}active{% endif %}" href="/../mon-blog/mon-blog/adminDashboard">Liste des Posts</a>
+                    <a class="nav-link {% if page == 'create-post' %}active{% endif %}" href="/../mon-blog/mon-blog/blog-management&create-post">Créer un Post</a>
                   </nav>
                 </div>
                 <!-- Sidenav Heading (Addons)-->
@@ -243,14 +243,14 @@
                 <!-- Sidenav Link (Charts)-->
                 <div class="collapse" id="appsCollapseMessage" data-bs-parent="#accordionSidenavAppsMenu">
                   <nav class="sidenav-menu-nested nav">
-                    <a class="nav-link {% if page == 'contact' %}active{% endif %}" href="http://localhost/mon-blog/contacts">
+                    <a class="nav-link {% if page == 'contacts' %}active{% endif %}" href="/../mon-blog/mon-blog/contacts/{{ 1 }}">
                       <div class="nav-link-icon">
                         <i data-feather="book"></i>
                       </div>
                       Contactes
                     </a>
                     <!-- Sidenav Link (Tables)-->
-                    <a class="nav-link {% if page == 'comment' %}active{% endif %}" href="http://localhost/mon-blog/comments">
+                    <a class="nav-link {% if page == 'comment' %}active{% endif %}" href="/../mon-blog/mon-blog/comments">
                       <div class="nav-link-icon">
                         <i data-feather="message-square"></i>
                       </div>
@@ -319,11 +319,11 @@
           </div>
         </div>
         {% block AdminJsLink %}
-          <script src="public/js/boostrapBundleMinScripts.js"></script>
-          <script src="public/js/adminJs/adminScripts.js"></script>
-          <script src="public/js/adminJs/markdown.js"></script>
-          <script src="public/js/adminJs/litepicker.js"></script>
-          <script src="public/js/adminJs/datatables/datatables-simple-demo.js"></script>
+          <script src="/../mon-blog/public/js/boostrapBundleMinScripts.js"></script>
+          <script src="/../mon-blog/public/js/adminJs/adminScripts.js"></script>
+          <script src="/../mon-blog/public/js/adminJs/markdown.js"></script>
+          <script src="/../mon-blog/public/js/adminJs/litepicker.js"></script>
+          <script src="/../mon-blog/public/js/adminJs/datatables/datatables-simple-demo.js"></script>
           <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" crossorigin="anonymous"></script>
           <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>

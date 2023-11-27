@@ -40,11 +40,11 @@
 			"managers": ["App\\Manager\\ContactManager", "App\\Manager\\UserManager"]
 	},
 	{
-			"path": "/contacts",
+			"path": "/contacts/{page}",
 			"controller": "App\\Controllers\\AdminController",
 			"action": "showContacts",
 			"method": "GET",
-			"param": [],
+			"param": ["page"],
 			"managers": ["App\\Manager\\ContactManager", "App\\Manager\\UserManager"]
 	},
 	{

@@ -1,5 +1,6 @@
-{# {% extends 'templates/adminLayout.html.twig' %}
-{% set page = 'liste-posts' %}
+{% extends 'templates/adminLayout.html.twig' %}
+{% set page = 'comments' %}
+
 {% block mainHeader %}
   <div class="container-fluid px-4">
     <div class="page-header-content">
@@ -9,160 +10,35 @@
             <div class="page-header-icon">
               <i data-feather="list"></i>
             </div>
-            Gestion des Posts
+            Commentaires
           </h1>
+          <div class="page-header-subtitle">Modérez ici les commentaires des internautes</div>
         </div>
         <div class="col-12 col-xl-auto mb-3">
-          <a class="btn btn-sm btn-light text-primary" href="blog-management-create-post.html">
-            <i class="me-1" data-feather="plus"></i>
-            Créer un Post
+          <a class="btn btn-sm btn-light text-primary" href="/../mon-blog/adminDashboard">
+            <i class="me-1" data-feather="arrow-left"></i>
+            Liste des Postes
           </a>
         </div>
       </div>
     </div>
   </div>
 {% endblock %}
-{% block mainHeaderContainer %}
-  <!-- Main page content-->
+{% block mainPageContent %}
   <div class="container-fluid px-4">
-    <div class="card">
-      <div class="card-body">
-        <table id="datatablesSimple">
-          <thead>
-            <tr>
-              <th>Post Title</th>
-              <th>Date</th>
-              <th>Status</th>
-              <th>Author</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tfoot>
-            <tr>
-              <th>Post Title</th>
-              <th>Date</th>
-              <th>Status</th>
-              <th>Author</th>
-              <th>Actions</th>
-            </tr>
-          </tfoot>
-          <tbody>
-            <tr>
-              <td>Boots on the Ground, Inclusive Thought Provoking Ideas</td>
-              <td>20 Jun 2021</td>
-              <td>
-                <div class="badge bg-gray-200 text-dark">Draft</div>
-              </td>
-              <td>Valerie Luna</td>
-              <td>
-                <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="blog-management-edit-post.html">
-                  <i data-feather="edit"></i>
-                </a>
-                <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#!">
-                  <i data-feather="trash-2"></i>
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>Invest In Social Impact</td>
-              <td>19 Jun 2021</td>
-              <td>
-                <div class="badge bg-yellow-soft text-yellow">Awaiting Approval</div>
-              </td>
-              <td>Aariz Fischer</td>
-              <td>
-                <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="blog-management-edit-post.html">
-                  <i data-feather="edit"></i>
-                </a>
-                <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#!">
-                  <i data-feather="trash-2"></i>
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>Save the World, Social Entrepreneur</td>
-              <td>18 Jun 2021</td>
-              <td>
-                <div class="badge bg-green-soft text-green">Published</div>
-              </td>
-              <td>Alicia Allen</td>
-              <td>
-                <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="blog-management-edit-post.html">
-                  <i data-feather="edit"></i>
-                </a>
-                <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#!">
-                  <i data-feather="trash-2"></i>
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>Design Thinking Benefits Corporation Thought Leadership</td>
-              <td>17 Jun 2021</td>
-              <td>
-                <div class="badge bg-green-soft text-green">Published</div>
-              </td>
-              <td>Mahesh Kumar</td>
-              <td>
-                <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="blog-management-edit-post.html">
-                  <i data-feather="edit"></i>
-                </a>
-                <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#!">
-                  <i data-feather="trash-2"></i>
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>Collaborative Consumption, Human-Centered Technology Thought Leader Systems</td>
-              <td>16 Jun 2021</td>
-              <td>
-                <div class="badge bg-green-soft text-green">Published</div>
-              </td>
-              <td>William Cole</td>
-              <td>
-                <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="blog-management-edit-post.html">
-                  <i data-feather="edit"></i>
-                </a>
-                <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#!">
-                  <i data-feather="trash-2"></i>
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>Co-create, Empower - Moving the Needle on Investor Interests</td>
-              <td>14 Jun 2021</td>
-              <td>
-                <div class="badge bg-green-soft text-green">Published</div>
-              </td>
-              <td>Valerie Luna</td>
-              <td>
-                <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="blog-management-edit-post.html">
-                  <i data-feather="edit"></i>
-                </a>
-                <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#!">
-                  <i data-feather="trash-2"></i>
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>Inclusive Shared Units of Analysis</td>
-              <td>13 Jun 2021</td>
-              <td>
-                <div class="badge bg-green-soft text-green">Published</div>
-              </td>
-              <td>Amy Love</td>
-              <td>
-                <a class="btn btn-datatable btn-icon btn-transparent-dark me-2" href="blog-management-edit-post.html">
-                  <i data-feather="edit"></i>
-                </a>
-                <a class="btn btn-datatable btn-icon btn-transparent-dark" href="#!">
-                  <i data-feather="trash-2"></i>
-                </a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
 
-{% endblock %} #}
+    {% block content %}
+      <div class="card card-header-actions">
+        <div class="card-header">
+          Nom du visiteur
+          <button class="btn btn-danger btn-sm">Refuser</button>
+          <button class="btn btn-success btn-sm">Valider</button>
+        </div>
+        <div class="card-body">
+          Contenu du commentaire
+        </div>
+      </div>
+    {% endblock %}
+
+  </div>
+{% endblock %}

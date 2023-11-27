@@ -1,6 +1,5 @@
 {% extends 'templates/adminLayout.html.twig' %}
 {% set page = 'contacts' %}
-
 {% block mainHeader %}
   <div class="container-fluid px-4">
     <div class="page-header-content">
@@ -15,9 +14,9 @@
           <div class="page-header-subtitle">Consultez les messages reçu via la page contact du blog</div>
         </div>
         <div class="col-12 col-xl-auto mb-3">
-          <a class="btn btn-sm btn-light text-primary" href="http://localhost/mon-blog/adminDashboard">
+          <a class="btn btn-sm btn-light text-primary" href="/../mon-blog/adminDashboard">
             <i class="me-1" data-feather="arrow-left"></i>
-            Liste des contacts
+            Liste des Postes
           </a>
         </div>
       </div>
@@ -35,25 +34,43 @@
           <ul>
             {% for contact in contacts %}
               <li>
-                <h2>{{ contact.name }}</h2>
+                <h5>{{ contact.userName }}</h5>
+                <h6>{{ contact.email }}</h6>
                 <p>{{ contact.message }}</p>
               </li>
             {% endfor %}
           </ul>
         {% else %}
-          <p>No contacts available.</p>
+          <p>Pas de contacts disponible sur cette page</p>
         {% endif %}
 
-        {# Ajouter des liens pour naviguer entre les pages #}
-        <div>
-          {% if page > 1 %}
-            <a href="?page={{ page }} - {{  1 }}">Previous Page</a>
-          {% endif %}
-          {% if contacts | length == perPage %}
-            <a href="?page={{ page }} + {{  1 }}">Next Page</a>
-          {% endif %}
-        </div>
+        <!-- Pagination -->
+        <nav aria-label="Pagination">
+          <hr class="my-0"/>
+          <ul class="pagination justify-content-center my-4">
+            {% if currentPage > 1 %}
+              <li class="page-item">
+                <a class="page-link" href="/../mon-blog/contacts/{{ currentPage - 1 }}" tabindex="-1" aria-disabled="true">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+            {% endif %}
 
+            {% for page in 1..totalPages %}
+              <li class="page-item {% if page == currentPage %}active{% endif %}" aria-current="page">
+                <a class="page-link" href="/../mon-blog/contacts/{{ page }}">{{ page }}</a>
+              </li>
+            {% endfor %}
+
+            {% if currentPage < totalPages %}
+              <li class="page-item" aria-current="page">
+                <a class="page-link" href="/../mon-blog/contacts/{{ currentPage + 1 }}">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            {% endif %}
+          </ul>
+        </nav>
       </div>
     {% endblock %}
 

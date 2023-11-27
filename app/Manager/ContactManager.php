@@ -1,9 +1,6 @@
 <?php
 namespace App\Manager;
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
 use App\Models\Contact;
 use App\Exceptions\ActionNotFoundException;
 
@@ -71,12 +68,36 @@ class ContactManager extends BaseManager
         }
     }
 
+    /**
+     * Retrieves the total number of contacts in the 'Contact' table.
+     *
+     * @return int The total number of contacts.
+     */
+    private function getTotalContacts(): int
+    {
+        // Retrieve the total number of contacts
+        $sql  = "SELECT COUNT(*) FROM Contact";
+        $stmt = $this->_db->query($sql);
+        return $stmt->fetchColumn();
+    }
+
+    /**
+     * Retrieves a paginated list of contacts.
+     *
+     * @param $page The current page number (default is 1).
+     * @param $perPage The number of contacts per page (default is 5).
+     *
+     * @return array An array containing contacts and pagination information.
+     */
     public function getContacts(int $page = 1, int $perPage = 5): array
     {
         // Calculate the offset based on the page number and items per page
         $offset = ($page - 1) * $perPage;
 
         try {
+            // Retrieve the total number of contacts
+            $totalContacts = $this->getTotalContacts();
+
             // Retrieve contacts from the 'Contact' table, ordered by date in descending order, with pagination
             $sql  = "SELECT * FROM Contact ORDER BY createdAt DESC LIMIT :offset, :perPage";
             $stmt = $this->_db->prepare($sql);
@@ -98,18 +119,21 @@ class ContactManager extends BaseManager
                 $contact->setCreatedAt(new \DateTime($data['createdAt']));
                 $contacts[] = $contact;
             }
-            // return $stmt->fetchAll(\PDO::FETCH_ASSOC);
-            return $contacts;
+
+            // Return an array with contacts and pagination information
+            return [
+                'contacts'    => $contacts,
+                'currentPage' => $page,
+                'totalPages'  => ceil($totalContacts / $perPage),
+            ];
         }
         catch (ActionNotFoundException $e) {
             // Handle exceptions, log errors, or return an empty array
-            // Redirect to a admin 500 error page if no matching route is found or action not found
+            // Redirect to an admin 500 error page if an exception occurs
             header("Location: 500");
             exit;
         }
     }
-
-
 
     // public function sendMail($userName, $email, $message): void
     // {
