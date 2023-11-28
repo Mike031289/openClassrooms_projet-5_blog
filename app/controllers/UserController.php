@@ -34,10 +34,10 @@ class UserController extends BaseController
     public function creatUser(): void
     {
         // Retrieve data from the form
-        $userName        = FormHelper::post('userName');
-        $email           = FormHelper::post('email');
-        $passWord        = FormHelper::post('passWord');
-        $passWordConfirm = FormHelper::post('passWordConfirm');
+        $userName = htmlspecialchars(FormHelper::post('userName'));
+        $email           = htmlspecialchars(FormHelper::post('email'));
+        $passWord        = htmlspecialchars(FormHelper::post('passWord'));
+        $passWordConfirm = htmlspecialchars(FormHelper::post('passWordConfirm'));
 
         $errors = [];
 

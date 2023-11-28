@@ -86,11 +86,12 @@ class AdminController extends BaseController
     public function createPost(): void
     {
         // Retrieve data from the form
-        $title       = FormHelper::post('title');
-        $content     = FormHelper::post('content');
+        $title       = htmlspecialchars(FormHelper::post('title'));
+        $content     = htmlspecialchars(FormHelper::post('content'));
         $postImg     = FormHelper::files('postImage');
-        $categoryId  = FormHelper::post('category');
-        $postPreview = FormHelper::post('postPreview');
+        $categoryId  = htmlspecialchars(FormHelper::post('category'));
+        $postPreview = htmlspecialchars(FormHelper::post('postPreview'));
+
 
         // Retrieve User from the session
         $user = $this->session->getUser();
@@ -112,7 +113,6 @@ class AdminController extends BaseController
 
         $this->view('admin/blog-management-create-post.html.twig', ['user' => $user, 'success' => $success]);
     }
-
 
     /**
      * Edit a post with the specified ID.
@@ -141,7 +141,6 @@ class AdminController extends BaseController
 
         $this->view('admin/blog-management-edit-post.html.twig', ['post' => $post, 'categories' => $categories, 'user' => $user]);
     }
-
 
     /**
      * Edit a post with the specified ID.
@@ -180,7 +179,7 @@ class AdminController extends BaseController
      *
      * @param $id The ID of the post to delete.
      */
-    public function deletePost(int $id): void
+    public function showPostToDelete(int $id): void
     {
         // Retrieve User from the session
         $user = $this->session->getUser();
@@ -208,7 +207,7 @@ class AdminController extends BaseController
      *
      * @param $id The ID of the post to delete.
      */
-    public function delete(int $id): void
+    public function deletePost(int $id): void
     {
         // Retrieve User from the session
         $user = $this->session->getUser();
@@ -251,7 +250,7 @@ class AdminController extends BaseController
         $perPage = 3;  // Set your desired items per page
 
         // Use the getContacts method of ContactManager to retrieve contacts in the admin side
-        $paginationData = $this->getManager(ContactManager::class)->getContacts($page, $perPage);
+        $paginationData = $this->getManager(ContactManager::class)->getPaginatedContacts($page, $perPage);
 
         // Pass the pagination data to the Twig template
         $this->view("admin/contacts.html.twig", [

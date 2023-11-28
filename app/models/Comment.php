@@ -18,6 +18,16 @@ class Comment
     }
 
     /**
+     * Set the value of id
+     */
+    public function setId($id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
      * Get the value of content
      */
     public function getContent()
@@ -44,11 +54,31 @@ class Comment
     }
 
     /**
+     * Set the value of authorId
+     */
+    public function setAuthorId($authorId): self
+    {
+        $this->authorId = $authorId;
+
+        return $this;
+    }
+
+    /**
      * Get the value of postId
      */
     public function getPostId()
     {
         return $this->postId;
+    }
+
+    /**
+     * Set the value of postId
+     */
+    public function setPostId($postId): self
+    {
+        $this->postId = $postId;
+
+        return $this;
     }
 
     /**
@@ -59,4 +89,13 @@ class Comment
         return $this->createdAt;
     }
 
+    /**
+     * Set the value of createdAt
+     */
+    public function setCreatedAt($createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
 }

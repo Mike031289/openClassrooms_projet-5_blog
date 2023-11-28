@@ -4,8 +4,6 @@ namespace App\Controllers;
 use App\Manager\PostManager;
 use App\Manager\CommentManager;
 use App\Manager\CategoryManager;
-use App\Manager\UserManager;
-
 
 /**
  * Class PostController

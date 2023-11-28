@@ -130,7 +130,7 @@
 	{
 			"path": "/blog-management-delete-post/{id}",
 			"controller":"App\\Controllers\\AdminController",
-			"action": "deletePost",
+			"action": "showPostToDelete",
 			"method": "GET",
 			"param": ["id"],
 			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
@@ -138,7 +138,7 @@
 	{
 			"path": "/blog-management-delete-post/{id}",
 			"controller":"App\\Controllers\\AdminController",
-			"action": "delete",
+			"action": "deletePost",
 			"method": "POST",
 			"param": ["id"],
 			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]

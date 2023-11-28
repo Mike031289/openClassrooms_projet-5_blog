@@ -3,7 +3,6 @@ namespace App\Controllers;
 
 use App\Manager\PostManager;
 use App\Manager\CategoryManager;
-use App\Manager\UserManager;
 
 /**
  * Class HomeController

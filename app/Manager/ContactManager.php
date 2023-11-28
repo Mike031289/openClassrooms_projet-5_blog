@@ -89,7 +89,7 @@ class ContactManager extends BaseManager
      *
      * @return array An array containing contacts and pagination information.
      */
-    public function getContacts(int $page = 1, int $perPage = 5): array
+    public function getPaginatedContacts(int $page, int $perPage): array
     {
         // Calculate the offset based on the page number and items per page
         $offset = ($page - 1) * $perPage;

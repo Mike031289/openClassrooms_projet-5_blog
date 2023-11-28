@@ -1,7 +1,6 @@
 <?php
 namespace App\Controllers;
 
-use App\Manager\UserManager;
 use App\Manager\ContactManager;
 use App\Core\Functions\FormHelper;
 
@@ -43,9 +42,10 @@ class ContactController extends BaseController
     $user = $this->session->getUser();
 
     // Retrieve data from the form
-    $userName        = FormHelper::post('userName');
-    $email           = FormHelper::post('email');
-    $message        = FormHelper::post('message');
+    $userName = htmlspecialchars(FormHelper::post('userName'));
+    $email    = htmlspecialchars(FormHelper::post('email'));
+    $message  = htmlspecialchars(FormHelper::post('message'));
+
 
     $errors = [];
     $error  = "Formulaire non soumit, vérifier vos champs de saisie";

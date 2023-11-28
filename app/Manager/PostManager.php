@@ -96,7 +96,14 @@ class PostManager extends BaseManager
         $stmt->bindValue(':pageSize', $pageSize, \PDO::PARAM_INT);
         $stmt->execute();
 
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $contacts = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        // Return an array with contacts and pagination information
+        return [
+            'contacts'    => $contacts,
+            'currentPage' => $page,
+            'totalPages'  => ceil(count($contacts) / $pageSize),
+        ];
     }
 
 
