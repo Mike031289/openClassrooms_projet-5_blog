@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Manager\PostManager;
 use App\Manager\CommentManager;
 use App\Manager\CategoryManager;
+use App\Core\Functions\FormHelper;
 
 /**
  * Class PostController
@@ -37,25 +38,6 @@ class PostController extends BaseController
         $this->view('blog/posts.html.twig', ['posts' => $posts, 'categories' => $categories, 'user' => $user]);
     }
 
-    // public function listPosts(): void
-    // {
-    //     // Paramètres de pagination
-    //     $page     = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
-    //     $pageSize = 10; // Nombre d'articles par page
-
-    //     // Récupérer les articles paginés
-    //     $posts      = $this->getManager(PostManager::class)->getPaginatedPosts($page, $pageSize);
-    //     $categories = $this->getManager(CategoryManager::class)->getAll();
-
-    // Check if the user is logged in and pass the user information to the template
-        // $user = $this->session->getUser();
-
-    //     // Passer les données à la vue Twig
-    //     $this->view('blog/posts.html.twig', ['posts' => $posts, 'categories' => $categories, 'user' => $user, 'page' => $page]);
-
-    //     // ...
-    // }
-
     /**
      * Display a specific article based on its identifier.
      *
@@ -80,21 +62,24 @@ class PostController extends BaseController
         $this->view('blog/post.html.twig', ['post' => $post, 'comments' => $comments, 'user' => $user]);
     }
 
-    // public function showPostWithComments(int $id): void
-    // {
-    //     // ...
+    public function addPostComment(int $postId): void 
+    {
+        // Check if the user is logged in and pass the user information to the template
+        $user = $this->session->getUser();
 
-    //     // Paramètres de pagination
-    //     $page     = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
-    //     $pageSize = 10; // Nombre de commentaires par page
+        // Retrieve data from the form
+        $content = htmlspecialchars(FormHelper::post('content'));
+        $authorId = $user->getId();
 
-    //     // Récupérer les commentaires paginés
-    //     $comments = $this->getManager(CommentManager::class)->getCommentsByPostId($id, $page, $pageSize);
+        $comment = $this->getManager(CommentManager::class)->createComment($content, $authorId, $postId);
 
-    //     // Passer les données à la vue Twig
-    //     $this->view('blog/post.html.twig', ['post' => $post, 'comments' => $comments, 'user' => $user, 'page' => $page]);
+        $comments = $this->getManager(CommentManager::class)->getCommentsByPostId($postId);
 
-    //     // ...
-    // }
+        // Retrieve post, comments, and user information as needed
+        $post = $this->getManager(PostManager::class)->getById($postId);
+
+        $this->view('blog/post.html.twig', ['post' => $post, 'comments' => $comments, 'user' => $user]);
+    }
+
 
 }

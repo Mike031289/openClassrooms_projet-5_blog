@@ -132,10 +132,10 @@
                     </a>
                     <div class="collapse" id="pagesCollapseAccount" data-bs-parent="#accordionSidenavPagesMenu">
                       <nav class="sidenav-menu-nested nav">
-                        <a class="nav-link {% if page == 'account-detail' %}active{% endif %}" href="/../mon-blog/mon-blog/account-detail">Détails du Profile</a>
-                        <a class="nav-link {% if page == 'edit-account' %}active{% endif %}" href="/../mon-blog/mon-blog/edit-account">Modifier le Profile</a>
-                        <a class="nav-link {% if page == 'create-admin' %}active{% endif %}" href="/../mon-blog/mon-blog/create-admin">Créer un Admin</a>
-                        <a class="nav-link {% if page == 'admin-list' %}active{% endif %}" href="/../mon-blog/mon-blog/admin-list">Liste des Admin</a>
+                        <a class="nav-link {% if page == 'account-detail' %}active{% endif %}" href="/../mon-blog/adminDashboard/account-detail">Détails du Profile</a>
+                        <a class="nav-link {% if page == 'edit-account' %}active{% endif %}" href="/../mon-blog/adminDashboard/edit-account">Modifier le Profile</a>
+                        <a class="nav-link {% if page == 'create-admin' %}active{% endif %}" href="/../mon-blog/adminDashboard/create-admin">Créer un Admin</a>
+                        <a class="nav-link {% if page == 'admin-list' %}active{% endif %}" href="/../mon-blog/adminDashboard/admin-list">Liste des Admin</a>
                       </nav>
                     </div>
                     <!-- Nested Sidenav Accordion (Apps -> User Management)-->
@@ -147,7 +147,7 @@
                     </a>
                     <div class="collapse" id="appsCollapseUserManagement" data-bs-parent="#accordionSidenavAppsMenu">
                       <nav class="sidenav-menu-nested nav">
-                        <a class="nav-link {% if page == 'visitor-list' %}active{% endif %}" href="/../mon-blog/mon-blog/visitor-list">Liste des Visiteurs</a>
+                        <a class="nav-link {% if page == 'visitor-list' %}active{% endif %}" href="/../mon-blog/adminDashboard/visitor-list">Liste des Visiteurs</a>
                       </nav>
                     </div>
                   </nav>
@@ -167,8 +167,8 @@
                 <div class="collapse" id="appsCollapsePostsManagement" data-bs-parent="#accordionSidenavAppsMenu">
                   <!-- Nested Sidenav Accordion (Apps -> Posts Management)-->
                   <nav class="sidenav-menu-nested nav">
-                    <a class="nav-link {% if page == 'list-post' %}active{% endif %}" href="/../mon-blog/mon-blog/adminDashboard">Liste des Posts</a>
-                    <a class="nav-link {% if page == 'create-post' %}active{% endif %}" href="/../mon-blog/mon-blog/blog-management&create-post">Créer un Post</a>
+                    <a class="nav-link {% if page == 'list-post' %}active{% endif %}" href="/../mon-blog/adminDashboard">Liste des Posts</a>
+                    <a class="nav-link {% if page == 'create-post' %}active{% endif %}" href="/../mon-blog/adminDashboard/blog-management&create-post">Créer un Post</a>
                   </nav>
                 </div>
                 <!-- Sidenav Heading (Addons)-->
@@ -188,14 +188,14 @@
                 <!-- Sidenav Link (Charts)-->
                 <div class="collapse" id="appsCollapseMessage" data-bs-parent="#accordionSidenavAppsMenu">
                   <nav class="sidenav-menu-nested nav">
-                    <a class="nav-link {% if page == 'contacts' %}active{% endif %}" href="/../mon-blog/mon-blog/contacts/{{ 1 }}">
+                    <a class="nav-link {% if page == 'contacts' %}active{% endif %}" href="/../mon-blog/adminDashboard/contacts/{{ 1 }}">
                       <div class="nav-link-icon">
                         <i data-feather="book"></i>
                       </div>
                       Contactes
                     </a>
                     <!-- Sidenav Link (Tables)-->
-                    <a class="nav-link {% if page == 'comment' %}active{% endif %}" href="/../mon-blog/mon-blog/comments">
+                    <a class="nav-link {% if page == 'comments' %}active{% endif %}" href="/../mon-blog/adminDashboard/comments/{{ 1 }}">
                       <div class="nav-link-icon">
                         <i data-feather="message-square"></i>
                       </div>

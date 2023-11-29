@@ -24,6 +24,14 @@
 		"managers": ["App\\Manager\\PostManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager"]
 	},
 	{
+		"path": "/post/{postId}",
+		"controller":"App\\Controllers\\PostController",
+		"action": "addPostComment",
+		"method": "POST",
+		"param": ["postId"],
+		"managers": ["App\\Manager\\PostManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager"]
+	},
+	{
 			"path": "/contact",
 			"controller": "App\\Controllers\\ContactController",
 			"action": "contactForm",
@@ -37,14 +45,6 @@
 			"action": "sendMessage",
 			"method": "POST",
 			"param": [],
-			"managers": ["App\\Manager\\ContactManager", "App\\Manager\\UserManager"]
-	},
-	{
-			"path": "/contacts/{page}",
-			"controller": "App\\Controllers\\AdminController",
-			"action": "showContacts",
-			"method": "GET",
-			"param": ["page"],
 			"managers": ["App\\Manager\\ContactManager", "App\\Manager\\UserManager"]
 	},
 	{
@@ -96,7 +96,15 @@
 			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
 	},
 	{
-			"path": "/blog-management&create-post",
+		"path": "/adminDashboard/contacts/{page}",
+		"controller": "App\\Controllers\\AdminController",
+		"action": "showContacts",
+		"method": "GET",
+		"param": ["page"],
+		"managers": ["App\\Manager\\ContactManager", "App\\Manager\\UserManager"]
+	},
+	{
+			"path": "/adminDashboard/blog-management&create-post",
 			"controller":"App\\Controllers\\AdminController",
 			"action": "postForm",
 			"method": "GET",
@@ -104,7 +112,7 @@
 			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
 	},
 	{
-			"path": "/blog-management&create-post",
+			"path": "/adminDashboard/blog-management&create-post",
 			"controller":"App\\Controllers\\AdminController",
 			"action": "creatPost",
 			"method": "POST",
@@ -112,7 +120,7 @@
 			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
 	},
 	{
-			"path": "/blog-management-edit-post/{id}",
+			"path": "/adminDashboard/blog-management-edit-post/{id}",
 			"controller":"App\\Controllers\\AdminController",
 			"action": "editPost",
 			"method": "GET",
@@ -120,7 +128,7 @@
 			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
 	},
 	{
-			"path": "/blog-management-edit-post/{id}",
+			"path": "/adminDashboard/blog-management-edit-post/{id}",
 			"controller":"App\\Controllers\\AdminController",
 			"action": "updatePost",
 			"method": "POST",
@@ -128,7 +136,7 @@
 			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
 	},
 	{
-			"path": "/blog-management-delete-post/{id}",
+			"path": "/adminDashboard/blog-management-delete-post/{id}",
 			"controller":"App\\Controllers\\AdminController",
 			"action": "showPostToDelete",
 			"method": "GET",
@@ -136,11 +144,27 @@
 			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
 	},
 	{
-			"path": "/blog-management-delete-post/{id}",
+			"path": "/adminDashboard/blog-management-delete-post/{id}",
 			"controller":"App\\Controllers\\AdminController",
 			"action": "deletePost",
 			"method": "POST",
 			"param": ["id"],
+			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
+	},
+	{
+			"path": "/adminDashboard/blog-management-delete-post/{id}",
+			"controller":"App\\Controllers\\AdminController",
+			"action": "deletePost",
+			"method": "POST",
+			"param": ["id"],
+			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
+	},
+	{
+			"path": "/adminDashboard/comments/{page}",
+			"controller":"App\\Controllers\\AdminController",
+			"action": "listComments",
+			"method": "GET",
+			"param": ["page"],
 			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
 	},
 	{

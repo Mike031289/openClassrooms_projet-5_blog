@@ -50,7 +50,7 @@
           <ul class="pagination justify-content-center my-4">
             {% if currentPage > 1 %}
               <li class="page-item">
-                <a class="page-link" href="/../mon-blog/contacts/{{ currentPage - 1 }}" tabindex="-1" aria-disabled="true">
+                <a class="page-link" href="/../mon-blog/adminDashboard/contacts/{{ currentPage - 1 }}" tabindex="-1" aria-disabled="true">
                   <span aria-hidden="true">&laquo;</span>
                 </a>
               </li>
@@ -58,13 +58,13 @@
 
             {% for page in 1..totalPages %}
               <li class="page-item {% if page == currentPage %}active{% endif %}" aria-current="page">
-                <a class="page-link" href="/../mon-blog/contacts/{{ page }}">{{ page }}</a>
+                <a class="page-link" href="/../mon-blog/adminDashboard/contacts/{{ page }}">{{ page }}</a>
               </li>
             {% endfor %}
 
             {% if currentPage < totalPages %}
               <li class="page-item" aria-current="page">
-                <a class="page-link" href="/../mon-blog/contacts/{{ currentPage + 1 }}">
+                <a class="page-link" href="/../mon-blog/adminDashboard/contacts/{{ currentPage + 1 }}">
                   <span aria-hidden="true">&raquo;</span>
                 </a>
               </li>
