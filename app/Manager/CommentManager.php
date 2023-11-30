@@ -80,64 +80,76 @@ class CommentManager extends BaseManager
         }
     }
 
+    // /**
+    //  * Get the total number of comments for a specific post.
+    //  *
+    //  * @param $postId The ID of the post.
+    //  *
+    //  * @return int The total number of comments for the post.
+    //  */
+    // public function getTotalCommentsForPost(int $postId): int
+    // {
+    //     $this->_db->beginTransaction();
+
+    //     try {
+    //         // Execute a SQL query to count the total number of comments for the specific post
+    //         $sql  = "SELECT COUNT(*) FROM Comment WHERE postId = :postId";
+    //         $stmt = $this->_db->prepare($sql);
+    //         $stmt->bindParam(':postId', $postId, \PDO::PARAM_INT);
+    //         $stmt->execute();
+
+    //         // Fetch the result
+    //         $totalComments = $stmt->fetchColumn();
+
+    //         // Commit the transaction
+    //         $this->_db->commit();
+
+    //         return $totalComments;
+    //     }
+    //     catch (ActionNotFoundException $e) {
+    //         // Handle the error in case of failure and roll back the transaction
+    //         header("Location: 500");
+    //         $this->_db->rollBack();
+    //         exit;
+    //     }
+    // }
+
+    
     /**
-     * Get the total number of comments for a specific post.
+     * Retrieves the total number of comments in the 'Comment' table.
      *
-     * @param $postId The ID of the post.
-     *
-     * @return int The total number of comments for the post.
+     * @return int The total number of comments.
      */
-    public function getTotalCommentsForPost(int $postId): int
+    private function getTotalComments(): int
     {
-        $this->_db->beginTransaction();
-
-        try {
-            // Execute a SQL query to count the total number of comments for the specific post
-            $sql  = "SELECT COUNT(*) FROM Comment WHERE postId = :postId";
-            $stmt = $this->_db->prepare($sql);
-            $stmt->bindParam(':postId', $postId, \PDO::PARAM_INT);
-            $stmt->execute();
-
-            // Fetch the result
-            $totalComments = $stmt->fetchColumn();
-
-            // Commit the transaction
-            $this->_db->commit();
-
-            return $totalComments;
-        }
-        catch (ActionNotFoundException $e) {
-            // Handle the error in case of failure and roll back the transaction
-            header("Location: 500");
-            $this->_db->rollBack();
-            exit;
-        }
+        $sql = "SELECT COUNT(*) FROM Comment";
+        $stmt = $this->_db->query($sql);
+        return (int) $stmt->fetchColumn();
     }
 
     /**
-     * Retrieves a paginated list of comments for a specific post.
+     * Retrieves a paginated list of comments without considering the post ID.
      *
-     * @param $postId The ID of the post for which to retrieve comments.
-     * @param $page The current page number (default is 1).
-     * @param $perPage The number of comments per page (default is 5).
+     * @param int $page The current page number (default is 1).
+     * @param int $perPage The number of comments per page (default is 5).
      *
      * @return array An array containing comments and pagination information.
      */
-    public function getPaginatedCommentsForPost(int $postId, int $page, int $perPage): array
+    public function getPaginatedComments(int $page, int $perPage): array
     {
         $this->_db->beginTransaction();
+        $createdAt = date('Y-m-d H:i:s');
 
         // Calculate the offset based on the page number and items per page
         $offset = ($page - 1) * $perPage;
 
         try {
-            // Retrieve the total number of comments for the post
-            $totalComments = $this->getTotalCommentsForPost($postId);
+            // Retrieve the total number of comments
+            $totalComments = $this->getTotalComments();
 
-            // Retrieve comments from the 'Comment' table for the specific post, ordered by date in descending order, with pagination
-            $sql  = "SELECT * FROM Comment WHERE postId = :postId ORDER BY createdAt DESC LIMIT :offset, :perPage";
+            // Retrieve comments from the 'Comment' table, ordered by date in descending order, with pagination
+            $sql = "SELECT * FROM Comment ORDER BY createdAt DESC LIMIT :offset, :perPage";
             $stmt = $this->_db->prepare($sql);
-            $stmt->bindParam(':postId', $postId, \PDO::PARAM_INT);
             $stmt->bindParam(':offset', $offset, \PDO::PARAM_INT);
             $stmt->bindParam(':perPage', $perPage, \PDO::PARAM_INT);
             $stmt->execute();
@@ -154,7 +166,7 @@ class CommentManager extends BaseManager
                 $comment = new Comment;
                 $comment->setId($data['id']);
                 $comment->setContent($data['content']);
-                $comment->setAuthorId($data['authorId']);
+                $comment->setAuthorName($data['authorName']);
                 $comment->setPostId($data['postId']);
                 $comment->setCreatedAt(new \DateTime($data['createdAt']));
                 $comments[] = $comment;
@@ -166,8 +178,7 @@ class CommentManager extends BaseManager
                 'currentPage' => $page,
                 'totalPages'  => ceil($totalComments / $perPage),
             ];
-        }
-        catch (ActionNotFoundException $e) {
+        } catch (ActionNotFoundException $e) {
             // Handle the error in case of failure and roll back the transaction
             header("Location: 500");
             $this->_db->rollBack();

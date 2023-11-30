@@ -26,19 +26,71 @@
 {% endblock %}
 {% block mainPageContent %}
   <div class="container-fluid px-4">
-
+    <div class="col-auto m-3">
+      <h1 class="page-header-title">
+        <div class="page-header-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list">
+            <line x1="8" y1="6" x2="21" y2="6"></line>
+            <line x1="8" y1="12" x2="21" y2="12"></line>
+            <line x1="8" y1="18" x2="21" y2="18"></line>
+            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+            <line x1="3" y1="18" x2="3.01" y2="18"></line>
+          </svg>
+        </div>
+          Listes des Commentaires
+      </h1>
+    </div>
     {% block content %}
       <div class="card card-header-actions">
-        <div class="card-header">
-          Nom du visiteur
-          <button class="btn btn-danger btn-sm">Refuser</button>
-          <button class="btn btn-success btn-sm">Valider</button>
-        </div>
-        <div class="card-body">
-          Contenu du commentaire
-        </div>
+        {% if comments %}
+        {% for comment in comments %}
+            <div class="container">
+              <div class="card-header">
+                <h5>{{ comment.authorName }}</h5>
+              </div>
+              <div class="card-body">
+                {{ comment.content }}
+              </div>
+              <div class="card-footer">
+            <div class="container"><small>{{ createdAt }}</small></div>
+                <button class="btn btn-danger btn-sm">Refuser</button>
+                <button class="btn btn-success btn-sm">Valider</button>
+              </div>
+            </div>
+          {% endfor %}
+          {% else %}
+            <p>Pas de commentaires disponible</p>
+        {% endif %}
+
+        <!-- Pagination -->
+        <nav aria-label="Pagination">
+          <hr class="my-0"/>
+          <ul class="pagination justify-content-center my-4">
+            {% if currentPage > 1 %}
+              <li class="page-item">
+                <a class="page-link" href="/../mon-blog/adminDashboard/comments/{{ currentPage - 1 }}" tabindex="-1" aria-disabled="true">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+            {% endif %}
+
+            {% for page in 1..totalPages %}
+              <li class="page-item {% if page == currentPage %}active{% endif %}" aria-current="page">
+                <a class="page-link" href="/../mon-blog/adminDashboard/comments/{{ page }}">{{ page }}</a>
+              </li>
+            {% endfor %}
+
+            {% if currentPage < totalPages %}
+              <li class="page-item" aria-current="page">
+                <a class="page-link" href="/../mon-blog/adminDashboard/comments/{{ currentPage + 1 }}">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            {% endif %}
+          </ul>
+        </nav>
       </div>
     {% endblock %}
-
   </div>
 {% endblock %}

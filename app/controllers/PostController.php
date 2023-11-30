@@ -88,13 +88,13 @@ class PostController extends BaseController
         $post = $this->getManager(PostManager::class)->getById($postId);
 
         // Get the number of all comment for a spécific Post
-        $commentNumber = $this->getManager(CommentManager::class)->getTotalCommentsForPost($postId);
+        // $commentNumber = $this->getManager(CommentManager::class)->getTotalCommentsForPost($postId);
 
         // Display the post with comments
         $this->view('blog/post.html.twig', [
             'post'          => $post,
             'comments'      => $comments,
-            'commentNumber' => $commentNumber,
+            // 'commentNumber' => $commentNumber,
             'user'          => $user
         ]);
     }

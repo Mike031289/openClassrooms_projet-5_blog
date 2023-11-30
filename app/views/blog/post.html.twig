@@ -66,9 +66,11 @@
         {% endif %}
 
   {% if comments %}
-    <small class="text-body-secondary">
-        {{ commentNumber }} Commentaires pour ce post
-    </small>
+    <div class="container mt-5">
+      <h5 class="text-body-secondary">
+        {{ comments|length }} Commentaires pour ce post
+      </h5>
+    </div>
   {% for comment in comments %}
     <div class="col-lg-6 col-md col-sm list-group m-4">
       <div class="list-group-item list-group-item-action">

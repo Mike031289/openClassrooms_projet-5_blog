@@ -106,7 +106,6 @@ class PostManager extends BaseManager
         ];
     }
 
-
     /**
      * Move the uploaded image file to the designated folder.
      *

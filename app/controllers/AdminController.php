@@ -262,40 +262,40 @@ class AdminController extends BaseController
         ]);
     }
 
-    // public function listComments(int $page = 1): void
-    // {
-    //     // Check if the user is logged in and pass the user information to the template
-    //     $user = $this->session->getUser();
+    public function listComments(int $page = 1): void
+    {
+        // Check if the user is logged in and pass the user information to the template
+        $user = $this->session->getUser();
 
-    //     // Retrieve User Role from the session
-    //     $userRole = $this->session->getUserRole();
+        // Retrieve User Role from the session
+        $userRole = $this->session->getUserRole();
 
-    //     // Check if the user is not logged in, or the user does not have the 'Admin' role redirect to the login page
-    //     if ((!$user) || ($userRole !== 'Admin')) {
-    //         header('Location: login');
-    //         exit;
-    //     }
+        // Check if the user is not logged in, or the user does not have the 'Admin' role redirect to the login page
+        if ((!$user) || ($userRole !== 'Admin')) {
+            header('Location: login');
+            exit;
+        }
 
-    //     $perPage = 3;  // Set your desired items per page
+        $perPage = 3;  // Set your desired items per page
 
-    //     $post = $this->getManager(PostManager::class)->getById($postId);
+        // $post = $this->getManager(PostManager::class)->getById($postId);
 
-    //     // User is logged in and has the 'Admin' role, proceed to the admin dashboard
-    //     // Retrieve post, comments, and user information as needed
-    //     $comment = $this->getManager(CommentManager::class)->getTotalCommentsForPost($postId);
+        // User is logged in and has the 'Admin' role, proceed to the admin dashboard
+        // Retrieve post, comments, and user information as needed
+        // $comment = $this->getManager(CommentManager::class)->getTotalCommentsForPost($postId);
 
-    //     // Use the getComment method of CommentManager to retrieve coments in the admin side
-    //     $paginationData = $this->getManager(CommentManager::class)->getPaginatedCommentsForPost($postId, $page, $perPage);
+        // Use the getComment method of CommentManager to retrieve coments in the admin side
+        $paginationData = $this->getManager(CommentManager::class)->getPaginatedComments($page, $perPage);
 
-    //     // Pass the pagination data to the Twig template
-    //     $this->view("admin/comments.html.twig", [
-    //         'user'        => $user,
-    //         'comments'    => $paginationData['comments'],
-    //         'currentPage' => $paginationData['currentPage'],
-    //         'totalPages'  => $paginationData['totalPages'],
-    //     ]);
+        // Pass the pagination data to the Twig template
+        $this->view("admin/comments.html.twig", [
+            'user'        => $user,
+            'comments'    => $paginationData['comments'],
+            'currentPage' => $paginationData['currentPage'],
+            'totalPages'  => $paginationData['totalPages'],
+        ]);
 
-    // }
+    }
 
 
 
