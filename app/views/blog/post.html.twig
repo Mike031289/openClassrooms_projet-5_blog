@@ -58,31 +58,34 @@
               </div>
             </form>
           {% else %}
-            <p>Laissez nous votre commentaire.Vous devez être connecté pour laisser un commentaire.</p>
+            <p>Pour laissez nous votre commentaire vous devez être connecté ! Si non inscrivez vous pour vous connecter celà vous prendra 2 min</p>
             <a href="http://localhost/mon-blog/login" class="btn btn-success btn-sm">Je me connecte</a>
             <a href="http://localhost/mon-blog/register" class="btn btn-secondary btn-sm">Je suis nouveau</a>
 
           {% endif %}
         {% endif %}
 
-        {# Comment rendering loop #}
-        {% if comments %}
-          {% for comment in comments %}
-            <div class="col-lg-6 col-md col-sm list-group m-4">
-              <div class="list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-between">
-                  <h5 class="mb-1">{{ comment.authorRole }}</h5>
-                  <small class="text-body-secondary">{{ comment.postId }}</small>
-                </div>
-                <p class="mb-1">{{ comment.content }}</p>
-                <small class="text-body-secondary">Send at :
-                  {{ comment.createdAt }}</small>
-              </div>
-            </div>
-          {% endfor %}
-        {% else %}
-          <p>0 commentaires pour ce post</p>
-        {% endif %}
+  {% if comments %}
+    <small class="text-body-secondary">
+        {{ commentNumber }} Commentaires pour ce post
+    </small>
+  {% for comment in comments %}
+    <div class="col-lg-6 col-md col-sm list-group m-4">
+      <div class="list-group-item list-group-item-action">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ comment.authorName }}</h5>
+            <small class="text-body-secondary">{{ comment.authorName }}</small>
+          </div>
+        <p class="mb-1">{{ comment.content }}</p>
+        <small class="text-body-secondary">Commentaire ajouté le :
+          {{ comment.createdAt }}</small>
+      </div>
+    </div>
+  {% endfor %}
+{% else %}
+  <p>0 commentaire pour ce post. Nous apprécions vos retours</p>
+{% endif %}
+
       </div>
     </div>
   {% endblock %}

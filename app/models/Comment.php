@@ -5,9 +5,11 @@ class Comment
 {
     private $id;
     private $content;
-    private $authorId;
+    private $authorName;
     private $postId;
     private $createdAt;
+
+ 
 
     /**
      * Get the value of id
@@ -46,19 +48,19 @@ class Comment
     }
 
     /**
-     * Get the value of authorId
+     * Get the value of authorName
      */
-    public function getAuthorId()
+    public function getAuthorName()
     {
-        return $this->authorId;
+        return $this->authorName;
     }
 
     /**
-     * Set the value of authorId
+     * Set the value of authorName
      */
-    public function setAuthorId($authorId): self
+    public function setAuthorName($authorName): self
     {
-        $this->authorId = $authorId;
+        $this->authorName = $authorName;
 
         return $this;
     }

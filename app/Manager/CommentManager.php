@@ -34,23 +34,23 @@ class CommentManager extends BaseManager
     /**
      * Create a new comment for a post.
      *
-     * @param $content The content of the comment.
-     * @param $authorId The ID of the comment author.
-     * @param $postId The ID of the post the comment belongs to.
-     * @param $createdAt The creation date and time of the comment.
+     * @param string $content The content of the comment.
+     * @param string $authorName The name of the comment author.
+     * @param int $postId The ID of the post the comment belongs to.
+     *
      * @return Comment|null Returns the created Comment object or null on failure.
      */
-    public function createComment(string $content, int $authorId, int $postId): ?Comment
+    public function createComment(string $content, string $authorName, int $postId): ?Comment
     {
         $this->_db->beginTransaction();
         $createdAt = date('Y-m-d H:i:s');
 
         try {
-            // Step 2: Insert the comment into the 'Comment' table
-            $sql  = "INSERT INTO Comment (content, authorId, postId, createdAt) VALUES (?, ?, ?, ?)";
+            // Insert the comment into the 'Comment' table
+            $sql = "INSERT INTO Comment (content, authorName, postId, createdAt) VALUES (?, ?, ?, ?)";
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(1, $content, \PDO::PARAM_STR);
-            $stmt->bindParam(2, $authorId, \PDO::PARAM_INT);
+            $stmt->bindParam(2, $authorName, \PDO::PARAM_STR); // Corrected from PARAM_INT to PARAM_STR
             $stmt->bindParam(3, $postId, \PDO::PARAM_INT);
             $stmt->bindParam(4, $createdAt, \PDO::PARAM_STR);
 
@@ -68,13 +68,12 @@ class CommentManager extends BaseManager
             $comment = new Comment;
             $comment->setId($id);
             $comment->setContent($content);
-            $comment->setAuthorId($authorId);
+            $comment->setAuthorName($authorName);
             $comment->setPostId($postId);
             $comment->setCreatedAt(new \DateTime($createdAt));
 
             return $comment;
-        }
-        catch (ActionNotFoundException $e) {
+        } catch (ActionNotFoundException $e) {
             // Handle the error in case of failure and roll back the transaction
             $this->_db->rollBack();
             return null;
@@ -90,6 +89,8 @@ class CommentManager extends BaseManager
      */
     public function getTotalCommentsForPost(int $postId): int
     {
+        $this->_db->beginTransaction();
+
         try {
             // Execute a SQL query to count the total number of comments for the specific post
             $sql  = "SELECT COUNT(*) FROM Comment WHERE postId = :postId";
@@ -100,11 +101,16 @@ class CommentManager extends BaseManager
             // Fetch the result
             $totalComments = $stmt->fetchColumn();
 
+            // Commit the transaction
+            $this->_db->commit();
+
             return $totalComments;
         }
         catch (ActionNotFoundException $e) {
-            // Handle exceptions, log errors, or return 0 in case of an error
-            return 0;
+            // Handle the error in case of failure and roll back the transaction
+            header("Location: 500");
+            $this->_db->rollBack();
+            exit;
         }
     }
 
@@ -119,6 +125,8 @@ class CommentManager extends BaseManager
      */
     public function getPaginatedCommentsForPost(int $postId, int $page, int $perPage): array
     {
+        $this->_db->beginTransaction();
+
         // Calculate the offset based on the page number and items per page
         $offset = ($page - 1) * $perPage;
 
@@ -136,6 +144,9 @@ class CommentManager extends BaseManager
 
             // Fetch the results as an associative array
             $commentsData = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+            // Commit the transaction
+            $this->_db->commit();
 
             // Convert the data into an array of Comment objects
             $comments = [];
@@ -157,8 +168,48 @@ class CommentManager extends BaseManager
             ];
         }
         catch (ActionNotFoundException $e) {
-            // Handle exceptions, log errors, or return an empty array
-            // Redirect to an admin 500 error page if an exception occurs
+            // Handle the error in case of failure and roll back the transaction
+            header("Location: 500");
+            $this->_db->rollBack();
+            exit;
+        }
+    }
+
+    /**
+     * Retrieve a Comment object by its ID.
+     *
+     * @param int $commentId The ID of the comment to retrieve.
+     *
+     * @return Comment|null The Comment object if found, or null if not found.
+     */
+    public function getCommentById(int $commentId): ?Comment
+    {
+        try {
+            // Prepare and execute the SQL query
+            $sql = "SELECT * FROM Comment WHERE id = :commentId";
+            $stmt = $this->_db->prepare($sql);
+            $stmt->bindParam(':commentId', $commentId, \PDO::PARAM_INT);
+            $stmt->execute();
+
+            // Fetch the result as an associative array
+            $commentData = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+            if ($commentData === false) {
+                // Comment not found
+                return null;
+            }
+
+            // Assuming you have a Comment class, create an instance and populate it
+            $comment = new Comment();
+            $comment->setId($commentData['id']);
+            $comment->setContent($commentData['content']);
+            $comment->setAuthorId($commentData['authorId']);
+            // Populate other properties as needed
+
+            return $comment;
+        
+        }catch (ActionNotFoundException $e) {
+            // Handle the error in case of failure and roll back the transaction
             header("Location: 500");
             exit;
         }
