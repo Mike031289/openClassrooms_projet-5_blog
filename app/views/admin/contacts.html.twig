@@ -24,25 +24,36 @@
   </div>
 {% endblock %}
 {% block mainPageContent %}
-  <div class="container-fluid px-4">
-
+  <div class="container px-4">
+   <div class="col-auto m-3">
+      <h1 class="page-header-title">
+        <button class="btn btn-teal btn-icon" type="button">
+        <i class="fas fa-flag"></i>
+        </button>
+        Messages
+      </h1>
+    </div>
     {% block content %}
-      <div class="container pt-5">
-        <h1>Messages</h1>
-
+      <div class="card card-header-actions  m-4">
         {% if contacts %}
-          <ul>
-            {% for contact in contacts %}
-              <li>
-                <h5>{{ contact.userName }}</h5>
-                <h6>{{ contact.email }}</h6>
-                <p>{{ contact.message }}</p>
-              </li>
-            {% endfor %}
-          </ul>
-        {% else %}
-          <p>Pas de contacts disponible sur cette page</p>
-        {% endif %}
+        {% for contact in contacts %}
+        <div class="card card-collapsable mb-4">
+        {# <a class="small m-4" href="#">{{ contact.email }}</a> #}
+        <a class="card-header" href="#collapseCardExample" data-bs-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">{{ contact.userName }} <br/>{{ contact.email }}
+              <div class="card-collapsable-arrow">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </a>
+            <div class="collapse show" id="collapseCardExample">
+              <div class="card-body">
+                {{ contact.message }}
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          {% else %}
+            <p>Pas de contacts disponible sur cette page</p>
+          {% endif %}
 
         <!-- Pagination -->
         <nav aria-label="Pagination">

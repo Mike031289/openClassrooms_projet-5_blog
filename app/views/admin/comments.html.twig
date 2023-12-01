@@ -25,19 +25,12 @@
   </div>
 {% endblock %}
 {% block mainPageContent %}
-  <div class="container-fluid px-4">
+  <div class="container px-4">
     <div class="col-auto m-3">
       <h1 class="page-header-title">
-        <div class="page-header-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list">
-            <line x1="8" y1="6" x2="21" y2="6"></line>
-            <line x1="8" y1="12" x2="21" y2="12"></line>
-            <line x1="8" y1="18" x2="21" y2="18"></line>
-            <line x1="3" y1="6" x2="3.01" y2="6"></line>
-            <line x1="3" y1="12" x2="3.01" y2="12"></line>
-            <line x1="3" y1="18" x2="3.01" y2="18"></line>
-          </svg>
-        </div>
+        <button class="btn btn-purple btn-icon" type="button">
+            <i class="fas fa-flag"></i>
+        </button>
           Listes des Commentaires
       </h1>
     </div>
@@ -45,22 +38,22 @@
       <div class="card card-header-actions">
         {% if comments %}
         {% for comment in comments %}
-            <div class="container">
-              <div class="card-header">
-                <h5>{{ comment.authorName }}</h5>
-              </div>
-              <div class="card-body">
-                {{ comment.content }}
-              </div>
-              <div class="card-footer">
-            <div class="container"><small>{{ createdAt }}</small></div>
-                <button class="btn btn-danger btn-sm">Refuser</button>
-                <button class="btn btn-success btn-sm">Valider</button>
-              </div>
-            </div>
-          {% endfor %}
-          {% else %}
-            <p>Pas de commentaires disponible</p>
+        <div class="card card-header-actions m-4">
+          <div class="card-header nav-item dropdown no-caret dropdown-user"> 
+            <div class="text-secondary"><i class="fa fa-user-circle text-dark" aria-hidden="true"></i>
+            {{ comment.authorName }}</div>
+            <a href="#" class="btn btn-danger btn-sm">Retirer</a>
+          </div>
+          <div class="card-body">
+            {{ comment.content }}
+          </div>
+          <div class="card-footer">
+            <div class="container"><small>Date :</small></div>
+          </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>Pas de commentaires disponible</p>
         {% endif %}
 
         <!-- Pagination -->
