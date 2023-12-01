@@ -91,6 +91,9 @@ class ContactManager extends BaseManager
      */
     public function getPaginatedContacts(int $page, int $perPage): array
     {
+        if($page < 1){
+            $page = 1;
+        }
         // Calculate the offset based on the page number and items per page
         $offset = ($page - 1) * $perPage;
 

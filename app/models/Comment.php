@@ -9,8 +9,6 @@ class Comment
     private $postId;
     private $createdAt;
 
- 
-
     /**
      * Get the value of id
      */

@@ -137,9 +137,12 @@ class CommentManager extends BaseManager
      */
     public function getPaginatedComments(int $page, int $perPage): array
     {
-        $this->_db->beginTransaction();
+          if($page < 1){
+            $page = 1;
+        }
+        
         $createdAt = date('Y-m-d H:i:s');
-
+       
         // Calculate the offset based on the page number and items per page
         $offset = ($page - 1) * $perPage;
 
@@ -157,18 +160,15 @@ class CommentManager extends BaseManager
             // Fetch the results as an associative array
             $commentsData = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
-            // Commit the transaction
-            $this->_db->commit();
-
             // Convert the data into an array of Comment objects
             $comments = [];
             foreach ($commentsData as $data) {
-                $comment = new Comment;
+                $comment = new Comment();
                 $comment->setId($data['id']);
                 $comment->setContent($data['content']);
                 $comment->setAuthorName($data['authorName']);
                 $comment->setPostId($data['postId']);
-                $comment->setCreatedAt(new \DateTime($data['createdAt']));
+                $comment->setCreatedAt(new \DateTime($createdAt));
                 $comments[] = $comment;
             }
 
@@ -181,7 +181,6 @@ class CommentManager extends BaseManager
         } catch (ActionNotFoundException $e) {
             // Handle the error in case of failure and roll back the transaction
             header("Location: 500");
-            $this->_db->rollBack();
             exit;
         }
     }
@@ -214,7 +213,7 @@ class CommentManager extends BaseManager
             $comment = new Comment();
             $comment->setId($commentData['id']);
             $comment->setContent($commentData['content']);
-            $comment->setAuthorId($commentData['authorId']);
+            $comment->setAuthorName($commentData['authorName']);
             // Populate other properties as needed
 
             return $comment;
