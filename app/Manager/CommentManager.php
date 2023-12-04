@@ -43,7 +43,10 @@ class CommentManager extends BaseManager
     public function createComment(string $content, string $authorName, int $postId): ?Comment
     {
         $this->_db->beginTransaction();
-        $createdAt = date('Y-m-d H:i:s');
+
+        $date = new \DateTime();
+        $date->setTimezone(new \DateTimeZone('Europe/Paris')); // Set the timezone if necessary
+        $createdAt = $date->format('Y-m-d H:i:s');
 
         try {
             // Insert the comment into the 'Comment' table
@@ -70,7 +73,7 @@ class CommentManager extends BaseManager
             $comment->setContent($content);
             $comment->setAuthorName($authorName);
             $comment->setPostId($postId);
-            $comment->setCreatedAt(new \DateTime($createdAt));
+            $comment->setCreatedAt($createdAt);
 
             return $comment;
         } catch (ActionNotFoundException $e) {
@@ -141,12 +144,11 @@ class CommentManager extends BaseManager
             $page = 1;
         }
         
-        $createdAt = date('Y-m-d H:i:s');
-       
         // Calculate the offset based on the page number and items per page
         $offset = ($page - 1) * $perPage;
 
         try {
+
             // Retrieve the total number of comments
             $totalComments = $this->getTotalComments();
 
@@ -168,7 +170,8 @@ class CommentManager extends BaseManager
                 $comment->setContent($data['content']);
                 $comment->setAuthorName($data['authorName']);
                 $comment->setPostId($data['postId']);
-                $comment->setCreatedAt(new \DateTime($createdAt));
+                $comment->setCreatedAt($data['createdAt']);
+
                 $comments[] = $comment;
             }
 
@@ -222,6 +225,34 @@ class CommentManager extends BaseManager
             // Handle the error in case of failure and roll back the transaction
             header("Location: 500");
             exit;
+        }
+    }
+
+        /**
+     * Delete a comment from the database by its ID.
+     *
+     * @param $id The ID of the comment to be deleted.
+     *
+     * @return bool True if the comment was successfully deleted, false otherwise.
+     */
+    public function deleteComment(int $id): bool
+    {
+        try {
+            // Prepare and execute a DELETE SQL query to remove the comment by its ID
+            $sql  = "DELETE FROM Comment WHERE id = ?";
+            $stmt = $this->_db->prepare($sql);
+            $stmt->bindParam(1, $id, \PDO::PARAM_INT);
+
+            // Check if the DELETE operation was successful
+            if ($stmt->execute()) {
+                return true; // Return true if the deletion was successful
+            } else {
+                return false; // Return false if the deletion failed
+            }
+        }
+        catch (ActionNotFoundException $e) {
+            // Handle any exceptions, e.g., log the error or return false
+            return false;
         }
     }
 

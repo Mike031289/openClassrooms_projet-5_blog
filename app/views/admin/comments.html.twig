@@ -36,24 +36,33 @@
     </div>
     {% block content %}
       <div class="card card-header-actions col-lg-7 col-md col-sm">
+       {% if success is defined %}
+          <div class="alert alert-success text-center" role="alert">
+            {{ success }}
+          </div>
+        {% endif %}
         {% if comments %}
         {% for comment in comments %}
         <div class="card card-header-actions m-4">
-          <div class="card-header nav-item dropdown no-caret dropdown-user"> 
-            <div class="text-secondary"><i class="fa fa-user-circle text-dark" aria-hidden="true"></i>
-            {{ comment.authorName }}</div>
-            <a href="#" class="btn btn-danger btn-sm">Retirer</a>
-          </div>
-          <div class="card-body">
-            {{ comment.content }}
-          </div>
-          <div class="card-footer">
-            <div class="container"><small>Date :</small></div>
-          </div>
+         <form class="" method="POST" enctype="multipart/form-data" action="/../mon-blog/adminDashboard/comments/{{ comment.id }}">
+         
+            <div class="card-header nav-item dropdown no-caret dropdown-user"> 
+              <div class="text-secondary"><i class="fa fa-user-circle text-secondary" aria-hidden="true"></i>
+              {{ comment.authorName }}</div>
+            {# <a type="submit" href="/../mon-blog/adminDashboard/comment/{{ 1 }}/{{ comment.id }}" class="btn btn-danger btn-sm"> Retirer </a> #}
+            <button type="submit" class="btn btn-danger btn-sm"> Retirer </button>
+            </div>
+            <div class="card-body">
+              {{ comment.content }}
+            </div>
+            <div class="card-footer">
+              <small>Ajouté le : {{ comment.createdAt }}</small>
+            </div>
+          </form>
         </div>
         {% endfor %}
-        {% else %}
-        <p>Pas de commentaires disponible</p>
+        {# {% else %}
+          <p>Pas de commentaires disponible</p> #}
         {% endif %}
 
         <!-- Pagination -->

@@ -88,6 +88,10 @@ class PostManager extends BaseManager
 
     public function getPaginatedPosts(int $page, int $pageSize): array
     {
+          if($page < 1){
+            $page = 1;
+        }
+        
         $start = ($page - 1) * $pageSize; // Calculation of starting point for pagination
 
         $sql  = "SELECT * FROM posts ORDER BY createdAt DESC LIMIT :start, :pageSize";

@@ -168,6 +168,14 @@
 			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
 	},
 	{
+			"path": "/adminDashboard/comments/{id}",
+			"controller":"App\\Controllers\\AdminController",
+			"action": "deleteComment",
+			"method": "POST",
+			"param": ["id"],
+			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
+	},
+	{
 			"path": "/404",
 			"controller": "App\\Controllers\\ErrorController",
 			"action": "routeNotFound",

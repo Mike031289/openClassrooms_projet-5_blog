@@ -26,7 +26,7 @@ class Contact
    */
   private string $message;
 
-  private \DateTime $createdAt;
+  private $createdAt;
 
   /**
    * Get the value of id
@@ -118,26 +118,27 @@ class Contact
     return $this;
   }
 
-  /**
-   * Get the value of createdAt
-   *
-   * @return \DateTime The date and time the message was sent.
-   */
-  public function getCreatedAt(): \DateTime
-  {
-    return $this->createdAt;
-  }
 
-  /**
-   * Set the value of createdAt
-   *
-   * @param \DateTime $createdAt The date and time the message was sent.
-   * @return self
-   */
-  public function setCreatedAt(\DateTime $createdAt): self
-  {
-    $this->createdAt = $createdAt;
 
-    return $this;
-  }
+    /**
+     * Get the formatted value of createdAt
+     */
+    public function getCreatedAt(): string
+    {
+        $formattedDate = new \DateTime($this->createdAt);
+        return $formattedDate->format('d/m/Y H:i');
+    }
+
+    /**
+     * Set the value of createdAt
+     */
+    public function setCreatedAt(string $createdAt): self
+    {
+        // Make sure that $createdAt is a string in the format "Y-m-d H:i:s".
+        $dateTime = new \DateTime($createdAt);
+        $this->createdAt = $dateTime->format('Y-m-d H:i:s');
+
+        return $this;
+    }
+   
 }

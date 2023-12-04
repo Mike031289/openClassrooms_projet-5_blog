@@ -30,8 +30,6 @@ class ContactManager extends BaseManager
         $this->_db->beginTransaction();
 
         try {
-            // Get the current date
-            $createdAt = date('Y-m-d H:i:s');
 
             // Step 2: Insert the contact into the 'Contact' table
             $sql  = "INSERT INTO Contact (name, email, message, createdAt) VALUES (?, ?, ?, ?)";
@@ -57,7 +55,7 @@ class ContactManager extends BaseManager
             $contact->setUserName($userName);
             $contact->setEmail($email);
             $contact->setMessage($message);
-            $contact->setCreatedAt(new \DateTime($createdAt));
+            $contact->setCreatedAt($createdAt);
 
             return $contact;
         }
@@ -119,7 +117,7 @@ class ContactManager extends BaseManager
                 $contact->setUserName($data['name']);
                 $contact->setEmail($data['email']);
                 $contact->setMessage($data['message']);
-                $contact->setCreatedAt(new \DateTime($data['createdAt']));
+                $contact->setCreatedAt($data['createdAt']);
                 $contacts[] = $contact;
             }
 

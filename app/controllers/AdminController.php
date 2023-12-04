@@ -297,6 +297,35 @@ class AdminController extends BaseController
 
     }
 
+        /**
+     * Delete a comment with the specified ID.
+     *
+     * @param $id The ID of the comment to delete.
+     */
+    public function deleteComment(int $id): void
+    {
+        // Retrieve User from the session
+        $user = $this->session->getUser();
+
+        // Retrive User Role frome the session
+        $userRole = $this->session->getUserRole();
+
+        // Check if the user is not logged in, or the user does not have the 'Admin' role redirect to the login page
+        if ((!$user) || ($userRole !== 'Admin')) {
+            header('Location: login');
+            exit;
+        }
+
+        $this->getManager(CommentManager::class)->deleteComment($id);
+        $success = "Commentaire retiré avec succès !";
+        // header('Location: 1');
+        // Call the method to display the comments page with the success message
+       
+            
+           $this->view("admin/comments.html.twig", [ 'user' => $user, 'success'=> $success
+        ]);
+    }
+
 
 
 }
