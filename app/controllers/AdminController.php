@@ -297,7 +297,7 @@ class AdminController extends BaseController
 
     }
 
-        /**
+    /**
      * Delete a comment with the specified ID.
      *
      * @param $id The ID of the comment to delete.
@@ -318,11 +318,8 @@ class AdminController extends BaseController
 
         $this->getManager(CommentManager::class)->deleteComment($id);
         $success = "Commentaire retiré avec succès !";
-        // header('Location: 1');
-        // Call the method to display the comments page with the success message
-       
-            
-           $this->view("admin/comments.html.twig", [ 'user' => $user, 'success'=> $success
+
+        $this->view("admin/comments.html.twig", [ 'user' => $user, 'success'=> $success
         ]);
     }
 
