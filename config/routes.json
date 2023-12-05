@@ -96,6 +96,14 @@
 			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
 	},
 	{
+			"path": "/adminDashboard/admin-profile",
+			"controller":"App\\Controllers\\UserController",
+			"action": "showUserProfile",
+			"method": "GET",
+			"param": [],
+			"managers": ["App\\Manager\\AdminManager","App\\Manager\\UserManager"]
+	},
+	{
 		"path": "/adminDashboard/contacts/{page}",
 		"controller": "App\\Controllers\\AdminController",
 		"action": "showContacts",

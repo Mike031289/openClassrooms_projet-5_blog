@@ -206,4 +206,21 @@ class UserController extends BaseController
         exit;
     }
 
+    public function showUserProfile(): void 
+    {
+                // Retrieve User from the session
+        $user = $this->session->getUser();
+
+        // Retrive User Role frome the session
+        $userRole = $this->session->getUserRole();
+
+        // Check if the user is not logged in, or the user does not have the 'Admin' role redirect to the login page
+        if ((!$user) || ($userRole !== 'Admin')) {
+            header('Location: login');
+            exit;
+        }
+
+        $this->view("admin/admin-profile.html.twig", [ 'user' => $user]);
+    }
+
 }
