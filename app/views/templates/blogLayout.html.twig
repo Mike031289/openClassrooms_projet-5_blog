@@ -9,7 +9,7 @@
       <meta name="author" content=""/>
       <title>Adjoukou AGBELOU Blog</title>
       <!-- Favicon-->
-      <link rel="icon" type="image/x-icon" href="public/assets/img/logo.png"/>
+      <link rel="icon" type="image/x-icon" href="/../mon-blog/public/assets/img/logo.png"/>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
       <!-- font awesome icon-->
       <script data-search-pseudo-elements="data-search-pseudo-elements" defer="defer" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"></script>
@@ -17,9 +17,9 @@
 
       <!-- Core theme CSS (includes Bootstrap)-->
       <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
-      <link href="public/css/booststrapStyles.css" rel="stylesheet"/>
-      <link href="public/css/myStyles.css" rel="stylesheet"/>
-      <link href="public/css/uiStyles.css" rel="stylesheet"/>
+      <link href="/../mon-blog/public/css/booststrapStyles.css" rel="stylesheet"/>
+      <link href="/../mon-blog/public/css/myStyles.css" rel="stylesheet"/>
+      <link href="/../mon-blog/public/css/uiStyles.css" rel="stylesheet"/>
     </head>
   {% endblock %}
 
@@ -31,30 +31,30 @@
           <!-- Navbar-->
           <nav class="navbar navbar-marketing navbar-expand-lg bg-transparent navbar-dark fixed-top">
             <div class="container px-5">
-              <a class="navbar-brand text-white" href="http://localhost/mon-blog/">Adjoukou AGBELOU</a>
+              <a class="navbar-brand text-white" href="/../mon-blog">Adjoukou AGBELOU</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i data-feather="menu"></i>
               </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link {% if page == 'home' %}active{% endif %}" href="http://localhost/mon-blog/">Accueil</a>
+                    <a class="nav-link {% if page == 'home' %}active{% endif %}" href="/../mon-blog">Accueil</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link {% if page == 'posts' %}active{% endif %}" href="http://localhost/mon-blog/posts">Articles</a>
+                    <a class="nav-link {% if page == 'posts' %}active{% endif %}" href="/../mon-blog/posts">Articles</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link {% if page == 'contact' %}active{% endif %}" href="http://localhost/mon-blog/contact">Contact</a>
+                    <a class="nav-link {% if page == 'contact' %}active{% endif %}" href="/../mon-blog/contact">Contact</a>
                   </li>
                 </ul>
                 {%if user is defined and user is not null %}
-                  <a class="btn fw-500 ms-lg-4 btn-teal {% if page == 'logout' %}active{% endif %}" href="http://localhost/mon-blog/logout">
+                  <a class="btn fw-500 ms-lg-4 btn-teal {% if page == 'logout' %}active{% endif %}" href="/../mon-blog/logout">
                     Se déconnecter
                     <i class="ms-2" data-feather="log-out"></i>
                   </a>
                 {% else %}
 
-                  <a class="btn fw-500 ms-lg-4 btn-white {% if page == 'login' %}active{% endif %}" href="http://localhost/mon-blog/login">
+                  <a class="btn fw-500 ms-lg-4 btn-white {% if page == 'login' %}active{% endif %}" href="/../mon-blog/login">
                     Se connecter
                     <i class="ms-2" data-feather="log-in"></i>
                   </a>
@@ -103,13 +103,13 @@
                 <div class="text-uppercase-expanded text-xs mb-4">Liens</div>
                 <ul class="list-unstyled mb-0">
                   <li class="mb-2 nav-item">
-                    <a class="nav-link {% if page == 'home' %}active{% endif %}" href="http://localhost/mon-blog/">Accueil</a>
+                    <a class="nav-link {% if page == 'home' %}active{% endif %}" href="/../mon-blog">Accueil</a>
                   </li>
                   <li class="mb-2 nav-item">
-                    <a class="nav-link {% if page == 'posts' %}active{% endif %}" href="http://localhost/mon-blog/posts">Articles</a>
+                    <a class="nav-link {% if page == 'posts' %}active{% endif %}" href="/../mon-blog/posts">Articles</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link {% if page == 'contact' %}active{% endif %}" href="http://localhost/mon-blog/contact">Contact</a>
+                    <a class="nav-link {% if page == 'contact' %}active{% endif %}" href="/../mon-blog/contact">Contact</a>
                   </li>
                 </ul>
               </div>
@@ -131,10 +131,10 @@
     {% block JsLink %}
       <!-- Bootstrap core JS-->
       <!-- Core theme JS-->
-      <script src="public/js/boostrapBundleMinScripts.js"></script>
+      <script src="/../mon-blog/public/js/boostrapBundleMinScripts.js"></script>
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      <script src="public/js/passwordShow.js"></script>
-      <script src="public/js/blogJs.js"></script>
+      <script src="/../mon-blog/public/js/passwordShow.js"></script>
+      <script src="/../mon-blog/public/js/blogJs.js"></script>
     {% endblock %}
 
   </body>
