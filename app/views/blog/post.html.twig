@@ -1,66 +1,103 @@
 {% extends 'templates/blogLayout.html.twig' %}
 
 {% set page = 'post' %}
+{% block main %}
+  <!-- nav container -->
+  {% block navContainer %}
+  <nav class="navbar navbar-marketing navbar-expand-lg bg-transparent navbar-dark fixed-top">
+    <div class="container-fluid bg-dark px-5">
+      <a class="navbar-brand text-white" href="/../mon-blog">Adjoukou AGBELOU</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i data-feather="menu"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link {% if page == 'home' %}active{% endif %}" href="/../mon-blog">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if page == 'posts' %}active{% endif %}" href="/../mon-blog/posts">Articles</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if page == 'contact' %}active{% endif %}" href="/../mon-blog/contact">Contact</a>
+          </li>
+        </ul>
+        {%if user is defined and user is not null %}
+          <a class="btn fw-500 ms-lg-4 btn-teal {% if page == 'logout' %}active{% endif %}" href="/../mon-blog/logout">
+            Se déconnecter
+            <i class="ms-2" data-feather="log-out"></i>
+          </a>
+        {% else %}
 
-{% block header %}
+          <a class="btn fw-500 ms-lg-4 btn-white {% if page == 'login' %}active{% endif %}" href="/../mon-blog/login">
+            Se connecter
+            <i class="ms-2" data-feather="log-in"></i>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+  {% endblock %}
+  {% block header %}
+  <hr class="mt-5 pt-5"/>
+  {% endblock %}
 
-{% endblock %}
-
-{% block section %}
-  <div class="container px-5">
-    <div class="row gx-5 justify-content-center">
-      <div class="col-lg-10 col-xl-8">
-        <div class="single-post">
-          <h1>Boots on the Ground, Inclusive Thought Provoking Ideas</h1>
-          <p class="lead">Empower communities and energize engaging ideas; scale and impact do-gooders while disruptring industries. Venture philanthropy benefits corporations and people by moving the needle.</p>
-          <div class="d-flex align-items-center justify-content-between mb-5">
-            <div class="single-post-meta me-4">
-              <img class="single-post-meta-img" src="assets/img/illustrations/profiles/profile-1.png"/>
-              <div class="single-post-meta-details">
-                <div class="single-post-meta-details-name">Valerie Luna</div>
-                <div class="single-post-meta-details-date">Feb 5 &middot; 6 min read</div>
+  {% block section %}
+    <div class="container px-5">
+      <div class="row gx-5 justify-content-center">
+        <div class="col-lg-10 col-xl-8">
+          <div class="single-post">
+            <h1 class="mt-5">{{ post.title }}</h1>
+            <p class="lead">Empower communities and energize engaging ideas; scale and impact do-gooders while disruptring industries. Venture philanthropy benefits corporations and people by moving the needle.</p>
+            <div class="d-flex align-items-center justify-content-between mb-5">
+              <div class="single-post-meta me-4">
+                <img class="single-post-meta-img" src="assets/img/illustrations/profiles/profile-1.png"/>
+                <div class="single-post-meta-details">
+                  <div class="single-post-meta-details-name">Valerie Luna</div>
+                  <div class="single-post-meta-details-date">Feb 5 &middot; 6 min read</div>
+                </div>
+              </div>
+              <div class="single-post-meta-links">
+                <a href="#!">
+                  <i class="fab fa-twitter fa-fw"></i>
+                </a>
+                <a href="#!">
+                  <i class="fab fa-facebook-f fa-fw"></i>
+                </a>
+                <a href="#!">
+                  <i class="fas fa-bookmark fa-fw"></i>
+                </a>
               </div>
             </div>
-            <div class="single-post-meta-links">
-              <a href="#!">
-                <i class="fab fa-twitter fa-fw"></i>
-              </a>
-              <a href="#!">
-                <i class="fab fa-facebook-f fa-fw"></i>
-              </a>
-              <a href="#!">
-                <i class="fas fa-bookmark fa-fw"></i>
-              </a>
-            </div>
-          </div>
-          <img class="img-fluid mb-2 rounded" src="https://source.unsplash.com/vZJdYl5JVXY/990x540"/>
-          <div class="small text-gray-500 text-center">Photo Credit: Unsplash</div>
-          <div class="single-post-text my-5">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit similique distinctio quidem blanditiis architecto ullam a itaque quisquam nihil! Unde ducimus deleniti exercitationem minima, molestiae ab saepe libero. Doloribus, a?</p>
-            <p>Magnam amet labore exercitationem maxime consectetur molestias quas quia dicta, praesentium minus illum quis fuga, fugiat velit voluptate sed nostrum ipsam atque.</p>
-            <p>Quaerat voluptas natus velit deleniti reprehenderit vero ad eos ab reiciendis. Libero dignissimos temporibus ipsam sint dolores voluptate consequatur debitis tempora doloremque.</p>
-            <h4>Creating Something New</h4>
-            <p>Laborum placeat quas accusantium vitae perferendis dolores possimus tempora, qui consectetur hic ullam autem. Enim, rerum obcaecati numquam quaerat necessitatibus voluptatem? Repellat!</p>
-            <p>Quasi, quos quaerat? Sint at odit possimus ullam saepe suscipit officiis nobis eaque, laudantium ut earum tempore repellendus mollitia odio nam! Unde?</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi explicabo unde perferendis reprehenderit ullam nobis? Laborum amet voluptatem sunt natus? Tempore commodi corporis accusamus laudantium assumenda blanditiis aut nobis culpa.</p>
-            <h4>It's time to build your new project</h4>
-            <p>Facilis enim voluptatibus qui voluptatum nemo non, facere, fugiat deserunt dicta ab sunt in sequi, assumenda nobis ipsam quidem corporis. Nemo, aliquam.</p>
-            <p>Illum numquam sapiente debitis similique, a accusantium quisquam recusandae! Nihil quia nulla blanditiis. Nobis numquam iure facilis consequuntur beatae eos adipisci doloremque!</p>
-            <p>Voluptate reiciendis nisi tempora laboriosam commodi sequi sapiente natus aut ab, cum aspernatur illo. Nobis laboriosam excepturi iste earum. Error, ab eius?</p>
-            <p>Quam, nesciunt iusto, praesentium amet necessitatibus quod porro libero voluptates soluta nostrum quisquam delectus repellendus totam accusamus sint magni dolore atque qui.</p>
-            <img class="img-fluid mb-2 rounded" src="https://source.unsplash.com/sv8oOQaUb-o/990x540"/>
+            <img class="img-fluid mb-2 rounded" src="https://source.unsplash.com/vZJdYl5JVXY/990x540"/>
             <div class="small text-gray-500 text-center">Photo Credit: Unsplash</div>
-            <h4>It's time to build your new project</h4>
-            <p>Laborum placeat quas accusantium vitae perferendis dolores possimus tempora, qui consectetur hic ullam autem. Enim, rerum obcaecati numquam quaerat necessitatibus voluptatem? Repellat!</p>
-            <p>Quasi, quos quaerat? Sint at odit possimus ullam saepe suscipit officiis nobis eaque, laudantium ut earum tempore repellendus mollitia odio nam! Unde?</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi explicabo unde perferendis reprehenderit ullam nobis? Laborum amet voluptatem sunt natus? Tempore commodi corporis accusamus laudantium assumenda blanditiis aut nobis culpa.</p>
-            <hr class="my-5"/>
-            <div class="text-center">
-              <a class="btn btn-transparent-dark" href="page-blog-overview.html">Back to Blog Overview</a>
+            <div class="single-post-text my-5">
+              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit similique distinctio quidem blanditiis architecto ullam a itaque quisquam nihil! Unde ducimus deleniti exercitationem minima, molestiae ab saepe libero. Doloribus, a?</p>
+              <p>Magnam amet labore exercitationem maxime consectetur molestias quas quia dicta, praesentium minus illum quis fuga, fugiat velit voluptate sed nostrum ipsam atque.</p>
+              <p>Quaerat voluptas natus velit deleniti reprehenderit vero ad eos ab reiciendis. Libero dignissimos temporibus ipsam sint dolores voluptate consequatur debitis tempora doloremque.</p>
+              <h4>Creating Something New</h4>
+              <p>Laborum placeat quas accusantium vitae perferendis dolores possimus tempora, qui consectetur hic ullam autem. Enim, rerum obcaecati numquam quaerat necessitatibus voluptatem? Repellat!</p>
+              <p>Quasi, quos quaerat? Sint at odit possimus ullam saepe suscipit officiis nobis eaque, laudantium ut earum tempore repellendus mollitia odio nam! Unde?</p>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi explicabo unde perferendis reprehenderit ullam nobis? Laborum amet voluptatem sunt natus? Tempore commodi corporis accusamus laudantium assumenda blanditiis aut nobis culpa.</p>
+              <h4>It's time to build your new project</h4>
+              <p>Facilis enim voluptatibus qui voluptatum nemo non, facere, fugiat deserunt dicta ab sunt in sequi, assumenda nobis ipsam quidem corporis. Nemo, aliquam.</p>
+              <p>Illum numquam sapiente debitis similique, a accusantium quisquam recusandae! Nihil quia nulla blanditiis. Nobis numquam iure facilis consequuntur beatae eos adipisci doloremque!</p>
+              <p>Voluptate reiciendis nisi tempora laboriosam commodi sequi sapiente natus aut ab, cum aspernatur illo. Nobis laboriosam excepturi iste earum. Error, ab eius?</p>
+              <p>Quam, nesciunt iusto, praesentium amet necessitatibus quod porro libero voluptates soluta nostrum quisquam delectus repellendus totam accusamus sint magni dolore atque qui.</p>
+              <img class="img-fluid mb-2 rounded" src="https://source.unsplash.com/sv8oOQaUb-o/990x540"/>
+              <div class="small text-gray-500 text-center">Photo Credit: Unsplash</div>
+              <h4>It's time to build your new project</h4>
+              <p>Laborum placeat quas accusantium vitae perferendis dolores possimus tempora, qui consectetur hic ullam autem. Enim, rerum obcaecati numquam quaerat necessitatibus voluptatem? Repellat!</p>
+              <p>Quasi, quos quaerat? Sint at odit possimus ullam saepe suscipit officiis nobis eaque, laudantium ut earum tempore repellendus mollitia odio nam! Unde?</p>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi explicabo unde perferendis reprehenderit ullam nobis? Laborum amet voluptatem sunt natus? Tempore commodi corporis accusamus laudantium assumenda blanditiis aut nobis culpa.</p>
+              <hr class="my-5"/>
+              <div class="text-center">
+                <a class="btn btn-transparent-dark" href="page-blog-overview.html">Back to Blog Overview</a>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  {% endblock %}
 {% endblock %}
