@@ -5,28 +5,50 @@
 {% block header %}
   <!-- Page Header-->
   <header class="page-header-ui page-header-ui-dark bg-img-cover overlay overlay-60" style="background-image: url(https://source.unsplash.com/PTRzqc_h1r4/1600x900)">
-      <div class="page-header-ui-content position-relative pt-10">
-          <div class="container px-5 text-center">
-              <div class="row gx-5 justify-content-center">
-                  <div class="col-lg-8">
-                      <h1 class="page-header-ui-title mb-3">Publications</h1>
-                      <p class="page-header-ui-text mb-0">Parcourez les articles, tenez-vous au courant et apprenez-en plus sur notre blog !</p>
-                  </div>
-              </div>
+    <div class="page-header-ui-content position-relative pt-10">
+      <div class="container px-5 text-center">
+        <div class="row gx-5 justify-content-center">
+          <div class="col-lg-8">
+            <h1 class="page-header-ui-title mb-3">Publications</h1>
+            <p class="page-header-ui-text mb-0">Parcourez les articles, tenez-vous au courant et apprenez-en plus sur notre blog !</p>
           </div>
+        </div>
       </div>
-      <div class="svg-border-rounded text-light">
-          <!-- Rounded SVG Border-->
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
-      </div>
+    </div>
+    <div class="svg-border-rounded text-light">
+      <!-- Rounded SVG Border-->
+      <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 144.54 17.34" preserveaspectratio="none" fill="currentColor">
+        <path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path>
+      </svg>
+    </div>
   </header>
 {% endblock %}
 
 {% block section %}
   <div class="container px-5">
-    {% if posts is empty %}
-        <p>Aucun post disponible</p>
+  {% if categories is empty %}
+        <p>Aucune catégories repertoriée</p>
       {% else %}
+        <!-- Sidebar -->
+        <div class="col-lg">
+          <!-- Categories widget -->
+          <div class="card mb-4">
+            <div class="card-header">Categories</div>
+            <div class="card-body">
+              <ul class="list-unstyled">
+                {% for category in categories %}
+                  <li>
+                    <a class="nav-link" href="/../mon-blog/posts/{{ category.id }}">{{ category.name }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% if posts is empty %}
+      <p>Aucun post disponible</p>
+    {% else %}
       {% set latestPost = posts | last %}
       <!-- Featured blog post -->
       <a class="card post-preview post-preview-featured lift mb-5 overflow-hidden" href="/../mon-blog/post/{{ latestPost.id }}">
@@ -48,7 +70,8 @@
                 <img class="post-preview-meta-img" src="/../mon-blog/public/assets/img/illustrations/profiles/profile-1.png"/>
                 <div class="post-preview-meta-details col-lg col-md col-sm">
                   <div class="post-preview-meta-details-name">Publié par : l'{{ latestPost.authorRole }}</div>
-                  <div class="post-preview-meta-details-date">Le, {{ latestPost.createdAt }}</div>
+                  <div class="post-preview-meta-details-date">Le,
+                    {{ latestPost.createdAt }}</div>
                 </div>
                 <button class="btn btn-dark btn-sm col-lg-2" href="/../mon-blog/post/{{ latestPost.id }}">Lire plus →</button>
               </div>
@@ -58,114 +81,28 @@
       </a>
     {% endif %}
     <div class="row gx-5">
-      <div class="col-md-6 col-xl-4 mb-5">
-        <a class="card post-preview lift h-100" href="#!">
-          <img class="card-img-top" src="https://source.unsplash.com/KE0nC8-58MQ/660x360" alt="..."/>
-          <div class="card-body">
-            <h5 class="card-title">Invest In Social Impact</h5>
-            <p class="card-text">Expose the truth, problem-solvers impact mobilized green spaces.</p>
-          </div>
-          <div class="card-footer">
-            <div class="post-preview-meta">
-              <img class="post-preview-meta-img" src="assets/img/illustrations/profiles/profile-2.png"/>
-              <div class="post-preview-meta-details">
-                <div class="post-preview-meta-details-name">Aariz Fischer</div>
-                <div class="post-preview-meta-details-date">Feb 4 &middot; 5 min read</div>
+      {% for post in posts %}
+        <div class="col-md-6 col-xl-4 mb-5">
+          <a class="card post-preview lift h-100" href="/../mon-blog/post/{{ post.id }}">
+            <img class="card-img-top" src="/../mon-blog/public/assets/img/postImg/{{ post.imageUrl }}" alt="post image"/>
+            <div class="card-body">
+              <h5 class="card-title">{{ post.title }}</h5>
+              <p class="card-text">{{ post.postpreview }}</p>
+            </div>
+            <div class="card-footer">
+              <div class="post-preview-meta">
+                <img class="post-preview-meta-img" src="/../mon-blog/public/assets/img/illustrations/profiles/profile-2.png"/>
+                <div class="post-preview-meta-details col-lg col-md col-sm">
+                  <div class="post-preview-meta-details-name">Publié par : l'{{ post.authorRole }}</div>
+                  <div class="post-preview-meta-details-date">Le,
+                    {{ latestPost.createdAt }}</div>
+                </div>
+                <button class="btn btn-dark btn-sm col-lg-3" href="/../mon-blog/post/{{ post.id }}">Lire plus →</button>
               </div>
             </div>
-          </div>
-        </a>
-      </div>
-      <div class="col-md-6 col-xl-4 mb-5">
-        <a class="card post-preview lift h-100" href="#!">
-          <img class="card-img-top" src="https://source.unsplash.com/hGV2TfOh0ns/660x360" alt="..."/>
-          <div class="card-body">
-            <h5 class="card-title">Save the World, Social Entrepreneur</h5>
-            <p class="card-text">Contextualize co-creation and do good while building your startup.</p>
-          </div>
-          <div class="card-footer">
-            <div class="post-preview-meta">
-              <img class="post-preview-meta-img" src="assets/img/illustrations/profiles/profile-3.png"/>
-              <div class="post-preview-meta-details">
-                <div class="post-preview-meta-details-name">Alicia Allen</div>
-                <div class="post-preview-meta-details-date">Feb 3 &middot; 7 min read</div>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="col-md-6 col-xl-4 mb-5">
-        <a class="card post-preview lift h-100" href="#!">
-          <img class="card-img-top" src="https://source.unsplash.com/9l_326FISzk/660x360" alt="..."/>
-          <div class="card-body">
-            <h5 class="card-title">Design Thinking Benefits Corporation Thought Leadership</h5>
-            <p class="card-text">Global changemakers, a state of play releives stress and creates inspirational work environments.</p>
-          </div>
-          <div class="card-footer">
-            <div class="post-preview-meta">
-              <img class="post-preview-meta-img" src="assets/img/illustrations/profiles/profile-4.png"/>
-              <div class="post-preview-meta-details">
-                <div class="post-preview-meta-details-name">Mahesh Kumar</div>
-                <div class="post-preview-meta-details-date">Feb 1 &middot; 4 min read</div>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="col-md-6 col-xl-4 mb-5">
-        <a class="card post-preview lift h-100" href="#!">
-          <img class="card-img-top" src="https://source.unsplash.com/oqStl2L5oxI/660x360" alt="..."/>
-          <div class="card-body">
-            <h5 class="card-title">Collaborative Consumption, Human-Centered Technology Thought Leader Systems</h5>
-            <p class="card-text">Milestones theory of change, an effective paradigm, exposes the truth and best practices to uplift equal opportunity.</p>
-          </div>
-          <div class="card-footer">
-            <div class="post-preview-meta">
-              <img class="post-preview-meta-img" src="assets/img/illustrations/profiles/profile-5.png"/>
-              <div class="post-preview-meta-details">
-                <div class="post-preview-meta-details-name">William Cole</div>
-                <div class="post-preview-meta-details-date">Jan 30 &middot; 12 min read</div>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="col-md-6 col-xl-4 mb-5">
-        <a class="card post-preview lift h-100" href="#!">
-          <img class="card-img-top" src="https://source.unsplash.com/Oalh2MojUuk/660x360" alt="..."/>
-          <div class="card-body">
-            <h5 class="card-title">Co-create, Empower - Moving the Needle on Investor Interests</h5>
-            <p class="card-text">Scalable efficient systems and thinking as a social entrepreneur creates a transparent, targeted vison.</p>
-          </div>
-          <div class="card-footer">
-            <div class="post-preview-meta">
-              <img class="post-preview-meta-img" src="assets/img/illustrations/profiles/profile-1.png"/>
-              <div class="post-preview-meta-details">
-                <div class="post-preview-meta-details-name">Valerie Luna</div>
-                <div class="post-preview-meta-details-date">Jan 29 &middot; 4 min read</div>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="col-md-6 col-xl-4 mb-5">
-        <a class="card post-preview lift h-100" href="#!">
-          <img class="card-img-top" src="https://source.unsplash.com/-uHVRvDr7pg/660x360" alt="..."/>
-          <div class="card-body">
-            <h5 class="card-title">Inclusive Shared Units of Analysis</h5>
-            <p class="card-text">Commit to inspiring social capital, social capital inspires the body and the mind.</p>
-          </div>
-          <div class="card-footer">
-            <div class="post-preview-meta">
-              <img class="post-preview-meta-img" src="assets/img/illustrations/profiles/profile-6.png"/>
-              <div class="post-preview-meta-details">
-                <div class="post-preview-meta-details-name">Amy Love</div>
-                <div class="post-preview-meta-details-date">Jan 25 &middot; 7 min read</div>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
+          </a>
+        </div>
+        {% endfor %}
     </div>
     <nav aria-label="Page navigation example">
       <ul class="pagination pagination-blog justify-content-center">
