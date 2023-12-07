@@ -46,11 +46,13 @@
                 <div class="offcanvas-body">
                   <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                     {% for category in categories %}
+                      <hr/>
                       <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/../mon-blog/posts/{{ category.id }}">{{ category.name }}</a>
                       </li>
                     {% endfor %}
                   </ul>
+                  <hr/>
                 </div>
               </div>
             </div>
@@ -94,7 +96,7 @@
     <div class="row gx-5">
       {% for post in posts %}
         <div class="col-md-6 col-xl-4 mb-5">
-          <a class="card post-preview lift h-100" href="/../mon-blog/post/{{ post.id }}">
+          <a class="card post-preview lift" href="/../mon-blog/post/{{ post.id }}">
             <img class="card-img-top" src="/../mon-blog/public/assets/img/postImg/{{ post.imageUrl }}" alt="post image"/>
             <div class="card-body">
               <h5 class="card-title">{{ post.title }}</h5>
@@ -106,7 +108,7 @@
                 <div class="post-preview-meta-details col-lg col-md col-sm">
                   <div class="post-preview-meta-details-name">Publié par : l'{{ post.authorRole }}</div>
                   <div class="post-preview-meta-details-date">Le,
-                    {{ latestPost.createdAt }}</div>
+                    {{ post.createdAt }}</div>
                 </div>
                 <button class="btn btn-dark btn-sm col-lg-3" href="/../mon-blog/post/{{ post.id }}">Lire plus →</button>
               </div>

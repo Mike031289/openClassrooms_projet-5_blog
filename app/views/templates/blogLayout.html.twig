@@ -107,13 +107,13 @@
                 <div class="text-uppercase-expanded text-xs mb-4">Liens</div>
                 <ul class="list-unstyled mb-0">
                   <li class="mb-2 nav-item">
-                    <a class="nav-link {% if page == 'home' %}active{% endif %}" href="/../mon-blog">Accueil</a>
+                    <a class="{% if page == 'home' %}active{% endif %}" href="/../mon-blog">Accueil</a>
                   </li>
                   <li class="mb-2 nav-item">
-                    <a class="nav-link {% if page == 'posts' %}active{% endif %}" href="/../mon-blog/posts">Articles</a>
+                    <a class="{% if page == 'posts' %}active{% endif %}" href="/../mon-blog/posts">Articles</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link {% if page == 'contact' %}active{% endif %}" href="/../mon-blog/contact">Contact</a>
+                    <a class="{% if page == 'contact' %}active{% endif %}" href="/../mon-blog/contact">Contact</a>
                   </li>
                 </ul>
               </div>
