@@ -16,6 +16,14 @@
 		"managers": ["App\\Manager\\PostManager", "App\\Manager\\CategoryManager", "App\\Manager\\UserManager"]
 	},
 	{
+		"path": "/posts/{page}/{categoryId}",
+		"controller": "App\\Controllers\\PostController",
+		"action": "listPosts",
+		"method": "GET",
+		"param": ["id","id"],
+		"managers": ["App\\Manager\\PostManager", "App\\Manager\\CategoryManager", "App\\Manager\\UserManager"]
+	},
+	{
 		"path": "/post/{id}",
 		"controller": "App\\Controllers\\PostController",
 		"action": "showPostWithComments",

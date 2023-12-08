@@ -3,6 +3,7 @@ require 'vendor/autoload.php';
 
 use App\Core\HttpRequest;
 use App\Core\Router;
+use App\Exceptions\ActionNotFoundException;
 use App\Exceptions\NoRouteFoundException;
 
 /**
@@ -29,7 +30,12 @@ try {
 
     // Run the HttpRequest to process the request using the configuration
     $httpRequest->run($config);
-} catch (NoRouteFoundException $e) {
+} 
+catch (NoRouteFoundException $e) {
     // Redirect to a 404 error page if no matching route is found
     header("Location: {$config->baseUrl}/404");
 }
+// A décommenter lors de la production
+// catch(ActionNotFoundException $e){
+//     header("Location: {$config->baseUrl}/500");
+// }

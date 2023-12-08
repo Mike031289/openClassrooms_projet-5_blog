@@ -54,6 +54,23 @@ class PostController extends BaseController
         ]);
     }
 
+    public function listPostsByCategories( int $categoryId, int $page = 1): void 
+    {
+    // $categories = $this->getManager(CategoryManager::class)->getAll();
+        $categories = $this->getManager(PostManager::class)->getPostsByCategory($categoryId);
+
+                // Check if the user is logged in and pass the user information to the template
+        // $user = $this->session->getUser();
+
+        // $this->view('blog/posts.html.twig', ['posts' => $posts, 'categories' => $categories, 'user' => $user]);
+
+        // Pass the pagination data to the Twig template
+        $this->view("blog/posts.html.twig", [
+            // 'user'        => $user,
+            'categories' => $categories,
+        ]);
+    }
+
     /**
      * Display a specific article based on its identifier.
      *

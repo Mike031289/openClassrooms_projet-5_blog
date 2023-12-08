@@ -36,7 +36,7 @@ class ContactManager extends BaseManager
             $stmt->bindParam(4, $createdAt, \PDO::PARAM_STR);
 
             if (!$stmt->execute()) {
-                throw new ActionNotFoundException;
+                throw new ActionNotFoundException();
             }
 
             // Commit the transaction
@@ -81,7 +81,7 @@ class ContactManager extends BaseManager
      * Retrieves a paginated list of contacts.
      *
      * @param $page The current page number (default is 1).
-     * @param $perPage The number of contacts per page (default is 5).
+     * @param $perPage The number of contacts per page.
      *
      * @return array An array containing contacts and pagination information.
      */

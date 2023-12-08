@@ -100,7 +100,85 @@ class PostManager extends BaseManager
         return $stmt->fetchColumn();
     }
 
+    /**
+     * Retrieve posts by category.
+     *
+     * @param int $categoryId The ID of the category.
+     * @return array An array of posts for the specified category.
+     */
+    public function getPostsByCategory(int $categoryId): array
+    {
+        try {
+            // You might want to add error handling here
 
+            // Prepare the SQL query
+            $sql = "SELECT * FROM Post WHERE categoryId = :categoryId";
+            $stmt = $this->_db->prepare($sql);
+            $stmt->bindParam(':categoryId', $categoryId, \PDO::PARAM_INT);
+
+            // Execute the query
+            $stmt->execute();
+
+            // Use setFetchMode to specify the class and fetch mode
+            // $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Post::class);
+
+            // Use fetchObject to retrieve the result as an object of the Post class
+            // $postsData = $stmt->fetchObject(Post::class);
+            // var_dump($postsData);
+            // die;
+            // Fetch the results as an associative array
+            $postsData = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+            // Convert the data into an array of Post objects
+            $posts = [];
+            foreach ($postsData as $data) {
+                $post = new Post();
+                // Populate the post object with data from the database
+                // $post->setId($id);
+                // $post->setTitle($title);
+                // $post->setContent($content);
+                // $post->setContent($content);
+                // $post->setImageUrl($imageFileName);
+                // $post->setCategoryId($categoryId);
+                // $post->setAuthorRole($authorRole);
+                // $post->setUpdatedAt($updatedAt);
+                // $post->setPostPreview($postPreview);
+                
+                $post->setId($data['id']);
+                $post->setTitle($data['title']);
+                $post->setContent($data['content']);
+                $post->setImageUrl($data['imageUrl']);
+                $post->setCategoryId($data['categoryId']);
+                $post->setAuthorRole($data['authorRole']);
+                $post->setCreatedAt($data['createdAt']);
+                $post->setPostPreview($data['postpreview']);
+
+                $posts[] = $post;
+            }
+            // Return an array with contacts and pagination information
+            return [
+                'posts'    => $posts,
+                // 'currentPage' => $page,
+                // 'totalPages'  => ceil($totalPosts / $pageSize),
+            ];
+
+        }catch (ActionNotFoundException $e) {
+            // Handle exceptions, log errors, or return an empty array
+            // Redirect to an admin 500 error page if an exception occurs
+            header("Location: 500");
+            exit;
+        }
+    }
+
+
+     /**
+     * Retrieves a paginated list of posts.
+     *
+     * @param $page The current page number (default is 1).
+     * @param $perPage The number of posts per page.
+     *
+     * @return array An array containing posts and pagination information.
+     */
     public function getPaginatedPosts(int $page, int $pageSize): array
     {
           if($page < 1){
@@ -126,12 +204,12 @@ class PostManager extends BaseManager
                 $post = new Post();
                 $post->setId($data['id']);
                 $post->setTitle($data['title']);
-                $post->setPostPreview($data['postpreview']);
                 $post->setContent($data['content']);
                 $post->setImageUrl($data['imageUrl']);
                 $post->setCategoryId($data['categoryId']);
                 $post->setAuthorRole($data['authorRole']);
                 $post->setCreatedAt($data['createdAt']);
+                $post->setPostPreview($data['postpreview']);
                 $posts[] = $post;
             }
             // Return an array with contacts and pagination information
@@ -225,7 +303,7 @@ class PostManager extends BaseManager
             $this->_db->commit();
 
             // Create a new Post object with the updated data
-            $post = new Post;
+            $post = new Post();
             $post->setId($id);
             $post->setTitle($title);
             $post->setContent($content);
