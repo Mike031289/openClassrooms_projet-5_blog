@@ -118,25 +118,25 @@
         {% endfor %}
     </div>
     <!-- Pagination -->
-    <nav aria-label="Page navigation example">
+    <nav aria-label="Pagination">
       <hr/>
       <ul class="pagination pagination-blog justify-content-center">
         {% if currentPage > 1 %}
           <li class="page-item disabled">
-            <a class="page-link" href="/../mon-blog/posts{{ currentPage - 1 }}"  aria-label="Previous">
+            <a class="page-link" href="/../mon-blog/posts/{{ currentPage - 1 }}" tabindex="-1" aria-disabled="true">
               <span aria-hidden="true">&laquo;</span></a>
           </li>
         {% endif %}
         {% for page in 1..totalPages %}
-          <li class="page-item {% if page == currentPage %}active{% endif %}">
-            <a class="page-link" href="/../mon-blog/posts{{ page }}">{{ page }}</a>
+          <li class="page-item {% if page == currentPage %}active{% endif %}" aria-current="page">
+            <a class="page-link" href="/../mon-blog/posts/{{ page }}">{{ page }}</a>
           </li>
         {% endfor %}
         {% if currentPage < totalPages %}
-          <li class="page-item {% if page == currentPage %}active{% endif %}">
-              <a class="page-link" href="/../mon-blog/posts{{ currentPage + 1 }}" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span></a>
-            </li>
+          <li class="page-item" aria-current="page">
+            <a class="page-link" href="/../mon-blog/posts/{{ currentPage + 1 }}">
+              <span aria-hidden="true">&raquo;</span></a>
+          </li>
         {% endif %}
       </ul>
     </nav>

@@ -7,10 +7,6 @@ use App\Exceptions\ActionNotFoundException;
 class ContactManager extends BaseManager
 {
 
-    // int $page = 1, int $perPage = 10
-    // const PAGE = 1;
-    // const PERPAGE = 10;
-
     public function __construct(object $dataSource)
     {
         parent::__construct("contact", "Contact", $dataSource);
@@ -50,7 +46,7 @@ class ContactManager extends BaseManager
             $id = $this->_db->lastInsertId();
 
             // Create a new Contact object with the inserted data
-            $contact = new Contact;
+            $contact = new Contact();
             $contact->setId($id);
             $contact->setUserName($userName);
             $contact->setEmail($email);
@@ -61,6 +57,8 @@ class ContactManager extends BaseManager
         }
         catch (ActionNotFoundException $e) {
             // Handle the error in case of failure and roll back the transaction
+            // Redirect to a 500 error page if no matching route is found
+            header("Location: 500");
             $this->_db->rollBack();
             return null;
         }
@@ -112,7 +110,7 @@ class ContactManager extends BaseManager
             // Convert the data into an array of Contact objects
             $contacts = [];
             foreach ($contactsData as $data) {
-                $contact = new Contact;
+                $contact = new Contact();
                 $contact->setId($data['id']);
                 $contact->setUserName($data['name']);
                 $contact->setEmail($data['email']);

@@ -13,25 +13,6 @@ class CommentManager extends BaseManager
     }
 
     /**
-     * Retrieve comments related to a specific article based on its identifier (postId).
-     *
-     * @param $postId The identifier of the article for which to retrieve comments.
-     * @return array An array of Comment objects representing the comments for the specified article.
-     */
-    public function getCommentsByPostId(int $postId)
-    {
-        $req = $this->_db->prepare("SELECT * FROM comment WHERE postId = :postId");
-        $req->bindValue(':postId', $postId, \PDO::PARAM_INT);
-        $req->execute();
-
-        // Assuming you have a Comment model, you can set the fetch mode accordingly:
-        $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Comment::class);
-
-        // Return an array of Comment objects representing the comments
-        return $req->fetchAll();
-    }
-
-    /**
      * Create a new comment for a post.
      *
      * @param string $content The content of the comment.
@@ -58,7 +39,7 @@ class CommentManager extends BaseManager
             $stmt->bindParam(4, $createdAt, \PDO::PARAM_STR);
 
             if (!$stmt->execute()) {
-                throw new ActionNotFoundException;
+                throw new ActionNotFoundException();
             }
 
             // Commit the transaction
@@ -68,19 +49,40 @@ class CommentManager extends BaseManager
             $id = $this->_db->lastInsertId();
 
             // Create a new Comment object with the inserted data
-            $comment = new Comment;
+            $comment = new Comment();
             $comment->setId($id);
-            $comment->setContent($content);
-            $comment->setAuthorName($authorName);
+            $comment->setContent(htmlspecialchars($content));
+            $comment->setAuthorName(htmlspecialchars($authorName));
             $comment->setPostId($postId);
             $comment->setCreatedAt($createdAt);
 
             return $comment;
         } catch (ActionNotFoundException $e) {
             // Handle the error in case of failure and roll back the transaction
+            // Redirect to a 500 error page if no matching route is found
+            header("Location: 500");
             $this->_db->rollBack();
             return null;
         }
+    }
+
+    /**
+     * Retrieve comments related to a specific article based on its identifier (postId).
+     *
+     * @param $postId The identifier of the article for which to retrieve comments.
+     * @return array An array of Comment objects representing the comments for the specified article.
+     */
+    public function getCommentsByPostId(int $postId)
+    {
+        $req = $this->_db->prepare("SELECT * FROM comment WHERE postId = :postId");
+        $req->bindValue(':postId', $postId, \PDO::PARAM_INT);
+        $req->execute();
+
+        // Assuming you have a Comment model, you can set the fetch mode accordingly:
+        $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Comment::class);
+
+        // Return an array of Comment objects representing the comments
+        return $req->fetchAll();
     }
 
     // /**
@@ -153,7 +155,7 @@ class CommentManager extends BaseManager
             $totalComments = $this->getTotalComments();
 
             // Retrieve comments from the 'Comment' table, ordered by date in descending order, with pagination
-            $sql = "SELECT * FROM Comment ORDER BY createdAt DESC LIMIT :offset, :perPage";
+            $sql = "SELECT * FROM comment ORDER BY createdAt DESC LIMIT :offset, :perPage";
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(':offset', $offset, \PDO::PARAM_INT);
             $stmt->bindParam(':perPage', $perPage, \PDO::PARAM_INT);
@@ -252,6 +254,8 @@ class CommentManager extends BaseManager
         }
         catch (ActionNotFoundException $e) {
             // Handle any exceptions, e.g., log the error or return false
+            // Redirect to a 500 error page if no matching route is found
+            header("Location: 500");
             return false;
         }
     }

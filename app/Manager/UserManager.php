@@ -136,7 +136,7 @@ class UserManager extends BaseManager
             $this->_db->commit();
 
             // Create a new User object with the inserted data
-            $user = new User;
+            $user = new User();
             $user->setId($userId);
             $user->setUserName($userName);
             $user->setEmail($email);

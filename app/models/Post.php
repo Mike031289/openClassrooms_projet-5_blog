@@ -15,8 +15,8 @@ class Post
     private ?string $imageUrl;
     private int $categoryId; 
     private string $authorRole;
-    private \DateTime $createdAt;
-    private \DateTime $updatedAt;
+    private string $createdAt;
+    private string $updatedAt;
 
     /**
      * Get the ID of the post.
@@ -151,43 +151,44 @@ class Post
     }
 
     /**
-     * Get the creation date and time of the post.
-     *
+     * Get the formatted value of createdAt
      */
-    public function getCreatedAt(): \DateTime
+    public function getCreatedAt(): string
     {
-        return $this->createdAt;
+        $formattedDate = new \DateTime($this->createdAt);
+        return $formattedDate->format('d/m/Y H:i');
     }
 
     /**
-     * Set the creation date and time of the post.
-     *
-     * @return self
+     * Set the value of createdAt
      */
-    public function setCreatedAt(\DateTime $createdAt): self
+    public function setCreatedAt(string $createdAt): self
     {
-        $this->createdAt = $createdAt;
+        // Make sure that $createdAt is a string in the format "Y-m-d H:i:s".
+        $dateTime = new \DateTime($createdAt);
+        $this->createdAt = $dateTime->format('Y-m-d H:i:s');
+
         return $this;
     }
 
-    /**
-     * Get the last update date and time of the post.
-     *
-     */
-    public function getUpdatedAt(): \DateTime
-    {
-        return $this->updatedAt;
-    }
+    // /**
+    //  * Get the last update date and time of the post.
+    //  *
+    //  */
+    // public function getUpdatedAt(): \DateTime
+    // {
+    //     return $this->updatedAt;
+    // }
 
-    /**
-     * Set the last update date and time of the post.
-     *
-     */
-    public function setUpdatedAt(\DateTime $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-        return $this;
-    }
+    // /**
+    //  * Set the last update date and time of the post.
+    //  *
+    //  */
+    // public function setUpdatedAt(\DateTime $updatedAt): self
+    // {
+    //     $this->updatedAt = $updatedAt;
+    //     return $this;
+    // }
 
     /**
      * Get the value of postPreview

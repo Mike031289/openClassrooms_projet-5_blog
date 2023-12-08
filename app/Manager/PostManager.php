@@ -40,11 +40,12 @@ class PostManager extends BaseManager
             }
 
             // Get the current date
-            $createdAt = date('Y-m-d H:i:s');
-            $updatedAt  = date('Y-m-d H:i:s');
+            $date = new \DateTime();
+            $date->setTimezone(new \DateTimeZone('Europe/Paris')); // Set the timezone if necessary
+            $createdAt = $date->format('Y-m-d H:i:s');
+
             // Step 2: Insert the post into the 'Post' table
-            $sql  = "INSERT INTO Post (title, content, imageUrl, categoryId, authorRole, createdAt, updatedAt, postpreview) 
-                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql  = "INSERT INTO post (title, content, imageUrl, categoryId, authorRole, createdAt, postpreview) VALUES (?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(1, $title, \PDO::PARAM_STR);
             $stmt->bindParam(2, $content, \PDO::PARAM_STR);
@@ -52,11 +53,10 @@ class PostManager extends BaseManager
             $stmt->bindParam(4, $categoryId, \PDO::PARAM_INT);
             $stmt->bindParam(5, $authorRole, \PDO::PARAM_STR);
             $stmt->bindParam(6, $createdAt, \PDO::PARAM_STR);
-            $stmt->bindParam(7, $updatedAt, \PDO::PARAM_STR);
-            $stmt->bindParam(8, $postPreview, \PDO::PARAM_STR);
+            $stmt->bindParam(7, $postPreview, \PDO::PARAM_STR);
 
             if (!$stmt->execute()) {
-                throw new ActionNotFoundException;
+                throw new ActionNotFoundException();
             }
 
             // Step 3: Get the ID of the newly created post
@@ -66,25 +66,40 @@ class PostManager extends BaseManager
             $this->_db->commit();
 
             // Create a new Post object with the inserted data
-            $post = new Post;
+            $post = new Post();
             $post->setId($id);
             $post->setTitle($title);
             $post->setContent($content);
             $post->setImageUrl($imageFileName);
             $post->setCategoryId($categoryId);
             $post->setAuthorRole($authorRole);
-            $post->setCreatedAt(new \DateTime($createdAt));
-            $post->setUpdatedAt(new \DateTime($updatedAt));
+            $post->setCreatedAt($createdAt);
             $post->setPostPreview($postPreview);
 
             return $post;
         }
         catch (ActionNotFoundException $e) {
             // Handle the error in case of failure and roll back the transaction
+            // Redirect to a 500 error page if no matching route is found
+            header("Location: 500");
             $this->_db->rollBack();
             return null;
         }
     }
+
+    /**
+     * Retrieves the total number of posts in the 'Post' table.
+     *
+     * @return int The total number of posts.
+     */
+    public function getTotalPosts(): int
+    {
+        // Retrieve the total number of posts
+        $sql  = "SELECT COUNT(*) FROM Post";
+        $stmt = $this->_db->query($sql);
+        return $stmt->fetchColumn();
+    }
+
 
     public function getPaginatedPosts(int $page, int $pageSize): array
     {
@@ -93,21 +108,46 @@ class PostManager extends BaseManager
         }
         
         $start = ($page - 1) * $pageSize; // Calculation of starting point for pagination
+        try {
+            // Retrieve the total number of posts
+            $totalPosts = $this->getTotalPosts();
 
-        $sql  = "SELECT * FROM posts ORDER BY createdAt DESC LIMIT :start, :pageSize";
-        $stmt = $this->_db->prepare($sql);
-        $stmt->bindValue(':start', $start, \PDO::PARAM_INT);
-        $stmt->bindValue(':pageSize', $pageSize, \PDO::PARAM_INT);
-        $stmt->execute();
+            $sql  = "SELECT * FROM post ORDER BY createdAt DESC LIMIT :start, :pageSize";
+            $stmt = $this->_db->prepare($sql);
+            $stmt->bindValue(':start', $start, \PDO::PARAM_INT);
+            $stmt->bindValue(':pageSize', $pageSize, \PDO::PARAM_INT);
+            $stmt->execute();
 
-        $contacts = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            $postsData = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
-        // Return an array with contacts and pagination information
-        return [
-            'contacts'    => $contacts,
-            'currentPage' => $page,
-            'totalPages'  => ceil(count($contacts) / $pageSize),
-        ];
+            // Convert the data into an array of Post objects
+            $posts = [];
+            foreach ($postsData as $data) {
+                $post = new Post();
+                $post->setId($data['id']);
+                $post->setTitle($data['title']);
+                $post->setPostPreview($data['postpreview']);
+                $post->setContent($data['content']);
+                $post->setImageUrl($data['imageUrl']);
+                $post->setCategoryId($data['categoryId']);
+                $post->setAuthorRole($data['authorRole']);
+                $post->setCreatedAt($data['createdAt']);
+                $posts[] = $post;
+            }
+            // Return an array with contacts and pagination information
+            return [
+                'posts'    => $posts,
+                'currentPage' => $page,
+                'totalPages'  => ceil($totalPosts / $pageSize),
+            ];
+
+        }
+        catch (ActionNotFoundException $e) {
+            // Handle exceptions, log errors, or return an empty array
+            // Redirect to an admin 500 error page if an exception occurs
+            header("Location: 500");
+            exit;
+        }
     }
 
     /**
@@ -163,7 +203,7 @@ class PostManager extends BaseManager
             }
 
             // Get the current date for updating the 'updatedAt' field
-            $updatedAt = date('Y-m-d H:i:s');
+            // $updatedAt = date('Y-m-d H:i:s');
 
             // Step 2: Update the post in the 'Post' table
             $sql  = "UPDATE Post SET title = ?, content = ?, imageUrl = ?, categoryId = ?, authorRole = ?, updatedAt = ?, postpreview = ? WHERE id = ?";
@@ -178,7 +218,7 @@ class PostManager extends BaseManager
             $stmt->bindParam(8, $id, \PDO::PARAM_INT);
 
             if (!$stmt->execute()) {
-                throw new ActionNotFoundException;
+                throw new ActionNotFoundException();
             }
 
             // Commit the transaction
@@ -192,13 +232,15 @@ class PostManager extends BaseManager
             $post->setImageUrl($imageFileName);
             $post->setCategoryId($categoryId);
             $post->setAuthorRole($authorRole);
-            $post->setUpdatedAt(new \DateTime($updatedAt));
+            $post->setUpdatedAt($updatedAt);
             $post->setPostPreview($postPreview);
 
             return $post;
         }
         catch (ActionNotFoundException $e) {
             // Handle the error in case of failure and roll back the transaction
+            // Redirect to a 500 error page if no matching route is found
+            header("Location: 500");
             $this->_db->rollBack();
             return null;
         }
@@ -228,10 +270,10 @@ class PostManager extends BaseManager
         }
         catch (ActionNotFoundException $e) {
             // Handle any exceptions, e.g., log the error or return false
+            // Redirect to a 500 error page if no matching route is found
+            header("Location: 500");
             return false;
         }
     }
-
-
 
 }

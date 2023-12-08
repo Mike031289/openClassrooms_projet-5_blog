@@ -16,7 +16,7 @@
               <a class="nav-link {% if page == 'home' %}active{% endif %}" href="/../mon-blog">Accueil</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link {% if page == 'posts' %}active{% endif %}" href="/../mon-blog/posts">Articles</a>
+              <a class="nav-link {% if page == 'posts' %}active{% endif %}" href="/../mon-blog/posts/{{ 1 }}">Articles</a>
             </li>
             <li class="nav-item">
               <a class="nav-link {% if page == 'contact' %}active{% endif %}" href="/../mon-blog/contact">Contact</a>
@@ -120,12 +120,12 @@
                     {% endfor %}
 
                     {% else %}
-                      <p><span class="translate-midlle badge rounded bg-dark p-2">{{ comments|length }}</span> commentaire pour ce post. Laissez nous votre commentaire, nous apprécions vos retours</p>
+                      <p class="mb-5"><span class="translate-midlle badge rounded bg-dark p-2">{{ comments|length }}</span> commentaire pour ce post. Laissez nous votre commentaire, nous apprécions vos retours</p>
                     {% endif %}
 
                   </div>
                 </div>
-                <nav aria-label="Page navigation example">
+                {# <nav aria-label="Page navigation example">
                   <ul class="pagination pagination-blog justify-content-center">
                     <li class="page-item disabled">
                       <a class="page-link" href="#!" aria-label="Previous">
@@ -151,7 +151,7 @@
                         <span aria-hidden="true">»</span></a>
                     </li>
                   </ul>
-                </nav>
+                </nav> #}
               </div>
             </section>
         </div>

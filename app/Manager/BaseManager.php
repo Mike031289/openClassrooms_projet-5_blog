@@ -100,27 +100,4 @@ class BaseManager
         return $object;
     }
 
-
-    /**
-     * Update an existing record in the table associated with the current class using data supplied in a specified object.
-     * It performs an update by using the SQL UPDATE clause and binding the values of the object's properties to the columns of the table.
-     *
-     * @param array $object An associative array containing the data to be updated in the database.
-     */
-    // public function update($object)
-    // {
-    //     // Implement the update logic here
-    // }
-
-    /**
-     * Delete a specific record from the table associated with the current class using a specified object.
-     * It performs a delete using the SQL DELETE clause with a condition based on the object's id property.
-     *
-     * @param mixed $object The object to delete.
-     * @return bool True if the delete was successful, false otherwise.
-     */
-    // public function delete($object)
-    // {
-    //     // Implement the delete logic here
-    // }
 }

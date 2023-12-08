@@ -15073,7 +15073,7 @@ body {
 #layoutError {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 70vh;
 }
 #layoutError #layoutError_content {
   min-width: 0;

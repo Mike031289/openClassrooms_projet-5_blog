@@ -110,7 +110,7 @@ class AdminController extends BaseController
         $authorRole = $this->getManager(UserManager::class)->getAuthorRoleById($user->getId());
         $this->getManager(PostManager::class)->createNewPost($title, $content, $postImg, $categoryId, $authorRole, $postPreview);
 
-        $success = "Post added successfully";
+        $success = "Merci, l'ajout du Poste Réussi !";
 
         $this->view('admin/blog-management-create-post.html.twig', ['user' => $user, 'success' => $success]);
     }
@@ -277,12 +277,6 @@ class AdminController extends BaseController
         }
 
         $perPage = 3;  // Set your desired items per page
-
-        // $post = $this->getManager(PostManager::class)->getById($postId);
-
-        // User is logged in and has the 'Admin' role, proceed to the admin dashboard
-        // Retrieve post, comments, and user information as needed
-        // $comment = $this->getManager(CommentManager::class)->getTotalCommentsForPost($postId);
 
         // Use the getComment method of CommentManager to retrieve coments in the admin side
         $paginationData = $this->getManager(CommentManager::class)->getPaginatedComments($page, $perPage);

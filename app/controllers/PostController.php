@@ -27,15 +27,31 @@ class PostController extends BaseController
     /**
      * Display a list of all articles.
      */
-    public function listPosts(): void
+    public function listPosts(int $page = 1): void
     {
-        $posts  = $this->getManager(PostManager::class)->getAll();
+        $pageSize = 2; // Set your desired items per page
+
+        // $post = $this->getManager(PostManager::class)->getById($postId);
+
+        // Retrieve post, comments, and user information as needed
+        // $comment = $this->getManager(CommentManager::class)->getTotalCommentsForPost($postId);
+
+        $paginationData  = $this->getManager(PostManager::class)->getPaginatedPosts($page,$pageSize);
         $categories = $this->getManager(CategoryManager::class)->getAll();
 
         // Check if the user is logged in and pass the user information to the template
         $user = $this->session->getUser();
 
-        $this->view('blog/posts.html.twig', ['posts' => $posts, 'categories' => $categories, 'user' => $user]);
+        // $this->view('blog/posts.html.twig', ['posts' => $posts, 'categories' => $categories, 'user' => $user]);
+
+        // Pass the pagination data to the Twig template
+        $this->view("blog/posts.html.twig", [
+            'user'        => $user,
+            'categories' => $categories,
+            'posts'    => $paginationData['posts'],
+            'currentPage' => $paginationData['currentPage'],
+            'totalPages'  => $paginationData['totalPages'],
+        ]);
     }
 
     /**
@@ -45,6 +61,9 @@ class PostController extends BaseController
      */
     public function showPostWithComments(int $id): void
     {
+        // Check if the user is logged in and pass the user information to the template
+        $user = $this->session->getUser();
+
         // Retrieve post, comments, and user information as needed
         $post = $this->getManager(PostManager::class)->getById($id);
 
@@ -53,9 +72,6 @@ class PostController extends BaseController
             header("Location: /mon-blog/404");
             exit; // Stop execution to prevent displaying page content
         }
-
-        // Check if the user is logged in and pass the user information to the template
-        $user = $this->session->getUser();
 
         $comments = $this->getManager(CommentManager::class)->getCommentsByPostId($id);
 
@@ -75,7 +91,7 @@ class PostController extends BaseController
         $user = $this->session->getUser();
 
         // Retrieve data from the form
-        $content  = htmlspecialchars(FormHelper::post('content'));
+        $content  = FormHelper::post('content');
         $authorName = $user->getUserName();
 
         // Create a new comment
@@ -87,14 +103,10 @@ class PostController extends BaseController
         // Retrieve post, comments, and user information as needed
         $post = $this->getManager(PostManager::class)->getById($postId);
 
-        // Get the number of all comment for a spécific Post
-        // $commentNumber = $this->getManager(CommentManager::class)->getTotalCommentsForPost($postId);
-
         // Display the post with comments
         $this->view('blog/post.html.twig', [
             'post'          => $post,
             'comments'      => $comments,
-            // 'commentNumber' => $commentNumber,
             'user'          => $user
         ]);
     }

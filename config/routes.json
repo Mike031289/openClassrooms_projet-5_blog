@@ -1,19 +1,19 @@
 [
 	{
-			"path": "/",
-			"controller": "App\\Controllers\\HomeController",
-			"action": "home",
-			"method": "GET",
-			"param": [],
-			"managers": ["App\\Manager\\PostManager", "App\\Manager\\CategoryManager", "App\\Manager\\UserManager" ]
+		"path": "/",
+		"controller": "App\\Controllers\\HomeController",
+		"action": "home",
+		"method": "GET",
+		"param": [],
+		"managers": ["App\\Manager\\PostManager", "App\\Manager\\CategoryManager", "App\\Manager\\UserManager" ]
 	},
 	{
-			"path": "/posts",
-			"controller": "App\\Controllers\\PostController",
-			"action": "listPosts",
-			"method": "GET",
-			"param": [],
-			"managers": ["App\\Manager\\PostManager", "App\\Manager\\CategoryManager", "App\\Manager\\UserManager"]
+		"path": "/posts/{page}",
+		"controller": "App\\Controllers\\PostController",
+		"action": "listPosts",
+		"method": "GET",
+		"param": ["id"],
+		"managers": ["App\\Manager\\PostManager", "App\\Manager\\CategoryManager", "App\\Manager\\UserManager"]
 	},
 	{
 		"path": "/post/{id}",
@@ -32,76 +32,76 @@
 		"managers": ["App\\Manager\\PostManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager"]
 	},
 	{
-			"path": "/contact",
-			"controller": "App\\Controllers\\ContactController",
-			"action": "contactForm",
-			"method": "GET",
-			"param": [],
-			"managers": ["App\\Manager\\ContactManager", "App\\Manager\\UserManager"]
+		"path": "/contact",
+		"controller": "App\\Controllers\\ContactController",
+		"action": "contactForm",
+		"method": "GET",
+		"param": [],
+		"managers": ["App\\Manager\\ContactManager", "App\\Manager\\UserManager"]
 	},
 	{
-			"path": "/contact",
-			"controller": "App\\Controllers\\ContactController",
-			"action": "sendMessage",
-			"method": "POST",
-			"param": [],
-			"managers": ["App\\Manager\\ContactManager", "App\\Manager\\UserManager"]
+		"path": "/contact",
+		"controller": "App\\Controllers\\ContactController",
+		"action": "sendMessage",
+		"method": "POST",
+		"param": [],
+		"managers": ["App\\Manager\\ContactManager", "App\\Manager\\UserManager"]
 	},
 	{
-			"path": "/login",
-			"controller": "App\\Controllers\\UserController",
-			"action": "displayLoginForm",
-			"method": "GET",
-			"param": [],
-			"managers":  ["App\\Manager\\UserManager"]
+		"path": "/login",
+		"controller": "App\\Controllers\\UserController",
+		"action": "displayLoginForm",
+		"method": "GET",
+		"param": [],
+		"managers":  ["App\\Manager\\UserManager"]
 	},
 	{
-			"path": "/login",
-			"controller": "App\\Controllers\\UserController",
-			"action": "login",
-			"method": "POST",
-			"param": [],
-			"managers":  ["App\\Manager\\UserManager", "App\\Manager\\AdminManager"]
+		"path": "/login",
+		"controller": "App\\Controllers\\UserController",
+		"action": "login",
+		"method": "POST",
+		"param": [],
+		"managers":  ["App\\Manager\\UserManager", "App\\Manager\\AdminManager"]
 	},
 	{
-			"path": "/logout",
-			"controller": "App\\Controllers\\UserController",
-			"action": "logout",
-			"method": "GET",
-			"param": [],
-			"managers":  ["App\\Manager\\UserManager"]
+		"path": "/logout",
+		"controller": "App\\Controllers\\UserController",
+		"action": "logout",
+		"method": "GET",
+		"param": [],
+		"managers":  ["App\\Manager\\UserManager"]
 	},
 	{
-			"path": "/register",
-			"controller":"App\\Controllers\\UserController",
-			"action": "displayRegisterForm",
-			"method": "GET",
-			"param": [],
-			"managers": ["App\\Manager\\UserManager"]
+		"path": "/register",
+		"controller":"App\\Controllers\\UserController",
+		"action": "displayRegisterForm",
+		"method": "GET",
+		"param": [],
+		"managers": ["App\\Manager\\UserManager"]
 	},
 	{
-			"path": "/register",
-			"controller":"App\\Controllers\\UserController",
-			"action": "creatUser",
-			"method": "POST",
-			"param": [],
-			"managers": ["App\\Manager\\UserManager"]
+		"path": "/register",
+		"controller":"App\\Controllers\\UserController",
+		"action": "creatUser",
+		"method": "POST",
+		"param": [],
+		"managers": ["App\\Manager\\UserManager"]
 	},
 	{
-			"path": "/adminDashboard",
-			"controller":"App\\Controllers\\AdminController",
-			"action": "adminDashboard",
-			"method": "GET",
-			"param": [],
-			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
+		"path": "/adminDashboard",
+		"controller":"App\\Controllers\\AdminController",
+		"action": "adminDashboard",
+		"method": "GET",
+		"param": [],
+		"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
 	},
 	{
-			"path": "/adminDashboard/admin-profile",
-			"controller":"App\\Controllers\\UserController",
-			"action": "showUserProfile",
-			"method": "GET",
-			"param": [],
-			"managers": ["App\\Manager\\AdminManager","App\\Manager\\UserManager"]
+		"path": "/adminDashboard/admin-profile",
+		"controller":"App\\Controllers\\UserController",
+		"action": "showUserProfile",
+		"method": "GET",
+		"param": [],
+		"managers": ["App\\Manager\\AdminManager","App\\Manager\\UserManager"]
 	},
 	{
 		"path": "/adminDashboard/contacts/{page}",
@@ -112,91 +112,91 @@
 		"managers": ["App\\Manager\\ContactManager", "App\\Manager\\UserManager"]
 	},
 	{
-			"path": "/adminDashboard/blog-management&create-post",
-			"controller":"App\\Controllers\\AdminController",
-			"action": "postForm",
-			"method": "GET",
-			"param": [],
-			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
+		"path": "/adminDashboard/blog-management&create-post",
+		"controller":"App\\Controllers\\AdminController",
+		"action": "postForm",
+		"method": "GET",
+		"param": [],
+		"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
 	},
 	{
-			"path": "/adminDashboard/blog-management&create-post",
-			"controller":"App\\Controllers\\AdminController",
-			"action": "creatPost",
-			"method": "POST",
-			"param": [],
-			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
+		"path": "/adminDashboard/blog-management&create-post",
+		"controller":"App\\Controllers\\AdminController",
+		"action": "createPost",
+		"method": "POST",
+		"param": [],
+		"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
 	},
 	{
-			"path": "/adminDashboard/blog-management-edit-post/{id}",
-			"controller":"App\\Controllers\\AdminController",
-			"action": "editPost",
-			"method": "GET",
-			"param": ["id"],
-			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
+		"path": "/adminDashboard/blog-management-edit-post/{id}",
+		"controller":"App\\Controllers\\AdminController",
+		"action": "editPost",
+		"method": "GET",
+		"param": ["id"],
+		"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
 	},
 	{
-			"path": "/adminDashboard/blog-management-edit-post/{id}",
-			"controller":"App\\Controllers\\AdminController",
-			"action": "updatePost",
-			"method": "POST",
-			"param": ["id"],
-			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
+		"path": "/adminDashboard/blog-management-edit-post/{id}",
+		"controller":"App\\Controllers\\AdminController",
+		"action": "updatePost",
+		"method": "POST",
+		"param": ["id"],
+		"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
 	},
 	{
-			"path": "/adminDashboard/blog-management-delete-post/{id}",
-			"controller":"App\\Controllers\\AdminController",
-			"action": "showPostToDelete",
-			"method": "GET",
-			"param": ["id"],
-			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
+		"path": "/adminDashboard/blog-management-delete-post/{id}",
+		"controller":"App\\Controllers\\AdminController",
+		"action": "showPostToDelete",
+		"method": "GET",
+		"param": ["id"],
+		"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
 	},
 	{
-			"path": "/adminDashboard/blog-management-delete-post/{id}",
-			"controller":"App\\Controllers\\AdminController",
-			"action": "deletePost",
-			"method": "POST",
-			"param": ["id"],
-			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
+		"path": "/adminDashboard/blog-management-delete-post/{id}",
+		"controller":"App\\Controllers\\AdminController",
+		"action": "deletePost",
+		"method": "POST",
+		"param": ["id"],
+		"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
 	},
 	{
-			"path": "/adminDashboard/blog-management-delete-post/{id}",
-			"controller":"App\\Controllers\\AdminController",
-			"action": "deletePost",
-			"method": "POST",
-			"param": ["id"],
-			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
+		"path": "/adminDashboard/blog-management-delete-post/{id}",
+		"controller":"App\\Controllers\\AdminController",
+		"action": "deletePost",
+		"method": "POST",
+		"param": ["id"],
+		"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
 	},
 	{
-			"path": "/adminDashboard/comments/{page}",
-			"controller":"App\\Controllers\\AdminController",
-			"action": "listComments",
-			"method": "GET",
-			"param": ["page"],
-			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
+		"path": "/adminDashboard/comments/{page}",
+		"controller":"App\\Controllers\\AdminController",
+		"action": "listComments",
+		"method": "GET",
+		"param": ["page"],
+		"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
 	},
 	{
-			"path": "/adminDashboard/comments/{id}",
-			"controller":"App\\Controllers\\AdminController",
-			"action": "deleteComment",
-			"method": "POST",
-			"param": ["id"],
-			"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
+		"path": "/adminDashboard/comments/{id}",
+		"controller":"App\\Controllers\\AdminController",
+		"action": "deleteComment",
+		"method": "POST",
+		"param": ["id"],
+		"managers": ["App\\Manager\\AdminManager", "App\\Manager\\CommentManager", "App\\Manager\\UserManager", "App\\Manager\\PostManager", "App\\Manager\\CategoryManager"]
 	},
 	{
-			"path": "/404",
-			"controller": "App\\Controllers\\ErrorController",
-			"action": "routeNotFound",
-			"method": "GET",
-			"param": [],
-			"managers": []
+		"path": "/404",
+		"controller": "App\\Controllers\\ErrorController",
+		"action": "routeNotFound",
+		"method": "GET",
+		"param": [],
+		"managers": []
 	},
 	{
-			"path": "/500",
-			"controller": "App\\Controllers\\ErrorController",
-			"action": "actionNotFound",
-			"method": "GET",
-			"param": [],
-			"managers": []
+		"path": "/500",
+		"controller": "App\\Controllers\\ErrorController",
+		"action": "actionNotFound",
+		"method": "GET",
+		"param": [],
+		"managers": []
 	}
 ]
