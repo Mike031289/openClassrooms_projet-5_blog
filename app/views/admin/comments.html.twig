@@ -43,20 +43,20 @@
         {% endif %}
         {% if comments %}
         {% for comment in comments %}
-        <div class="card card-header-actions m-4">
+        <div class="card card-header-actions m-1">
 
          <!-- Modal -->
           <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-              <form class="modal-dialog" role="document" method="POST" enctype="multipart/form-data" action="/../mon-blog/adminDashboard/comments/{{ comment.id }}">
-                  <div class="modal-content">
-                      <div class="modal-header">
-                          <h5 class="modal-title" id="staticBackdropLabel">Voulez-vous supprimer ce commentaire ?</h5>
-                          <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">{{ comment.content }}</div>
-                      <div class="modal-footer"><button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Non</button><button class="btn btn-danger" type="submit">Oui</button></div>
-                  </div>
-                </form>
+            <form class="modal-dialog" role="document" method="POST" enctype="multipart/form-data" action="/../mon-blog/adminDashboard/comments/{{ comment.id }}">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Voulez-vous supprimer ce commentaire ?</h5>
+                        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">{{ comment.content }}</div>
+                    <div class="modal-footer"><button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Non</button><button class="btn btn-danger" type="submit">Oui</button></div>
+                </div>
+              </form>
             </div>
             <div class="card-header nav-item dropdown no-caret dropdown-user"> 
               <div class="text-secondary"><i class="fa fa-user-circle text-secondary" aria-hidden="true"></i>

@@ -16,11 +16,11 @@
 		"managers": ["App\\Manager\\PostManager", "App\\Manager\\CategoryManager", "App\\Manager\\UserManager"]
 	},
 	{
-		"path": "/posts/{page}/{categoryId}",
+		"path": "/posts-by-category/{page}/{id}",
 		"controller": "App\\Controllers\\PostController",
-		"action": "listPosts",
+		"action": "listPostsByCategory",
 		"method": "GET",
-		"param": ["id","id"],
+		"param": ["id", "id"],
 		"managers": ["App\\Manager\\PostManager", "App\\Manager\\CategoryManager", "App\\Manager\\UserManager"]
 	},
 	{

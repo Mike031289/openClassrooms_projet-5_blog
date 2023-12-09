@@ -54,21 +54,29 @@ class PostController extends BaseController
         ]);
     }
 
-    public function listPostsByCategories( int $categoryId, int $page = 1): void 
+    public function listPostsByCategory( int $categoryId, int $page = 1): void 
     {
-    // $categories = $this->getManager(CategoryManager::class)->getAll();
-        $categories = $this->getManager(PostManager::class)->getPostsByCategory($categoryId);
+        $pageSize = 3; // Set your desired items per page
 
-                // Check if the user is logged in and pass the user information to the template
-        // $user = $this->session->getUser();
+        // $categoryId = $this->getManager(CategoryManager::class)->getById($categoryId);
+        $paginationData = $this->getManager(PostManager::class)->getPostsByCategory($categoryId, $page, $pageSize);
+        // var_dump($paginationData);
+        // die;
+        // Retrieve posts by category, and user information as needed
+        $categories = $this->getManager(CategoryManager::class)->getAll();
 
-        // $this->view('blog/posts.html.twig', ['posts' => $posts, 'categories' => $categories, 'user' => $user]);
+        // Check if the user is logged in and pass the user information to the template
+        $user = $this->session->getUser();
 
         // Pass the pagination data to the Twig template
-        $this->view("blog/posts.html.twig", [
-            // 'user'        => $user,
+        $this->view("blog/posts-by-category.html.twig", [
+            'user'        => $user,
             'categories' => $categories,
+            'posts'    => $paginationData['posts'],
+            'currentPage' => $paginationData['currentPage'],
+            'totalPages'  => $paginationData['totalPages'],
         ]);
+
     }
 
     /**

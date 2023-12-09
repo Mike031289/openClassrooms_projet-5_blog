@@ -101,21 +101,63 @@ class PostManager extends BaseManager
     }
 
     /**
-     * Retrieve posts by category.
+     * Retrieves the total number of posts in the 'Post' table by category.
      *
      * @param int $categoryId The ID of the category.
-     * @return array An array of posts for the specified category.
+     * @return int The total number of posts by category.
      */
-    public function getPostsByCategory(int $categoryId): array
+    public function getTotalPostsByCategory(int $categoryId): int
     {
         try {
-            // You might want to add error handling here
-
             // Prepare the SQL query
-            $sql = "SELECT * FROM Post WHERE categoryId = :categoryId";
+            $sql = "SELECT COUNT(*) FROM Post WHERE categoryId = :categoryId";
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(':categoryId', $categoryId, \PDO::PARAM_INT);
 
+            // Execute the query
+            $stmt->execute();
+
+            // Fetch the result
+            $totalPosts = $stmt->fetchColumn();
+
+            return $totalPosts;
+        }
+            catch (ActionNotFoundException $e) {
+            // Handle exceptions, log errors, or return an empty array
+            // Redirect to an admin 500 error page if an exception occurs
+            header("Location: 500");
+            exit;
+        }
+    }
+
+    /**
+     * Retrieves a paginated list of posts by category.
+     *
+     * @param $page The current page number (default is 1).
+     * @param $perPage The number of posts per page.
+     *
+     * @return array An array containing posts and pagination information.
+     */
+    public function getPostsByCategory(int $categoryId, int $page, int $pageSize): array
+    {
+        if($page < 1){
+            $page = 1;
+        }
+        
+        $start = ($page - 1) * $pageSize; // Calculation of starting point for pagination
+
+        try {
+
+            // var_dump($totalPosts);
+            // die;
+
+            // Prepare the SQL query
+            $sql = "SELECT * FROM Post WHERE categoryId = :categoryId ORDER BY createdAt DESC LIMIT :start, :pageSize";
+
+            $stmt = $this->_db->prepare($sql);
+            $stmt->bindValue(':start', $start, \PDO::PARAM_INT);
+            $stmt->bindParam(':categoryId', $categoryId, \PDO::PARAM_INT);
+            $stmt->bindParam(':pageSize', $pageSize, \PDO::PARAM_INT);
             // Execute the query
             $stmt->execute();
 
@@ -126,24 +168,12 @@ class PostManager extends BaseManager
             // $postsData = $stmt->fetchObject(Post::class);
             // var_dump($postsData);
             // die;
-            // Fetch the results as an associative array
             $postsData = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
             // Convert the data into an array of Post objects
             $posts = [];
             foreach ($postsData as $data) {
                 $post = new Post();
-                // Populate the post object with data from the database
-                // $post->setId($id);
-                // $post->setTitle($title);
-                // $post->setContent($content);
-                // $post->setContent($content);
-                // $post->setImageUrl($imageFileName);
-                // $post->setCategoryId($categoryId);
-                // $post->setAuthorRole($authorRole);
-                // $post->setUpdatedAt($updatedAt);
-                // $post->setPostPreview($postPreview);
-                
                 $post->setId($data['id']);
                 $post->setTitle($data['title']);
                 $post->setContent($data['content']);
@@ -152,24 +182,25 @@ class PostManager extends BaseManager
                 $post->setAuthorRole($data['authorRole']);
                 $post->setCreatedAt($data['createdAt']);
                 $post->setPostPreview($data['postpreview']);
-
                 $posts[] = $post;
             }
+
             // Return an array with contacts and pagination information
             return [
                 'posts'    => $posts,
-                // 'currentPage' => $page,
-                // 'totalPages'  => ceil($totalPosts / $pageSize),
+                'currentPage' => $page,
+                'totalPages'  => ceil($this->getTotalPostsByCategory($categoryId) / $pageSize),
             ];
 
-        }catch (ActionNotFoundException $e) {
+        }
+        catch (ActionNotFoundException $e) {
             // Handle exceptions, log errors, or return an empty array
             // Redirect to an admin 500 error page if an exception occurs
             header("Location: 500");
             exit;
         }
-    }
 
+    }
 
      /**
      * Retrieves a paginated list of posts.
