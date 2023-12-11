@@ -1,13 +1,11 @@
-{% extends 'templates/layout.html.twig' %}
+{# {% extends 'templates/layout.html.twig' %}
 
 {% set page = 'register' %}
 
 {% block header_title %}
-  {# Créer un compte #}
 {% endblock %}
 
 {% block header_description %}
-  {# Découvrez nos derniers articles et restez informé de nos activités. #}
 {% endblock %}
 
 {% block content %}
@@ -100,4 +98,143 @@
       </footer>
     </div>
   </div>
-{% endblock %}
+{% endblock %} #}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <meta name="description" content=""/>
+  <meta name="author" content=""/>
+  <title>Inscription</title>
+  <link href="/../mon-blog/public/css/adminStyles.css" rel="stylesheet"/>
+  <link rel="icon" type="image/x-icon" href="/../mon-blog/public/assets/img/logo.png"/>
+  <script data-search-pseudo-elements="data-search-pseudo-elements" defer="defer" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/easymde@2.18.0/dist/easymde.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/easymde@2.18.0/dist/easymde.min.css" rel="stylesheet">
+</head>
+  <body class="bg-primary">
+    <div id="layoutAuthentication">
+      <div id="layoutAuthentication_content">
+        <main>
+          <div class="container-xl px-4">
+            <div class="row justify-content-center">
+              <div class="col-lg-7">
+                <!-- Basic registration form-->
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                  <div class="card-header justify-content-center">
+                    <h3 class="fw-light my-4">Créer un compte</h3>
+                  </div>
+                  <div class="card-body">
+                    <!-- Registration form-->
+                    <form class="needs-validation" novalidate="novalidate" method="POST">
+                      {% if error is defined%}
+                        <div class="alert alert-danger" role="alert">
+                          {{ error }}
+                        </div>
+                      {% endif %}
+                      <!-- Form Row-->
+                      <div class="row gx-3">
+                        <div class="{% if errors.userName %}has-error{% endif %}">
+                          <!-- Form Group (name)-->
+                          <div class="mb-3">
+                            <label class="small mb-1" for="inputFirstName">Nom d'utilisateur *</label>
+                            <input class="form-control {% if errors.userName %}is-invalid{% endif %}" id="inputUserName" type="text" name="userName" required="required" value="{{ value.userNameValue ?? '' }}" placeholder="Saisissez votre nom"/> 
+                            {% if errors.userName %}
+                              <div class="invalid-feedback">{{ errors.userName }}</div>
+                            {% endif %}
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Form Group (email address) -->
+                      <div class="{% if errors.email %}has-error{% endif %} mb-3">
+                        <label class="small mb-1" for="inputEmailAddress">Adresse email *</label>
+                        <input class="form-control {% if errors.email %}is-invalid{% endif %}" id="inputEmail" type="email" name="email" required="required" value="{{ value.emailValue ?? '' }}" aria-describedby="emailHelp" placeholder="Saisissez votre adresse email"/>
+                        {% if errors.email %}
+                          <div class="invalid-feedback">{{ errors.email }}</div>
+                        {% endif %}
+                      </div>
+                      <!-- Form Row -->
+                      <div class="row gx-3">
+                        <div class="col-md-6">
+                          <!-- Form Group (password)-->
+                          <div class="mb-3 {% if errors.password %}has-error{% endif %}">
+                            <label class="small mb-1" for="inputPassword">Mot de passe *</label>
+                            <div class="input-group">
+                              <input class="form-control {% if errors.password %}is-invalid{% endif %}" id="inputPassword" type="password" placeholder="Entrez votre mot de passe" name="passWord" required="required" value="{{ value.passwordValue ?? '' }}"/>
+                              <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="showPasswordBtn">
+                                  <i class="fa fa-eye" id="password-icon"></i>
+                                </button>
+                              </div>
+                            </div>
+                            {% if errors.password %}
+                              <div class="invalid-feedback">{{ errors.password }}</div>
+                            {% endif %}
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <!-- Form Group (confirm password)-->
+                          <div class="mb-3">
+                            <label class="small mb-1" for="inputConfirmPassword">Confirmez mot de passe *</label>
+                            <div class="input-group">
+                              <input class="form-control {% if errors.password2 %}is-invalid{% endif %}" id="inputConfirmPassword" type="password" name="passWordConfirm" required="required" value="{{ value.passwordValue2 ?? '' }}" placeholder="Confirmez votre mot de passe"/>
+                              <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="showConfirmPasswordBtn">
+                                  <i class="fa fa-eye" id="confirm-password-icon"></i>
+                                </button>
+                              </div>
+                            </div>
+                            {% if errors.password2 %}
+                              <div class="invalid-feedback">{{ errors.password2 }}</div>
+                            {% endif %}
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Form Group (create account submit)-->
+                      <button type="submit" class="btn btn-secondary btn-block">Créer un compte</button>
+                      <div class="small text-danger mt-5">
+                          * Ces champs sont obligatoire
+                      </div>
+                    </form>
+                  </div>
+                  <div class="card-footer text-center">
+                    <div class="small">
+                      <a class="text-secondary" href="/../mon-blog/login">Vous êtes déjà inscrit? Connectez-vous</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+      <div id="layoutAuthentication_footer">
+        <footer class="footer-admin mt-auto footer-light">
+          <div class="container-xl px-4">
+            <div class="row">
+              <div class="col-md-6 small">Copyright &copy; Adjoukou AGBELOU 2023</div>
+              <div class="col-md-6 text-md-end small">
+                <a href="#!">Politique de Confidentialité</a>
+                &middot;
+                <a href="#!">Conditions générales</a>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="/../mon-blog/public/js/scripts.js"></script>
+    <!-- Bootstrap core JS-->
+    <!-- Core theme JS-->
+    <script src="/../mon-blog/public/js/boostrapBundleMinScripts.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/../mon-blog/public/js/passwordShow.js"></script>
+    <script src="/../mon-blog/public/js/blogJs.js"></script>
+  </body>
+</html>
+
