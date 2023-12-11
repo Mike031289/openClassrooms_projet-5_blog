@@ -29,7 +29,7 @@ class PostController extends BaseController
      */
     public function listPosts(int $page = 1): void
     {
-        $pageSize = 2; // Set your desired items per page
+        $pageSize = 3; // Set your desired items per page
 
         // $post = $this->getManager(PostManager::class)->getById($postId);
 
@@ -56,9 +56,8 @@ class PostController extends BaseController
 
     public function listPostsByCategory( int $categoryId, int $page = 1): void 
     {
-        $pageSize = 3; // Set your desired items per page
+        $pageSize = 50; // Set your desired items per page
 
-        // $categoryId = $this->getManager(CategoryManager::class)->getById($categoryId);
         $paginationData = $this->getManager(PostManager::class)->getPostsByCategory($categoryId, $page, $pageSize);
         // var_dump($paginationData);
         // die;

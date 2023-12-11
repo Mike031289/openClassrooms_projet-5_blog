@@ -118,9 +118,9 @@ class PostManager extends BaseManager
             $stmt->execute();
 
             // Fetch the result
-            $totalPosts = $stmt->fetchColumn();
+            $totalPostsByCategory = $stmt->fetchColumn();
 
-            return $totalPosts;
+            return $totalPostsByCategory;
         }
             catch (ActionNotFoundException $e) {
             // Handle exceptions, log errors, or return an empty array
@@ -147,9 +147,8 @@ class PostManager extends BaseManager
         $start = ($page - 1) * $pageSize; // Calculation of starting point for pagination
 
         try {
-
-            // var_dump($totalPosts);
-            // die;
+            // Retrieve the total number of posts by category
+            $totalPostsByCategory = $this->getTotalPostsByCategory($categoryId);
 
             // Prepare the SQL query
             $sql = "SELECT * FROM Post WHERE categoryId = :categoryId ORDER BY createdAt DESC LIMIT :start, :pageSize";
@@ -189,7 +188,7 @@ class PostManager extends BaseManager
             return [
                 'posts'    => $posts,
                 'currentPage' => $page,
-                'totalPages'  => ceil($this->getTotalPostsByCategory($categoryId) / $pageSize),
+                'totalPages'  => ceil($totalPostsByCategory / $pageSize),
             ];
 
         }
