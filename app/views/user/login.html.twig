@@ -136,14 +136,19 @@
                         {% endif %}
                       </div>
                       <!-- Form Group (password)-->
-                      <div class="{% if errors.password %}has-error{% endif %} mb-3">
-                        {# <div class=""> #}
-                          <label class="small mb-1" for="inputPassword">Mot de passe *</label>
-                          <input class="form-control {% if errors.password %}is-invalid{% endif %}" id="inputPassword" name="passWord" type="password" required="required" placeholder="Entrez votre mot de passe" value="{{ value.passwordValue ?? '' }}"/>
+                      <div class="mb-3 {% if errors.password %}has-error{% endif %}">
+                        <label class="small mb-1" for="inputPassword">Mot de passe *</label>
+                        <div class="input-group">
+                          <input class="form-control {% if errors.password %}is-invalid{% endif %}" id="inputPassword" type="password" placeholder="Entrez votre mot de passe" name="passWord" required="required" value="{{ value.passwordValue ?? '' }}"/>
+                          <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="showPasswordBtn">
+                              <i class="fa fa-eye" id="password-icon"></i>
+                            </button>
+                          </div>
                           {% if errors.password %}
                             <div class="invalid-feedback">{{ errors.password }}</div>
                           {% endif %}
-                        {# </div> #}
+                        </div>
                       </div>
                       
                       <!-- Form Group (login box)-->
@@ -151,8 +156,8 @@
                         <a class="small text-secondary" href="/../mon-blog/posts/{{ 1 }}">Retourer au Blog</a>
                         <button type="submit" class="btn btn-secondary">Connexion</button>
                       </div>
-                      <div class="small text-danger mt-5">
-                          * Ces champs sont obligatoire
+                      <div class="small text-mutted mt-2">
+                          * Ces champs sont obligatoires
                       </div>
                     </form>
                   </div>
@@ -184,6 +189,12 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="/../mon-blog/public/js/scripts.js"></script>
+    <!-- Bootstrap core JS-->
+    <!-- Core theme JS-->
+    <script src="/../mon-blog/public/js/boostrapBundleMinScripts.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/../mon-blog/public/js/passwordShow.js"></script>
+    <script src="/../mon-blog/public/js/blogJs.js"></script>
   </body>
 </html>
 

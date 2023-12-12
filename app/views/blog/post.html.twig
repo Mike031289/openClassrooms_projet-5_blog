@@ -53,8 +53,7 @@
                 <img class="single-post-meta-img" src="/../mon-blog/public/assets/img/illustrations/profiles/profile-1.png"/>
                 <div class="single-post-meta-details">
                   <div class="single-post-meta-details-name">Publié par : l'{{ post.authorRole }}</div>
-                  <div class="single-post-meta-details-date">Le,
-                    {{ post.createdAt }}</div>
+                  <div class="single-post-meta-details-date">Le, {{ post.createdAt }}</div>
                 </div>
               </div>
               <div class="single-post-meta-links">
@@ -80,7 +79,6 @@
               <div class="card mb-5">
                   <div class="card-header text-secondary">LAISSEZ NOUS UN COMMENTAIRE</div>
                   <div class="card-body">
-                      {# <input type="hidden" name="article_id" value="{{ post.id }}"> #}
                       <textarea class="form-control mb-2" name="content" placeholder="Ajouter un commentaire" required="required" rows="4"></textarea>
                       <button type="submit" class="btn btn-secondary btn-sm me-2">Ajouter</button>
                   </div>

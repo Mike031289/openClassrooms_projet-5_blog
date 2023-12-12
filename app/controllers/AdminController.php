@@ -136,7 +136,7 @@ class AdminController extends BaseController
 
         // User is logged in and has the 'Admin' role, proceed to the admin dashboard
         // Retrieve post, comments, and user information as needed
-        $post = $this->getManager(PostManager::class)->getById($id);
+        $post = $this->getManager(PostManager::class)->getPostById($id);
 
         $categories = $this->getManager(CategoryManager::class)->getAll();
 
@@ -196,7 +196,7 @@ class AdminController extends BaseController
 
         // User is logged in and has the 'Admin' role, proceed to the admin dashboard
         // Retrieve post, comments, and user information as needed
-        $post = $this->getManager(PostManager::class)->getById($id);
+        $post = $this->getManager(PostManager::class)->getPostById($id);
 
         $categories = $this->getManager(CategoryManager::class)->getAll();
 

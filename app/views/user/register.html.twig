@@ -170,10 +170,10 @@
                                   <i class="fa fa-eye" id="password-icon"></i>
                                 </button>
                               </div>
+                              {% if errors.password %}
+                                <div class="invalid-feedback">{{ errors.password }}</div>
+                              {% endif %}
                             </div>
-                            {% if errors.password %}
-                              <div class="invalid-feedback">{{ errors.password }}</div>
-                            {% endif %}
                           </div>
                         </div>
                         <div class="col-md-6">
@@ -187,17 +187,20 @@
                                   <i class="fa fa-eye" id="confirm-password-icon"></i>
                                 </button>
                               </div>
+                              {% if errors.password2 %}
+                                <div class="invalid-feedback">{{ errors.password2 }}</div>
+                              {% endif %}
                             </div>
-                            {% if errors.password2 %}
-                              <div class="invalid-feedback">{{ errors.password2 }}</div>
-                            {% endif %}
                           </div>
                         </div>
                       </div>
                       <!-- Form Group (create account submit)-->
-                      <button type="submit" class="btn btn-secondary btn-block">Créer un compte</button>
-                      <div class="small text-danger mt-5">
-                          * Ces champs sont obligatoire
+                      <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                        <a class="small text-secondary" href="/../mon-blog/posts/{{ 1 }}">Retourer au Blog</a>
+                        <button type="submit" class="btn btn-secondary btn-block">Créer un compte</button>
+                      </div>
+                      <div class="small text-mutted mt-2">
+                          * Ces champs sont obligatoires
                       </div>
                     </form>
                   </div>

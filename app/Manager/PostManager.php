@@ -73,7 +73,7 @@ class PostManager extends BaseManager
             $post->setImageUrl($imageFileName);
             $post->setCategoryId($categoryId);
             $post->setAuthorRole($authorRole);
-            $post->setCreatedAt($createdAt);
+            $post->setCreatedAt(new \DateTime($createdAt));
             $post->setPostPreview($postPreview);
 
             return $post;
@@ -85,6 +85,34 @@ class PostManager extends BaseManager
             $this->_db->rollBack();
             return null;
         }
+    }
+
+    /**
+     * Retrieve a specific record from the table associated with the current class based on its identifier (ID).
+     * It returns the record in the form of an object corresponding to the class of the current object.
+     *
+     * @param int $id The identifier of the record to retrieve.
+     * @return Post|null The retrieved object or null if not found.
+     */
+    public function getPostById(int $id): ?Post
+    {
+        // Prepare the SQL query to retrieve a specific record by ID
+        $sql = "SELECT * FROM Post WHERE id = :id ORDER BY createdAt DESC LIMIT 1";
+
+        // Prepare the SQL statement
+        $stmt = $this->_db->prepare($sql);
+
+        // Bind the ID parameter
+        $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
+
+        // Execute the query
+        $stmt->execute();
+
+        // Set the fetch mode to retrieve the result as an object of the Post class
+        $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Post::class);
+
+        // Fetch and return the object or null if not found
+        return $stmt->fetchObject(Post::class) ?: null;
     }
 
     /**
@@ -138,7 +166,7 @@ class PostManager extends BaseManager
      *
      * @return array An array containing posts and pagination information.
      */
-    public function getPostsByCategory(int $categoryId, int $page, int $pageSize): array
+    public function getPaginatedPostsByCategory(int $categoryId, int $page, int $pageSize): array
     {
         if($page < 1){
             $page = 1;
@@ -161,26 +189,23 @@ class PostManager extends BaseManager
             $stmt->execute();
 
             // Use setFetchMode to specify the class and fetch mode
-            // $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Post::class);
+            $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Post::class);
 
-            // Use fetchObject to retrieve the result as an object of the Post class
-            // $postsData = $stmt->fetchObject(Post::class);
-            // var_dump($postsData);
-            // die;
-            $postsData = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            $postsData = $stmt->fetchAll(\PDO::FETCH_CLASS);
 
-            // Convert the data into an array of Post objects
-            $posts = [];
             foreach ($postsData as $data) {
+
                 $post = new Post();
-                $post->setId($data['id']);
-                $post->setTitle($data['title']);
-                $post->setContent($data['content']);
-                $post->setImageUrl($data['imageUrl']);
-                $post->setCategoryId($data['categoryId']);
-                $post->setAuthorRole($data['authorRole']);
-                $post->setCreatedAt($data['createdAt']);
-                $post->setPostPreview($data['postpreview']);
+                $post->setId($data->id);
+                $post->setTitle($data->title);
+                $post->setContent($data->content);
+                $post->setImageUrl($data->imageUrl);
+                $post->setCategoryId($data->categoryId);
+                $post->setAuthorRole($data->authorRole);
+                $post->setCreatedAt(new \DateTime($data->createdAt));
+                $post->setUpdatedAt(new \DateTime($data->updatedAt));
+                $post->setPostPreview($data->postpreview);
+
                 $posts[] = $post;
             }
 
@@ -201,21 +226,22 @@ class PostManager extends BaseManager
 
     }
 
-     /**
+    /**
      * Retrieves a paginated list of posts.
      *
-     * @param $page The current page number (default is 1).
-     * @param $perPage The number of posts per page.
+     * @param int $page The current page number (default is 1).
+     * @param int $pageSize The number of posts per page.
      *
      * @return array An array containing posts and pagination information.
      */
     public function getPaginatedPosts(int $page, int $pageSize): array
     {
-          if($page < 1){
+        if ($page < 1) {
             $page = 1;
         }
-        
+
         $start = ($page - 1) * $pageSize; // Calculation of starting point for pagination
+
         try {
             // Retrieve the total number of posts
             $totalPosts = $this->getTotalPosts();
@@ -226,31 +252,34 @@ class PostManager extends BaseManager
             $stmt->bindValue(':pageSize', $pageSize, \PDO::PARAM_INT);
             $stmt->execute();
 
-            $postsData = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            // Use setFetchMode to specify the class and fetch mode
+            $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Post::class);
 
-            // Convert the data into an array of Post objects
-            $posts = [];
+            $postsData = $stmt->fetchAll(\PDO::FETCH_CLASS);
+
             foreach ($postsData as $data) {
+
                 $post = new Post();
-                $post->setId($data['id']);
-                $post->setTitle($data['title']);
-                $post->setContent($data['content']);
-                $post->setImageUrl($data['imageUrl']);
-                $post->setCategoryId($data['categoryId']);
-                $post->setAuthorRole($data['authorRole']);
-                $post->setCreatedAt($data['createdAt']);
-                $post->setPostPreview($data['postpreview']);
+                $post->setId($data->id);
+                $post->setTitle($data->title);
+                $post->setContent($data->content);
+                $post->setImageUrl($data->imageUrl);
+                $post->setCategoryId($data->categoryId);
+                $post->setAuthorRole($data->authorRole);
+                $post->setCreatedAt(new \DateTime($data->createdAt));
+                $post->setUpdatedAt(new \DateTime($data->updatedAt));
+                $post->setPostPreview($data->postpreview);
+
                 $posts[] = $post;
             }
-            // Return an array with contacts and pagination information
+
+            // Return an array with posts and pagination information
             return [
-                'posts'    => $posts,
+                'posts'       => $posts,
                 'currentPage' => $page,
                 'totalPages'  => ceil($totalPosts / $pageSize),
             ];
-
-        }
-        catch (ActionNotFoundException $e) {
+        } catch (ActionNotFoundException $e) {
             // Handle exceptions, log errors, or return an empty array
             // Redirect to an admin 500 error page if an exception occurs
             header("Location: 500");
@@ -309,9 +338,6 @@ class PostManager extends BaseManager
                 // For example, you might want to keep the existing image or display an error message.
                 $imageFileName = null; // Set a default value or handle the null case accordingly
             }
-
-            // Get the current date for updating the 'updatedAt' field
-            // $updatedAt = date('Y-m-d H:i:s');
 
             // Step 2: Update the post in the 'Post' table
             $sql  = "UPDATE Post SET title = ?, content = ?, imageUrl = ?, categoryId = ?, authorRole = ?, updatedAt = ?, postpreview = ? WHERE id = ?";

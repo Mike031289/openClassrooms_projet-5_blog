@@ -121,25 +121,22 @@ class User
         return $this;
     }
 
+  
     /**
-     * Get the value of createdAt.
-     *
-     * @return string|null
+     * Get the formatted value of createdAt
      */
-    public function getCreatedAt()
+    public function getCreatedAt(): string
     {
-        return $this->createdAt;
+        $formattedDate = new \DateTime($this->createdAt);
+        return $formattedDate->format('d/m/Y H:i');
     }
 
     /**
-     * Set the value of createdAt.
-     *
-     * @param string $createdAt
-     * @return self
+     * Set the value of createdAt
      */
-    public function setCreatedAt($createdAt): self
+    public function setCreatedAt(\DateTime $createdAt): self
     {
-        $this->createdAt = $createdAt;
+        $this->createdAt = $createdAt->format('Y-m-d H:i:s');
         return $this;
     }
 

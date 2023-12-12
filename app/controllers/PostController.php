@@ -31,18 +31,12 @@ class PostController extends BaseController
     {
         $pageSize = 3; // Set your desired items per page
 
-        // $post = $this->getManager(PostManager::class)->getById($postId);
-
-        // Retrieve post, comments, and user information as needed
-        // $comment = $this->getManager(CommentManager::class)->getTotalCommentsForPost($postId);
-
         $paginationData  = $this->getManager(PostManager::class)->getPaginatedPosts($page,$pageSize);
+
         $categories = $this->getManager(CategoryManager::class)->getAll();
 
         // Check if the user is logged in and pass the user information to the template
         $user = $this->session->getUser();
-
-        // $this->view('blog/posts.html.twig', ['posts' => $posts, 'categories' => $categories, 'user' => $user]);
 
         // Pass the pagination data to the Twig template
         $this->view("blog/posts.html.twig", [
@@ -58,9 +52,8 @@ class PostController extends BaseController
     {
         $pageSize = 50; // Set your desired items per page
 
-        $paginationData = $this->getManager(PostManager::class)->getPostsByCategory($categoryId, $page, $pageSize);
-        // var_dump($paginationData);
-        // die;
+        $paginationData = $this->getManager(PostManager::class)->getPaginatedPostsByCategory($categoryId, $page, $pageSize);
+        
         // Retrieve posts by category, and user information as needed
         $categories = $this->getManager(CategoryManager::class)->getAll();
 
@@ -89,11 +82,11 @@ class PostController extends BaseController
         $user = $this->session->getUser();
 
         // Retrieve post, comments, and user information as needed
-        $post = $this->getManager(PostManager::class)->getById($id);
+        $post = $this->getManager(PostManager::class)->getPostById($id);
 
         if (!$post) {
             // Handle the case where the article does not exist (e.g., redirect, display an error, etc.)
-            header("Location: /mon-blog/404");
+            header("Location: 404");
             exit; // Stop execution to prevent displaying page content
         }
 
@@ -125,7 +118,7 @@ class PostController extends BaseController
         $comments = $this->getManager(CommentManager::class)->getCommentsByPostId($postId);
 
         // Retrieve post, comments, and user information as needed
-        $post = $this->getManager(PostManager::class)->getById($postId);
+        $post = $this->getManager(PostManager::class)->getPostById($postId);
 
         // Display the post with comments
         $this->view('blog/post.html.twig', [

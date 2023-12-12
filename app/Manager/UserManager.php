@@ -141,7 +141,7 @@ class UserManager extends BaseManager
             $user->setUserName($userName);
             $user->setEmail($email);
             $user->setPassWord($hashedPassword);
-            $user->setCreatedAt($createdAt);
+            $user->setCreatedAt(new \DateTime($createdAt));
 
             // Return the User object
             return $user;

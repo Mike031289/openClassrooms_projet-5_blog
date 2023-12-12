@@ -8,15 +8,15 @@ namespace App\Models;
  */
 class Post
 {
-    private int $id;
-    private string $title;
-    private string $postPreview;
-    private string $content;
-    private ?string $imageUrl;
-    private int $categoryId; 
-    private string $authorRole;
-    private string $createdAt;
-    private string $updatedAt;
+    protected int $id;
+    protected string $title;
+    protected string $content;
+    protected ?string $imageUrl;
+    protected int $categoryId; 
+    protected string $authorRole;  
+    protected string $createdAt;
+    protected string $updatedAt;
+    protected string $postpreview;
 
     /**
      * Get the ID of the post.
@@ -162,40 +162,36 @@ class Post
     /**
      * Set the value of createdAt
      */
-    public function setCreatedAt(string $createdAt): self
+    public function setCreatedAt(\DateTime $createdAt): self
     {
-        // Make sure that $createdAt is a string in the format "Y-m-d H:i:s".
-        $dateTime = new \DateTime($createdAt);
-        $this->createdAt = $dateTime->format('Y-m-d H:i:s');
-
+        $this->createdAt = $createdAt->format('Y-m-d H:i:s');
         return $this;
     }
 
-    // /**
-    //  * Get the last update date and time of the post.
-    //  *
-    //  */
-    // public function getUpdatedAt(): \DateTime
-    // {
-    //     return $this->updatedAt;
-    // }
+    /**
+     * Get the last update date and time of the post.
+     */
+    public function getUpdatedAt(): string
+    {
+        $formattedDate = new \DateTime($this->updatedAt);
+        return $formattedDate->format('d/m/Y H:i');
+    }
 
-    // /**
-    //  * Set the last update date and time of the post.
-    //  *
-    //  */
-    // public function setUpdatedAt(\DateTime $updatedAt): self
-    // {
-    //     $this->updatedAt = $updatedAt;
-    //     return $this;
-    // }
+    /**
+     * Set the last update date and time of the post.
+     */
+    public function setUpdatedAt(\DateTime $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt->format('Y-m-d H:i:s');
+        return $this;
+    }
 
     /**
      * Get the value of postPreview
      */
     public function getPostPreview(): string
     {
-        return $this->postPreview;
+        return $this->postpreview;
     }
 
     /**
@@ -203,8 +199,10 @@ class Post
      */
     public function setPostPreview(string $postPreview): self
     {
-        $this->postPreview = $postPreview;
+        $this->postpreview = $postPreview;
 
         return $this;
     }
+
+
 }
