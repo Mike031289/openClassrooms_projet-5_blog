@@ -87,11 +87,11 @@ class AdminController extends BaseController
     public function createPost(): void
     {
         // Retrieve data from the form
-        $title       = htmlspecialchars(FormHelper::post('title'));
-        $content     = htmlspecialchars(FormHelper::post('content'));
+        $title       = FormHelper::post('title');
+        $content     = FormHelper::post('content');
         $postImg     = FormHelper::files('postImage');
-        $categoryId  = htmlspecialchars(FormHelper::post('category'));
-        $postPreview = htmlspecialchars(FormHelper::post('postPreview'));
+        $categoryId  = FormHelper::post('category');
+        $postPreview = FormHelper::post('postPreview');
 
 
         // Retrieve User from the session

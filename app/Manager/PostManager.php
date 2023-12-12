@@ -43,9 +43,10 @@ class PostManager extends BaseManager
             $date = new \DateTime();
             $date->setTimezone(new \DateTimeZone('Europe/Paris')); // Set the timezone if necessary
             $createdAt = $date->format('Y-m-d H:i:s');
+            $updatedAt = $date->format('Y-m-d H:i:s');
 
             // Step 2: Insert the post into the 'Post' table
-            $sql  = "INSERT INTO post (title, content, imageUrl, categoryId, authorRole, createdAt, postpreview) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $sql  = "INSERT INTO post (title, content, imageUrl, categoryId, authorRole, createdAt, updatedAt, postpreview) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(1, $title, \PDO::PARAM_STR);
             $stmt->bindParam(2, $content, \PDO::PARAM_STR);
@@ -53,7 +54,8 @@ class PostManager extends BaseManager
             $stmt->bindParam(4, $categoryId, \PDO::PARAM_INT);
             $stmt->bindParam(5, $authorRole, \PDO::PARAM_STR);
             $stmt->bindParam(6, $createdAt, \PDO::PARAM_STR);
-            $stmt->bindParam(7, $postPreview, \PDO::PARAM_STR);
+            $stmt->bindParam(7, $updatedAt, \PDO::PARAM_STR);
+            $stmt->bindParam(8, $postPreview, \PDO::PARAM_STR);
 
             if (!$stmt->execute()) {
                 throw new ActionNotFoundException();
@@ -68,13 +70,14 @@ class PostManager extends BaseManager
             // Create a new Post object with the inserted data
             $post = new Post();
             $post->setId($id);
-            $post->setTitle($title);
-            $post->setContent($content);
-            $post->setImageUrl($imageFileName);
-            $post->setCategoryId($categoryId);
-            $post->setAuthorRole($authorRole);
+            $post->setTitle(htmlspecialchars($title));
+            $post->setContent(htmlspecialchars($content));
+            $post->setImageUrl(htmlspecialchars($imageFileName));
+            $post->setCategoryId(htmlspecialchars($categoryId));
+            $post->setAuthorRole(htmlspecialchars($authorRole));
             $post->setCreatedAt(new \DateTime($createdAt));
-            $post->setPostPreview($postPreview);
+            $post->setUpdatedAt(new \DateTime($updatedAt));
+            $post->setPostPreview(htmlspecialchars($postPreview));
 
             return $post;
         }
@@ -324,9 +327,26 @@ class PostManager extends BaseManager
         return $uniqueFileName;
     }
 
+    /**
+     * Update a post in the database.
+     *
+     * @param  $id           The ID of the post to update.
+     * @param  $title        The updated title.
+     * @param $content      The updated content.
+     * @param $postImg      The updated image file. Pass null if no update is needed.
+     * @param $categoryId   The updated category ID.
+     * @param $authorRole   The updated author role.
+     * @param $postPreview  The updated post preview.
+     *
+     * @return Post|null The updated Post object or null on failure.
+     */
     public function updatePost(int $id, $title, $content, $postImg, $categoryId, $authorRole, $postPreview): ?Post
     {
         $this->_db->beginTransaction();
+            // Get the current date
+            $date = new \DateTime();
+            $date->setTimezone(new \DateTimeZone('Europe/Paris')); // Set the timezone if necessary
+            $updatedAt = $date->format('Y-m-d H:i:s');
 
         try {
             // Step 1: Check if $postImg is not null before calling uploadImage
@@ -361,13 +381,13 @@ class PostManager extends BaseManager
             // Create a new Post object with the updated data
             $post = new Post();
             $post->setId($id);
-            $post->setTitle($title);
-            $post->setContent($content);
-            $post->setImageUrl($imageFileName);
+            $post->setTitle(htmlspecialchars($title));
+            $post->setContent(htmlspecialchars($content));
+            $post->setImageUrl(htmlspecialchars($imageFileName));
             $post->setCategoryId($categoryId);
-            $post->setAuthorRole($authorRole);
-            $post->setUpdatedAt($updatedAt);
-            $post->setPostPreview($postPreview);
+            $post->setAuthorRole(htmlspecialchars($authorRole));
+            $post->setUpdatedAt(new \DateTime($updatedAt));
+            $post->setPostPreview(htmlspecialchars($postPreview));
 
             return $post;
         }

@@ -138,9 +138,9 @@ class UserManager extends BaseManager
             // Create a new User object with the inserted data
             $user = new User();
             $user->setId($userId);
-            $user->setUserName($userName);
-            $user->setEmail($email);
-            $user->setPassWord($hashedPassword);
+            $user->setUserName(htmlspecialchars($userName));
+            $user->setEmail(htmlspecialchars($email));
+            $user->setPassWord(htmlspecialchars($hashedPassword));
             $user->setCreatedAt(new \DateTime($createdAt));
 
             // Return the User object

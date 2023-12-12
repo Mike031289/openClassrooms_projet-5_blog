@@ -52,9 +52,9 @@ class ContactManager extends BaseManager
             // Create a new Contact object with the inserted data
             $contact = new Contact();
             $contact->setId($id);
-            $contact->setUserName($userName);
-            $contact->setEmail($email);
-            $contact->setMessage($message);
+            $contact->setUserName(htmlspecialchars($userName));
+            $contact->setEmail(htmlspecialchars($email));
+            $contact->setMessage(htmlspecialchars($message));
             $contact->setCreatedAt(new \DateTime($createdAt));
 
             return $contact;

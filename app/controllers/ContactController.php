@@ -42,10 +42,9 @@ class ContactController extends BaseController
     $user = $this->session->getUser();
 
     // Retrieve data from the form
-    $userName = htmlspecialchars(FormHelper::post('userName'));
-    $email    = htmlspecialchars(FormHelper::post('email'));
-    $message  = htmlspecialchars(FormHelper::post('message'));
-
+    $userName = FormHelper::post('userName');
+    $email    = FormHelper::post('email');
+    $message  = FormHelper::post('message');
 
     $errors = [];
     $error  = "Formulaire non soumit, vérifier vos champs de saisie";
