@@ -62,7 +62,7 @@
     {% if posts is empty %}
       <p>Aucun post disponible</p>
     {% else %}
-      {% set latestPost = posts | last %}
+      {% set latestPost = posts|sort|last %}
       <!-- Featured blog post -->
       <a class="card post-preview post-preview-featured lift mb-5 overflow-hidden" href="/../mon-blog/post/{{ latestPost.id }}">
         <div class="card-header">

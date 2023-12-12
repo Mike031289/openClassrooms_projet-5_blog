@@ -8,15 +8,15 @@ namespace App\Models;
  */
 class Post
 {
-    protected int $id;
-    protected string $title;
-    protected string $content;
-    protected ?string $imageUrl;
-    protected int $categoryId; 
-    protected string $authorRole;  
-    protected string $createdAt;
-    protected string $updatedAt;
-    protected string $postpreview;
+    private int $id;
+    private string $title;
+    private string $content;
+    private ?string $imageUrl;
+    private int $categoryId; 
+    private string $authorRole;  
+    private string $createdAt;
+    private string $updatedAt;
+    private string $postpreview;
 
     /**
      * Get the ID of the post.

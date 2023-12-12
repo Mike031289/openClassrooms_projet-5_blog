@@ -89,10 +89,22 @@
               </li>
             {% endif %}
 
-            {% for page in 1..totalPages %}
-              <li class="page-item {% if page == currentPage %}active{% endif %}" aria-current="page">
-                <a class="page-link" href="/../mon-blog/adminDashboard/comments/{{ page }}">{{ page }}</a>
-              </li>
+            {% set maxPagesToShow = 10 %} {# Adjust this value as needed #}
+            {% set startPage = (currentPage - maxPagesToShow / 10)|round %}
+            {% set endPage = startPage + maxPagesToShow - 1 %}
+
+            {% for page in startPage..endPage %}
+              {% if page >= 1 and page <= totalPages %}
+                <li class="page-item {% if page == currentPage %}active{% endif %}" aria-current="page">
+                  <a class="page-link" href="/../mon-blog/adminDashboard/comments/{{ page }}">{{ page }}</a>
+                </li>
+              {% elseif page < 1 %}
+                {# Display nothing or ellipsis for pages before the first page #}
+              {% elseif page > totalPages %}
+                {# Display nothing or ellipsis for pages after the last page #}
+              {% else %}
+                <li class="page-item disabled"><span class="page-link">...</span></li>
+              {% endif %}
             {% endfor %}
 
             {% if currentPage < totalPages %}

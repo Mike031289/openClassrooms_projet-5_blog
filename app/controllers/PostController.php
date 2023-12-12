@@ -50,7 +50,7 @@ class PostController extends BaseController
 
     public function listPostsByCategory( int $categoryId, int $page = 1): void 
     {
-        $pageSize = 50; // Set your desired items per page
+        $pageSize = 30; // Set your desired items per page
 
         $paginationData = $this->getManager(PostManager::class)->getPaginatedPostsByCategory($categoryId, $page, $pageSize);
         

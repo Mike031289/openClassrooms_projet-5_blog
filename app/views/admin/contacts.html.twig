@@ -8,21 +8,11 @@
           <h1 class="page-header-title">
             <div class="page-header-icon">
               {# <i data-feather="list"></i> #}
-              <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <rect x="2" y="7" width="20" height="15" rx="2" ry="2" />
-              <polyline points="2 17 12 10 22 17" />
-              <polyline points="2 10 12 3 22 10" />
-            </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="7" width="20" height="15" rx="2" ry="2"/>
+                <polyline points="2 17 12 10 22 17"/>
+                <polyline points="2 10 12 3 22 10"/>
+              </svg>
             </div>
             Messagerie
           </h1>
@@ -40,10 +30,10 @@
 {% endblock %}
 {% block mainPageContent %}
   <div class="container px-4">
-   <div class="col-auto m-3">
+    <div class="col-auto m-3">
       <h1 class="page-header-title">
         <button class="btn btn-teal btn-icon" type="button">
-        <i class="fas fa-flag"></i>
+          <i class="fas fa-flag"></i>
         </button>
         Messages
       </h1>
@@ -51,28 +41,31 @@
     {% block content %}
       <div class="card card-header-actions m-4 col-lg-7 col-md col-sm">
         {% if contacts %}
-        {% for contact in contacts %}
-        <div class="card card-collapsable m-1">
-        {# <a class="small m-4" href="#">{{ contact.email }}</a> #}
-      <a class="card-header text-info" href="#collapseCardExample" data-bs-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample"> <div class="text-info"><i class="fa fa-user-circle text-info" aria-hidden="true"></i>
-            {{ contact.userName }}</div><span class="small text-muted">{{ contact.email }}</span>
-              <div class="card-collapsable-arrow">
-                <i class="fas fa-chevron-down"></i>
-              </div>
-            </a>
-            <div class="collapse show" id="collapseCardExample">
-              <div class="card-body">
-                {{ contact.message }}
-              </div>
-              <div class="text-end m-5">Envoyé le : 
-                <span class="small text-muted">{{ contact.createdAt }}</span>
+          {% for contact in contacts %}
+            <div class="card card-collapsable m-1">
+              {# <a class="small m-4" href="#">{{ contact.email }}</a> #}
+              <a class="card-header text-info" href="#collapseCardExample" data-bs-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                <div class="text-info">
+                  <i class="fa fa-user-circle text-info" aria-hidden="true"></i>
+                  {{ contact.userName }}</div>
+                <span class="small text-muted">{{ contact.email }}</span>
+                <div class="card-collapsable-arrow">
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+              </a>
+              <div class="collapse show" id="collapseCardExample">
+                <div class="card-body">
+                  {{ contact.message }}
+                </div>
+                <div class="text-end m-5">Envoyé le :
+                  <span class="small text-muted">{{ contact.createdAt }}</span>
+                </div>
               </div>
             </div>
-          </div>
           {% endfor %}
-          {% else %}
-            <p>Pas de contacts disponible sur cette page</p>
-          {% endif %}
+        {% else %}
+          <p>Pas de contacts disponible sur cette page</p>
+        {% endif %}
 
         <!-- Pagination -->
         <nav aria-label="Pagination">
@@ -86,10 +79,24 @@
               </li>
             {% endif %}
 
-            {% for page in 1..totalPages %}
-              <li class="page-item {% if page == currentPage %}active{% endif %}" aria-current="page">
-                <a class="page-link" href="/../mon-blog/adminDashboard/contacts/{{ page }}">{{ page }}</a>
-              </li>
+            {% set maxPagesToShow = 10 %}
+            {# Adjust this value as needed #}
+            {% set startPage = (currentPage - maxPagesToShow / 10)|round %}
+            {% set endPage = startPage + maxPagesToShow - 1 %}
+
+            {% for page in startPage..endPage %}
+              {% if page >= 1 and page <= totalPages %}
+                <li class="page-item {% if page == currentPage %}active{% endif %}" aria-current="page">
+                  <a class="page-link" href="/../mon-blog/adminDashboard/contacts/{{ page }}">{{ page }}</a>
+                </li>
+              {% elseif page < 1 %}
+                {# Display nothing or ellipsis for pages before the first page #}
+              {% elseif page > totalPages %}
+                {# Display nothing or ellipsis for pages after the last page #}
+              {% else %}
+                <li class="page-item disabled">
+                  <span class="page-link">...</span></li>
+              {% endif %}
             {% endfor %}
 
             {% if currentPage < totalPages %}
@@ -101,6 +108,7 @@
             {% endif %}
           </ul>
         </nav>
+
       </div>
     {% endblock %}
 

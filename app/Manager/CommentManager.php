@@ -54,7 +54,8 @@ class CommentManager extends BaseManager
             $comment->setContent(htmlspecialchars($content));
             $comment->setAuthorName(htmlspecialchars($authorName));
             $comment->setPostId($postId);
-            $comment->setCreatedAt($createdAt);
+            $comment->setCreatedAt(new \DateTime($createdAt));
+
 
             return $comment;
         } catch (ActionNotFoundException $e) {
@@ -84,41 +85,6 @@ class CommentManager extends BaseManager
         // Return an array of Comment objects representing the comments
         return $req->fetchAll();
     }
-
-    // /**
-    //  * Get the total number of comments for a specific post.
-    //  *
-    //  * @param $postId The ID of the post.
-    //  *
-    //  * @return int The total number of comments for the post.
-    //  */
-    // public function getTotalCommentsForPost(int $postId): int
-    // {
-    //     $this->_db->beginTransaction();
-
-    //     try {
-    //         // Execute a SQL query to count the total number of comments for the specific post
-    //         $sql  = "SELECT COUNT(*) FROM Comment WHERE postId = :postId";
-    //         $stmt = $this->_db->prepare($sql);
-    //         $stmt->bindParam(':postId', $postId, \PDO::PARAM_INT);
-    //         $stmt->execute();
-
-    //         // Fetch the result
-    //         $totalComments = $stmt->fetchColumn();
-
-    //         // Commit the transaction
-    //         $this->_db->commit();
-
-    //         return $totalComments;
-    //     }
-    //     catch (ActionNotFoundException $e) {
-    //         // Handle the error in case of failure and roll back the transaction
-    //         header("Location: 500");
-    //         $this->_db->rollBack();
-    //         exit;
-    //     }
-    // }
-
     
     /**
      * Retrieves the total number of comments in the 'Comment' table.
@@ -161,18 +127,19 @@ class CommentManager extends BaseManager
             $stmt->bindParam(':perPage', $perPage, \PDO::PARAM_INT);
             $stmt->execute();
 
-            // Fetch the results as an associative array
-            $commentsData = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            // Use setFetchMode to specify the class and fetch mode
+            $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Comment::class);
+
+            $commentsData = $stmt->fetchAll(\PDO::FETCH_OBJ );
 
             // Convert the data into an array of Comment objects
-            $comments = [];
             foreach ($commentsData as $data) {
                 $comment = new Comment();
-                $comment->setId($data['id']);
-                $comment->setContent($data['content']);
-                $comment->setAuthorName($data['authorName']);
-                $comment->setPostId($data['postId']);
-                $comment->setCreatedAt($data['createdAt']);
+                $comment->setId($data->id);
+                $comment->setContent($data->content);
+                $comment->setAuthorName($data->authorName);
+                $comment->setPostId($data->postId);
+                $comment->setCreatedAt(new \DateTime($data->createdAt));
 
                 $comments[] = $comment;
             }
@@ -201,7 +168,7 @@ class CommentManager extends BaseManager
     {
         try {
             // Prepare and execute the SQL query
-            $sql = "SELECT * FROM Comment WHERE id = :commentId";
+            $sql = "SELECT * FROM Comment WHERE id = :commentId ORDER BY createdAt DESC";
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(':commentId', $commentId, \PDO::PARAM_INT);
             $stmt->execute();
@@ -214,12 +181,16 @@ class CommentManager extends BaseManager
                 return null;
             }
 
-            // Assuming you have a Comment class, create an instance and populate it
+            // Use setFetchMode to specify the class and fetch mode
+            $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Comment::class);
+
+            $commentData = $stmt->fetchObject(\PDO::FETCH_OBJ);
+
             $comment = new Comment();
-            $comment->setId($commentData['id']);
-            $comment->setContent($commentData['content']);
-            $comment->setAuthorName($commentData['authorName']);
-            // Populate other properties as needed
+            $comment->setId($commentData->id);
+            $comment->setContent($commentData->content);
+            $comment->setAuthorName($commentData->authorName);
+            $comment->setCreatedAt(new \DateTime($commentData->createdAt));
 
             return $comment;
         
@@ -230,7 +201,7 @@ class CommentManager extends BaseManager
         }
     }
 
-        /**
+    /**
      * Delete a comment from the database by its ID.
      *
      * @param $id The ID of the comment to be deleted.

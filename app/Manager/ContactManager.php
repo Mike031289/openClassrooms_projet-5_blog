@@ -25,6 +25,10 @@ class ContactManager extends BaseManager
     {
         $this->_db->beginTransaction();
 
+        $date = new \DateTime();
+        $date->setTimezone(new \DateTimeZone('Europe/Paris')); // Set the timezone if necessary
+        $createdAt = $date->format('Y-m-d H:i:s');
+
         try {
 
             // Step 2: Insert the contact into the 'Contact' table
@@ -51,7 +55,7 @@ class ContactManager extends BaseManager
             $contact->setUserName($userName);
             $contact->setEmail($email);
             $contact->setMessage($message);
-            $contact->setCreatedAt($createdAt);
+            $contact->setCreatedAt(new \DateTime($createdAt));
 
             return $contact;
         }
@@ -104,18 +108,22 @@ class ContactManager extends BaseManager
             $stmt->bindParam(':perPage', $perPage, \PDO::PARAM_INT);
             $stmt->execute();
 
-            // Fetch the results as an associative array
-            $contactsData = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            // Use setFetchMode to specify the class and fetch mode
+            $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Contact::class);
+
+            // Fetch the results as an Object in array
+            $contactsData = $stmt->fetchAll(\PDO::FETCH_OBJ);
 
             // Convert the data into an array of Contact objects
-            $contacts = [];
+            // $contacts = [];
             foreach ($contactsData as $data) {
                 $contact = new Contact();
-                $contact->setId($data['id']);
-                $contact->setUserName($data['name']);
-                $contact->setEmail($data['email']);
-                $contact->setMessage($data['message']);
-                $contact->setCreatedAt($data['createdAt']);
+                $contact->setId($data->id);
+                $contact->setUserName($data->name);
+                $contact->setEmail($data->email);
+                $contact->setMessage($data->message);
+                $contact->setCreatedAt(new \DateTime($data->createdAt));
+
                 $contacts[] = $contact;
             }
 

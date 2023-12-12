@@ -191,7 +191,7 @@ class PostManager extends BaseManager
             // Use setFetchMode to specify the class and fetch mode
             $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Post::class);
 
-            $postsData = $stmt->fetchAll(\PDO::FETCH_CLASS);
+            $postsData = $stmt->fetchAll(\PDO::FETCH_OBJ);
 
             foreach ($postsData as $data) {
 
@@ -255,7 +255,7 @@ class PostManager extends BaseManager
             // Use setFetchMode to specify the class and fetch mode
             $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Post::class);
 
-            $postsData = $stmt->fetchAll(\PDO::FETCH_CLASS);
+            $postsData = $stmt->fetchAll(\PDO::FETCH_OBJ);
 
             foreach ($postsData as $data) {
 

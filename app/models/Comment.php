@@ -3,11 +3,11 @@ namespace App\Models;
 
 class Comment
 {
-    private $id;
-    private $content;
-    private $authorName;
-    private $postId;
-    private $createdAt;
+    private int $id;
+    private string $content;
+    private string $authorName;
+    private int $postId;
+    private string $createdAt;
 
     /**
      * Get the value of id
@@ -93,13 +93,10 @@ class Comment
     /**
      * Set the value of createdAt
      */
-    public function setCreatedAt(string $createdAt): self
+    public function setCreatedAt(\DateTime $createdAt): self
     {
-        // Make sure that $createdAt is a string in the format "Y-m-d H:i:s".
-        $dateTime = new \DateTime($createdAt);
-        $this->createdAt = $dateTime->format('Y-m-d H:i:s');
-
+        $this->createdAt = $createdAt->format('Y-m-d H:i:s');
         return $this;
     }
-   
+    
 }
