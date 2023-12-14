@@ -42,20 +42,26 @@
   {% endblock %}
 
   {% block section %}
-    <!-- Contenu spécifique de la page 404 -->
-    <div id="layoutError">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-6">
-            <div class="text-center mt-5">
-              <img class="m-5 img-error" src="/../mon-blog/public/assets/error-500-monochrome.svg"/>
-              <p class="lead">
-                Oupss !! Votre requête a échouée veuillez contacter l'administrateur
-              </p>
-            </div>
+    <!-- Contenu spécifique de la page 500 -->
+    <section class="bg-white py-10">
+      <div class="container px-5">
+          <div class="row gx-5 justify-content-center">
+              <div class="col-lg-6">
+                  <div class="text-center mt-4">
+                      <img class="img-fluid p-4" src="/../mon-blog/public/assets/img/error-img/500-error.svg" alt="Erreur 500" />
+                      <p class="lead">Oupss !! Le serveur a rencontré une erreur interne. Veuillez contacter l'administrateur pour plus de détails</p>
+                      <a class="text-arrow-icon" href="/../mon-blog/contact">
+                        <i class="ms-0 me-1" data-feather="arrow-left"></i>
+                          Contacter l'administrateur
+                      </a>
+                  </div>
+              </div>
           </div>
-        </div>
       </div>
-    </div>
+      <div class="svg-border-rounded text-dark">
+          <!-- Rounded SVG Border-->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
+      </div>
+    </section>
   {% endblock %}
 {% endblock %}

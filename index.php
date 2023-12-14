@@ -36,6 +36,6 @@ catch (NoRouteFoundException $e) {
     header("Location: {$config->baseUrl}/404");
 }
 // A décommenter lors de la production
-// catch(ActionNotFoundException $e){
-//     header("Location: {$config->baseUrl}/500");
-// }
+catch(ActionNotFoundException $e){
+    header("Location: {$config->baseUrl}/500");
+}

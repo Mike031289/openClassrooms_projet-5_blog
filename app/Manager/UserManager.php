@@ -67,7 +67,6 @@ class UserManager extends BaseManager
         return $user ? $user : null;
     }
 
-
     /**
      * Create a new user in the database.
      *
@@ -82,11 +81,13 @@ class UserManager extends BaseManager
         // Hash the password
         $hashedPassword = password_hash($passWord, PASSWORD_DEFAULT);
 
-        // Get the current date
-        $createdAt = date('Y-m-d H:i:s');
-
         // Use a transaction to ensure data consistency
         $this->_db->beginTransaction();
+
+        // Get the current date
+        $date = new \DateTime();
+        $date->setTimezone(new \DateTimeZone('Europe/Paris')); // Set the timezone if necessary
+        $createdAt = $date->format('Y-m-d H:i:s');
 
         try {
             // Step 1: Insert the user into the 'user' table
@@ -103,7 +104,7 @@ class UserManager extends BaseManager
             }
 
             // Step 2: Get the ID of the newly created user
-            $userId = $this->_db->lastInsertId();
+            $id = $this->_db->lastInsertId();
 
             // Step 3: Retrieve the roleId from the 'role' table (adjust the SQL query as needed)
             $roleName = 'Visitor'; // Replace with the actual role name
@@ -125,7 +126,7 @@ class UserManager extends BaseManager
             // Step 4: Insert the user ID and role into the 'userrole' table
             $sql  = "INSERT INTO userrole (userId, roleId) VALUES (?, ?)";
             $stmt = $this->_db->prepare($sql);
-            $stmt->bindParam(1, $userId, \PDO::PARAM_INT);
+            $stmt->bindParam(1, $id, \PDO::PARAM_INT);
             $stmt->bindParam(2, $roleId, \PDO::PARAM_INT);
 
             if (!$stmt->execute()) {
@@ -137,7 +138,7 @@ class UserManager extends BaseManager
 
             // Create a new User object with the inserted data
             $user = new User();
-            $user->setId($userId);
+            $user->setId($id);
             $user->setUserName(htmlspecialchars($userName));
             $user->setEmail(htmlspecialchars($email));
             $user->setPassWord(htmlspecialchars($hashedPassword));

@@ -262,6 +262,11 @@ class AdminController extends BaseController
         ]);
     }
 
+    /**
+     * List comments for the admin user with pagination.
+     *
+     * @param int $page The current page number (default is 1).
+     */
     public function listComments(int $page = 1): void
     {
         // Check if the user is logged in and pass the user information to the template
@@ -270,15 +275,15 @@ class AdminController extends BaseController
         // Retrieve User Role from the session
         $userRole = $this->session->getUserRole();
 
-        // Check if the user is not logged in, or the user does not have the 'Admin' role redirect to the login page
-        if ((!$user) || ($userRole !== 'Admin')) {
+        // Check if the user is not logged in, or the user does not have the 'Admin' role, redirect to the login page
+        if (!$user || $userRole !== 'Admin') {
             header('Location: login');
             exit;
         }
 
         $perPage = 3;  // Set your desired items per page
 
-        // Use the getComment method of CommentManager to retrieve coments in the admin side
+        // Use the getComment method of CommentManager to retrieve comments in the admin side
         $paginationData = $this->getManager(CommentManager::class)->getPaginatedComments($page, $perPage);
 
         // Pass the pagination data to the Twig template
@@ -288,7 +293,6 @@ class AdminController extends BaseController
             'currentPage' => $paginationData['currentPage'],
             'totalPages'  => $paginationData['totalPages'],
         ]);
-
     }
 
     /**
@@ -317,6 +321,27 @@ class AdminController extends BaseController
         ]);
     }
 
+    /**
+     * Show the profile of the logged-in user with 'Admin' role.
+     * Redirect to the login page if the user is not logged in or does not have the 'Admin' role.
+     */
+    public function showUserProfile(): void
+    {
+        // Retrieve User from the session
+        $user = $this->session->getUser();
+
+        // Retrieve User Role from the session
+        $userRole = $this->session->getUserRole();
+
+        // Check if the user is not logged in, or the user does not have the 'Admin' role, redirect to the login page
+        if (!$user || $userRole !== 'Admin') {
+            header('Location: login');
+            exit;
+        }
+
+        // Display the admin profile view
+        $this->view("admin/admin-profile.html.twig", ['user' => $user]);
+    }
 
 
 }

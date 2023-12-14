@@ -105,7 +105,7 @@
 	},
 	{
 		"path": "/adminDashboard/admin-profile",
-		"controller":"App\\Controllers\\UserController",
+		"controller":"App\\Controllers\\AdminController",
 		"action": "showUserProfile",
 		"method": "GET",
 		"param": [],

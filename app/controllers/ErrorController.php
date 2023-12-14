@@ -1,5 +1,6 @@
 <?php
 namespace App\Controllers;
+use App\Manager\UserManager;
 
 /**
  * Class ErrorController
@@ -13,7 +14,10 @@ class ErrorController extends BaseController
      */
     public function routeNotFound(): void
     {
-        $this->view('errors/404.html.twig');
+        // Check if the user is logged in and pass the user information to the template
+        $user = $this->session->getUser();
+
+        $this->view('errors/404.html.twig', ['user' => $user]);
     }
 
     /**
@@ -21,6 +25,8 @@ class ErrorController extends BaseController
      */
     public function actionNotFound(): void
     {
-        $this->view('errors/500.html.twig');
+        // Check if the user is logged in and pass the user information to the template
+        $user = $this->session->getUser();
+        $this->view('errors/500.html.twig', ['user' => $user]);
     }
 }
