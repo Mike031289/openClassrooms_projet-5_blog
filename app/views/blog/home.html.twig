@@ -1,15 +1,51 @@
 {% extends 'templates/blogLayout.html.twig' %}
 
 {% set page = 'home' %}
+{% block main %}
+<!-- nav container -->
+{% block navContainer %}
+  <nav class="navbar navbar-marketing navbar-expand-lg bg-dark navbar-dark fixed-top">
+    <div class="container bg-dark px-5">
+      <a class="navbar-brand text-white" href="/../mon-blog">Adjoukou AGBELOU</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i data-feather="menu"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link {% if page == 'home' %}active{% endif %}" href="/../mon-blog">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if page == 'posts' %}active{% endif %}" href="/../mon-blog/posts/{{ 1 }}">Articles</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if page == 'contact' %}active{% endif %}" href="/../mon-blog/contact">Contact</a>
+          </li>
+        </ul>
+        {%if user is defined and user is not null %}
+          <a class="btn fw-500 ms-lg-4 btn-teal {% if page == 'logout' %}active{% endif %}" href="/../mon-blog/logout">
+            Se déconnecter
+            <i class="ms-2" data-feather="log-out"></i>
+          </a>
+        {% else %}
 
+          <a class="btn fw-500 ms-lg-4 btn-white {% if page == 'login' %}active{% endif %}" href="/../mon-blog/login">
+            Se connecter
+            <i class="ms-2" data-feather="log-in"></i>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+{% endblock %}
 {% block header %}
   <!-- Page Header-->
-  <header class="page-header-ui page-header-ui-light bg-white">
-    <div class="page-header-ui-content pt-5">
+  <header id="home-header" class="page-header-ui page-header-ui-light bg-white bg-img-cover">
+    <div class="page-header-ui-content">
       <div class="container px-5">
         <div class="row gx-5 align-items-center">
           <div class="col-lg-6">
-            <h1 class="page-header-ui-title">Build your next project faster with SB UI Kit Pro</h1>
+            <h1 class="page-header-ui-title">Développeur Concepteur D'Application PHP/SYMFONY</h1>
             <p class="page-header-ui-text mb-5">Welcome to SB UI Kit Pro, a toolkit for building beautiful web interfaces, created by the development team at Start Bootstrap.</p>
             <div class="d-flex flex-column flex-sm-row">
               <a class="btn btn-lg btn-primary fw-500 me-sm-3 mb-3 mb-sm-0" href="#explore">
@@ -19,7 +55,7 @@
               <a class="btn btn-lg btn-primary-soft text-primary fw-500" href="https://docs.startbootstrap.com/sb-ui-kit-pro/quickstart" target="_blank">Documentation</a>
             </div>
           </div>
-          <div class="col-lg-6 d-none d-lg-block" data-aos-delay="100"><img class="img-fluid" src="/../mon-blog/public/assets/img/illustrations/programming.svg" alt="..."/></div>
+          <div class="col-lg-6 d-none d-lg-block" data-aos-delay="100"><img class="img-fluid" src="/../mon-blog/public/assets/img/backgrounds/Adjoukou-Agbelou-img.jpg" alt="Adjoukou AGBELOU Développeur Concepteur D'application"/>
         </div>
       </div>
     </div>
@@ -30,6 +66,7 @@
       </svg>
     </div>
   </header>
+  <!-- Ajout du style CSS pour le fond -->
 {% endblock %}
 
 {% block section %}
@@ -94,4 +131,5 @@
       </div>
     </div>
   </div>
+{% endblock %}
 {% endblock %}
