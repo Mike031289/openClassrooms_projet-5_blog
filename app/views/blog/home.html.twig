@@ -2,134 +2,144 @@
 
 {% set page = 'home' %}
 {% block main %}
-<!-- nav container -->
-{% block navContainer %}
-  <nav class="navbar navbar-marketing navbar-expand-lg bg-dark navbar-dark fixed-top">
-    <div class="container bg-dark px-5">
-      <a class="navbar-brand text-white" href="/../mon-blog">Adjoukou AGBELOU</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i data-feather="menu"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link {% if page == 'home' %}active{% endif %}" href="/../mon-blog">Accueil</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {% if page == 'posts' %}active{% endif %}" href="/../mon-blog/posts/{{ 1 }}">Articles</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {% if page == 'contact' %}active{% endif %}" href="/../mon-blog/contact">Contact</a>
-          </li>
-        </ul>
-        {%if user is defined and user is not null %}
-          <a class="btn fw-500 ms-lg-4 btn-teal {% if page == 'logout' %}active{% endif %}" href="/../mon-blog/logout">
-            Se déconnecter
-            <i class="ms-2" data-feather="log-out"></i>
-          </a>
-        {% else %}
+  <!-- nav container -->
+  {% block navContainer %}
+    <nav class="navbar navbar-marketing navbar-expand-lg bg-dark navbar-dark fixed-top">
+      <div class="container bg-dark px-5">
+        <a class="navbar-brand text-white" href="/../mon-blog">Adjoukou AGBELOU</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <i data-feather="menu"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link {% if page == 'home' %}active{% endif %}" href="/../mon-blog">Accueil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if page == 'posts' %}active{% endif %}" href="/../mon-blog/posts/{{ 1 }}">Articles</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if page == 'contact' %}active{% endif %}" href="/../mon-blog/contact">Contact</a>
+            </li>
+          </ul>
+          {%if user is defined and user is not null %}
+            <a class="btn fw-500 ms-lg-4 btn-teal {% if page == 'logout' %}active{% endif %}" href="/../mon-blog/logout">
+              Se déconnecter
+              <i class="ms-2" data-feather="log-out"></i>
+            </a>
+          {% else %}
 
-          <a class="btn fw-500 ms-lg-4 btn-white {% if page == 'login' %}active{% endif %}" href="/../mon-blog/login">
-            Se connecter
-            <i class="ms-2" data-feather="log-in"></i>
-          </a>
-        {% endif %}
-      </div>
-    </div>
-  </nav>
-{% endblock %}
-{% block header %}
-  <!-- Page Header-->
-  <header id="home-header" class="page-header-ui page-header-ui-light bg-white bg-img-cover">
-    <div class="page-header-ui-content">
-      <div class="container px-5">
-        <div class="row gx-5 align-items-center">
-          <div class="col-lg-6">
-            <h1 class="page-header-ui-title">Développeur Concepteur D'Application PHP/SYMFONY</h1>
-            <p class="page-header-ui-text mb-5">Welcome to SB UI Kit Pro, a toolkit for building beautiful web interfaces, created by the development team at Start Bootstrap.</p>
-            <div class="d-flex flex-column flex-sm-row">
-              <a class="btn btn-lg btn-primary fw-500 me-sm-3 mb-3 mb-sm-0" href="#explore">
-                Explore Pages
-                <i class="ms-2" data-feather="arrow-right"></i>
-              </a>
-              <a class="btn btn-lg btn-primary-soft text-primary fw-500" href="https://docs.startbootstrap.com/sb-ui-kit-pro/quickstart" target="_blank">Documentation</a>
-            </div>
-          </div>
-          <div class="col-lg-6 d-none d-lg-block" data-aos-delay="100"><img class="img-fluid" src="/../mon-blog/public/assets/img/backgrounds/Adjoukou-Agbelou-img.jpg" alt="Adjoukou AGBELOU Développeur Concepteur D'application"/>
+            <a class="btn fw-500 ms-lg-4 btn-white {% if page == 'login' %}active{% endif %}" href="/../mon-blog/login">
+              Se connecter
+              <i class="ms-2" data-feather="log-in"></i>
+            </a>
+          {% endif %}
         </div>
       </div>
-    </div>
-    <div class="svg-border-rounded text-light">
+    </nav>
+  {% endblock %}
+  {% block header %}
+    <!-- Page Header-->
+    <header id="home-header" class="page-header-ui page-header-ui-light bg-white bg-img-cover">
+      <div class="page-header-ui-content">
+        <div class="container px-5">
+          <div class="row gx-5 align-items-center">
+            <div class="col-lg-6">
+              <h1 class="page-header-ui-title">Développeur Concepteur D'Application PHP/SYMFONY</h1>
+              <p class="page-header-ui-text mb-5">Welcome to SB UI Kit Pro, a toolkit for building beautiful web interfaces, created by the development team at Start Bootstrap.</p>
+              <div class="d-flex flex-column flex-sm-row">
+                <a class="btn btn-lg btn-secondary fw-500 me-sm-3 mb-3 mb-sm-0" href="/../mon-blog/contact">
+                Contacter moi
+                  <i class="ms-2" data-feather="arrow-right"></i>
+                </a>
+                <a class="btn btn-lg btn-secondary-soft text-secondary fw-500" href="/../mon-blog/public/assets/img/mon-cv/CV_Stage_Alternance-Adjoukou_AGBELOU.pdf" target="_blank"> <i class="fas fa-file-pdf"></i> Télécharger mon CV
+                </a>
+              </div>
+            </div>
+            <div class="col-lg-6 d-none d-lg-block" data-aos-delay="100"><img class="img-fluid" src="/../mon-blog/public/assets/img/backgrounds/Adjoukou-Agbelou-img.jpg" alt="Adjoukou AGBELOU Développeur Concepteur D'application"/>
+          </div>
+        </div>
+      </div>
+      <div class="svg-border-rounded text-light">
+        <!-- Rounded SVG Border-->
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 144.54 17.34" preserveaspectratio="none" fill="currentColor">
+          <path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path>
+        </svg>
+      </div>
+    </header>
+    <!-- Ajout du style CSS pour le fond -->
+  {% endblock %}
+
+  <!-- Page Section-->
+  <section class="bg-light py-10">
+    {% block section %}
+      <div class="container px-5">
+          <div class="row gx-5 justify-content-center">
+            <div class="col-lg-8">
+              <div class="text-center mb-10">
+                <div class="badge rounded-pill bg-primary-soft text-primary badge-marketing mb-3">12 Demos!</div>
+                <h2>Landing Pages</h2>
+                <p class="lead">After purchasing SB UI Kit Pro, you will gain access to these professionally coded, pre-built landing page templates!</p>
+              </div>
+            </div>
+          </div>
+        <div class="row gx-5 text-center">
+          <div class="col-lg-4 mb-5">
+            <h6 class="mb-3">Demo 1 - Multipurpose</h6>
+            <a class="d-block rounded-3 lift lift-lg" href="landing-multipurpose.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-multipurpose.png"/></a>
+          </div>
+          <div class="col-lg-4 mb-5">
+            <h6 class="mb-3">Demo 2 - Mobile App</h6>
+            <a class="d-block rounded-3 lift lift-lg" href="landing-app-mobile.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-app-mobile.png"/></a>
+          </div>
+          <div class="col-lg-4 mb-5">
+            <h6 class="mb-3">Demo 3 - Desktop App</h6>
+            <a class="d-block rounded-3 lift lift-lg" href="landing-app-desktop.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-app-desktop.png"/></a>
+          </div>
+          <div class="col-lg-4 mb-5">
+            <h6 class="mb-3">Demo 4 - Agency</h6>
+            <a class="d-block rounded-3 lift lift-lg" href="landing-agency.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-agency.png"/></a>
+          </div>
+          <div class="col-lg-4 mb-5">
+            <h6 class="mb-3">Demo 5 - Lead Capture</h6>
+            <a class="d-block rounded-3 lift lift-lg" href="landing-lead-capture.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-lead-capture.png"/></a>
+          </div>
+          <div class="col-lg-4 mb-5">
+            <h6 class="mb-3">Demo 6 - Press</h6>
+            <a class="d-block rounded-3 lift lift-lg" href="landing-press.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-press.png"/></a>
+          </div>
+          <div class="col-lg-4 mb-5">
+            <h6 class="mb-3">Demo 7 - Directory</h6>
+            <a class="d-block rounded-3 lift lift-lg" href="landing-directory.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-directory.png"/></a>
+          </div>
+          <div class="col-lg-4 mb-5">
+            <h6 class="mb-3">Demo 8 - Rental</h6>
+            <a class="d-block rounded-3 lift lift-lg" href="landing-rental.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-rental.png"/></a>
+          </div>
+          <div class="col-lg-4 mb-5">
+            <h6 class="mb-3">Demo 9 - Real Estate</h6>
+            <a class="d-block rounded-3 lift lift-lg" href="landing-real-estate.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-real-estate.png"/></a>
+          </div>
+          <div class="col-lg-4 mb-5">
+            <h6 class="mb-3">Demo 10 - Classifieds</h6>
+            <a class="d-block rounded-3 lift lift-lg" href="landing-classifieds.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-classifieds.png"/></a>
+          </div>
+          <div class="col-lg-4 mb-5">
+            <h6 class="mb-3">Demo 11 - Resume</h6>
+            <a class="d-block rounded-3 lift lift-lg" href="landing-resume.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-resume.png"/></a>
+          </div>
+          <div class="col-lg-4 mb-5">
+            <h6 class="mb-3">Demo 12 - Portfolio</h6>
+            <a class="d-block rounded-3 lift lift-lg" href="landing-portfolio.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-portfolio.png"/></a>
+          </div>
+        </div>
+      </div>
+    {% endblock %}
+    <div class="svg-border-rounded text-dark">
       <!-- Rounded SVG Border-->
       <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 144.54 17.34" preserveaspectratio="none" fill="currentColor">
         <path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path>
       </svg>
     </div>
-  </header>
-  <!-- Ajout du style CSS pour le fond -->
-{% endblock %}
-
-{% block section %}
-  <div class="container px-5">
-    <div class="row gx-5 justify-content-center">
-      <div class="col-lg-8">
-        <div class="text-center mb-10">
-          <div class="badge rounded-pill bg-primary-soft text-primary badge-marketing mb-3">12 Demos!</div>
-          <h2>Landing Pages</h2>
-          <p class="lead">After purchasing SB UI Kit Pro, you will gain access to these professionally coded, pre-built landing page templates!</p>
-        </div>
-      </div>
-    </div>
-    <div class="row gx-5 text-center">
-      <div class="col-lg-4 mb-5">
-        <h6 class="mb-3">Demo 1 - Multipurpose</h6>
-        <a class="d-block rounded-3 lift lift-lg" href="landing-multipurpose.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-multipurpose.png"/></a>
-      </div>
-      <div class="col-lg-4 mb-5">
-        <h6 class="mb-3">Demo 2 - Mobile App</h6>
-        <a class="d-block rounded-3 lift lift-lg" href="landing-app-mobile.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-app-mobile.png"/></a>
-      </div>
-      <div class="col-lg-4 mb-5">
-        <h6 class="mb-3">Demo 3 - Desktop App</h6>
-        <a class="d-block rounded-3 lift lift-lg" href="landing-app-desktop.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-app-desktop.png"/></a>
-      </div>
-      <div class="col-lg-4 mb-5">
-        <h6 class="mb-3">Demo 4 - Agency</h6>
-        <a class="d-block rounded-3 lift lift-lg" href="landing-agency.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-agency.png"/></a>
-      </div>
-      <div class="col-lg-4 mb-5">
-        <h6 class="mb-3">Demo 5 - Lead Capture</h6>
-        <a class="d-block rounded-3 lift lift-lg" href="landing-lead-capture.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-lead-capture.png"/></a>
-      </div>
-      <div class="col-lg-4 mb-5">
-        <h6 class="mb-3">Demo 6 - Press</h6>
-        <a class="d-block rounded-3 lift lift-lg" href="landing-press.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-press.png"/></a>
-      </div>
-      <div class="col-lg-4 mb-5">
-        <h6 class="mb-3">Demo 7 - Directory</h6>
-        <a class="d-block rounded-3 lift lift-lg" href="landing-directory.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-directory.png"/></a>
-      </div>
-      <div class="col-lg-4 mb-5">
-        <h6 class="mb-3">Demo 8 - Rental</h6>
-        <a class="d-block rounded-3 lift lift-lg" href="landing-rental.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-rental.png"/></a>
-      </div>
-      <div class="col-lg-4 mb-5">
-        <h6 class="mb-3">Demo 9 - Real Estate</h6>
-        <a class="d-block rounded-3 lift lift-lg" href="landing-real-estate.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-real-estate.png"/></a>
-      </div>
-      <div class="col-lg-4 mb-5">
-        <h6 class="mb-3">Demo 10 - Classifieds</h6>
-        <a class="d-block rounded-3 lift lift-lg" href="landing-classifieds.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-classifieds.png"/></a>
-      </div>
-      <div class="col-lg-4 mb-5">
-        <h6 class="mb-3">Demo 11 - Resume</h6>
-        <a class="d-block rounded-3 lift lift-lg" href="landing-resume.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-resume.png"/></a>
-      </div>
-      <div class="col-lg-4 mb-5">
-        <h6 class="mb-3">Demo 12 - Portfolio</h6>
-        <a class="d-block rounded-3 lift lift-lg" href="landing-portfolio.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-portfolio.png"/></a>
-      </div>
-    </div>
-  </div>
-{% endblock %}
+  </section>
 {% endblock %}
