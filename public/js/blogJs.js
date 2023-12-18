@@ -53,8 +53,16 @@ window.addEventListener('DOMContentLoaded', event => {
     // Collapse the navbar when page is scrolled
     document.addEventListener('scroll', navbarCollapse);
 
+    // the annimation and display projets in portofolio part
+    AOS.init({
+        disable: 'mobile',
+        duration: 600,
+        once: true,
+    });
+
 });
 
+// navbar animation when scrolling
 let scrollPos = 0;
 const mainNav = document.getElementById('mainNav');
 const headerHeight = mainNav.clientHeight;
@@ -77,4 +85,5 @@ window.addEventListener('scroll', function () {
     }
     scrollPos = currentTop;
 });
+
 

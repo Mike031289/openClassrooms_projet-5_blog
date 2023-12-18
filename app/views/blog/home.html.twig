@@ -4,8 +4,8 @@
 {% block main %}
   <!-- nav container -->
   {% block navContainer %}
-    <nav class="navbar navbar-marketing navbar-expand-lg bg-dark navbar-dark fixed-top">
-      <div class="container bg-dark px-5">
+    <nav class="navbar navbar-marketing navbar-expand-lg bg-secondary navbar-dark fixed-top">
+      <div class="container bg-secondary px-5">
         <a class="navbar-brand text-white" href="/../mon-blog">Adjoukou AGBELOU</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <i data-feather="menu"></i>
@@ -44,12 +44,14 @@
       <div class="page-header-ui-content">
         <div class="container px-5">
           <div class="row gx-5 align-items-center">
-            <div class="col-lg-6">
-              <h1 class="page-header-ui-title">Développeur Concepteur D'Application PHP/SYMFONY</h1>
+            <div class="col-lg-6 d-lg-none" data-aos-delay="100"><img class="img-fluid" src="/../mon-blog/public/assets/img/backgrounds/Adjoukou-Agbelou-img.jpg" alt="Adjoukou AGBELOU Développeur Concepteur D'application"/>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <h1 class="page-header-ui-title mt-5">Développeur Concepteur D'Application PHP/SYMFONY</h1>
               <p class="page-header-ui-text mb-5">Welcome to SB UI Kit Pro, a toolkit for building beautiful web interfaces, created by the development team at Start Bootstrap.</p>
               <div class="d-flex flex-column flex-sm-row">
-                <a class="btn btn-lg btn-secondary fw-500 me-sm-3 mb-3 mb-sm-0" href="/../mon-blog/contact">
-                  Contacter moi
+                <a class="btn btn-lg btn-secondary fw-500 me-sm-3 mb-3 mb-sm-0" href="tel:+33662272975">
+                  Appeler Ici
                   <i class="ms-2" data-feather="arrow-right"></i>
                 </a>
                 <a class="btn btn-lg btn-secondary-soft text-secondary fw-500" href="/../mon-blog/public/assets/img/mon-cv/CV_Stage_Alternance-Adjoukou_AGBELOU.pdf" target="_blank">
@@ -69,81 +71,227 @@
           </svg>
         </div>
       </header>
-      <!-- Ajout du style CSS pour le fond -->
     {% endblock %}
 
     <!-- Page Section-->
     <section class="bg-light py-10">
       {% block section %}
+
         <div class="container px-5">
-          <div class="row gx-5 justify-content-center">
-            <div class="col-lg-8">
-              <div class="text-center mb-10">
-                <div class="badge rounded-pill bg-primary-soft text-primary badge-marketing mb-3">12 Demos!</div>
-                <h2>Landing Pages</h2>
-                <p class="lead">After purchasing SB UI Kit Pro, you will gain access to these professionally coded, pre-built landing page templates!</p>
+          <h1 class="text-center mb-5 text-secondary">COMPETENCES</h1>
+          <div class="row gx-5">
+
+            <div class="col-lg-4 mb-5 mb-lg-0">
+              <div class="icon-stack icon-stack-lg bg-purple-soft text-purple mb-4">
+                <i data-feather="book"></i>
               </div>
+              <h3 class="text-secondary">Analyse et Recueil de Besoins</h3>
+              <p class="mb-5">Je suis spécialisé dans l'analyse exhaustive des besoins clients et la rédaction précise de cahiers des charges pour garantir le succès des projets</p>
+            </div>
+
+            <div class="col-lg-4 mb-5 mb-lg-0">
+              <div class="icon-stack icon-stack-lg bg-purple-soft text-purple mb-4">
+                <i data-feather="layout"></i>
+              </div>
+              <h3 class="text-secondary">CMS</h3>
+              <p class="mb-5">Compétent dans le développement d'applications web avec expertise particulière dans la création et la personnalisation de sites en CMS, notamment avec WordPress</p>
+            </div>
+
+            <div class="col-lg-4 mb-5 mb-lg-0">
+              <div class="icon-stack icon-stack-lg bg-purple-soft text-purple mb-4">
+                <i data-feather="layers"></i>
+              </div>
+              <h3 class="text-secondary">Conception et Modelisation de Données</h3>
+              <p class="mb-5">Spécialisé dans la modélisation avec UML, la création de cas d'utilisation (Use Case) et la conception de modèles conceptuels de données (MCD), garantissant une représentation visuelle précise des systèmes</p>
+            </div>
+
+            <div class="col-lg-4 mb-5 mb-lg-0">
+              <div class="icon-stack icon-stack-lg bg-purple-soft text-purple mb-4">
+                <i data-feather="github"></i>
+              </div>
+              <h3 class="text-secondary">Versioning du Projet</h3>
+              <p class="mb-5">Expérience approfondie dans le versioning des projets avec Git, GitHub, et d'autres outils, assurant une gestion efficace des modifications, la collaboration transparente, et le suivi du développement logiciel</p>
+            </div>
+
+            <div class="col-lg-4 mb-5 mb-lg-0">
+              <div class="icon-stack icon-stack-lg bg-purple-soft text-purple mb-4">
+                <i data-feather="smartphone"></i>
+              </div>
+              <h3 class="text-secondary">Responsive Design Moderne</h3>
+              <p class="mb-5">Expert en conception responsive avec une approche moderne, utilisant Bootstrap, CSS, HTML, JavaScript, et jQuery pour créer des interfaces web dynamiques et adaptées à toutes les tailles d'écrans</p>
+            </div>
+
+            <div class="col-lg-4">
+              <div class="icon-stack icon-stack-lg bg-purple-soft text-purple mb-4">
+                <i data-feather="code"></i>
+              </div>
+              <h3 class="text-secondary">Programmation Orienté Objet</h3>
+              <p class="mb-5">Maîtrise avancée de la programmation orientée objet en PHP 8, permettant la création de code modulaire, réutilisable et structuré pour des applications web robustes et évolutives</p>
+            </div>
+            
+          </div>
+        </div>
+
+      {% endblock %}
+    </section>
+    
+<h1 class="text-center p-5 bg-white mb-0 text-info">PROJETS REALISÉS</h1>
+
+    <section class="bg-dark py-10 text-light">
+      <!-- Le contenu de votre première diapositive -->
+      <div class="container px-5">
+        <div class="row gx-5 align-items-center justify-content-center">
+          <div class="col-md-9 col-lg-6 order-1 order-lg-0" data-aos="fade-right">
+            <div class="content-skewed content-skewed-right">
+              <img class="content-skewed-item img-fluid shadow-lg rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-portfolio.png" alt="..."/>
             </div>
           </div>
-          <div class="row gx-5 text-center">
-            <div class="col-lg-4 mb-5">
-              <h6 class="mb-3">Demo 1 - Multipurpose</h6>
-              <a class="d-block rounded-3 lift lift-lg" href="landing-multipurpose.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-multipurpose.png"/></a>
+          <div class="col-lg-6 order-0 order-lg-1 mb-5 mb-lg-0" data-aos="fade-left">
+            <div class="mb-5 text-light">
+              <h2 class="text-info">ASI-BAT</h2>
+              <p class="lead">When you purchase this UI Kit, you get access to a robust suite of powerful tools and components to help you build your next landing page quickly and easily.</p>
             </div>
-            <div class="col-lg-4 mb-5">
-              <h6 class="mb-3">Demo 2 - Mobile App</h6>
-              <a class="d-block rounded-3 lift lift-lg" href="landing-app-mobile.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-app-mobile.png"/></a>
-            </div>
-            <div class="col-lg-4 mb-5">
-              <h6 class="mb-3">Demo 3 - Desktop App</h6>
-              <a class="d-block rounded-3 lift lift-lg" href="landing-app-desktop.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-app-desktop.png"/></a>
-            </div>
-            <div class="col-lg-4 mb-5">
-              <h6 class="mb-3">Demo 4 - Agency</h6>
-              <a class="d-block rounded-3 lift lift-lg" href="landing-agency.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-agency.png"/></a>
-            </div>
-            <div class="col-lg-4 mb-5">
-              <h6 class="mb-3">Demo 5 - Lead Capture</h6>
-              <a class="d-block rounded-3 lift lift-lg" href="landing-lead-capture.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-lead-capture.png"/></a>
-            </div>
-            <div class="col-lg-4 mb-5">
-              <h6 class="mb-3">Demo 6 - Press</h6>
-              <a class="d-block rounded-3 lift lift-lg" href="landing-press.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-press.png"/></a>
-            </div>
-            <div class="col-lg-4 mb-5">
-              <h6 class="mb-3">Demo 7 - Directory</h6>
-              <a class="d-block rounded-3 lift lift-lg" href="landing-directory.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-directory.png"/></a>
-            </div>
-            <div class="col-lg-4 mb-5">
-              <h6 class="mb-3">Demo 8 - Rental</h6>
-              <a class="d-block rounded-3 lift lift-lg" href="landing-rental.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-rental.png"/></a>
-            </div>
-            <div class="col-lg-4 mb-5">
-              <h6 class="mb-3">Demo 9 - Real Estate</h6>
-              <a class="d-block rounded-3 lift lift-lg" href="landing-real-estate.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-real-estate.png"/></a>
-            </div>
-            <div class="col-lg-4 mb-5">
-              <h6 class="mb-3">Demo 10 - Classifieds</h6>
-              <a class="d-block rounded-3 lift lift-lg" href="landing-classifieds.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-classifieds.png"/></a>
-            </div>
-            <div class="col-lg-4 mb-5">
-              <h6 class="mb-3">Demo 11 - Resume</h6>
-              <a class="d-block rounded-3 lift lift-lg" href="landing-resume.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-resume.png"/></a>
-            </div>
-            <div class="col-lg-4 mb-5">
-              <h6 class="mb-3">Demo 12 - Portfolio</h6>
-              <a class="d-block rounded-3 lift lift-lg" href="landing-portfolio.html"><img class="img-fluid rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-portfolio.png"/></a>
+            <div class="row gx-5">
+              <div class="col-md-6 mb-4">
+                <h6 class="text-info">Landing Pages</h6>
+                <p class="mb-2 small">We've crafted landing page examples for many popular business and product types.</p>
+                <a class="small text-arrow-icon" href="#!">
+                  Learn More
+                  <i data-feather="arrow-right"></i>
+                </a>
+              </div>
+              <!-- Ajoutez d'autres éléments au besoin -->
             </div>
           </div>
         </div>
-      {% endblock %}
-      <div class="svg-border-rounded text-white">
-        <!-- Rounded SVG Border-->
-        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 144.54 17.34" preserveaspectratio="none" fill="currentColor">
-          <path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path>
-        </svg>
       </div>
     </section>
+
+    <section class="bg-light py-10 text-dark">
+      <!-- Le contenu de votre deuxième diapositive -->
+      <div class="container px-5">
+        <div class="row gx-5 align-items-center justify-content-center">
+          <div class="col-md-9 col-lg-6 order-0 order-lg-1 mb-5" data-aos="fade-left">
+            <div class="content-skewed content-skewed-left">
+              <img class="content-skewed-item img-fluid shadow-lg rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-portfolio.png" alt="..."/>
+            </div>
+          </div>
+          <div class="col-lg-6 order-1 order-lg-0 mb-5 mb-lg-0" data-aos="fade-right">
+            <div class="mb-5 text-dark">
+              <h2 class="text-info">LES BATISSEURS</h2>
+              <p class="lead">When you purchase this UI Kit, you get access to a robust suite of powerful tools and components to help you build your next landing page quickly and easily.</p>
+            </div>
+            <div class="row gx-5">
+              <div class="col-md-6 mb-4">
+                <h6 class="text-info">Landing Pages</h6>
+                <p class="mb-2 small">We've crafted landing page examples for many popular business and product types.</p>
+                <a class="small text-arrow-icon" href="#!">
+                  Learn More
+                  <i data-feather="arrow-right"></i>
+                </a>
+              </div>
+              <!-- Ajoutez d'autres éléments au besoin -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-dark py-10 text-light">
+      <!-- Le contenu de votre première diapositive -->
+      <div class="container px-5">
+        <div class="row gx-5 align-items-center justify-content-center">
+          <div class="col-md-9 col-lg-6 order-1 order-lg-0" data-aos="fade-right">
+            <div class="content-skewed content-skewed-right">
+              <img class="content-skewed-item img-fluid shadow-lg rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-portfolio.png" alt="..."/>
+            </div>
+          </div>
+          <div class="col-lg-6 order-0 order-lg-1 mb-5 mb-lg-0" data-aos="fade-left">
+            <div class="mb-5 text-light">
+              <h2 class="text-info">MON-BLOG Espace Administratieur</h2>
+              <p class="lead">When you purchase this UI Kit, you get access to a robust suite of powerful tools and components to help you build your next landing page quickly and easily.</p>
+            </div>
+            <div class="row gx-5">
+              <div class="col-md-6 mb-4">
+                <h6 class="text-info">Landing Pages</h6>
+                <p class="mb-2 small">We've crafted landing page examples for many popular business and product types.</p>
+                <a class="small text-arrow-icon" href="#!">
+                  Learn More
+                  <i data-feather="arrow-right"></i>
+                </a>
+              </div>
+              <!-- Ajoutez d'autres éléments au besoin -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-light py-10 text-dark">
+      <!-- Le contenu de votre deuxième diapositive -->
+      <div class="container px-5">
+        <div class="row gx-5 align-items-center justify-content-center">
+          <div class="col-md-9 col-lg-6 order-0 order-lg-1 mb-5" data-aos="fade-left">
+            <div class="content-skewed content-skewed-left">
+              <img class="content-skewed-item img-fluid shadow-lg rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-portfolio.png" alt="..."/>
+            </div>
+          </div>
+          <div class="col-lg-6 order-1 order-lg-0 mb-5 mb-lg-0" data-aos="fade-right">
+            <div class="mb-5 text-dark">
+              <h2 class="text-info">MON-BLOG Blog</h2>
+              <p class="lead">When you purchase this UI Kit, you get access to a robust suite of powerful tools and components to help you build your next landing page quickly and easily.</p>
+            </div>
+            <div class="row gx-5">
+              <div class="col-md-6 mb-4">
+                <h6 class="text-info">Landing Pages</h6>
+                <p class="mb-2 small">We've crafted landing page examples for many popular business and product types.</p>
+                <a class="small text-arrow-icon" href="#!">
+                  Learn More
+                  <i data-feather="arrow-right"></i>
+                </a>
+              </div>
+              <!-- Ajoutez d'autres éléments au besoin -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-dark py-10 text-light">
+      <!-- Le contenu de votre première diapositive -->
+      <div class="container px-5">
+        <div class="row gx-5 align-items-center justify-content-center">
+          <div class="col-md-9 col-lg-6 order-1 order-lg-0" data-aos="fade-right">
+            <div class="content-skewed content-skewed-right">
+              <img class="content-skewed-item img-fluid shadow-lg rounded-3" src="https://assets.startbootstrap.com/img/screenshots-product-pages/sb-ui-kit-pro/landing-portfolio.png" alt="..."/>
+            </div>
+          </div>
+          <div class="col-lg-6 order-0 order-lg-1 mb-5 mb-lg-0" data-aos="fade-left">
+            <div class="mb-5 text-light">
+              <h2 class="text-info">Page Comming Soon</h2>
+              <p class="lead">When you purchase this UI Kit, you get access to a robust suite of powerful tools and components to help you build your next landing page quickly and easily.</p>
+            </div>
+            <div class="row gx-5">
+              <div class="col-md-6 mb-4">
+                <h6 class="text-info">Landing Pages</h6>
+                <p class="mb-2 small">We've crafted landing page examples for many popular business and product types.</p>
+                <a class="small text-arrow-icon" href="#!">
+                  Learn More
+                  <i data-feather="arrow-right"></i>
+                </a>
+              </div>
+              <!-- Ajoutez d'autres éléments au besoin -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- Répétez le schéma pour les sections suivantes -->
+
+
+    {# </div> #}
+
     <section class="bg-white py-10">
       <div class="container px-5">
         <div class="text-uppercase-expanded small mb-2">Contact</div>

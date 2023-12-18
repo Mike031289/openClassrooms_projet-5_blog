@@ -188,7 +188,7 @@ class UserController extends BaseController
             header('Location: adminDashboard');
             exit;
         } else if ($userRole == "Visitor") {
-            header('Location: posts/1');
+            header('Location: /../mon-blog/');
             exit;
         }
 

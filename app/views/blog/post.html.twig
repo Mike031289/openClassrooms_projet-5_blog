@@ -4,8 +4,8 @@
 {% block main %}
   <!-- nav container -->
   {% block navContainer %}
-    <nav class="navbar navbar-marketing navbar-expand-lg bg-dark navbar-dark fixed-top">
-      <div class="container bg-dark px-5">
+    <nav class="navbar navbar-marketing navbar-expand-lg bg-secondary navbar-dark fixed-top">
+      <div class="container bg-secondary px-5">
         <a class="navbar-brand text-white" href="/../mon-blog">Adjoukou AGBELOU</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <i data-feather="menu"></i>
@@ -42,120 +42,102 @@
     <hr class="mt-5 pt-5"/>
   {% endblock %}
 
-  {% block section %}
-    <div class="container px-5">
-      <div class="row gx-5 justify-content-center">
-        <div class="col-lg-10 col-xl-8">
-          <div class="single-post">
-            <h1 class="mt-5">{{ post.title }}</h1>
-            <div class="d-flex align-items-center justify-content-between mb-5">
-              <div class="single-post-meta me-4">
-                <img class="single-post-meta-img" src="/../mon-blog/public/assets/img/illustrations/profiles/profile-1.png"/>
-                <div class="single-post-meta-details">
-                  <div class="single-post-meta-details-name">Publié par : l'{{ post.authorRole }}</div>
-                  <div class="single-post-meta-details-date">Le, {{ post.updatedAt }}</div>
+  <!-- Page Section-->
+  <section class="bg-light py-10">
+    {% block section %}
+      <div class="container px-5">
+        <div class="row gx-5 justify-content-center">
+          <div class="col-lg-10 col-xl-8">
+            <div class="single-post">
+              <h1 class="mt-5">{{ post.title }}</h1>
+              <div class="d-flex align-items-center justify-content-between mb-5">
+                <div class="single-post-meta me-4">
+                  <img class="single-post-meta-img" src="/../mon-blog/public/assets/img/illustrations/profiles/profile-1.png"/>
+                  <div class="single-post-meta-details">
+                    <div class="single-post-meta-details-name">Publié par : l'{{ post.authorRole }}</div>
+                    <div class="single-post-meta-details-date">Le, {{ post.updatedAt }}</div>
+                  </div>
+                </div>
+                <div class="single-post-meta-links">
+                  <a href="https://www.linkedin.com/in/mike-adjoukou-agbelou-23640098/" target="blank"><i class="fab fa-linkedin"></i></a>
+                  <a href="https://github.com/Mike031289" target="blank"><i class="fab fa-github"></i></a>
+                  <a href="https://dmdprod.com/developpeur_adjoukou-agbelou" target="blank"><i class="fas fa-globe"></i></a>
                 </div>
               </div>
-              <div class="single-post-meta-links">
-                <a href="https://www.linkedin.com/in/mike-adjoukou-agbelou-23640098/" target="blank"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/Mike031289" target="blank"><i class="fab fa-github"></i></a>
-                <a href="https://dmdprod.com/developpeur_adjoukou-agbelou" target="blank"><i class="fas fa-globe"></i></a>
+              <img class="img-fluid mb-2 rounded" src="/../mon-blog/public/assets/img/postImg/{{ post.imageUrl }}"/>
+              <div class="small text-gray-500 text-center">Photo Credit:
+                {{ user.userName }}</div>
+              <div class="single-post-text my-5">
+                <p>{{ post.content }}</p>
+                <hr class="my-5"/>
+                <div class="text-center">
+                  <a class="btn btn-transparent-dark" href="/../mon-blog/posts/{{ 1 }}">Retour à la Liste des Posts</a>
+                </div>
               </div>
-            </div>
-            <img class="img-fluid mb-2 rounded" src="/../mon-blog/public/assets/img/postImg/{{ post.imageUrl }}"/>
-            <div class="small text-gray-500 text-center">Photo Credit:
-              {{ user.userName }}</div>
-            <div class="single-post-text my-5">
-              <p>{{ post.content }}</p>
-              <hr class="my-5"/>
-              <div class="text-center">
-                <a class="btn btn-transparent-dark" href="/../mon-blog/posts/{{ 1 }}">Retour à la Liste des Posts</a>
-              </div>
-            </div>
-          </div> 
-          {% if user is defined and user is not null %}
-            <!-- formulaire d'ajout de commentaires -->
-            <form class="mt-5" method="POST">
-              <div class="card mb-5">
-                  <div class="card-header text-secondary">LAISSEZ NOUS UN COMMENTAIRE</div>
-                  <div class="card-body">
-                      <textarea class="form-control mb-2" name="content" placeholder="Ajouter un commentaire" required="required" rows="4"></textarea>
-                      <button type="submit" class="btn btn-secondary btn-sm me-2">Ajouter</button>
-                  </div>
-              </div>
-            </form>
-            {% else %}
-            <div class="mb-5">
-              <p>Pour nous laissez votre commentaire vous devez être connecté ! Si non inscrivez vous pour vous connecter celà vous prendra environ 2 min</p>
-              <a href="/../mon-blog/login" class="btn btn-success btn-sm">Je me connecte</a>
-              <a href="/../mon-blog/register" class="btn btn-secondary btn-sm">Je suis nouveau</a>
-            </div>
-          {% endif %}
-
-          {% if comments %}
-            <!-- affichage des commentaires -->
-            <section class="bg-light py-3">
-              <div class="container px-5">
-                <div class="row gx-5 justify-content-center">
-                  <div class="col-lg-10">
-                    <h3 class="post-archive-tag">
-                      <span class="translate-midlle badge rounded bg-secondary p-2">{{ comments|length }}</span> COMMENTAIRES
-                    </h3>
-                    {% for comment in comments %}
-                    <div>
-                      <a class="post-archive-item">
-                        <h5>Auteur du Commentaire: {{ comment.authorName }}</h5>
-                        <p>{{ comment.content }}</p>
-                      </a>
-                      <div class="post-archive-meta">
-                        <img class="post-archive-meta-img" src="/../mon-blog/public/assets/img/illustrations/profiles/profile-1.png"/>
-                        <div class="post-archive-meta-details">
-                          <div class="post-archive-meta-details-name">Auteur : {{ comment.authorName }}</div>
-                          <div class="post-archive-meta-details-date">Commentaire ajouté le : {{ comment.createdAt }}</div>
-                      </div>
+            </div> 
+            {% if user is defined and user is not null %}
+              <!-- formulaire d'ajout de commentaires -->
+              <form class="mt-5" method="POST">
+                <div class="card mb-5">
+                    <div class="card-header text-secondary">LAISSEZ NOUS UN COMMENTAIRE</div>
+                    <div class="card-body">
+                        <textarea class="form-control mb-2" name="content" placeholder="Ajouter un commentaire" required="required" rows="4"></textarea>
+                        <button type="submit" class="btn btn-secondary btn-sm me-2">Ajouter</button>
                     </div>
-                    <hr class="my-5"/>
-                    {% endfor %}
+                </div>
+              </form>
+              {% else %}
+              <div class="mb-5">
+                <p>Pour nous laissez votre commentaire vous devez être connecté ! Si non inscrivez vous pour vous connecter celà vous prendra environ 2 min</p>
+                <a href="/../mon-blog/login" class="btn btn-success btn-sm">Je me connecte</a>
+                <a href="/../mon-blog/register" class="btn btn-secondary btn-sm">Je suis nouveau</a>
+              </div>
+            {% endif %}
 
-                    {% else %}
-                      <p class="mb-5"><span class="translate-midlle badge rounded bg-dark p-2">{{ comments|length }}</span> commentaire pour ce post. Laissez nous votre commentaire, nous apprécions vos retours</p>
-                    {% endif %}
+            {% if comments %}
+              <!-- affichage des commentaires -->
+              <section class="bg-light py-3">
+                <div class="container px-5">
+                  <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-10">
+                      <h3 class="post-archive-tag">
+                        <span class="translate-midlle badge rounded bg-secondary p-2">{{ comments|length }}</span> COMMENTAIRES
+                      </h3>
+                      {% for comment in comments %}
+                      <div>
+                        <a class="post-archive-item">
+                          <h5>Auteur du Commentaire: {{ comment.authorName }}</h5>
+                          <p>{{ comment.content }}</p>
+                        </a>
+                        <div class="post-archive-meta">
+                          <img class="post-archive-meta-img" src="/../mon-blog/public/assets/img/illustrations/profiles/profile-1.png"/>
+                          <div class="post-archive-meta-details">
+                            <div class="post-archive-meta-details-name">Auteur : {{ comment.authorName }}</div>
+                            <div class="post-archive-meta-details-date">Commentaire ajouté le : {{ comment.createdAt }}</div>
+                        </div>
+                      </div>
+                      <hr class="my-5"/>
+                      {% endfor %}
 
+                      {% else %}
+                        <p class="mb-5"><span class="translate-midlle badge rounded bg-dark p-2">{{ comments|length }}</span> commentaire pour ce post. Laissez nous votre commentaire, nous apprécions vos retours</p>
+                      {% endif %}
+
+                    </div>
                   </div>
                 </div>
-                {# <nav aria-label="Page navigation example">
-                  <ul class="pagination pagination-blog justify-content-center">
-                    <li class="page-item disabled">
-                      <a class="page-link" href="#!" aria-label="Previous">
-                        <span aria-hidden="true">«</span></a>
-                    </li>
-                    <li class="page-item active">
-                      <a class="page-link" href="#!">1</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#!">2</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#!">3</a>
-                    </li>
-                    <li class="page-item disabled">
-                      <a class="page-link" href="#!">...</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#!">12</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#!" aria-label="Next">
-                        <span aria-hidden="true">»</span></a>
-                    </li>
-                  </ul>
-                </nav> #}
-              </div>
-            </section>
+              </section>
+          </div>
+        
         </div>
-       
       </div>
-    </div>
-    
-  {% endblock %}
+    {% endblock %}
+      <div class="svg-border-angled text-dark">
+        <!-- Angled SVG Border-->
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 100" preserveaspectratio="none" fill="currentColor">
+          <polygon points="0,100 100,0 100,100"></polygon>
+        </svg>
+      </div>
+  </section>
 {% endblock %}
+
