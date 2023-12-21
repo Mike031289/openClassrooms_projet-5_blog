@@ -186,12 +186,9 @@ class UserController extends BaseController
 
         if ($userRole === 'Admin') {
             header('Location: adminDashboard');
-            exit;
         } else if ($userRole == "Visitor") {
             header('Location: /../mon-blog/');
-            exit;
         }
-
     }
 
     /**
@@ -202,8 +199,6 @@ class UserController extends BaseController
         
         $this->session->destroy();
 
-        header('Location: /mon-blog/login');
-        exit;
+        header('Location: /../mon-blog/login');
     }
-
 }

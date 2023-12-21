@@ -106,7 +106,7 @@ class CommentManager extends BaseManager
      *
      * @return array An array containing comments and pagination information.
      */
-    public function getPaginatedComments(int $page, int $perPage): array
+    public function getPaginatedComments(int $page, int $perPage): ?array
     {
           if($page < 1){
             $page = 1;
@@ -153,7 +153,6 @@ class CommentManager extends BaseManager
         } catch (ActionNotFoundException $e) {
             // Handle the error in case of failure and roll back the transaction
             header("Location: 500");
-            exit;
         }
     }
 
@@ -197,7 +196,6 @@ class CommentManager extends BaseManager
         }catch (ActionNotFoundException $e) {
             // Handle the error in case of failure and roll back the transaction
             header("Location: 500");
-            exit;
         }
     }
 

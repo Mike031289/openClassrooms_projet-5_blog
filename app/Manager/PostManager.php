@@ -136,7 +136,7 @@ class PostManager extends BaseManager
      * @param int $categoryId The ID of the category.
      * @return int The total number of posts by category.
      */
-    public function getTotalPostsByCategory(int $categoryId): int
+    public function getTotalPostsByCategory(int $categoryId): ?int
     {
         try {
             // Prepare the SQL query
@@ -156,7 +156,6 @@ class PostManager extends BaseManager
             // Handle exceptions, log errors, or return an empty array
             // Redirect to an admin 500 error page if an exception occurs
             header("Location: 500");
-            exit;
         }
     }
 
@@ -168,7 +167,7 @@ class PostManager extends BaseManager
      *
      * @return array An array containing posts and pagination information.
      */
-    public function getPaginatedPostsByCategory(int $categoryId, int $page, int $pageSize): array
+    public function getPaginatedPostsByCategory(int $categoryId, int $page, int $pageSize): ?array
     {
         if($page < 1){
             $page = 1;
@@ -223,9 +222,7 @@ class PostManager extends BaseManager
             // Handle exceptions, log errors, or return an empty array
             // Redirect to an admin 500 error page if an exception occurs
             header("Location: 500");
-            exit;
         }
-
     }
 
     /**
@@ -236,7 +233,7 @@ class PostManager extends BaseManager
      *
      * @return array An array containing posts and pagination information.
      */
-    public function getPaginatedPosts(int $page, int $pageSize): array
+    public function getPaginatedPosts(int $page, int $pageSize): ?array
     {
         if ($page < 1) {
             $page = 1;
@@ -285,7 +282,6 @@ class PostManager extends BaseManager
             // Handle exceptions, log errors, or return an empty array
             // Redirect to an admin 500 error page if an exception occurs
             header("Location: 500");
-            exit;
         }
     }
 

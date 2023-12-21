@@ -53,8 +53,6 @@ class BaseController
         extract($this->_param);
         ob_get_clean();
         echo $this->_twig->render($fileName, $viewContent);
-        exit;
-
     }
 
     /**

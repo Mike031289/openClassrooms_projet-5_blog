@@ -43,7 +43,6 @@ class AdminController extends BaseController
         // Check if the user is not logged in, or the user does not have the 'Admin' role, redirect to the login page
         if ((!$user) || ($userRole !== 'Admin')) {
             header('Location: login');
-            exit;
         }
 
         // User is logged in and has the 'Admin' role, proceed to the admin dashboard
@@ -70,7 +69,6 @@ class AdminController extends BaseController
         // Check if the user is not logged in, or the user does not have the 'Admin' role, redirect to the login page
         if ((!$user) || ($userRole !== 'Admin')) {
             header('Location: login');
-            exit;
         }
 
         // User is logged in and has the 'Admin' role, proceed to the post form
@@ -103,7 +101,6 @@ class AdminController extends BaseController
         // Check if the user is not logged in, or the user does not have the 'Admin' role, redirect to the login page
         if ((!$user) || ($userRole !== 'Admin')) {
             header('Location: login');
-            exit;
         }
 
         // User is logged in and has the 'Admin' role, proceed to create the new post
@@ -131,7 +128,6 @@ class AdminController extends BaseController
         // Check if the user is not logged in, or the user does not have the 'Admin' role redirect to the login page
         if ((!$user) || ($userRole !== 'Admin')) {
             header('Location: login');
-            exit;
         }
 
         // User is logged in and has the 'Admin' role, proceed to the admin dashboard
@@ -166,7 +162,6 @@ class AdminController extends BaseController
         // Check if the user is not logged in, or the user does not have the 'Admin' role redirect to the login page
         if ((!$user) || ($userRole !== 'Admin')) {
             header('Location: login');
-            exit;
         }
 
         $authorRole = $this->getManager(UserManager::class)->getAuthorRoleById($user->getId());
@@ -191,7 +186,6 @@ class AdminController extends BaseController
         // Check if the user is not logged in, or the user does not have the 'Admin' role redirect to the login page
         if ((!$user) || ($userRole !== 'Admin')) {
             header('Location: login');
-            exit;
         }
 
         // User is logged in and has the 'Admin' role, proceed to the admin dashboard
@@ -219,7 +213,6 @@ class AdminController extends BaseController
         // Check if the user is not logged in, or the user does not have the 'Admin' role redirect to the login page
         if ((!$user) || ($userRole !== 'Admin')) {
             header('Location: login');
-            exit;
         }
 
         $this->getManager(PostManager::class)->deletePost($id);
@@ -245,7 +238,6 @@ class AdminController extends BaseController
         // Check if the user is not logged in, or the user does not have the 'Admin' role redirect to the login page
         if ((!$user) || ($userRole !== 'Admin')) {
             header('Location: login');
-            exit;
         }
 
         $perPage = 3;  // Set your desired items per page
@@ -278,7 +270,6 @@ class AdminController extends BaseController
         // Check if the user is not logged in, or the user does not have the 'Admin' role, redirect to the login page
         if (!$user || $userRole !== 'Admin') {
             header('Location: login');
-            exit;
         }
 
         $perPage = 3;  // Set your desired items per page
@@ -311,7 +302,6 @@ class AdminController extends BaseController
         // Check if the user is not logged in, or the user does not have the 'Admin' role redirect to the login page
         if ((!$user) || ($userRole !== 'Admin')) {
             header('Location: login');
-            exit;
         }
 
         $this->getManager(CommentManager::class)->deleteComment($id);
@@ -336,12 +326,9 @@ class AdminController extends BaseController
         // Check if the user is not logged in, or the user does not have the 'Admin' role, redirect to the login page
         if (!$user || $userRole !== 'Admin') {
             header('Location: login');
-            exit;
         }
 
         // Display the admin profile view
         $this->view("admin/admin-profile.html.twig", ['user' => $user]);
     }
-
-
 }

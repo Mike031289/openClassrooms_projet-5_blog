@@ -89,7 +89,7 @@ class ContactManager extends BaseManager
      *
      * @return array An array containing contacts and pagination information.
      */
-    public function getPaginatedContacts(int $page, int $perPage): array
+    public function getPaginatedContacts(int $page, int $perPage): ?array
     {
         if($page < 1){
             $page = 1;
@@ -115,7 +115,6 @@ class ContactManager extends BaseManager
             $contactsData = $stmt->fetchAll(\PDO::FETCH_OBJ);
 
             // Convert the data into an array of Contact objects
-            // $contacts = [];
             foreach ($contactsData as $data) {
                 $contact = new Contact();
                 $contact->setId($data->id);
@@ -138,63 +137,6 @@ class ContactManager extends BaseManager
             // Handle exceptions, log errors, or return an empty array
             // Redirect to an admin 500 error page if an exception occurs
             header("Location: 500");
-            exit;
         }
     }
-
-    // public function sendMail($userName, $email, $message): void
-    // {
-    //     // Création de l'objet PHPMailer
-    //     $mail = new PHPMailer(true);
-
-    //     try {
-    //         // Configuration de l'envoi via SMTP
-    //         $mail->isSMTP();
-    //         $mail->Host       = "localhost";
-    //         $mail->SMTPAuth   = false;
-    //         $mail->Username   = "root";
-    //         $mail->Password   = "";
-    //         $mail->SMTPSecure = "";
-    //         $mail->Port       = 25;
-
-    //         // Configuration du charset
-    //         $mail->CharSet = "utf-8";
-
-    //         // Ajout des destinataires
-    //         $mail->addAddress("mike.agbelou@gmail.com");
-
-    //         // Configuration de l'expéditeur
-    //         $mail->setFrom("adjoukou-agbelou-blog@mon-blog.fr");
-
-    //         // Configuration du contenu du message
-    //         $mail->isHTML();
-    //         $mail->Subject = "Contact venant de mon Blog";
-    //         $mail->Body    =
-    //             "Bonjour, <br> 
-    //         <p> Un utilisateur vient de vous envoyer un message via votre Blog.</p> 
-    //         <p> <strong> Nom & Prénoms ou Raison sociale : </strong> $userName</p> 
-    //         <p> <strong> Email : </strong> $email</p> 
-    //         <p> <strong> Contenu du message : </strong> $message </p> 
-    //         <p> Cordialement, </p>
-    //         <p> Ce message est automatique depuis votre Blog </p>
-    //         <h4>
-    //             <img src='href='public/assets/img/logo.png' alt='Logo du Blog'>
-    //         </h4>";
-
-    //         // Corps alternatif du message (texte brut)
-    //         $mail->AltBody = "Bonjour, 
-    //     Un utilisateur vient de vous envoyer un message via votre Blog.
-    //     Nom & Prénoms ou Raison sociale : $userName 
-    //     Email :  $email 
-    //     Contenu du message : $message 
-    //     Cordialement,
-    //     Ce message est automatique depuis votre Blog";
-
-    //         // Envoi du mail
-    //         $mail->send();
-    //     }
-    //     catch (Exception $e) {
-    //         echo "Message non envoyé. Erreur: {$e->getMessage()}";
-    //     }
-    // }
 }
