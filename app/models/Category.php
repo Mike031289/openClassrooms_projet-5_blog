@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Models;
 
 class Category
@@ -20,6 +23,7 @@ class Category
     public function setId($id): self
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -37,6 +41,7 @@ class Category
     public function setName($name): self
     {
         $this->name = $name;
+
         return $this;
     }
 }

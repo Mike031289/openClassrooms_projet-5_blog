@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Core;
 
 use App\Exceptions\ActionNotFoundException;
@@ -21,8 +24,8 @@ class Route
     /**
      * Route constructor.
      *
-     * @param object $route       The route object containing route information.
-     * @param array  $routeParams The route parameters.
+     * @param object $route       the route object containing route information
+     * @param array  $routeParams the route parameters
      */
     public function __construct(object $route, array $routeParams)
     {
@@ -36,8 +39,6 @@ class Route
 
     /**
      * Get the value of _path.
-     *
-     * @return string
      */
     public function getPath(): string
     {
@@ -46,8 +47,6 @@ class Route
 
     /**
      * Get the value of _controller.
-     *
-     * @return string
      */
     public function getController(): string
     {
@@ -56,8 +55,6 @@ class Route
 
     /**
      * Get the value of _action.
-     *
-     * @return string
      */
     public function getAction(): string
     {
@@ -66,8 +63,6 @@ class Route
 
     /**
      * Get the value of _method.
-     *
-     * @return string
      */
     public function getMethod(): string
     {
@@ -76,8 +71,6 @@ class Route
 
     /**
      * Get the value of _param.
-     *
-     * @return array
      */
     public function getParam(): array
     {
@@ -86,8 +79,6 @@ class Route
 
     /**
      * Get the value of _managers.
-     *
-     * @return array
      */
     public function getManagers(): array
     {
@@ -97,11 +88,11 @@ class Route
     /**
      * Run the route and execute the associated controller action.
      *
-     * @param object $httpRequest The HTTP request object.
-     * @param object  $config      The application configuration.
+     * @param object $httpRequest the HTTP request object
+     * @param object $config      the application configuration
      *
-     * @throws ActionNotFoundException   If the action does not exist in the controller.
-     * @throws ControllerNotFoundException If the controller class does not exist.
+     * @throws ActionNotFoundException     if the action does not exist in the controller
+     * @throws ControllerNotFoundException if the controller class does not exist
      */
     public function run(object $httpRequest, object $config): void
     {

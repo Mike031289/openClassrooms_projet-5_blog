@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Models;
 
 /**
@@ -12,16 +15,14 @@ class Post
     private string $title;
     private string $content;
     private ?string $imageUrl;
-    private int $categoryId; 
-    private string $authorRole;  
+    private int $categoryId;
+    private string $authorRole;
     private string $createdAt;
     private string $updatedAt;
     private string $postpreview;
 
     /**
      * Get the ID of the post.
-     *
-     * @return int
      */
     public function getId(): int
     {
@@ -30,20 +31,16 @@ class Post
 
     /**
      * Set the ID of the post.
-     *
-     * @param int $id
-     * @return self
      */
     public function setId(int $id): self
     {
         $this->id = $id;
+
         return $this;
     }
 
     /**
      * Get the title of the post.
-     *
-     * @return string
      */
     public function getTitle(): string
     {
@@ -52,20 +49,16 @@ class Post
 
     /**
      * Set the title of the post.
-     *
-     * @param string $title
-     * @return self
      */
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
         return $this;
     }
 
     /**
      * Get the content of the post.
-     *
-     * @return string
      */
     public function getContent(): string
     {
@@ -74,20 +67,16 @@ class Post
 
     /**
      * Set the content of the post.
-     *
-     * @param string $content
-     * @return self
      */
     public function setContent(string $content): self
     {
         $this->content = $content;
+
         return $this;
     }
 
     /**
      * Get the image URL of the post.
-     *
-     * @return string|null
      */
     public function getImageUrl(): ?string
     {
@@ -96,20 +85,16 @@ class Post
 
     /**
      * Set the image URL of the post.
-     *
-     * @param string|null $imageUrl
-     * @return self
      */
     public function setImageUrl(?string $imageUrl): self
     {
         $this->imageUrl = $imageUrl;
+
         return $this;
     }
 
     /**
      * Get the category ID of the post.
-     *
-     * @return int
      */
     public function getCategoryId(): int
     {
@@ -118,20 +103,16 @@ class Post
 
     /**
      * Set the category ID of the post.
-     *
-     * @param int $categoryId
-     * @return self
      */
     public function setCategoryId(int $categoryId): self
     {
         $this->categoryId = $categoryId;
+
         return $this;
     }
 
     /**
      * Get the author ID of the post.
-     *
-     * @return string
      */
     public function getAuthorRole(): string
     {
@@ -140,13 +121,11 @@ class Post
 
     /**
      * Set the author ID of the post.
-     *
-     * @param string $authorRole
-     * @return self
      */
     public function setAuthorRole(string $authorRole): self
     {
         $this->authorRole = $authorRole;
+
         return $this;
     }
 
@@ -156,6 +135,7 @@ class Post
     public function getCreatedAt(): string
     {
         $formattedDate = new \DateTime($this->createdAt);
+
         return $formattedDate->format('d/m/Y H:i');
     }
 
@@ -165,6 +145,7 @@ class Post
     public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt->format('Y-m-d H:i:s');
+
         return $this;
     }
 
@@ -174,6 +155,7 @@ class Post
     public function getUpdatedAt(): string
     {
         $formattedDate = new \DateTime($this->updatedAt);
+
         return $formattedDate->format('d/m/Y H:i');
     }
 
@@ -183,6 +165,7 @@ class Post
     public function setUpdatedAt(\DateTime $updatedAt): self
     {
         $this->updatedAt = $updatedAt->format('Y-m-d H:i:s');
+
         return $this;
     }
 
@@ -203,6 +186,4 @@ class Post
 
         return $this;
     }
-
-
 }

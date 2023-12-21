@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Core;
 
 use App\Exceptions\NoRouteFoundException;
@@ -7,26 +10,24 @@ use App\Exceptions\NoRouteFoundException;
  * Class Router
  *
  * This class is responsible for routing incoming HTTP requests to the appropriate controller action.
- *
- * @package App\Vendor
  */
 class Router
 {
     /**
-     * @var array The list of configured routes.
+     * @var array the list of configured routes
      */
     private array $_listRoute;
 
     /**
-     * @var string The base URL for the application.
+     * @var string the base URL for the application
      */
     private string $_baseUrl;
 
     /**
      * Router constructor.
      *
-     * @param array $configRoutes An array containing the list of configured routes.
-     * @param string $_baseUrl The base URL for the application.
+     * @param array  $configRoutes an array containing the list of configured routes
+     * @param string $_baseUrl     the base URL for the application
      */
     public function __construct(array $configRoutes, string $_baseUrl)
     {
@@ -40,14 +41,14 @@ class Router
      * If only one matching route is found, it returns it. If no route is found, or if multiple routes match,
      * it generates the appropriate exceptions to signal routing problems.
      *
-     * @param HttpRequest $httpRequest The HTTP request object.
-     * @return Route The matched route.
-     * @throws NoRouteFoundException If no matching route is found.
+     * @param  HttpRequest           $httpRequest the HTTP request object
+     * @throws NoRouteFoundException if no matching route is found
+     * @return Route                 the matched route
      */
-    public function findRoute(object $httpRequest): Route 
+    public function findRoute(object $httpRequest): Route
     {
         // Extract the URL portion after the base URL
-        $url = str_replace($this->_baseUrl, "", $httpRequest->getUrl());
+        $url = str_replace($this->_baseUrl, '', $httpRequest->getUrl());
 
         // Get the HTTP method (GET, POST, etc.) used in the request
         $method = $httpRequest->getMethod();
@@ -59,12 +60,12 @@ class Router
         foreach ($this->_listRoute as $route) {
             // Define a regular expression pattern to match the route path
             // Replace dynamic parts in curly braces with a regular expression that matches them
-            $pattern = "#^" . preg_replace('/\{([a-zA-Z]+)\}/', '([^/]+)', $route->path) . "$#";
+            $pattern = '#^'.preg_replace('/\{([a-zA-Z]+)\}/', '([^/]+)', $route->path).'$#';
 
             // Attempt to match the current URL with the pattern and check if the HTTP method matches
-            if (preg_match($pattern, $url, $matches) && $route->method == $method) {
+            if (preg_match($pattern, $url, $matches) && $route->method === $method) {
                 // Combine route parameter names with captured values to create an associative array
-                $routeParams = array_combine($route->param, array_slice($matches, 1));
+                $routeParams = array_combine($route->param, \array_slice($matches, 1));
 
                 // Create a new Route object with matched route and parameters
                 return new Route($route, $routeParams);

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Models;
 
 class Comment
@@ -87,6 +90,7 @@ class Comment
     public function getCreatedAt(): string
     {
         $formattedDate = new \DateTime($this->createdAt);
+
         return $formattedDate->format('d/m/Y H:i');
     }
 
@@ -96,7 +100,7 @@ class Comment
     public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt->format('Y-m-d H:i:s');
+
         return $this;
     }
-    
 }

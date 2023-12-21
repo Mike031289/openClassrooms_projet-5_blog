@@ -1,10 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Controllers;
 
-use App\Manager\PostManager;
-use App\Manager\CommentManager;
-use App\Manager\CategoryManager;
 use App\Core\Functions\FormHelper;
+use App\Manager\CategoryManager;
+use App\Manager\CommentManager;
+use App\Manager\PostManager;
 
 /**
  * Class PostController
@@ -16,8 +19,8 @@ class PostController extends BaseController
     /**
      * PostController constructor.
      *
-     * @param object $httpRequest The HTTP request object.
-     * @param object $config      The application configuration.
+     * @param object $httpRequest the HTTP request object
+     * @param object $config      the application configuration
      */
     public function __construct(object $httpRequest, object $config)
     {
@@ -31,7 +34,7 @@ class PostController extends BaseController
     {
         $pageSize = 3; // Set your desired items per page
 
-        $paginationData  = $this->getManager(PostManager::class)->getPaginatedPosts($page,$pageSize);
+        $paginationData = $this->getManager(PostManager::class)->getPaginatedPosts($page, $pageSize);
 
         $categories = $this->getManager(CategoryManager::class)->getAll();
 
@@ -39,21 +42,21 @@ class PostController extends BaseController
         $user = $this->session->getUser();
 
         // Pass the pagination data to the Twig template
-        $this->view("blog/posts.html.twig", [
+        $this->view('blog/posts.html.twig', [
             'user'        => $user,
-            'categories' => $categories,
-            'posts'    => $paginationData['posts'],
+            'categories'  => $categories,
+            'posts'       => $paginationData['posts'],
             'currentPage' => $paginationData['currentPage'],
             'totalPages'  => $paginationData['totalPages'],
         ]);
     }
 
-    public function listPostsByCategory( int $categoryId, int $page = 1): void 
+    public function listPostsByCategory(int $categoryId, int $page = 1): void
     {
         $pageSize = 30; // Set your desired items per page
 
         $paginationData = $this->getManager(PostManager::class)->getPaginatedPostsByCategory($categoryId, $page, $pageSize);
-        
+
         // Retrieve posts by category, and user information as needed
         $categories = $this->getManager(CategoryManager::class)->getAll();
 
@@ -61,20 +64,19 @@ class PostController extends BaseController
         $user = $this->session->getUser();
 
         // Pass the pagination data to the Twig template
-        $this->view("blog/posts-by-category.html.twig", [
+        $this->view('blog/posts-by-category.html.twig', [
             'user'        => $user,
-            'categories' => $categories,
-            'posts'    => $paginationData['posts'],
+            'categories'  => $categories,
+            'posts'       => $paginationData['posts'],
             'currentPage' => $paginationData['currentPage'],
             'totalPages'  => $paginationData['totalPages'],
         ]);
-
     }
 
     /**
      * Display a specific article based on its identifier.
      *
-     * @param $id The identifier of the article to display.
+     * @param $id The identifier of the article to display
      */
     public function showPostWithComments(int $id): void
     {
@@ -86,7 +88,7 @@ class PostController extends BaseController
 
         if (!$post) {
             // Handle the case where the article does not exist (e.g., redirect, display an error, etc.)
-            header("Location: 404");
+            header('Location: 404');
             exit; // Stop execution to prevent displaying page content
         }
 
@@ -98,9 +100,7 @@ class PostController extends BaseController
     /**
      * Add a comment to a post and display the post with comments.
      *
-     * @param int $postId The ID of the post to add a comment to.
-     *
-     * @return void
+     * @param int $postId the ID of the post to add a comment to
      */
     public function addPostComment(int $postId): void
     {
@@ -108,7 +108,7 @@ class PostController extends BaseController
         $user = $this->session->getUser();
 
         // Retrieve data from the form
-        $content  = FormHelper::post('content');
+        $content = FormHelper::post('content');
         $authorName = $user->getUserName();
 
         // Create a new comment
@@ -124,8 +124,7 @@ class PostController extends BaseController
         $this->view('blog/post.html.twig', [
             'post'          => $post,
             'comments'      => $comments,
-            'user'          => $user
+            'user'          => $user,
         ]);
     }
-
 }

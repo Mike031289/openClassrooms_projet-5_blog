@@ -1,25 +1,27 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Manager;
 
-use App\Models\Comment;
 use App\Exceptions\ActionNotFoundException;
+use App\Models\Comment;
 
 class CommentManager extends BaseManager
 {
-
     public function __construct(object $dataSource)
     {
-        parent::__construct("comment", "Comment", $dataSource);
+        parent::__construct('comment', 'Comment', $dataSource);
     }
 
     /**
      * Create a new comment for a post.
      *
-     * @param string $content The content of the comment.
-     * @param string $authorName The name of the comment author.
-     * @param int $postId The ID of the post the comment belongs to.
+     * @param string $content    the content of the comment
+     * @param string $authorName the name of the comment author
+     * @param int    $postId     the ID of the post the comment belongs to
      *
-     * @return Comment|null Returns the created Comment object or null on failure.
+     * @return Comment|null returns the created Comment object or null on failure
      */
     public function createComment(string $content, string $authorName, int $postId): ?Comment
     {
@@ -31,7 +33,7 @@ class CommentManager extends BaseManager
 
         try {
             // Insert the comment into the 'Comment' table
-            $sql = "INSERT INTO Comment (content, authorName, postId, createdAt) VALUES (?, ?, ?, ?)";
+            $sql = 'INSERT INTO Comment (content, authorName, postId, createdAt) VALUES (?, ?, ?, ?)';
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(1, $content, \PDO::PARAM_STR);
             $stmt->bindParam(2, $authorName, \PDO::PARAM_STR); // Corrected from PARAM_INT to PARAM_STR
@@ -56,13 +58,13 @@ class CommentManager extends BaseManager
             $comment->setPostId($postId);
             $comment->setCreatedAt(new \DateTime($createdAt));
 
-
             return $comment;
         } catch (ActionNotFoundException $e) {
             // Handle the error in case of failure and roll back the transaction
             // Redirect to a 500 error page if no matching route is found
-            header("Location: 500");
+            header('Location: 500');
             $this->_db->rollBack();
+
             return null;
         }
     }
@@ -70,12 +72,12 @@ class CommentManager extends BaseManager
     /**
      * Retrieve comments related to a specific article based on its identifier (postId).
      *
-     * @param $postId The identifier of the article for which to retrieve comments.
-     * @return array An array of Comment objects representing the comments for the specified article.
+     * @param        $postId The identifier of the article for which to retrieve comments
+     * @return array an array of Comment objects representing the comments for the specified article
      */
     public function getCommentsByPostId(int $postId)
     {
-        $req = $this->_db->prepare("SELECT * FROM comment WHERE postId = :postId");
+        $req = $this->_db->prepare('SELECT * FROM comment WHERE postId = :postId');
         $req->bindValue(':postId', $postId, \PDO::PARAM_INT);
         $req->execute();
 
@@ -85,43 +87,43 @@ class CommentManager extends BaseManager
         // Return an array of Comment objects representing the comments
         return $req->fetchAll();
     }
-    
+
     /**
      * Retrieves the total number of comments in the 'Comment' table.
      *
-     * @return int The total number of comments.
+     * @return int the total number of comments
      */
     private function getTotalComments(): int
     {
-        $sql = "SELECT COUNT(*) FROM Comment";
+        $sql = 'SELECT COUNT(*) FROM Comment';
         $stmt = $this->_db->query($sql);
+
         return (int) $stmt->fetchColumn();
     }
 
     /**
      * Retrieves a paginated list of comments without considering the post ID.
      *
-     * @param int $page The current page number (default is 1).
-     * @param int $perPage The number of comments per page (default is 5).
+     * @param int $page    the current page number (default is 1)
+     * @param int $perPage the number of comments per page (default is 5)
      *
-     * @return array An array containing comments and pagination information.
+     * @return array an array containing comments and pagination information
      */
     public function getPaginatedComments(int $page, int $perPage): array
     {
-          if($page < 1){
+        if ($page < 1) {
             $page = 1;
         }
-        
+
         // Calculate the offset based on the page number and items per page
         $offset = ($page - 1) * $perPage;
 
         try {
-
             // Retrieve the total number of comments
             $totalComments = $this->getTotalComments();
 
             // Retrieve comments from the 'Comment' table, ordered by date in descending order, with pagination
-            $sql = "SELECT * FROM comment ORDER BY createdAt DESC LIMIT :offset, :perPage";
+            $sql = 'SELECT * FROM comment ORDER BY createdAt DESC LIMIT :offset, :perPage';
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(':offset', $offset, \PDO::PARAM_INT);
             $stmt->bindParam(':perPage', $perPage, \PDO::PARAM_INT);
@@ -130,7 +132,7 @@ class CommentManager extends BaseManager
             // Use setFetchMode to specify the class and fetch mode
             $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Comment::class);
 
-            $commentsData = $stmt->fetchAll(\PDO::FETCH_OBJ );
+            $commentsData = $stmt->fetchAll(\PDO::FETCH_OBJ);
 
             // Convert the data into an array of Comment objects
             foreach ($commentsData as $data) {
@@ -152,7 +154,7 @@ class CommentManager extends BaseManager
             ];
         } catch (ActionNotFoundException $e) {
             // Handle the error in case of failure and roll back the transaction
-            header("Location: 500");
+            header('Location: 500');
             exit;
         }
     }
@@ -160,15 +162,15 @@ class CommentManager extends BaseManager
     /**
      * Retrieve a Comment object by its ID.
      *
-     * @param int $commentId The ID of the comment to retrieve.
+     * @param int $commentId the ID of the comment to retrieve
      *
-     * @return Comment|null The Comment object if found, or null if not found.
+     * @return Comment|null the Comment object if found, or null if not found
      */
     public function getCommentById(int $commentId): ?Comment
     {
         try {
             // Prepare and execute the SQL query
-            $sql = "SELECT * FROM Comment WHERE id = :commentId ORDER BY createdAt DESC";
+            $sql = 'SELECT * FROM Comment WHERE id = :commentId ORDER BY createdAt DESC';
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(':commentId', $commentId, \PDO::PARAM_INT);
             $stmt->execute();
@@ -176,7 +178,7 @@ class CommentManager extends BaseManager
             // Fetch the result as an associative array
             $commentData = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-            if ($commentData === false) {
+            if (false === $commentData) {
                 // Comment not found
                 return null;
             }
@@ -193,10 +195,9 @@ class CommentManager extends BaseManager
             $comment->setCreatedAt(new \DateTime($commentData->createdAt));
 
             return $comment;
-        
-        }catch (ActionNotFoundException $e) {
+        } catch (ActionNotFoundException $e) {
             // Handle the error in case of failure and roll back the transaction
-            header("Location: 500");
+            header('Location: 500');
             exit;
         }
     }
@@ -204,32 +205,30 @@ class CommentManager extends BaseManager
     /**
      * Delete a comment from the database by its ID.
      *
-     * @param $id The ID of the comment to be deleted.
+     * @param $id The ID of the comment to be deleted
      *
-     * @return bool True if the comment was successfully deleted, false otherwise.
+     * @return bool true if the comment was successfully deleted, false otherwise
      */
     public function deleteComment(int $id): bool
     {
         try {
             // Prepare and execute a DELETE SQL query to remove the comment by its ID
-            $sql  = "DELETE FROM Comment WHERE id = ?";
+            $sql = 'DELETE FROM Comment WHERE id = ?';
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(1, $id, \PDO::PARAM_INT);
 
             // Check if the DELETE operation was successful
             if ($stmt->execute()) {
                 return true; // Return true if the deletion was successful
-            } else {
-                return false; // Return false if the deletion failed
             }
-        }
-        catch (ActionNotFoundException $e) {
+
+            return false; // Return false if the deletion failed
+        } catch (ActionNotFoundException $e) {
             // Handle any exceptions, e.g., log the error or return false
             // Redirect to a 500 error page if no matching route is found
-            header("Location: 500");
+            header('Location: 500');
+
             return false;
         }
     }
-
-
 }

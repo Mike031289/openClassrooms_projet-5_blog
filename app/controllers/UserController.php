@@ -1,8 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Controllers;
 
-use App\Manager\UserManager;
 use App\Core\Functions\FormHelper;
+use App\Manager\UserManager;
 
 /**
  * UserController - Controller responsible for handling user-related actions.
@@ -12,8 +15,8 @@ class UserController extends BaseController
     /**
      * UserController constructor.
      *
-     * @param object $httpRequest The HTTP request object.
-     * @param object $config      The application configuration.
+     * @param object $httpRequest the HTTP request object
+     * @param object $config      the application configuration
      */
     public function __construct(object $httpRequest, object $config)
     {
@@ -35,8 +38,8 @@ class UserController extends BaseController
     {
         // Retrieve data from the form
         $userName = FormHelper::post('userName');
-        $email           = FormHelper::post('email');
-        $passWord        = FormHelper::post('passWord');
+        $email = FormHelper::post('email');
+        $passWord = FormHelper::post('passWord');
         $passWordConfirm = FormHelper::post('passWordConfirm');
 
         $errors = [];
@@ -44,57 +47,51 @@ class UserController extends BaseController
         // Validate the fields using regex patterns
         if (empty($userName)) {
             $errors['userName'] = "Nom d'utilisateur requis";
-
-        } else if (!FormHelper::validateField($userName, FormHelper::USERNAME_REGEX)) {
-            $errors['userName'] = "Nom invalide(minimum 3 caractères maximum 20 et pas de caractères spéciaux)";
+        } elseif (!FormHelper::validateField($userName, FormHelper::USERNAME_REGEX)) {
+            $errors['userName'] = 'Nom invalide(minimum 3 caractères maximum 20 et pas de caractères spéciaux)';
         }
 
         // Validate email fields
         if (empty($email)) {
-            $errors['email'] = "Adresse email requis";
-
-        } else if (!FormHelper::validateField($email, FormHelper::EMAIL_REGEX)) {
-            $errors['email'] = "Email invalide (format requis : email@example.com)";
+            $errors['email'] = 'Adresse email requis';
+        } elseif (!FormHelper::validateField($email, FormHelper::EMAIL_REGEX)) {
+            $errors['email'] = 'Email invalide (format requis : email@example.com)';
         }
 
         // Validate password fields
         if (empty($passWord)) {
-            $errors['password'] = "Mot de passe requis";
-
-        } else if (!FormHelper::validateField($passWord, FormHelper::PASSWORD_REGEX)) {
-            $errors['password'] = "Mot de passe invalide";
+            $errors['password'] = 'Mot de passe requis';
+        } elseif (!FormHelper::validateField($passWord, FormHelper::PASSWORD_REGEX)) {
+            $errors['password'] = 'Mot de passe invalide';
         }
 
         // Validate password fields
         if (empty($passWordConfirm)) {
-            $errors['password2'] = "Confirmez le mot de passe";
-
-        } else if ($passWord !== $passWordConfirm) {
-            $errors['password2'] = "Le mot de passe doit correspondre au premier";
+            $errors['password2'] = 'Confirmez le mot de passe';
+        } elseif ($passWord !== $passWordConfirm) {
+            $errors['password2'] = 'Le mot de passe doit correspondre au premier';
         }
 
         $userEmailExist = $this->getManager(UserManager::class)->getUserByEmail($email);
 
         // Check if the email already exists in the database
-        if ($userEmailExist !== null) {
-            $errors['email'] = "Cette adresse email existe déjà";
-
+        if (null !== $userEmailExist) {
+            $errors['email'] = 'Cette adresse email existe déjà';
         }
 
         $userNameExist = $this->getManager(UserManager::class)->getUserByName($userName);
 
         // Check if the user name already exists in the database
-        if ($userNameExist !== null) {
+        if (null !== $userNameExist) {
             $errors['userName'] = "Ce nom d'utilisateur est déjà pris";
-
         }
 
         // If there are errors, display the Twig template with the errors
         if (!empty($errors)) {
             // Add the email and password values to the value array so the value will note be clear after submition
-            $value['userNameValue']  = $userName;
-            $value['emailValue']     = $email;
-            $value['passwordValue']  = $passWord;
+            $value['userNameValue'] = $userName;
+            $value['emailValue'] = $email;
+            $value['passwordValue'] = $passWord;
             $value['passwordValue2'] = $passWordConfirm;
             $this->view('user/register.html.twig', ['errors' => $errors, 'value' => $value]);
         }
@@ -103,11 +100,10 @@ class UserController extends BaseController
         $this->getManager(UserManager::class)->createUserWithRole($userName, $email, $passWord);
 
         // Redirect to the login page
-        $successMessage = "Votre compte a été bien créé ! Connectez vous et commentez nos articles";
+        $successMessage = 'Votre compte a été bien créé ! Connectez vous et commentez nos articles';
         // Définir un cookie avec le message de succès
         setcookie('success', $successMessage, time() + 3600, '/mon-blog/login');
         header('Location: login');
-
     }
 
     /**
@@ -131,37 +127,37 @@ class UserController extends BaseController
      */
     public function login(): void
     {
-        $email    = FormHelper::post('email');
+        $email = FormHelper::post('email');
         $passWord = FormHelper::post('passWord');
-        $errors   = [];
+        $errors = [];
 
         // Validate email fields
         if (empty($email)) {
-            $errors['email'] = "Adresse email requis";
-        } else if (!FormHelper::validateField($email, FormHelper::EMAIL_REGEX)) {
-            $errors['email'] = "Email invalide (format requis : email@example.com)";
+            $errors['email'] = 'Adresse email requis';
+        } elseif (!FormHelper::validateField($email, FormHelper::EMAIL_REGEX)) {
+            $errors['email'] = 'Email invalide (format requis : email@example.com)';
         }
 
         // Validate password fields
         if (empty($passWord)) {
-            $errors['password'] = "Mot de passe requis";
-        } else if (!FormHelper::validateField($passWord, FormHelper::PASSWORD_REGEX)) {
-            $errors['password'] = "Mot de passe invalide";
+            $errors['password'] = 'Mot de passe requis';
+        } elseif (!FormHelper::validateField($passWord, FormHelper::PASSWORD_REGEX)) {
+            $errors['password'] = 'Mot de passe invalide';
         }
 
         // If there are errors, display the Twig template with the errors
         if (!empty($errors)) {
             // Add the email and password values to the value array so the value will not be cleared after submission
-            $value['emailValue']    = $email;
+            $value['emailValue'] = $email;
             $value['passwordValue'] = $passWord;
             $this->view('user/login.html.twig', ['errors' => $errors, 'value' => $value]);
         }
 
         // Attempt to retrieve the user based on the provided email
-        $user     = $this->getManager(UserManager::class)->getUserByEmail($email);
+        $user = $this->getManager(UserManager::class)->getUserByEmail($email);
         $userRole = $this->getManager(UserManager::class)->getUserRoleByEmail($email);
 
-        if ($user === null) {
+        if (null === $user) {
             // User not found
             $error = "Ce compte n'existe pas. Créez un compte pour vous connecter.";
             $this->view('user/login.html.twig', ['error' => $error]);
@@ -171,27 +167,25 @@ class UserController extends BaseController
             $error = "Votre compte est suspendu. Veuillez contacter l'administrateur";
             $this->view('user/login.html.twig', ['error' => $error]);
         }
-        
+
         // If the password matches, log in the user
         if (!password_verify($passWord, $user->getPassWord())) {
             // Password is incorrect
-            $errors['password']  = "Mot de passe incorrect";
+            $errors['password'] = 'Mot de passe incorrect';
             $value['emailValue'] = $email;
-            
-            $this->view('user/login.html.twig', ['errors' => $errors]);
 
+            $this->view('user/login.html.twig', ['errors' => $errors]);
         }
 
         $this->session->connect($user, $userRole);
 
-        if ($userRole === 'Admin') {
+        if ('Admin' === $userRole) {
             header('Location: adminDashboard');
             exit;
-        } else if ($userRole == "Visitor") {
+        } elseif ('Visitor' === $userRole) {
             header('Location: /../mon-blog/');
             exit;
         }
-
     }
 
     /**
@@ -199,11 +193,9 @@ class UserController extends BaseController
      */
     public function logout(): void
     {
-        
         $this->session->destroy();
 
         header('Location: /mon-blog/login');
         exit;
     }
-
 }

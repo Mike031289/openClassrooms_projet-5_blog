@@ -1,26 +1,28 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Controllers;
 
-use App\Manager\UserManager;
-use App\Manager\ContactManager;
 use App\Core\Functions\FormHelper;
-use App\Manager\PostManager;
 use App\Manager\CategoryManager;
 use App\Manager\CommentManager;
+use App\Manager\ContactManager;
+use App\Manager\PostManager;
+use App\Manager\UserManager;
 
 /**
  * Class AdminController
  *
  * Controller responsible for handling admin-related actions.
  */
-
 class AdminController extends BaseController
 {
     /**
      * Constructor for AdminController.
      *
-     * @param $httpRequest The HTTP request object.
-     * @param $config The configuration object.
+     * @param $httpRequest The HTTP request object
+     * @param $config      The configuration object
      */
     public function __construct(object $httpRequest, object $config)
     {
@@ -29,8 +31,6 @@ class AdminController extends BaseController
 
     /**
      * Admin dashboard action.
-     *
-     * @return void
      */
     public function adminDashboard(): void
     {
@@ -41,13 +41,13 @@ class AdminController extends BaseController
         $userRole = $this->session->getUserRole();
 
         // Check if the user is not logged in, or the user does not have the 'Admin' role, redirect to the login page
-        if ((!$user) || ($userRole !== 'Admin')) {
+        if ((!$user) || ('Admin' !== $userRole)) {
             header('Location: login');
             exit;
         }
 
         // User is logged in and has the 'Admin' role, proceed to the admin dashboard
-        $posts      = $this->getManager(PostManager::class)->getAll();
+        $posts = $this->getManager(PostManager::class)->getAll();
         $categories = $this->getManager(CategoryManager::class)->getAll();
 
         // Render the admin dashboard view
@@ -56,8 +56,6 @@ class AdminController extends BaseController
 
     /**
      * Post form action.
-     *
-     * @return void
      */
     public function postForm(): void
     {
@@ -68,7 +66,7 @@ class AdminController extends BaseController
         $userRole = $this->session->getUserRole();
 
         // Check if the user is not logged in, or the user does not have the 'Admin' role, redirect to the login page
-        if ((!$user) || ($userRole !== 'Admin')) {
+        if ((!$user) || ('Admin' !== $userRole)) {
             header('Location: login');
             exit;
         }
@@ -81,18 +79,15 @@ class AdminController extends BaseController
 
     /**
      * Create post action.
-     *
-     * @return void
      */
     public function createPost(): void
     {
         // Retrieve data from the form
-        $title       = FormHelper::post('title');
-        $content     = FormHelper::post('content');
-        $postImg     = FormHelper::files('postImage');
-        $categoryId  = FormHelper::post('category');
+        $title = FormHelper::post('title');
+        $content = FormHelper::post('content');
+        $postImg = FormHelper::files('postImage');
+        $categoryId = FormHelper::post('category');
         $postPreview = FormHelper::post('postPreview');
-
 
         // Retrieve User from the session
         $user = $this->session->getUser();
@@ -101,7 +96,7 @@ class AdminController extends BaseController
         $userRole = $this->session->getUserRole();
 
         // Check if the user is not logged in, or the user does not have the 'Admin' role, redirect to the login page
-        if ((!$user) || ($userRole !== 'Admin')) {
+        if ((!$user) || ('Admin' !== $userRole)) {
             header('Location: login');
             exit;
         }
@@ -118,7 +113,7 @@ class AdminController extends BaseController
     /**
      * Edit a post with the specified ID.
      *
-     * @param $id The ID of the post to edit.
+     * @param $id The ID of the post to edit
      */
     public function editPost(int $id): void
     {
@@ -129,7 +124,7 @@ class AdminController extends BaseController
         $userRole = $this->session->getUserRole();
 
         // Check if the user is not logged in, or the user does not have the 'Admin' role redirect to the login page
-        if ((!$user) || ($userRole !== 'Admin')) {
+        if ((!$user) || ('Admin' !== $userRole)) {
             header('Location: login');
             exit;
         }
@@ -146,15 +141,15 @@ class AdminController extends BaseController
     /**
      * Edit a post with the specified ID.
      *
-     * @param $id The ID of the post to edit.
+     * @param $id The ID of the post to edit
      */
     public function updatePost(int $id): void
     {
         // Retrieve data from the form
-        $title       = FormHelper::post('title');
-        $content     = FormHelper::post('content');
-        $postImg     = FormHelper::files('postImage');
-        $categoryId  = FormHelper::post('category');
+        $title = FormHelper::post('title');
+        $content = FormHelper::post('content');
+        $postImg = FormHelper::files('postImage');
+        $categoryId = FormHelper::post('category');
         $postPreview = FormHelper::post('postPreview');
 
         // Retrieve User from the session
@@ -164,21 +159,21 @@ class AdminController extends BaseController
         $userRole = $this->session->getUserRole();
 
         // Check if the user is not logged in, or the user does not have the 'Admin' role redirect to the login page
-        if ((!$user) || ($userRole !== 'Admin')) {
+        if ((!$user) || ('Admin' !== $userRole)) {
             header('Location: login');
             exit;
         }
 
         $authorRole = $this->getManager(UserManager::class)->getAuthorRoleById($user->getId());
         $this->getManager(PostManager::class)->updatePost($id, $title, $content, $postImg, $categoryId, $authorRole, $postPreview);
-        $success = "Poste Modifié avec succès !";
+        $success = 'Poste Modifié avec succès !';
         $this->view('admin/blog-management-edit-post.html.twig', ['user' => $user, 'success' => $success]);
     }
 
     /**
      * getin a post for Deletion with the specified ID.
      *
-     * @param $id The ID of the post to delete.
+     * @param $id The ID of the post to delete
      */
     public function showPostToDelete(int $id): void
     {
@@ -189,7 +184,7 @@ class AdminController extends BaseController
         $userRole = $this->session->getUserRole();
 
         // Check if the user is not logged in, or the user does not have the 'Admin' role redirect to the login page
-        if ((!$user) || ($userRole !== 'Admin')) {
+        if ((!$user) || ('Admin' !== $userRole)) {
             header('Location: login');
             exit;
         }
@@ -206,7 +201,7 @@ class AdminController extends BaseController
     /**
      * Delete a post with the specified ID.
      *
-     * @param $id The ID of the post to delete.
+     * @param $id The ID of the post to delete
      */
     public function deletePost(int $id): void
     {
@@ -217,22 +212,20 @@ class AdminController extends BaseController
         $userRole = $this->session->getUserRole();
 
         // Check if the user is not logged in, or the user does not have the 'Admin' role redirect to the login page
-        if ((!$user) || ($userRole !== 'Admin')) {
+        if ((!$user) || ('Admin' !== $userRole)) {
             header('Location: login');
             exit;
         }
 
         $this->getManager(PostManager::class)->deletePost($id);
-        $success = "Poste supprimé avec succès !";
+        $success = 'Poste supprimé avec succès !';
         $this->view('admin/dashboard-delete-post.html.twig', ['user' => $user, 'success' => $success]);
     }
 
     /**
      * Displays a paginated list of contacts for the admin.
      *
-     * @param $page The current page number (default is 1).
-     *
-     * @return void
+     * @param $page The current page number (default is 1)
      */
     public function showContacts(int $page = 1): void
     {
@@ -243,7 +236,7 @@ class AdminController extends BaseController
         $userRole = $this->session->getUserRole();
 
         // Check if the user is not logged in, or the user does not have the 'Admin' role redirect to the login page
-        if ((!$user) || ($userRole !== 'Admin')) {
+        if ((!$user) || ('Admin' !== $userRole)) {
             header('Location: login');
             exit;
         }
@@ -254,7 +247,7 @@ class AdminController extends BaseController
         $paginationData = $this->getManager(ContactManager::class)->getPaginatedContacts($page, $perPage);
 
         // Pass the pagination data to the Twig template
-        $this->view("admin/contacts.html.twig", [
+        $this->view('admin/contacts.html.twig', [
             'user'        => $user,
             'contacts'    => $paginationData['contacts'],
             'currentPage' => $paginationData['currentPage'],
@@ -265,7 +258,7 @@ class AdminController extends BaseController
     /**
      * List comments for the admin user with pagination.
      *
-     * @param int $page The current page number (default is 1).
+     * @param int $page the current page number (default is 1)
      */
     public function listComments(int $page = 1): void
     {
@@ -276,7 +269,7 @@ class AdminController extends BaseController
         $userRole = $this->session->getUserRole();
 
         // Check if the user is not logged in, or the user does not have the 'Admin' role, redirect to the login page
-        if (!$user || $userRole !== 'Admin') {
+        if (!$user || 'Admin' !== $userRole) {
             header('Location: login');
             exit;
         }
@@ -287,7 +280,7 @@ class AdminController extends BaseController
         $paginationData = $this->getManager(CommentManager::class)->getPaginatedComments($page, $perPage);
 
         // Pass the pagination data to the Twig template
-        $this->view("admin/comments.html.twig", [
+        $this->view('admin/comments.html.twig', [
             'user'        => $user,
             'comments'    => $paginationData['comments'],
             'currentPage' => $paginationData['currentPage'],
@@ -298,7 +291,7 @@ class AdminController extends BaseController
     /**
      * Delete a comment with the specified ID.
      *
-     * @param $id The ID of the comment to delete.
+     * @param $id The ID of the comment to delete
      */
     public function deleteComment(int $id): void
     {
@@ -309,15 +302,15 @@ class AdminController extends BaseController
         $userRole = $this->session->getUserRole();
 
         // Check if the user is not logged in, or the user does not have the 'Admin' role redirect to the login page
-        if ((!$user) || ($userRole !== 'Admin')) {
+        if ((!$user) || ('Admin' !== $userRole)) {
             header('Location: login');
             exit;
         }
 
         $this->getManager(CommentManager::class)->deleteComment($id);
-        $success = "Commentaire retiré avec succès !";
+        $success = 'Commentaire retiré avec succès !';
 
-        $this->view("admin/comments.html.twig", [ 'user' => $user, 'success'=> $success
+        $this->view('admin/comments.html.twig', ['user' => $user, 'success' => $success,
         ]);
     }
 
@@ -334,14 +327,12 @@ class AdminController extends BaseController
         $userRole = $this->session->getUserRole();
 
         // Check if the user is not logged in, or the user does not have the 'Admin' role, redirect to the login page
-        if (!$user || $userRole !== 'Admin') {
+        if (!$user || 'Admin' !== $userRole) {
             header('Location: login');
             exit;
         }
 
         // Display the admin profile view
-        $this->view("admin/admin-profile.html.twig", ['user' => $user]);
+        $this->view('admin/admin-profile.html.twig', ['user' => $user]);
     }
-
-
 }

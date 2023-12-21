@@ -22,5 +22,8 @@
             "name": "Mike Agbelou",
             "email": "mike.agbelou@gmail.com"
         }
-    ]
+    ],
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.41"
+    }
 }

@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Core;
 
 /**
@@ -24,8 +27,6 @@ class HttpRequest
 
     /**
      * Get the value of _url.
-     *
-     * @return string
      */
     public function getUrl(): string
     {
@@ -34,8 +35,6 @@ class HttpRequest
 
     /**
      * Get the value of _method.
-     *
-     * @return string
      */
     public function getMethod(): string
     {
@@ -44,8 +43,6 @@ class HttpRequest
 
     /**
      * Get the value of _param.
-     *
-     * @return array
      */
     public function getParam(): array
     {
@@ -66,12 +63,11 @@ class HttpRequest
      * Set the value of _route.
      *
      * @param Route|null $_route
-     *
-     * @return self
      */
     public function setRoute(Route $_route): self
     {
         $this->_route = $_route;
+
         return $this;
     }
 
@@ -81,17 +77,17 @@ class HttpRequest
     public function bindParam(): void
     {
         switch ($this->_method) {
-            case "GET":
-            case "DELETE":
+            case 'GET':
+            case 'DELETE':
                 // Search for a match between the route path ($this->_route->getPath()) and the current URL ($this->_url)
-                if (preg_match("#" . $this->_route->getPath() . "#", $this->_url, $matches)) {
-                    for ($i = 1; $i < count($matches) - 1; $i++) {
+                if (preg_match('#'.$this->_route->getPath().'#', $this->_url, $matches)) {
+                    for ($i = 1; $i < \count($matches) - 1; ++$i) {
                         $this->_param[] = $matches[$i];
                     }
                 }
                 break;
-            case "POST":
-            case "PUT":
+            case 'POST':
+            case 'PUT':
                 foreach ($this->_route->getParam() as $param) {
                     if (isset($_POST[$param])) {
                         $this->_param[] = $_POST[$param];
@@ -104,7 +100,7 @@ class HttpRequest
     /**
      * Run the route processing configuration settings.
      *
-     * @param object $config The application configuration.
+     * @param object $config the application configuration
      */
     public function run(object $config): void
     {

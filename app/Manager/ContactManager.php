@@ -1,25 +1,27 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Manager;
 
-use App\Models\Contact;
 use App\Exceptions\ActionNotFoundException;
+use App\Models\Contact;
 
 class ContactManager extends BaseManager
 {
-
     public function __construct(object $dataSource)
     {
-        parent::__construct("contact", "Contact", $dataSource);
+        parent::__construct('contact', 'Contact', $dataSource);
     }
 
     /**
      * Create a new contact and insert it into the database.
      *
-     * @param $userName The name or company name of the contact.
-     * @param $email The email address of the contact.
-     * @param $message The message content from the contact.
+     * @param $userName The name or company name of the contact
+     * @param $email    The email address of the contact
+     * @param $message  The message content from the contact
      *
-     * @return Contact|null The created Contact object, or null on failure.
+     * @return Contact|null the created Contact object, or null on failure
      */
     public function createContact(string $userName, string $email, string $message): ?Contact
     {
@@ -30,9 +32,8 @@ class ContactManager extends BaseManager
         $createdAt = $date->format('Y-m-d H:i:s');
 
         try {
-
             // Step 2: Insert the contact into the 'Contact' table
-            $sql  = "INSERT INTO Contact (name, email, message, createdAt) VALUES (?, ?, ?, ?)";
+            $sql = 'INSERT INTO Contact (name, email, message, createdAt) VALUES (?, ?, ?, ?)';
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(1, $userName, \PDO::PARAM_STR);
             $stmt->bindParam(2, $email, \PDO::PARAM_STR);
@@ -58,12 +59,12 @@ class ContactManager extends BaseManager
             $contact->setCreatedAt(new \DateTime($createdAt));
 
             return $contact;
-        }
-        catch (ActionNotFoundException $e) {
+        } catch (ActionNotFoundException $e) {
             // Handle the error in case of failure and roll back the transaction
             // Redirect to a 500 error page if no matching route is found
-            header("Location: 500");
+            header('Location: 500');
             $this->_db->rollBack();
+
             return null;
         }
     }
@@ -71,27 +72,28 @@ class ContactManager extends BaseManager
     /**
      * Retrieves the total number of contacts in the 'Contact' table.
      *
-     * @return int The total number of contacts.
+     * @return int the total number of contacts
      */
     private function getTotalContacts(): int
     {
         // Retrieve the total number of contacts
-        $sql  = "SELECT COUNT(*) FROM Contact";
+        $sql = 'SELECT COUNT(*) FROM Contact';
         $stmt = $this->_db->query($sql);
+
         return $stmt->fetchColumn();
     }
 
     /**
      * Retrieves a paginated list of contacts.
      *
-     * @param $page The current page number (default is 1).
-     * @param $perPage The number of contacts per page.
+     * @param $page    The current page number (default is 1)
+     * @param $perPage The number of contacts per page
      *
-     * @return array An array containing contacts and pagination information.
+     * @return array an array containing contacts and pagination information
      */
     public function getPaginatedContacts(int $page, int $perPage): array
     {
-        if($page < 1){
+        if ($page < 1) {
             $page = 1;
         }
         // Calculate the offset based on the page number and items per page
@@ -102,7 +104,7 @@ class ContactManager extends BaseManager
             $totalContacts = $this->getTotalContacts();
 
             // Retrieve contacts from the 'Contact' table, ordered by date in descending order, with pagination
-            $sql  = "SELECT * FROM Contact ORDER BY createdAt DESC LIMIT :offset, :perPage";
+            $sql = 'SELECT * FROM Contact ORDER BY createdAt DESC LIMIT :offset, :perPage';
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(':offset', $offset, \PDO::PARAM_INT);
             $stmt->bindParam(':perPage', $perPage, \PDO::PARAM_INT);
@@ -133,11 +135,10 @@ class ContactManager extends BaseManager
                 'currentPage' => $page,
                 'totalPages'  => ceil($totalContacts / $perPage),
             ];
-        }
-        catch (ActionNotFoundException $e) {
+        } catch (ActionNotFoundException $e) {
             // Handle exceptions, log errors, or return an empty array
             // Redirect to an admin 500 error page if an exception occurs
-            header("Location: 500");
+            header('Location: 500');
             exit;
         }
     }
@@ -170,11 +171,11 @@ class ContactManager extends BaseManager
     //         $mail->isHTML();
     //         $mail->Subject = "Contact venant de mon Blog";
     //         $mail->Body    =
-    //             "Bonjour, <br> 
-    //         <p> Un utilisateur vient de vous envoyer un message via votre Blog.</p> 
-    //         <p> <strong> Nom & Prénoms ou Raison sociale : </strong> $userName</p> 
-    //         <p> <strong> Email : </strong> $email</p> 
-    //         <p> <strong> Contenu du message : </strong> $message </p> 
+    //             "Bonjour, <br>
+    //         <p> Un utilisateur vient de vous envoyer un message via votre Blog.</p>
+    //         <p> <strong> Nom & Prénoms ou Raison sociale : </strong> $userName</p>
+    //         <p> <strong> Email : </strong> $email</p>
+    //         <p> <strong> Contenu du message : </strong> $message </p>
     //         <p> Cordialement, </p>
     //         <p> Ce message est automatique depuis votre Blog </p>
     //         <h4>
@@ -182,11 +183,11 @@ class ContactManager extends BaseManager
     //         </h4>";
 
     //         // Corps alternatif du message (texte brut)
-    //         $mail->AltBody = "Bonjour, 
+    //         $mail->AltBody = "Bonjour,
     //     Un utilisateur vient de vous envoyer un message via votre Blog.
-    //     Nom & Prénoms ou Raison sociale : $userName 
-    //     Email :  $email 
-    //     Contenu du message : $message 
+    //     Nom & Prénoms ou Raison sociale : $userName
+    //     Email :  $email
+    //     Contenu du message : $message
     //     Cordialement,
     //     Ce message est automatique depuis votre Blog";
 

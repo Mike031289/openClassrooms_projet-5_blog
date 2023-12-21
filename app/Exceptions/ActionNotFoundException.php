@@ -1,6 +1,9 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Exceptions;
 
-class ActionNotFoundException extends \Exception {
-
+class ActionNotFoundException extends \Exception
+{
 }

@@ -1,8 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 namespace App\Controllers;
 
-use App\Manager\PostManager;
 use App\Manager\CategoryManager;
+use App\Manager\PostManager;
 
 /**
  * Class HomeController
@@ -19,12 +22,11 @@ class HomeController extends BaseController
      */
     public function home(): void
     {
-        $posts      = $this->getManager(PostManager::class)->getAll();
+        $posts = $this->getManager(PostManager::class)->getAll();
         $categories = $this->getManager(CategoryManager::class)->getAll();
         // Check if the user is logged in and pass the user information to the template
         $user = $this->session->getUser();
-        
-        $this->view("blog/home.html.twig", ['posts' => $posts, 'categories' => $categories, 'user' => $user]);
-    }
 
+        $this->view('blog/home.html.twig', ['posts' => $posts, 'categories' => $categories, 'user' => $user]);
+    }
 }
