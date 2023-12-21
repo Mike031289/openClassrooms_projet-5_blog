@@ -18451,7 +18451,7 @@ section {
   padding-top: 3rem;
 }
 .svg-border-angled svg {
-  position: absolute;
+  /* position: absolute; */
   bottom: 0;
   left: 0;
   height: 3rem;
