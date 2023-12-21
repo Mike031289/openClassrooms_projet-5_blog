@@ -53,7 +53,6 @@ class BaseManager
         $req = $this->_db->prepare("SELECT * FROM {$this->_table} WHERE id = :id");
         $req->bindValue(':id', $id, \PDO::PARAM_INT);
         $req->execute();
-
         $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $this->_object);
         return $req->fetch();
     }
