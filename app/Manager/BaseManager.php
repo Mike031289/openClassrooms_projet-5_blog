@@ -48,14 +48,14 @@ class BaseManager
      * @param int $id The identifier of the record to retrieve.
      * @return mixed|null The retrieved object or null if not found.
      */
-    public function getById(int $id): mixed
+    public function getById(int $id): object
     {
-        $req = $this->_db->prepare("SELECT * FROM " . $this->_table . " WHERE id = :id");
+        $req = $this->_db->prepare("SELECT * FROM {$this->_table} WHERE id = :id");
         $req->bindValue(':id', $id, \PDO::PARAM_INT);
         $req->execute();
 
         $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $this->_object);
-        return $req->fetchAll();
+        return $req->fetch();
     }
 
     /**
@@ -66,11 +66,11 @@ class BaseManager
      */
     public function getAll(): array
     {
-        $req = $this->_db->prepare("SELECT * FROM " . $this->_table);
+        $req = $this->_db->prepare("SELECT * FROM {$this->_table}");
         $req->execute();
 
-        // $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $this->_object);
-        return $req->fetchAll();
+        // Utiliser FETCH_OBJ pour obtenir des objets anonymes
+        return $req->fetchAll(\PDO::FETCH_OBJ);
     }
 
     /**
