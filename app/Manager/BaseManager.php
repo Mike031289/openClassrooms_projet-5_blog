@@ -1,7 +1,10 @@
 <?php
+<<<<<<< HEAD
 
 declare(strict_types=1);
 
+=======
+>>>>>>> debug-branch
 namespace App\Manager;
 
 /**
@@ -47,15 +50,22 @@ class BaseManager
      * @param  int        $id the identifier of the record to retrieve
      * @return mixed|null the retrieved object or null if not found
      */
-    public function getById(int $id): mixed
+    public function getById(int $id): object
     {
+<<<<<<< HEAD
         $req = $this->_db->prepare('SELECT * FROM '.$this->_table.' WHERE id = :id');
+=======
+        $req = $this->_db->prepare("SELECT * FROM {$this->_table} WHERE id = :id");
+>>>>>>> debug-branch
         $req->bindValue(':id', $id, \PDO::PARAM_INT);
         $req->execute();
-
         $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $this->_object);
+<<<<<<< HEAD
 
         return $req->fetchAll();
+=======
+        return $req->fetch();
+>>>>>>> debug-branch
     }
 
     /**
@@ -66,11 +76,15 @@ class BaseManager
      */
     public function getAll(): array
     {
+<<<<<<< HEAD
         $req = $this->_db->prepare('SELECT * FROM '.$this->_table);
+=======
+        $req = $this->_db->prepare("SELECT * FROM {$this->_table}");
+>>>>>>> debug-branch
         $req->execute();
 
-        // $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $this->_object);
-        return $req->fetchAll();
+        // Utiliser FETCH_OBJ pour obtenir des objets anonymes
+        return $req->fetchAll(\PDO::FETCH_OBJ);
     }
 
     /**
@@ -101,4 +115,8 @@ class BaseManager
         // Return the object after insertion
         return $object;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> debug-branch

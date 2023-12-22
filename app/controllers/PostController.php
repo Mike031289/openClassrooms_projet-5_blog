@@ -88,8 +88,12 @@ class PostController extends BaseController
 
         if (!$post) {
             // Handle the case where the article does not exist (e.g., redirect, display an error, etc.)
+<<<<<<< HEAD
             header('Location: 404');
             exit; // Stop execution to prevent displaying page content
+=======
+            header("Location: 404");
+>>>>>>> debug-branch
         }
 
         $comments = $this->getManager(CommentManager::class)->getCommentsByPostId($id);
