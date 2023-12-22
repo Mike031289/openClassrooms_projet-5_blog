@@ -17,25 +17,16 @@ class PostManager extends BaseManager
     /**
      * Create a new post and insert it into the database.
      *
-<<<<<<< HEAD
      * @param $title       The title of the post
      * @param $content     The content of the post
      * @param $postImg     The image file for the post
      * @param $categoryId  The category ID of the post
      * @param $authorRole  The author ID of the post
      * @param $postPreview The preview of the post
-=======
-     * @param $title The title of the post.
-     * @param $content The content of the post.
-     * @param $postImg The image file for the post. Null if no image.
-     * @param $categoryId The category ID of the post.
-     * @param $authorRole The author role of the post.
-     * @param $postPreview The preview of the post.
->>>>>>> debug-branch
      *
      * @return Post|null the created Post object, or null on failure
      */
-    public function createNewPost(string $title, string $content, ?array $postImg, int $categoryId, string $authorRole, string $postPreview): ?Post
+    public function createNewPost($title, $content, $postImg, $categoryId, $authorRole, $postPreview): ?Post
     {
         $this->_db->beginTransaction();
 
@@ -149,7 +140,7 @@ class PostManager extends BaseManager
      * @param  int $categoryId the ID of the category
      * @return int the total number of posts by category
      */
-    public function getTotalPostsByCategory(int $categoryId): ?int
+    public function getTotalPostsByCategory(int $categoryId): int
     {
         try {
             // Prepare the SQL query
@@ -167,12 +158,8 @@ class PostManager extends BaseManager
         } catch (ActionNotFoundException $e) {
             // Handle exceptions, log errors, or return an empty array
             // Redirect to an admin 500 error page if an exception occurs
-<<<<<<< HEAD
             header('Location: 500');
             exit;
-=======
-            header("Location: 500");
->>>>>>> debug-branch
         }
     }
 
@@ -183,7 +170,7 @@ class PostManager extends BaseManager
      *
      * @return array an array containing posts and pagination information
      */
-    public function getPaginatedPostsByCategory(int $categoryId, int $page, int $pageSize): ?array
+    public function getPaginatedPostsByCategory(int $categoryId, int $page, int $pageSize): array
     {
         if ($page < 1) {
             $page = 1;
@@ -234,12 +221,8 @@ class PostManager extends BaseManager
         } catch (ActionNotFoundException $e) {
             // Handle exceptions, log errors, or return an empty array
             // Redirect to an admin 500 error page if an exception occurs
-<<<<<<< HEAD
             header('Location: 500');
             exit;
-=======
-            header("Location: 500");
->>>>>>> debug-branch
         }
     }
 
@@ -251,7 +234,7 @@ class PostManager extends BaseManager
      *
      * @return array an array containing posts and pagination information
      */
-    public function getPaginatedPosts(int $page, int $pageSize): ?array
+    public function getPaginatedPosts(int $page, int $pageSize): array
     {
         if ($page < 1) {
             $page = 1;
@@ -298,12 +281,8 @@ class PostManager extends BaseManager
         } catch (ActionNotFoundException $e) {
             // Handle exceptions, log errors, or return an empty array
             // Redirect to an admin 500 error page if an exception occurs
-<<<<<<< HEAD
             header('Location: 500');
             exit;
-=======
-            header("Location: 500");
->>>>>>> debug-branch
         }
     }
 
@@ -347,7 +326,6 @@ class PostManager extends BaseManager
     /**
      * Update a post in the database.
      *
-<<<<<<< HEAD
      * @param $id          the ID of the post to update
      * @param $title       the updated title
      * @param $content     The updated content
@@ -355,28 +333,16 @@ class PostManager extends BaseManager
      * @param $categoryId  The updated category ID
      * @param $authorRole  The updated author role
      * @param $postPreview The updated post preview
-=======
-     * @param $id The ID of the post to update.
-     * @param $title The updated title.
-     * @param $content The updated content.
-     * @param $postImg The updated image file. Pass null if no update is needed.
-     * @param $categoryId The updated category ID.
-     * @param $authorRole The updated author role.
-     * @param $postPreview The updated post preview.
->>>>>>> debug-branch
      *
      * @return Post|null the updated Post object or null on failure
      */
-    public function updatePost(int $id, string $title, string $content, ?array $postImg, int $categoryId, string $authorRole, string $postPreview): ?Post
+    public function updatePost(int $id, $title, $content, $postImg, $categoryId, $authorRole, $postPreview): ?Post
     {
         $this->_db->beginTransaction();
-<<<<<<< HEAD
         // Get the current date
         $date = new \DateTime();
         $date->setTimezone(new \DateTimeZone('Europe/Paris')); // Set the timezone if necessary
         $updatedAt = $date->format('Y-m-d H:i:s');
-=======
->>>>>>> debug-branch
 
         try {
             // Step 1: Check if $postImg is not null before calling uploadImage
@@ -388,11 +354,6 @@ class PostManager extends BaseManager
                 // For example, you might want to keep the existing image or display an error message.
                 $imageFileName = null; // Set a default value or handle the null case accordingly
             }
-
-            // Get the current date
-            $date = new \DateTime();
-            $date->setTimezone(new \DateTimeZone('Europe/Paris')); // Set the timezone if necessary
-            $updatedAt = $date->format('Y-m-d H:i:s');
 
             // Step 2: Update the post in the 'Post' table
             $sql = 'UPDATE Post SET title = ?, content = ?, imageUrl = ?, categoryId = ?, authorRole = ?, updatedAt = ?, postpreview = ? WHERE id = ?';

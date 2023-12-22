@@ -181,13 +181,10 @@ class UserController extends BaseController
 
         if ('Admin' === $userRole) {
             header('Location: adminDashboard');
-<<<<<<< HEAD
             exit;
         } elseif ('Visitor' === $userRole) {
-=======
-        } else if ($userRole == "Visitor") {
->>>>>>> debug-branch
             header('Location: /../mon-blog/');
+            exit;
         }
     }
 
@@ -198,10 +195,7 @@ class UserController extends BaseController
     {
         $this->session->destroy();
 
-        header('Location: /../mon-blog/login');
+        header('Location: /mon-blog/login');
+        exit;
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> debug-branch

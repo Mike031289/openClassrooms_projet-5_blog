@@ -91,7 +91,7 @@ class ContactManager extends BaseManager
      *
      * @return array an array containing contacts and pagination information
      */
-    public function getPaginatedContacts(int $page, int $perPage): ?array
+    public function getPaginatedContacts(int $page, int $perPage): array
     {
         if ($page < 1) {
             $page = 1;
@@ -117,6 +117,7 @@ class ContactManager extends BaseManager
             $contactsData = $stmt->fetchAll(\PDO::FETCH_OBJ);
 
             // Convert the data into an array of Contact objects
+            // $contacts = [];
             foreach ($contactsData as $data) {
                 $contact = new Contact();
                 $contact->setId($data->id);
@@ -137,7 +138,6 @@ class ContactManager extends BaseManager
         } catch (ActionNotFoundException $e) {
             // Handle exceptions, log errors, or return an empty array
             // Redirect to an admin 500 error page if an exception occurs
-<<<<<<< HEAD
             header('Location: 500');
             exit;
         }
@@ -199,9 +199,3 @@ class ContactManager extends BaseManager
     //     }
     // }
 }
-=======
-            header("Location: 500");
-        }
-    }
-}
->>>>>>> debug-branch
