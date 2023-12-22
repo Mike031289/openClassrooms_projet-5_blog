@@ -12,7 +12,6 @@ class FormHelper
     public const TEXTAREA_REGEX = '/^.{5,}$/s'; // Example pattern for textarea
     public const PASSWORD_REGEX = '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/'; // Example pattern for password (at least 8 characters, including at least one digit, one lowercase, and one uppercase letter)
 
-<<<<<<< HEAD
     /**
      * Get a value from the $_POST superglobal.
      *
@@ -61,56 +60,3 @@ class FormHelper
         return (bool) preg_match($regex, $field);
     }
 }
-=======
-  /**
-   * Get a value from the $_POST superglobal.
-   *
-   * @param string $key The key to retrieve.
-   * @param mixed $default The default value to return if the key does not exist.
-   * @return mixed The value associated with the key or the default value.
-   */
-  public static function post(string $key, mixed $default = null, array $source = null): mixed
-  {
-    $source = $source ?? $_POST;
-    return isset($source[$key]) ? $source[$key] : $default;
-  }
-
-  /**
-   * Get a value from the $_GET superglobal.
-   *
-   * @param string $key The key to retrieve.
-   * @param mixed $default The default value to return if the key does not exist.
-   * @return mixed The value associated with the key or the default value.
-   */
-  public static function get(string $key, mixed $default = null, array $source = null): mixed
-  {
-    $source = $source ?? $_GET;
-    return isset($source[$key]) ? $source[$key] : $default;
-  }
-
-  /**
-   * Get a value from the $_FILES superglobal.
-   *
-   * @param string $key The key to retrieve.
-   * @param mixed $default The default value to return if the key does not exist.
-   * @return mixed The value associated with the key or the default value.
-   */
-  public static function files(string $key, mixed $default = null, array $source = null): mixed
-  {
-    $source = $source ?? $_FILES;
-    return isset($source[$key]) ? $source[$key] : $default;
-  }
-
-  /**
-   * Validate a field using a regular expression pattern.
-   *
-   * @param $field The field value to validate.
-   * @param $regex The regular expression pattern to use for validation.
-   * @return, true if the field is valid, false otherwise.
-   */
-  public static function validateField(string $field, string $regex): bool
-  {
-    return (bool) preg_match($regex, $field);
-  }
-}
->>>>>>> debug-branch

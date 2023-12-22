@@ -4,14 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-<<<<<<< HEAD
-=======
-use App\Manager\UserManager;
-use LDAP\Result;
-use Twig\Loader\FilesystemLoader;
-use Twig\Environment;
-use App\Core\Session;
->>>>>>> debug-branch
 use App\Core\HttpRequest;
 use App\Core\Session;
 use App\Manager\UserManager;
@@ -64,11 +56,7 @@ class BaseController
         extract($this->_param);
         ob_get_clean();
         echo $this->_twig->render($fileName, $viewContent);
-<<<<<<< HEAD
         exit;
-=======
-        exit ;
->>>>>>> debug-branch
     }
 
     /**

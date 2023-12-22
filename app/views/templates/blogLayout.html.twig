@@ -4,8 +4,8 @@
     <head>
       <meta charset="utf-8"/>
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-      <meta name="description" content="Développeur Concepteur D'Application PHP/SYMFONY Adjoukou AGBELOU"/>
-      <meta name="author" content="Développeur Full Satck Adjoukou AGBELOU"/>
+      <meta name="description" content=""/>
+      <meta name="author" content=""/>
       <title>Adjoukou AGBELOU Blog</title>
       <link rel="icon" type="image/x-icon" href="/../mon-blog/public/assets/img/logo.png"/>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
@@ -26,7 +26,6 @@
     <div id="layoutDefault">
       <div id="layoutDefault_content">
         <main>
-<<<<<<< HEAD
           {% block main %}
             <!-- Navbar-->
             <!-- nav container -->
@@ -55,35 +54,6 @@
                         <i class="ms-2" data-feather="log-out"></i>
                       </a>
                     {% else %}
-=======
-        {% block main %}
-          <!-- Navbar-->            
-          {% block navContainer %}
-            <nav class="navbar navbar-marketing navbar-expand-lg bg-transparent navbar-dark fixed-top">
-              <div class="container px-5">
-                <a class="navbar-brand text-white" href="/../mon-blog">Adjoukou AGBELOU</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <i data-feather="menu"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                      <a class="nav-link {% if page == 'home' %}active{% endif %}" href="/../mon-blog">Accueil</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link {% if page == 'posts' %}active{% endif %}" href="/../mon-blog/posts/{{ 1 }}">Articles</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link {% if page == 'contact' %}active{% endif %}" href="/../mon-blog/contact">Contact</a>
-                    </li>
-                  </ul>
-                  {%if user is defined and user is not null %}
-                    <a class="btn fw-500 ms-lg-4 btn-teal {% if page == 'logout' %}active{% endif %}" href="/../mon-blog/logout">
-                      Se déconnecter
-                      <i class="ms-2" data-feather="log-out"></i>
-                    </a>
-                  {% else %}
->>>>>>> debug-branch
 
                       <a class="btn fw-500 ms-lg-4 btn-white {% if page == 'login' %}active{% endif %}" href="/../mon-blog/login">
                         Se connecter
@@ -101,7 +71,6 @@
             <!-- Page Section-->
             <section class="bg-light py-10">
               {% block section %}{% endblock %}
-<<<<<<< HEAD
               <div class="svg-border-angled text-dark">
                 <!-- Angled SVG Border-->
                 <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 100" preserveaspectratio="none" fill="currentColor">
@@ -109,16 +78,6 @@
                 </svg>
               </div>
             </section>
-=======
-           
-            </section>   
-            <div class="svg-border-angled text-dark">
-              <!-- Angled SVG Border-->
-              <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 100" preserveaspectratio="none" fill="currentColor">
-                <polygon points="0,100 100,0 100,100"></polygon>
-              </svg>
-            </div>
->>>>>>> debug-branch
           {% endblock %}
         </main>
       </div>
