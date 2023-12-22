@@ -1,40 +1,61 @@
 <?php
+
 namespace App\Models;
 
+/**
+ * Class Category
+ *
+ * Represents a category entity.
+ */
 class Category
 {
-    private $id;
-    private $name;
+    /** @var int|null The unique identifier for the category. */
+    private ?int $id;
+
+    /** @var string|null The name of the category. */
+    private ?string $name;
 
     /**
-     * Get the value of id
+     * Get the value of id.
+     *
+     * @return int|null The category ID.
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
     /**
-     * Set the value of id
+     * Set the value of id.
+     *
+     * @param int $id The category ID.
+     *
+     * @return self
      */
-    public function setId($id): self
+    public function setId(int $id): self
     {
         $this->id = $id;
         return $this;
     }
 
     /**
-     * Get the value of name
+     * Get the value of name.
+     *
+     * @return string|null The category name.
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * Set the value of name
+     * Set the value of name.
+     *
+     * @param string $name The category name.
+     *
+     * @return self
      */
-    public function setName($name): self
+    public function setName(string $name): self
     {
         $this->name = $name;
         return $this;

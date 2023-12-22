@@ -12,25 +12,27 @@ class FormHelper
   /**
    * Get a value from the $_POST superglobal.
    *
-   * @param $key The key to retrieve.
-   * @param $default The default value to return if the key does not exist.
-   * @return, the value associated with the key or the default value.
+   * @param string $key The key to retrieve.
+   * @param mixed $default The default value to return if the key does not exist.
+   * @return mixed The value associated with the key or the default value.
    */
-  public static function post(string $key, mixed $default = null): mixed
+  public static function post(string $key, mixed $default = null, array $source = null): mixed
   {
-    return isset($_POST[$key]) ? $_POST[$key] : $default;
+    $source = $source ?? $_POST;
+    return isset($source[$key]) ? $source[$key] : $default;
   }
 
   /**
    * Get a value from the $_GET superglobal.
    *
-   * @param $key The key to retrieve.
-   * @param $default The default value to return if the key does not exist.
-   * @return, the value associated with the key or the default value.
+   * @param string $key The key to retrieve.
+   * @param mixed $default The default value to return if the key does not exist.
+   * @return mixed The value associated with the key or the default value.
    */
-  public static function get(string $key, mixed $default = null): mixed
+  public static function get(string $key, mixed $default = null, array $source = null): mixed
   {
-    return isset($_GET[$key]) ? $_GET[$key] : $default;
+    $source = $source ?? $_GET;
+    return isset($source[$key]) ? $source[$key] : $default;
   }
 
   /**
@@ -40,11 +42,11 @@ class FormHelper
    * @param mixed $default The default value to return if the key does not exist.
    * @return mixed The value associated with the key or the default value.
    */
-  public static function files(string $key, mixed $default = null): mixed
+  public static function files(string $key, mixed $default = null, array $source = null): mixed
   {
-    return isset($_FILES[$key]) ? $_FILES[$key] : $default;
+    $source = $source ?? $_FILES;
+    return isset($source[$key]) ? $source[$key] : $default;
   }
-
 
   /**
    * Validate a field using a regular expression pattern.

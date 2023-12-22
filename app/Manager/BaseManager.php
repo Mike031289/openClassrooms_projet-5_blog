@@ -1,7 +1,5 @@
 <?php
 namespace App\Manager;
-use App\Models\Post;
-
 
 /**
  * Class BaseManager
@@ -100,5 +98,4 @@ class BaseManager
         // Return the object after insertion
         return $object;
     }
-
 }

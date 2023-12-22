@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use App\Manager\UserManager;
+use LDAP\Result;
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
 use App\Core\Session;
@@ -53,6 +54,7 @@ class BaseController
         extract($this->_param);
         ob_get_clean();
         echo $this->_twig->render($fileName, $viewContent);
+        exit ;
     }
 
     /**
