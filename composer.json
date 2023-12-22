@@ -1,6 +1,6 @@
 {
     "name": "pc/mon-blog",
-    "description": "mon premier blog pour le projet-5 openClmassrooms",
+    "description": "mon premier blog pour le projet-5 openClassrooms",
     "require": {
         "michelf/php-markdown": "^2.0",
         "twig/twig": "^3.5",
@@ -19,7 +19,7 @@
     },
     "authors": [
         {
-            "name": "Mike Agbelou",
+            "name": "Adjoukou Agbelou",
             "email": "mike.agbelou@gmail.com"
         }
     ],
