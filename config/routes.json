@@ -17,7 +17,7 @@
 		"action": "listPosts",
 		"method": "GET",
 		"param": [
-			"id"
+			"page"
 		],
 		"managers": [
 			"App\\Manager\\PostManager",

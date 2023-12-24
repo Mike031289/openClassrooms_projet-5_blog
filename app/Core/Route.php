@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+// declare(strict_types=1);
 
 namespace App\Core;
 
@@ -56,7 +56,7 @@ class Route
     /**
      * Get the value of _action.
      */
-    public function getAction(): string
+    public function getAction(): ?string
     {
         return $this->_action;
     }

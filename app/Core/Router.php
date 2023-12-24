@@ -60,7 +60,7 @@ class Router
         foreach ($this->_listRoute as $route) {
             // Define a regular expression pattern to match the route path
             // Replace dynamic parts in curly braces with a regular expression that matches them
-            $pattern = '#^'.preg_replace('/\{([a-zA-Z]+)\}/', '([^/]+)', $route->path).'$#';
+            $pattern = '#^'.preg_replace('/\{([a-zA-Z0-9_-]+)\}/', '([^/]+)', $route->path).'$#';
 
             // Attempt to match the current URL with the pattern and check if the HTTP method matches
             if (preg_match($pattern, $url, $matches) && $route->method === $method) {

@@ -1,0 +1,521 @@
+[33mcommit 33d661ad38254d16c9b2361600f3c912a1472d3e[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Mon Dec 11 22:34:14 2023 +0100
+
+    login and register from relook
+
+[33mcommit cd6b2f0454555932469426e8413b1c517648d103[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Mon Dec 11 15:29:28 2023 +0100
+
+    show post by categorie without pagination
+
+[33mcommit f5cfb50a3cb251f1a0879734cc77bae913ffe515[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Sat Dec 9 16:09:02 2023 +0100
+
+    show post by categorie
+
+[33mcommit fc36c077dc4fdcd7a5b91717dc1287a74bacbe24[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Fri Dec 8 21:25:46 2023 +0100
+
+    gestion des catégorie part 1
+
+[33mcommit 07a09077ba2d09de0c46fa061fc8c96bc4d8bfa0[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Fri Dec 8 02:54:02 2023 +0100
+
+    blog post pagination
+
+[33mcommit c01147dca39ffae9aba81b171446923f0f873b19[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Thu Dec 7 01:31:30 2023 +0100
+
+    single post nav-bar setUp
+
+[33mcommit 55af52a4a45f3f692dacf2d38790d09eb7aebc62[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Thu Dec 7 01:21:52 2023 +0100
+
+    display single post and comment belong
+
+[33mcommit 92bc1d6126f260236749748e433bac78e3c4dbe8[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Wed Dec 6 20:18:38 2023 +0100
+
+    categories nav items
+
+[33mcommit 68b0bb334b20f3a520d464109243c99056871bb3[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Wed Dec 6 01:19:27 2023 +0100
+
+    retrive all post in posts template
+
+[33mcommit 1b0e37a917766346bbf1437c26e8c20bd584cd50[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Tue Dec 5 22:16:15 2023 +0100
+
+    liste blog article template
+
+[33mcommit aece2818e526991e85921ed53b0ec4c420d11795[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Tue Dec 5 02:30:44 2023 +0100
+
+    admin profil detail template
+
+[33mcommit 9522e479385dcf32f0d1f261678cee1d557c4109[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Mon Dec 4 23:51:05 2023 +0100
+
+    delete comment in a modale
+
+[33mcommit e98e34e2bdc7b9944f7f291cb01962aa3b2d71e2[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Mon Dec 4 23:09:31 2023 +0100
+
+    delete comment implementation
+
+[33mcommit f24ca51f945ff4cddb8793c4145b48d114eb8b40[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Fri Dec 1 22:58:01 2023 +0100
+
+    delete rollback and transaction systeme for retriving data elemnents
+
+[33mcommit 65d4a9b9fbd2c183bf4b3dd63d0e63a8315f2450[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Fri Dec 1 19:04:09 2023 +0100
+
+    relook of contact and comment template by Admin side
+
+[33mcommit 794083bbe762df2d944b9bded35701db90efb9c2[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Fri Dec 1 00:32:34 2023 +0100
+
+    retrive comments and make pagination in admin side
+
+[33mcommit bc03dff33de81098a5ea92800e89e615796d3e91[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Thu Nov 30 22:34:45 2023 +0100
+
+    adding comments for Post and displaying them in a post
+
+[33mcommit 03719d649324eff7bee2585c7842210d2b76c7b2[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Wed Nov 29 11:26:45 2023 +0100
+
+    creating comment for the post
+
+[33mcommit 4ef067a6a0d05a5026158263e398f6ece6b1644c[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Tue Nov 28 11:33:22 2023 +0100
+
+    start comment creation
+
+[33mcommit 795545531fd713932205b2c588956ecb953dfb66[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Mon Nov 27 23:56:03 2023 +0100
+
+    png links modification
+
+[33mcommit fd8c113ec304e4ead7b3ceae5ab5be218ceaf882[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Mon Nov 27 23:50:59 2023 +0100
+
+    pagination of contacts in admin side
+
+[33mcommit 4b530760f97e1e091252ad42cc3d68927173c1a1[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Fri Nov 24 22:43:52 2023 +0100
+
+    retrive messages from contact form in admin side
+
+[33mcommit 553c3075a24768a5004c6eb6644aace96df738f1[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Mon Nov 20 19:12:52 2023 +0100
+
+    rewrite Session class for all file by insanciating Session in  BaseController
+
+[33mcommit f1efbcb1ed9fb05c3c5c6053683ec39897e30e51[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Thu Nov 16 22:17:27 2023 +0100
+
+    rewrite posts list on the pages for pagination strat
+
+[33mcommit f7deb313e2195f732d62a5f401cc77cb2d09b017[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Wed Nov 15 14:56:02 2023 +0100
+
+    contact form validation
+
+[33mcommit db565c2992eb8f3006b7301f11d9083aac317d1c[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Wed Nov 15 11:41:00 2023 +0100
+
+    update user creation sql
+
+[33mcommit 1712634865aabc7de4544a1eeab637e8ebe8f718[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Tue Nov 14 16:34:52 2023 +0100
+
+    contct page
+
+[33mcommit 8bdeecc2926e330c2ccacd45302f9702bcce7d58[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Mon Nov 13 22:13:22 2023 +0100
+
+    deletion of a post
+
+[33mcommit e3effdaf0c259ba81471ba1f0f47e48df4463ac1[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Mon Nov 13 19:13:09 2023 +0100
+
+    updating a post method
+
+[33mcommit a3192f1358e83fec7a3a7eafc05f26213ce48ce6[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Fri Nov 10 20:56:45 2023 +0100
+
+    create new Post and upload post image
+
+[33mcommit 7c43b68c5b30a3b533b4478339b7c91b7f4086ef[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Thu Nov 2 23:35:16 2023 +0100
+
+    display post list on dashbord
+
+[33mcommit 090fb9a20dd22b46e91f1d981c5a89a619b084d7[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Tue Oct 31 23:23:25 2023 +0100
+
+    edit post and list post pages
+
+[33mcommit 6fb163e738bcd4b47fb96b647b6eaecc07aeacd0[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Tue Oct 31 22:31:39 2023 +0100
+
+    create post page
+
+[33mcommit c01256a572c597e156f79d95f49a8c7fc49adc26[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Tue Oct 31 00:17:34 2023 +0100
+
+    dashboard Menu layout
+
+[33mcommit 35fa44fe8fa1b6dd4fc5152c4e2099ab4809bbe4[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Mon Oct 30 19:30:02 2023 +0100
+
+    dashboard icone and svg added
+
+[33mcommit 8b3244da240bdece463d5e951f4497ae431a09da[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Wed Oct 25 03:14:41 2023 +0200
+
+    implementation of restriction for user to not switch between vistor pages to admin pages
+
+[33mcommit 1f49d9e010706c4591bd7690ebd56426dbe628d3[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Tue Oct 24 23:21:04 2023 +0200
+
+    admin login systeme and redirecting to dashboard
+
+[33mcommit 62d737582404a9de17419d13ef38fa0fe6af8ef8[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Sat Oct 21 02:06:50 2023 +0200
+
+    revew of userCreat methode to add role to user
+
+[33mcommit 21e275e4a4551a3c9da3a407f1ff07bb8accd6a2[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Thu Oct 19 03:43:27 2023 +0200
+
+    register form input validation with passWord show and hide
+
+[33mcommit 8c7abf5fc5214ac68a3b8435d0ccb17722713cb1[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Wed Oct 18 23:32:18 2023 +0200
+
+    login form validation
+
+[33mcommit 79f5b4b93328cd582ed80aaf868e80f755c1386e[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Sat Oct 7 01:00:25 2023 +0200
+
+    user session implementation
+
+[33mcommit e34807aa9c3b537ca36175821986e267fa540c3e[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Fri Oct 6 22:32:45 2023 +0200
+
+    costomisation of navbar with font icones
+
+[33mcommit 6479d9e71621e9ab388b7b4c39c397d10156fe60[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Thu Oct 5 14:46:45 2023 +0200
+
+    loged user and session start()
+
+[33mcommit ca3b8b34d0dafa57ac15305c67528a3bf6361d0a[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Wed Oct 4 17:11:26 2023 +0200
+
+    creation of user objet and insertion of user data in database
+
+[33mcommit 4ca8025df1a0ca1ee7dde6c6fd2638f6b1c639e0[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Tue Oct 3 17:43:01 2023 +0200
+
+     login form validation error message implementation
+
+[33mcommit b18593115dd5a79537bc26c586b3d3776115eec0[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Tue Oct 3 00:33:24 2023 +0200
+
+    verification of user existance in database before register him
+
+[33mcommit 23d77279d54d51a0ccef1ca146a1e201072a3edb[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Mon Oct 2 13:52:04 2023 +0200
+
+    Implementtion of FormHelper Class to add all functions to validate form
+
+[33mcommit e4a68f71e52b452665dd8c6a8d83f7bb23f8d931[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Thu Sep 28 00:58:40 2023 +0200
+
+    upgrading php version 7.4.26 to php 8.2.10
+
+[33mcommit f00d395fa1406583f37039d3685c960cbe924ed7[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Tue Sep 26 17:31:12 2023 +0200
+
+    PHP Hints and Documentation for the All files
+
+[33mcommit 0fc97c185bf3878e593c101ac80b744cdfa6cf9a[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Mon Sep 25 18:31:54 2023 +0200
+
+    php doc and php hints for all controllers files
+
+[33mcommit 976ada563211edc927e50d86cdeb45e609549eb5[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Sat Sep 23 02:15:32 2023 +0200
+
+     and  Classes documentation and hints
+
+[33mcommit 29d8cced87b734eae9292de405a73c0af2882016[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Fri Sep 22 02:33:59 2023 +0200
+
+    creation of  and  classes
+
+[33mcommit ae20d9dc3e7a9eb727e774fa799f73333d303322[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Mon Sep 18 22:19:19 2023 +0200
+
+    login with user
+
+[33mcommit f896ed7bf3990ca9d5b72aeeffaa328b7545b1b8[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Fri Sep 15 22:31:51 2023 +0200
+
+    user registration
+
+[33mcommit ff364412ba5343e0dd0323367b80caa1fa123fb9[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Mon Sep 11 22:13:06 2023 +0200
+
+    login and register form
+
+[33mcommit f51f7934faf0293ad3e1193d47427fac94bf5efc[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Sat Sep 9 23:47:52 2023 +0200
+
+    display comments in each post
+
+[33mcommit 052fee5259320056b9d09207fbde2ddcb1d5475b[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Fri Sep 8 21:15:28 2023 +0200
+
+    add comment to single post
+
+[33mcommit 4325be586a8f17b9d23b38bad46728f4a7561d77[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Tue Sep 5 11:03:13 2023 +0200
+
+    CSS file redirect and comment template for post page
+
+[33mcommit 63830018b7cfb154d5b06c0bbf1e03fc29db96df[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Tue Aug 29 00:21:24 2023 +0200
+
+    getting params of my Route Class
+
+[33mcommit 5e19fa684e51664a3eaa085aff89ecb9ce0b1f5b[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Fri Aug 25 20:43:13 2023 +0200
+
+    layout template and and nav-link
+
+[33mcommit 70c61089d68ade4588b43ed6bd71086c4c9ae7e3[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Fri Aug 25 00:04:13 2023 +0200
+
+    implamentation of home page and post with links ang pagination
+
+[33mcommit 18f2d8e8c03bd55711129e262d01eaede172b9a4[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Wed Aug 2 20:46:12 2023 +0200
+
+    implamentation of error exceptions systeme
+
+[33mcommit b5e6b003b7ba480d04fcf37118cb716736f203c9[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Mon Jul 31 23:40:45 2023 +0200
+
+    implamentation of home page whith a new views
+
+[33mcommit 2b14bf9b1a4790ecdfdfbb0d10a7dbc12112cd82[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Sat Jul 29 23:46:49 2023 +0200
+
+    adding of namespace for all files and edithing of composer and routes.json files to autoload classes
+
+[33mcommit 90c142edac8bb9889ed161d31d2fabb4c2b52afd[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Thu Jul 27 14:09:42 2023 +0200
+
+    writing documentation for the application's class methods
+
+[33mcommit a02a03f94b4536efcb9e99d869c61cc739e585a7[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Tue Jul 25 14:09:54 2023 +0200
+
+    update of all file to display all posts in post template with twig
+
+[33mcommit c7781c46e516ac39a15739d216f37ac793124f34[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Wed Jul 12 00:08:08 2023 +0200
+
+    Code review because of many error when trying to call a view
+
+[33mcommit b16882f73402be215f4e821dbef8c7a0bfcb5d88[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Wed Jul 5 21:10:22 2023 +0200
+
+    apdate of BaseManager.php file, replacement of  to  in each function
+
+[33mcommit 5bcfcbe79e46572f51690ad5c3a0146e35511660[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Wed Jul 5 20:58:55 2023 +0200
+
+    implamentation of Post.php file as class and PostManager.php as post manager to access data
+
+[33mcommit 540512d9883e2698159180f3e6eb461a51a5081c[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Thu Jun 29 01:03:23 2023 +0200
+
+    code review
+
+[33mcommit 5b2071d2624d909d75073aaf8937611c663a9398[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Tue Jun 20 21:08:49 2023 +0200
+
+    creation and implementation of the BaseManager file in Manager folder
+
+[33mcommit fabf10bffd13dbf520810ebe01615bd8a369bf92[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Tue Jun 20 19:06:46 2023 +0200
+
+    new folder 'Manager' + new file 'DB' for DB connexion
+
+[33mcommit bbf0ea81cce5d2e6e021ffef569d823f46c51903[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Tue Jun 20 15:28:46 2023 +0200
+
+    adding new files (BaseController.php, ViewNotFondException.php, layout.html.twig
+
+[33mcommit fbd6bffd5cad71c98171afccb01548dbce0ab8d0[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Tue Jun 20 00:32:34 2023 +0200
+
+    création of new BaseController file as a Classe of BaseController
+
+[33mcommit 22db33751f2097ed6e7aeb93f0cd2b1ee1ba3ede[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Wed Jun 14 23:12:49 2023 +0200
+
+    Reorganisation of file locations (architecture)
+
+[33mcommit 3fd3d274af4bbdd78e4eb97af768a37e6340ffd7[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Wed Jun 14 22:51:52 2023 +0200
+
+    Reorganisation of file locations (architecture)
+
+[33mcommit cdea0f6fb32ac5c96bac9a38580d1e7dabaf5b7e[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Thu Jun 1 20:34:09 2023 +0200
+
+    url rewrite without /mon-blog
+
+[33mcommit 245f9bf3d84c6d5ba66dc1695cccb53f0ccdba2f[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Thu Jun 1 19:11:53 2023 +0200
+
+    new method added to HttpRequest Class
+
+[33mcommit b8ba59c0a744b45c9908df46a9c7c2b963d74a60[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Thu Jun 1 13:13:22 2023 +0200
+
+    edition of MVC and Exceptions folders to have a bigining letters Capitalize
+
+[33mcommit 7cd82195cdcec9f0b98c7a368d3e542abb16ba75[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Thu Jun 1 01:24:48 2023 +0200
+
+    config of index.php to instanciate a Router by charging all the Classes
+
+[33mcommit 2f183d927f2fc1bcfe214fd284465187663d90a4[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Wed May 31 11:42:07 2023 +0200
+
+    editing of index.php and config.php files
+
+[33mcommit ed50d825271b004abada8e0be4fc15022ed37073[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Wed May 31 00:41:48 2023 +0200
+
+    adding config file and updating of index.php and httpRequest.php files
+
+[33mcommit c8fe4a97ba9d8826011896e9621ba4de74a22943[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Tue May 30 20:39:35 2023 +0200
+
+    edition of index.php file (using autoload)
+
+[33mcommit de01996164190d225002554eff42059f9b043b47[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Tue May 30 19:53:10 2023 +0200
+
+    adding exceptions folder and files with personal exceptions
+
+[33mcommit 4f153b0388a28351fbad734abba0082b67897a39[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Tue May 30 16:59:06 2023 +0200
+
+    creation of new file 'Router.php'
+
+[33mcommit 986b086f9d4b57b4c3a5c4b4359b54f6100328b3[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Tue May 30 12:42:57 2023 +0200
+
+    edition of routes.jason file
+
+[33mcommit d4659da7e4dc6cca71c2007593c20599d16521f7[m
+Author: Mike Agbelou <mike.agbelou@gmail.com>
+Date:   Tue May 30 11:27:28 2023 +0200
+
+    new model Route.php and config routes in routes.jason file

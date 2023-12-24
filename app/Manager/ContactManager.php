@@ -49,7 +49,8 @@ class ContactManager extends BaseManager
 
             // Get the ID of the inserted contact
             $id = $this->_db->lastInsertId();
-
+            // Convert $id to an integer
+            $id = (int) $id;
             // Create a new Contact object with the inserted data
             $contact = new Contact();
             $contact->setId($id);
@@ -59,6 +60,7 @@ class ContactManager extends BaseManager
             $contact->setCreatedAt(new \DateTime($createdAt));
 
             return $contact;
+            
         } catch (ActionNotFoundException $e) {
             // Handle the error in case of failure and roll back the transaction
             // Redirect to a 500 error page if no matching route is found
@@ -111,7 +113,7 @@ class ContactManager extends BaseManager
             $stmt->execute();
 
             // Use setFetchMode to specify the class and fetch mode
-            $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Contact::class);
+            $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Contact::class, []);
 
             // Fetch the results as an Object in array
             $contactsData = $stmt->fetchAll(\PDO::FETCH_OBJ);
@@ -137,71 +139,7 @@ class ContactManager extends BaseManager
         } catch (ActionNotFoundException $e) {
             // Handle exceptions, log errors, or return an empty array
             // Redirect to an admin 500 error page if an exception occurs
-<<<<<<< HEAD
-            header('Location: 500');
-            exit;
-        }
-    }
-
-    // public function sendMail($userName, $email, $message): void
-    // {
-    //     // Création de l'objet PHPMailer
-    //     $mail = new PHPMailer(true);
-
-    //     try {
-    //         // Configuration de l'envoi via SMTP
-    //         $mail->isSMTP();
-    //         $mail->Host       = "localhost";
-    //         $mail->SMTPAuth   = false;
-    //         $mail->Username   = "root";
-    //         $mail->Password   = "";
-    //         $mail->SMTPSecure = "";
-    //         $mail->Port       = 25;
-
-    //         // Configuration du charset
-    //         $mail->CharSet = "utf-8";
-
-    //         // Ajout des destinataires
-    //         $mail->addAddress("mike.agbelou@gmail.com");
-
-    //         // Configuration de l'expéditeur
-    //         $mail->setFrom("adjoukou-agbelou-blog@mon-blog.fr");
-
-    //         // Configuration du contenu du message
-    //         $mail->isHTML();
-    //         $mail->Subject = "Contact venant de mon Blog";
-    //         $mail->Body    =
-    //             "Bonjour, <br>
-    //         <p> Un utilisateur vient de vous envoyer un message via votre Blog.</p>
-    //         <p> <strong> Nom & Prénoms ou Raison sociale : </strong> $userName</p>
-    //         <p> <strong> Email : </strong> $email</p>
-    //         <p> <strong> Contenu du message : </strong> $message </p>
-    //         <p> Cordialement, </p>
-    //         <p> Ce message est automatique depuis votre Blog </p>
-    //         <h4>
-    //             <img src='href='public/assets/img/logo.png' alt='Logo du Blog'>
-    //         </h4>";
-
-    //         // Corps alternatif du message (texte brut)
-    //         $mail->AltBody = "Bonjour,
-    //     Un utilisateur vient de vous envoyer un message via votre Blog.
-    //     Nom & Prénoms ou Raison sociale : $userName
-    //     Email :  $email
-    //     Contenu du message : $message
-    //     Cordialement,
-    //     Ce message est automatique depuis votre Blog";
-
-    //         // Envoi du mail
-    //         $mail->send();
-    //     }
-    //     catch (Exception $e) {
-    //         echo "Message non envoyé. Erreur: {$e->getMessage()}";
-    //     }
-    // }
-}
-=======
             header("Location: 500");
         }
     }
 }
->>>>>>> debug-branch

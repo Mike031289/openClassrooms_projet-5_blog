@@ -32,6 +32,9 @@ class PostController extends BaseController
      */
     public function listPosts(int $page = 1): void
     {
+        // Ensure that $page is an integer
+        $page = (int) $page;
+
         $pageSize = 3; // Set your desired items per page
 
         $paginationData = $this->getManager(PostManager::class)->getPaginatedPosts($page, $pageSize);
@@ -88,12 +91,8 @@ class PostController extends BaseController
 
         if (!$post) {
             // Handle the case where the article does not exist (e.g., redirect, display an error, etc.)
-<<<<<<< HEAD
-            header('Location: 404');
-            exit; // Stop execution to prevent displaying page content
-=======
+
             header("Location: 404");
->>>>>>> debug-branch
         }
 
         $comments = $this->getManager(CommentManager::class)->getCommentsByPostId($id);

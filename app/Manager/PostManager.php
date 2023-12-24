@@ -17,21 +17,12 @@ class PostManager extends BaseManager
     /**
      * Create a new post and insert it into the database.
      *
-<<<<<<< HEAD
-     * @param $title       The title of the post
-     * @param $content     The content of the post
-     * @param $postImg     The image file for the post
-     * @param $categoryId  The category ID of the post
-     * @param $authorRole  The author ID of the post
-     * @param $postPreview The preview of the post
-=======
-     * @param $title The title of the post.
-     * @param $content The content of the post.
-     * @param $postImg The image file for the post. Null if no image.
-     * @param $categoryId The category ID of the post.
-     * @param $authorRole The author role of the post.
-     * @param $postPreview The preview of the post.
->>>>>>> debug-branch
+     * @param string $title The title of the post.
+     * @param string $content The content of the post.
+     * @param array|null $postImg The image file for the post. Null if no image.
+     * @param int $categoryId The category ID of the post.
+     * @param string $authorRole The author role of the post.
+     * @param string $postPreview The preview of the post.
      *
      * @return Post|null the created Post object, or null on failure
      */
@@ -40,9 +31,9 @@ class PostManager extends BaseManager
         $this->_db->beginTransaction();
 
         try {
-            // Step 1: Check if $postImg is not null before calling uploadImage
+            // Check if $postImg is not null before calling uploadImage
             if (null !== $postImg) {
-                // Step 1: Move the image to the designated folder
+                // Move the image to the designated folder
                 $imageFileName = $this->uploadImage($postImg);
             } else {
                 // Handle the case where $postImg is null (if needed)
@@ -56,8 +47,8 @@ class PostManager extends BaseManager
             $createdAt = $date->format('Y-m-d H:i:s');
             $updatedAt = $date->format('Y-m-d H:i:s');
 
-            // Step 2: Insert the post into the 'Post' table
-            $sql = 'INSERT INTO post (title, content, imageUrl, categoryId, authorRole, createdAt, updatedAt, postpreview) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+            // Insert the post into the 'Post' table
+            $sql  = 'INSERT INTO post (title, content, imageUrl, categoryId, authorRole, createdAt, updatedAt, postpreview) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(1, $title, \PDO::PARAM_STR);
             $stmt->bindParam(2, $content, \PDO::PARAM_STR);
@@ -72,8 +63,11 @@ class PostManager extends BaseManager
                 throw new ActionNotFoundException();
             }
 
-            // Step 3: Get the ID of the newly created post
+            // Get the ID of the newly created post
             $id = $this->_db->lastInsertId();
+            
+            // Convert $id to an integer
+            $id = (int) $id;
 
             // Commit the transaction
             $this->_db->commit();
@@ -84,14 +78,15 @@ class PostManager extends BaseManager
             $post->setTitle(htmlspecialchars($title));
             $post->setContent(htmlspecialchars($content));
             $post->setImageUrl(htmlspecialchars($imageFileName));
-            $post->setCategoryId(htmlspecialchars($categoryId));
+            $post->setCategoryId($categoryId);
             $post->setAuthorRole(htmlspecialchars($authorRole));
             $post->setCreatedAt(new \DateTime($createdAt));
             $post->setUpdatedAt(new \DateTime($updatedAt));
             $post->setPostPreview(htmlspecialchars($postPreview));
 
             return $post;
-        } catch (ActionNotFoundException $e) {
+        }
+        catch (ActionNotFoundException $e) {
             // Handle the error in case of failure and roll back the transaction
             // Redirect to a 500 error page if no matching route is found
             header('Location: 500');
@@ -105,13 +100,14 @@ class PostManager extends BaseManager
      * Retrieve a specific record from the table associated with the current class based on its identifier (ID).
      * It returns the record in the form of an object corresponding to the class of the current object.
      *
-     * @param  int       $id the identifier of the record to retrieve
+     * @param int $id the identifier of the record to retrieve
+     *
      * @return Post|null the retrieved object or null if not found
      */
     public function getPostById(int $id): ?Post
     {
         // Prepare the SQL query to retrieve a specific record by ID
-        $sql = 'SELECT * FROM Post WHERE id = :id ORDER BY createdAt DESC LIMIT 1';
+        $sql = 'SELECT * FROM post WHERE id = :id ORDER BY createdAt DESC LIMIT 1';
 
         // Prepare the SQL statement
         $stmt = $this->_db->prepare($sql);
@@ -123,7 +119,7 @@ class PostManager extends BaseManager
         $stmt->execute();
 
         // Set the fetch mode to retrieve the result as an object of the Post class
-        $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Post::class);
+        $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Post::class, []);
 
         // Fetch and return the object or null if not found
         return $stmt->fetchObject(Post::class) ?: null;
@@ -137,7 +133,7 @@ class PostManager extends BaseManager
     public function getTotalPosts(): int
     {
         // Retrieve the total number of posts
-        $sql = 'SELECT COUNT(*) FROM Post';
+        $sql  = 'SELECT COUNT(*) FROM post';
         $stmt = $this->_db->query($sql);
 
         return $stmt->fetchColumn();
@@ -146,14 +142,15 @@ class PostManager extends BaseManager
     /**
      * Retrieves the total number of posts in the 'Post' table by category.
      *
-     * @param  int $categoryId the ID of the category
+     * @param int $categoryId the ID of the category
+     *
      * @return int the total number of posts by category
      */
     public function getTotalPostsByCategory(int $categoryId): ?int
     {
         try {
             // Prepare the SQL query
-            $sql = 'SELECT COUNT(*) FROM Post WHERE categoryId = :categoryId';
+            $sql  = 'SELECT COUNT(*) FROM post WHERE categoryId = :categoryId';
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(':categoryId', $categoryId, \PDO::PARAM_INT);
 
@@ -164,24 +161,22 @@ class PostManager extends BaseManager
             $totalPostsByCategory = $stmt->fetchColumn();
 
             return $totalPostsByCategory;
-        } catch (ActionNotFoundException $e) {
+        }
+        catch (ActionNotFoundException $e) {
             // Handle exceptions, log errors, or return an empty array
             // Redirect to an admin 500 error page if an exception occurs
-<<<<<<< HEAD
-            header('Location: 500');
-            exit;
-=======
             header("Location: 500");
->>>>>>> debug-branch
         }
     }
 
     /**
      * Retrieves a paginated list of posts by category.
      *
-     * @param $page The current page number (default is 1)
+     * @param int $categoryId The category ID.
+     * @param int $page The current page number (default is 1).
+     * @param int $pageSize The number of posts per page.
      *
-     * @return array an array containing posts and pagination information
+     * @return array|null An array containing posts and pagination information
      */
     public function getPaginatedPostsByCategory(int $categoryId, int $page, int $pageSize): ?array
     {
@@ -196,7 +191,7 @@ class PostManager extends BaseManager
             $totalPostsByCategory = $this->getTotalPostsByCategory($categoryId);
 
             // Prepare the SQL query
-            $sql = 'SELECT * FROM Post WHERE categoryId = :categoryId ORDER BY createdAt DESC LIMIT :start, :pageSize';
+            $sql = 'SELECT * FROM post WHERE categoryId = :categoryId ORDER BY createdAt DESC LIMIT :start, :pageSize';
 
             $stmt = $this->_db->prepare($sql);
             $stmt->bindValue(':start', $start, \PDO::PARAM_INT);
@@ -206,11 +201,11 @@ class PostManager extends BaseManager
             $stmt->execute();
 
             // Use setFetchMode to specify the class and fetch mode
-            $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Post::class);
+            // Use setFetchMode to specify the class and fetch mode
+            $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Post::class, []);
 
-            $postsData = $stmt->fetchAll(\PDO::FETCH_OBJ);
-
-            foreach ($postsData as $data) {
+            $posts = [];
+            while ($data = $stmt->fetchObject()) {
                 $post = new Post();
                 $post->setId($data->id);
                 $post->setTitle($data->title);
@@ -231,15 +226,11 @@ class PostManager extends BaseManager
                 'currentPage' => $page,
                 'totalPages'  => ceil($totalPostsByCategory / $pageSize),
             ];
-        } catch (ActionNotFoundException $e) {
+        }
+        catch (ActionNotFoundException $e) {
             // Handle exceptions, log errors, or return an empty array
             // Redirect to an admin 500 error page if an exception occurs
-<<<<<<< HEAD
-            header('Location: 500');
-            exit;
-=======
             header("Location: 500");
->>>>>>> debug-branch
         }
     }
 
@@ -249,7 +240,7 @@ class PostManager extends BaseManager
      * @param int $page     the current page number (default is 1)
      * @param int $pageSize the number of posts per page
      *
-     * @return array an array containing posts and pagination information
+     * @return array|null an array containing posts and pagination information
      */
     public function getPaginatedPosts(int $page, int $pageSize): ?array
     {
@@ -263,18 +254,17 @@ class PostManager extends BaseManager
             // Retrieve the total number of posts
             $totalPosts = $this->getTotalPosts();
 
-            $sql = 'SELECT * FROM post ORDER BY createdAt DESC LIMIT :start, :pageSize';
+            $sql  = 'SELECT * FROM post ORDER BY createdAt DESC LIMIT :start, :pageSize';
             $stmt = $this->_db->prepare($sql);
             $stmt->bindValue(':start', $start, \PDO::PARAM_INT);
             $stmt->bindValue(':pageSize', $pageSize, \PDO::PARAM_INT);
             $stmt->execute();
 
             // Use setFetchMode to specify the class and fetch mode
-            $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Post::class);
+            $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Post::class, []);
 
-            $postsData = $stmt->fetchAll(\PDO::FETCH_OBJ);
-
-            foreach ($postsData as $data) {
+            $posts = [];
+            while ($data = $stmt->fetchObject()) {
                 $post = new Post();
                 $post->setId($data->id);
                 $post->setTitle($data->title);
@@ -295,15 +285,11 @@ class PostManager extends BaseManager
                 'currentPage' => $page,
                 'totalPages'  => ceil($totalPosts / $pageSize),
             ];
-        } catch (ActionNotFoundException $e) {
+        }
+        catch (ActionNotFoundException $e) {
             // Handle exceptions, log errors, or return an empty array
             // Redirect to an admin 500 error page if an exception occurs
-<<<<<<< HEAD
-            header('Location: 500');
-            exit;
-=======
             header("Location: 500");
->>>>>>> debug-branch
         }
     }
 
@@ -320,25 +306,25 @@ class PostManager extends BaseManager
         $uploadDirectory = '../mon-blog/public/assets/img/postImg/';
 
         // Get file information
-        $fileTmpName = $imageFile['tmp_name'];
-        $fileName = basename($imageFile['name']);
-        $fileType = $imageFile['type'];
-        $fileSize = $imageFile['size'];
+        $fileTmpName   = $imageFile['tmp_name'];
+        $fileName      = basename($imageFile['name']);
+        $fileType      = $imageFile['type'];
+        $fileSize      = $imageFile['size'];
         $fileExtension = strtolower(pathinfo($fileName, \PATHINFO_EXTENSION));
 
         // Allowed file extensions
         $allowedExtensions = ['jpeg', 'jpg', 'png'];
 
         // Check if the file extension is allowed
-        if (!\in_array($fileExtension, $allowedExtensions, true)) {
+        if (!in_array($fileExtension, $allowedExtensions, true)) {
             return null; // File extension not allowed
         }
 
         // Generate a unique file name to avoid overwriting existing files
-        $uniqueFileName = uniqid().'_'.$fileName;
+        $uniqueFileName = uniqid() . '_' . $fileName;
 
         // Move the uploaded file to the designated folder
-        $imageFilePath = $uploadDirectory.$uniqueFileName;
+        $imageFilePath = $uploadDirectory . $uniqueFileName;
         move_uploaded_file($fileTmpName, $imageFilePath);
 
         return $uniqueFileName;
@@ -347,15 +333,6 @@ class PostManager extends BaseManager
     /**
      * Update a post in the database.
      *
-<<<<<<< HEAD
-     * @param $id          the ID of the post to update
-     * @param $title       the updated title
-     * @param $content     The updated content
-     * @param $postImg     The updated image file. Pass null if no update is needed.
-     * @param $categoryId  The updated category ID
-     * @param $authorRole  The updated author role
-     * @param $postPreview The updated post preview
-=======
      * @param $id The ID of the post to update.
      * @param $title The updated title.
      * @param $content The updated content.
@@ -363,21 +340,11 @@ class PostManager extends BaseManager
      * @param $categoryId The updated category ID.
      * @param $authorRole The updated author role.
      * @param $postPreview The updated post preview.
->>>>>>> debug-branch
-     *
      * @return Post|null the updated Post object or null on failure
      */
     public function updatePost(int $id, string $title, string $content, ?array $postImg, int $categoryId, string $authorRole, string $postPreview): ?Post
     {
         $this->_db->beginTransaction();
-<<<<<<< HEAD
-        // Get the current date
-        $date = new \DateTime();
-        $date->setTimezone(new \DateTimeZone('Europe/Paris')); // Set the timezone if necessary
-        $updatedAt = $date->format('Y-m-d H:i:s');
-=======
->>>>>>> debug-branch
-
         try {
             // Step 1: Check if $postImg is not null before calling uploadImage
             if (null !== $postImg) {

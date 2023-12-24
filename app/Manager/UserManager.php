@@ -32,7 +32,7 @@ class UserManager extends BaseManager
         $stmt->execute();
 
         // Use setFetchMode to specify the class and fetch mode
-        $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, User::class);
+        $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, User::class, []);
 
         // Use fetchObject to retrieve the result as an object of the User class
         $user = $stmt->fetchObject(User::class);
@@ -59,7 +59,7 @@ class UserManager extends BaseManager
         $stmt->execute();
 
         // Use setFetchMode to specify the class and fetch mode
-        $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, User::class);
+        $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, User::class, []);
 
         // Use fetchObject to retrieve the result as an object of the User class
         $user = $stmt->fetchObject(User::class);
@@ -135,6 +135,8 @@ class UserManager extends BaseManager
 
             // Commit the transaction
             $this->_db->commit();
+            // Convert $id to an integer
+            $id = (int) $id;
 
             // Create a new User object with the inserted data
             $user = new User();
@@ -185,7 +187,7 @@ class UserManager extends BaseManager
      * @param              $id The id of the user
      * @return string|null the user's role or null if not found
      */
-    public function getAuthorRoleById(string $id): ?string
+    public function getAuthorRoleById(int $id): ?string
     {
         $sql = 'SELECT r.roleName
             FROM user AS u

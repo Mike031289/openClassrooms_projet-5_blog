@@ -1,10 +1,5 @@
 <?php
 
-<<<<<<< HEAD
-declare(strict_types=1);
-
-=======
->>>>>>> debug-branch
 namespace App\Models;
 
 /**

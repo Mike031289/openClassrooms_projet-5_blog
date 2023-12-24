@@ -181,12 +181,8 @@ class UserController extends BaseController
 
         if ('Admin' === $userRole) {
             header('Location: adminDashboard');
-<<<<<<< HEAD
-            exit;
-        } elseif ('Visitor' === $userRole) {
-=======
+
         } else if ($userRole == "Visitor") {
->>>>>>> debug-branch
             header('Location: /../mon-blog/');
         }
     }
@@ -200,8 +196,5 @@ class UserController extends BaseController
 
         header('Location: /../mon-blog/login');
     }
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> debug-branch
