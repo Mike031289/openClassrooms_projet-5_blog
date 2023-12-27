@@ -386,7 +386,7 @@ class PostManager extends BaseManager
             $post->setTitle(htmlspecialchars($title));
             $post->setContent(htmlspecialchars($content));
             $post->setImageUrl(htmlspecialchars($imageFileName));
-            $post->setCategoryId($categoryId);
+            $post->setCategoryId((int)($categoryId));
             $post->setAuthorRole(htmlspecialchars($authorRole));
             $post->setUpdatedAt(new \DateTime($updatedAt));
             $post->setPostPreview(htmlspecialchars($postPreview));

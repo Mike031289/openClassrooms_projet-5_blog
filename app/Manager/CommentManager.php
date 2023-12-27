@@ -52,10 +52,10 @@ class CommentManager extends BaseManager
 
             // Create a new Comment object with the inserted data
             $comment = new Comment();
-            $comment->setId($id);
+            $comment->setId((int)$id);
             $comment->setContent(htmlspecialchars($content));
             $comment->setAuthorName(htmlspecialchars($authorName));
-            $comment->setPostId($postId);
+            $comment->setPostId((int)$postId);
             $comment->setCreatedAt(new \DateTime($createdAt));
 
             return $comment;
@@ -82,7 +82,7 @@ class CommentManager extends BaseManager
         $req->execute();
 
         // Assuming you have a Comment model, you can set the fetch mode accordingly:
-        $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Comment::class);
+        $req->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Comment::class, []);
 
         // Return an array of Comment objects representing the comments
         return $req->fetchAll();
@@ -130,7 +130,7 @@ class CommentManager extends BaseManager
             $stmt->execute();
 
             // Use setFetchMode to specify the class and fetch mode
-            $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Comment::class);
+            $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Comment::class, []);
 
             $commentsData = $stmt->fetchAll(\PDO::FETCH_OBJ);
 
@@ -183,9 +183,9 @@ class CommentManager extends BaseManager
             }
 
             // Use setFetchMode to specify the class and fetch mode
-            $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Comment::class);
+            $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Comment::class, []);
 
-            $commentData = $stmt->fetchObject(\PDO::FETCH_OBJ);
+            $commentData = $stmt->fetch();
 
             $comment = new Comment();
             $comment->setId($commentData->id);

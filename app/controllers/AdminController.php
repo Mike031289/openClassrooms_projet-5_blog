@@ -100,7 +100,7 @@ class AdminController extends BaseController
 
         // User is logged in and has the 'Admin' role, proceed to create the new post
         $authorRole = $this->getManager(UserManager::class)->getAuthorRoleById($user->getId());
-        $this->getManager(PostManager::class)->createNewPost($title, $content, $postImg, $categoryId, $authorRole, $postPreview);
+        $this->getManager(PostManager::class)->createNewPost($title, $content, $postImg, (int)$categoryId, $authorRole, $postPreview);
 
         $success = "Merci, l'ajout du Poste Réussi !";
 
@@ -160,7 +160,7 @@ class AdminController extends BaseController
         }
 
         $authorRole = $this->getManager(UserManager::class)->getAuthorRoleById($user->getId());
-        $this->getManager(PostManager::class)->updatePost($id, $title, $content, $postImg, $categoryId, $authorRole, $postPreview);
+        $this->getManager(PostManager::class)->updatePost($id, $title, $content, $postImg, (int)$categoryId, $authorRole, $postPreview);
         $success = 'Poste Modifié avec succès !';
         $this->view('admin/blog-management-edit-post.html.twig', ['user' => $user, 'success' => $success]);
     }
