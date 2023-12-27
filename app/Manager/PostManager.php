@@ -65,7 +65,7 @@ class PostManager extends BaseManager
 
             // Get the ID of the newly created post
             $id = $this->_db->lastInsertId();
-            
+
             // Convert $id to an integer
             $id = (int) $id;
 
@@ -362,7 +362,7 @@ class PostManager extends BaseManager
             $updatedAt = $date->format('Y-m-d H:i:s');
 
             // Step 2: Update the post in the 'Post' table
-            $sql = 'UPDATE Post SET title = ?, content = ?, imageUrl = ?, categoryId = ?, authorRole = ?, updatedAt = ?, postpreview = ? WHERE id = ?';
+            $sql  = 'UPDATE Post SET title = ?, content = ?, imageUrl = ?, categoryId = ?, authorRole = ?, updatedAt = ?, postpreview = ? WHERE id = ?';
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(1, $title, \PDO::PARAM_STR);
             $stmt->bindParam(2, $content, \PDO::PARAM_STR);
@@ -382,17 +382,18 @@ class PostManager extends BaseManager
 
             // Create a new Post object with the updated data
             $post = new Post();
-            $post->setId($id);
+            $post->setId((int) $id);
             $post->setTitle(htmlspecialchars($title));
             $post->setContent(htmlspecialchars($content));
             $post->setImageUrl(htmlspecialchars($imageFileName));
-            $post->setCategoryId((int)($categoryId));
+            $post->setCategoryId((int) ($categoryId));
             $post->setAuthorRole(htmlspecialchars($authorRole));
             $post->setUpdatedAt(new \DateTime($updatedAt));
             $post->setPostPreview(htmlspecialchars($postPreview));
 
             return $post;
-        } catch (ActionNotFoundException $e) {
+        }
+        catch (ActionNotFoundException $e) {
             // Handle the error in case of failure and roll back the transaction
             // Redirect to a 500 error page if no matching route is found
             header('Location: 500');
@@ -413,7 +414,7 @@ class PostManager extends BaseManager
     {
         try {
             // Prepare and execute a DELETE SQL query to remove the post by its ID
-            $sql = 'DELETE FROM Post WHERE id = ?';
+            $sql  = 'DELETE FROM Post WHERE id = ?';
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(1, $id, \PDO::PARAM_INT);
 
@@ -423,7 +424,8 @@ class PostManager extends BaseManager
             }
 
             return false; // Return false if the deletion failed
-        } catch (ActionNotFoundException $e) {
+        }
+        catch (ActionNotFoundException $e) {
             // Handle any exceptions, e.g., log the error or return false
             // Redirect to a 500 error page if no matching route is found
             header('Location: 500');

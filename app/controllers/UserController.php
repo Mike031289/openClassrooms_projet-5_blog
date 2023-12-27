@@ -37,9 +37,9 @@ class UserController extends BaseController
     public function creatUser(): void
     {
         // Retrieve data from the form
-        $userName = FormHelper::post('userName');
-        $email = FormHelper::post('email');
-        $passWord = FormHelper::post('passWord');
+        $userName        = FormHelper::post('userName');
+        $email           = FormHelper::post('email');
+        $passWord        = FormHelper::post('passWord');
         $passWordConfirm = FormHelper::post('passWordConfirm');
 
         $errors = [];
@@ -89,9 +89,9 @@ class UserController extends BaseController
         // If there are errors, display the Twig template with the errors
         if (!empty($errors)) {
             // Add the email and password values to the value array so the value will note be clear after submition
-            $value['userNameValue'] = $userName;
-            $value['emailValue'] = $email;
-            $value['passwordValue'] = $passWord;
+            $value['userNameValue']  = $userName;
+            $value['emailValue']     = $email;
+            $value['passwordValue']  = $passWord;
             $value['passwordValue2'] = $passWordConfirm;
             $this->view('user/register.html.twig', ['errors' => $errors, 'value' => $value]);
         }
@@ -127,9 +127,9 @@ class UserController extends BaseController
      */
     public function login(): void
     {
-        $email = FormHelper::post('email');
+        $email    = FormHelper::post('email');
         $passWord = FormHelper::post('passWord');
-        $errors = [];
+        $errors   = [];
 
         // Validate email fields
         if (empty($email)) {
@@ -148,13 +148,13 @@ class UserController extends BaseController
         // If there are errors, display the Twig template with the errors
         if (!empty($errors)) {
             // Add the email and password values to the value array so the value will not be cleared after submission
-            $value['emailValue'] = $email;
+            $value['emailValue']    = $email;
             $value['passwordValue'] = $passWord;
             $this->view('user/login.html.twig', ['errors' => $errors, 'value' => $value]);
         }
 
         // Attempt to retrieve the user based on the provided email
-        $user = $this->getManager(UserManager::class)->getUserByEmail($email);
+        $user     = $this->getManager(UserManager::class)->getUserByEmail($email);
         $userRole = $this->getManager(UserManager::class)->getUserRoleByEmail($email);
 
         if (null === $user) {
@@ -171,7 +171,7 @@ class UserController extends BaseController
         // If the password matches, log in the user
         if (!password_verify($passWord, $user->getPassWord())) {
             // Password is incorrect
-            $errors['password'] = 'Mot de passe incorrect';
+            $errors['password']  = 'Mot de passe incorrect';
             $value['emailValue'] = $email;
 
             $this->view('user/login.html.twig', ['errors' => $errors]);

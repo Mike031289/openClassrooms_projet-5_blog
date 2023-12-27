@@ -111,7 +111,7 @@ class PostController extends BaseController
         $user = $this->session->getUser();
 
         // Retrieve data from the form
-        $content = FormHelper::post('content');
+        $content    = FormHelper::post('content');
         $authorName = $user->getUserName();
 
         // Create a new comment
@@ -125,9 +125,9 @@ class PostController extends BaseController
 
         // Display the post with comments
         $this->view('blog/post.html.twig', [
-            'post'          => $post,
-            'comments'      => $comments,
-            'user'          => $user,
+            'post'     => $post,
+            'comments' => $comments,
+            'user'     => $user,
         ]);
     }
 }

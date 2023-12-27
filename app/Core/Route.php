@@ -1,6 +1,6 @@
 <?php
 
-// declare(strict_types=1);
+declare(strict_types=1);
 
 namespace App\Core;
 
@@ -29,12 +29,12 @@ class Route
      */
     public function __construct(object $route, array $routeParams)
     {
-        $this->_path = $route->path;
+        $this->_path       = $route->path;
         $this->_controller = $route->controller;
-        $this->_action = $route->action;
-        $this->_method = $route->method;
-        $this->_param = $routeParams;
-        $this->_managers = $route->managers;
+        $this->_action     = $route->action;
+        $this->_method     = $route->method;
+        $this->_param      = $routeParams;
+        $this->_managers   = $route->managers;
     }
 
     /**
@@ -96,7 +96,7 @@ class Route
      */
     public function run(object $httpRequest, object $config): void
     {
-        $controller = null;
+        $controller     = null;
         $controllerName = $this->_controller;
 
         // Check if the controller class exists

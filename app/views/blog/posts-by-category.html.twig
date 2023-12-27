@@ -54,7 +54,9 @@
                   <hr/>
 
                   <li class="nav-item  pt-3">
-                    <a class="nav-link {% if page == 'posts' %}active{% endif %} text-info"  aria-current="page" href="/../mon-blog/posts/{{ 1 }}"><i class="fa fa-arrow-left" aria-hidden="true"></i> RETOUR A LA LISTE DES ARTICLES</a>
+                    <a class="nav-link {% if page == 'posts' %}active{% endif %} text-info" aria-current="page" href="/../mon-blog/posts/{{ 1 }}">
+                      <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                      RETOUR A LA LISTE DES ARTICLES</a>
                   </li>
                 </ul>
               </div>
@@ -90,29 +92,5 @@
         </div>
       {% endfor %}
     </div>
-    <!-- Pagination -->
-    {# <nav aria-label="Pagination">
-      <hr/>
-      <ul class="pagination pagination-blog justify-content-center">
-      
-        {% if currentPage > 1 %}
-          <li class="page-item disabled">
-            <a class="page-link" href="/../mon-blog/posts-by-category/{{ currentPage - 1 }}" tabindex="-1" aria-disabled="true">
-              <span aria-hidden="true">&laquo;</span></a>
-          </li>
-        {% endif %}
-        {% for page in 1..totalPages %}
-          <li class="page-item {% if page == currentPage %}active{% endif %}" aria-current="page">
-            <a class="page-link" href="/../mon-blog/posts-by-category/{{ currentPage }}/{{ currentPage + 1 }}">{{ page }}</a>
-          </li>
-        {% endfor %}
-        {% if currentPage < totalPages %}
-          <li class="page-item" aria-current="page">
-            <a class="page-link" href="/../mon-blog/posts-by-category/{{ currentPage }}/{{ currentPage }}">
-              <span aria-hidden="true">&raquo;</span></a>
-          </li>
-        {% endif %}
-      </ul>
-    </nav> #}
   </div>
 {% endblock %}

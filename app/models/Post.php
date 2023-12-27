@@ -106,7 +106,7 @@ class Post
      */
     public function setCategoryId(int $categoryId): self
     {
-        $this->categoryId = (int)$categoryId;
+        $this->categoryId = (int) $categoryId;
 
         return $this;
     }

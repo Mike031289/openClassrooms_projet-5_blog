@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Manager\UserManager;
 use Twig\Loader\FilesystemLoader;
+use App\Manager\UserManager;
+use App\Core\HttpRequest;
 use Twig\Environment;
 use App\Core\Session;
-use App\Core\HttpRequest;
 
 /**
  * Class BaseController
@@ -17,13 +17,12 @@ use App\Core\HttpRequest;
  */
 class BaseController
 {
-    private array $_param = [];
     protected HttpRequest $httpRequest;
-    private Environment $_twig;
-    private object $config;
     protected array $_managers = [];
-
+    private array $_param = [];
+    private Environment $_twig;
     protected Session $session;
+    private object $config;
 
     // Declare a property for SessionManager
     // private object $sessionManager;
@@ -37,9 +36,9 @@ class BaseController
     public function __construct(HttpRequest $httpRequest, object $config)
     {
         $this->httpRequest = $httpRequest;
-        $this->config = $config;
-        $loader = new FilesystemLoader(__DIR__.'/../Views');
-        $this->_twig = new Environment($loader);
+        $this->config      = $config;
+        $loader            = new FilesystemLoader(__DIR__ . '/../Views');
+        $this->_twig       = new Environment($loader);
         $this->bindManager();
         $this->session = new Session(new UserManager($config->database)); // Initialize the session manager
     }
@@ -56,7 +55,7 @@ class BaseController
         extract($this->_param);
         ob_get_clean();
         echo $this->_twig->render($fileName, $viewContent);
-        exit ;
+        exit;
     }
 
     /**

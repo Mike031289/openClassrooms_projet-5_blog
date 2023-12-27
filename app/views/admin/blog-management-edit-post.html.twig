@@ -29,68 +29,70 @@
 <!-- Main page content-->
 <div class="container-fluid px-4">
   <form class="row gx-4 mt-2" method="POST" enctype="multipart/form-data">
-      {% if post is empty %}
-          {% if success is defined %}
-            <div class="alert alert-success" role="alert">
-              {{ success }}
-            </div>
-          {% endif %}
-      {% else %}
+    {% if post is empty %}
+      {% if success is defined %}
+        <div class="alert alert-success" role="alert">
+          {{ success }}
+        </div>
+      {% endif %}
+    {% else %}
       {% if post %}
-      <div class="col-lg-8 mb-4">
-       
-          
-        <div class="card card-header-actions mb-4">
-          <div class="card-header">
-            Catégorie du Post
-            <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="Veuillez choisir la catégorie corespondante dans la liste"></i>
+        <div class="col-lg-8 mb-4">
+
+          <div class="card card-header-actions mb-4">
+            <div class="card-header">
+              Catégorie du Post
+              <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="Veuillez choisir la catégorie corespondante dans la liste"></i>
+            </div>
+            <div class="card-body">
+              <select class="form-select" name="category" required="required">
+                <option></option>
+                {% for category in categories %}
+                  <option value="{{ category.id }}">{{ category.id }}
+                    -
+                    {{ category.name }}
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
           </div>
-          <div class="card-body">
-            <select class="form-select" name="category" required>
-            <option></option>
-              {% for category in categories %}
-              <option value="{{ category.id }}">{{ category.id }} - {{ category.name }} </option>
-              {% endfor %}
-            </select>
+          <div class="card mb-4">
+            <div class="card-header">Titre du Post</div>
+            <div class="card-body"><input class="form-control" id="postTitleInput" type="text" name="title" required="required" value="{{ post.title }}"/></div>
           </div>
+          <div class="card card-header-actions mb-4">
+            <div class="card-header">
+              Aperçu du Post
+              <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="petit extrait du post"></i>
+            </div>
+            <div class="card-body">
+              <textarea class="form-control" id="postpreview" name="postPreview" rows="3" required="required">{{ post.postpreview }}</textarea>
+            </div>
+          </div>
+          <div class="card card-header-actions mb-4">
+            <div class="card-header">
+              Image Principal du Post
+              <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="L'image de couverture du Post en format JPEG"></i>
+            </div>
+            <div class="card-body">
+              <input type="file" name="postImage" class="form-control" id="inputGroupFile" required="required" placeholder="Format Jpg requis*" title="Veuillez importer une image jpeg (* format .jpg)" accept=".jpg" value="{{ post.imageUrl }}">
+                <img class="img-account-profile m-2" src="/../mon-blog/public/assets/img/postImg/{{ post.imageUrl }}" alt="post image"/></input>
+              <label for="postImage" class="file-label">
+                <small class="text-muted">Format requis : (* .jpg)</small>
+              </label>
+            </div>
+          </div>
+          <div class="card card-header-actions mb-4 mb-lg-0">
+            <div class="card-header">
+              Contenu du Post
+              <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="Contenu du post (tous les paragraphes etc)"></i>
+            </div>
+            <div class="card-body">
+              <textarea class="form-control" id="contenu" name="content" rows="20" required="required">{{ post.content }}</textarea >
+            </div>
+          </div>
+
         </div>
-        <div class="card mb-4">
-          <div class="card-header">Titre du Post</div>
-          <div class="card-body"><input class="form-control" id="postTitleInput" type="text" name="title" required="required" value="{{ post.title }}"/></div>
-        </div>
-        <div class="card card-header-actions mb-4">
-          <div class="card-header">
-            Aperçu du Post
-            <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="petit extrait du post"></i>
-          </div>
-          <div class="card-body">
-           <textarea class="form-control" id="postpreview" name="postPreview" rows="3" required="required">{{ post.postpreview }}</textarea>
-          </div>
-        </div>
-        <div class="card card-header-actions mb-4">
-          <div class="card-header">
-            Image Principal du Post
-            <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="L'image de couverture du Post en format JPEG"></i>
-          </div>
-          <div class="card-body">
-            <input type="file" name="postImage" class="form-control" id="inputGroupFile" required="required" placeholder="Format Jpg requis*" title="Veuillez importer une image jpeg (* format .jpg)" accept=".jpg" value="{{ post.imageUrl }}">
-            <img class="img-account-profile m-2" src="/../mon-blog/public/assets/img/postImg/{{ post.imageUrl }}" alt="post image"/></input>
-            <label for="postImage" class="file-label">
-              <small class="text-muted">Format requis : (* .jpg)</small>
-            </label>
-          </div>
-        </div>
-        <div class="card card-header-actions mb-4 mb-lg-0">
-          <div class="card-header">
-            Contenu du Post
-            <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="Contenu du post (tous les paragraphes etc)"></i>
-          </div>
-          <div class="card-body">
-            <textarea class="form-control" id="contenu" name="content" rows="20" required="required">{{ post.content }}</textarea >
-          </div>
-        </div>
-        
-      </div>
       {% endif %}
       <div class="container col-lg">
         <div class="card card-header-actions">
@@ -105,7 +107,7 @@
           </div>
         </div>
       </div>
-      {% endif %}
+    {% endif %}
 
   </form>
 </div>

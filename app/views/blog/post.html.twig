@@ -55,13 +55,20 @@
                   <img class="single-post-meta-img" src="/../mon-blog/public/assets/img/illustrations/profiles/profile-1.png"/>
                   <div class="single-post-meta-details">
                     <div class="single-post-meta-details-name">Publié par : l'{{ post.authorRole }}</div>
-                    <div class="single-post-meta-details-date">Le, {{ post.updatedAt }}</div>
+                    <div class="single-post-meta-details-date">Le,
+                      {{ post.updatedAt }}</div>
                   </div>
                 </div>
                 <div class="single-post-meta-links">
-                  <a href="https://www.linkedin.com/in/mike-adjoukou-agbelou-23640098/" target="blank"><i class="fab fa-linkedin"></i></a>
-                  <a href="https://github.com/Mike031289" target="blank"><i class="fab fa-github"></i></a>
-                  <a href="https://dmdprod.com/developpeur_adjoukou-agbelou" target="blank"><i class="fas fa-globe"></i></a>
+                  <a href="https://www.linkedin.com/in/mike-adjoukou-agbelou-23640098/" target="blank">
+                    <i class="fab fa-linkedin"></i>
+                  </a>
+                  <a href="https://github.com/Mike031289" target="blank">
+                    <i class="fab fa-github"></i>
+                  </a>
+                  <a href="https://dmdprod.com/developpeur_adjoukou-agbelou" target="blank">
+                    <i class="fas fa-globe"></i>
+                  </a>
                 </div>
               </div>
               <img class="img-fluid mb-2 rounded" src="/../mon-blog/public/assets/img/postImg/{{ post.imageUrl }}"/>
@@ -74,19 +81,19 @@
                   <a class="btn btn-transparent-dark" href="/../mon-blog/posts/{{ 1 }}">Retour à la Liste des Posts</a>
                 </div>
               </div>
-            </div> 
+            </div>
             {% if user is defined and user is not null %}
               <!-- formulaire d'ajout de commentaires -->
               <form class="mt-5" method="POST">
                 <div class="card mb-5">
-                    <div class="card-header text-secondary">LAISSEZ NOUS UN COMMENTAIRE</div>
-                    <div class="card-body">
-                        <textarea class="form-control mb-2" name="content" placeholder="Ajouter un commentaire" required="required" rows="4"></textarea>
-                        <button type="submit" class="btn btn-secondary btn-sm me-2">Ajouter</button>
-                    </div>
+                  <div class="card-header text-secondary">LAISSEZ NOUS UN COMMENTAIRE</div>
+                  <div class="card-body">
+                    <textarea class="form-control mb-2" name="content" placeholder="Ajouter un commentaire" required="required" rows="4"></textarea>
+                    <button type="submit" class="btn btn-secondary btn-sm me-2">Ajouter</button>
+                  </div>
                 </div>
               </form>
-              {% else %}
+            {% else %}
               <div class="mb-5">
                 <p>Pour nous laissez votre commentaire vous devez être connecté ! Si non inscrivez vous pour vous connecter celà vous prendra environ 2 min</p>
                 <a href="/../mon-blog/login" class="btn btn-success btn-sm">Je me connecte</a>
@@ -101,44 +108,49 @@
                   <div class="row gx-5 justify-content-center">
                     <div class="col-lg-10">
                       <h3 class="post-archive-tag">
-                        <span class="translate-midlle badge rounded bg-secondary p-2">{{ comments|length }}</span> COMMENTAIRES
+                        <span class="translate-midlle badge rounded bg-secondary p-2">{{ comments|length }}</span>
+                        COMMENTAIRES
                       </h3>
                       {% for comment in comments %}
-                      <div>
-                        <a class="post-archive-item">
-                          <h5>Auteur du Commentaire: {{ comment.authorName }}</h5>
-                          <p>{{ comment.content }}</p>
-                        </a>
-                        <div class="post-archive-meta">
-                          <img class="post-archive-meta-img" src="/../mon-blog/public/assets/img/illustrations/profiles/profile-1.png"/>
-                          <div class="post-archive-meta-details">
-                            <div class="post-archive-meta-details-name">Auteur : {{ comment.authorName }}</div>
-                            <div class="post-archive-meta-details-date">Commentaire ajouté le : {{ comment.createdAt }}</div>
-                        </div>
-                      </div>
-                      <hr class="my-5"/>
-                      {% endfor %}
+                        <div>
+                          <a class="post-archive-item">
+                            <h5>Auteur du Commentaire:
+                              {{ comment.authorName }}</h5>
+                            <p>{{ comment.content }}</p>
+                          </a>
+                          <div class="post-archive-meta">
+                            <img class="post-archive-meta-img" src="/../mon-blog/public/assets/img/illustrations/profiles/profile-1.png"/>
+                            <div class="post-archive-meta-details">
+                              <div class="post-archive-meta-details-name">Auteur :
+                                {{ comment.authorName }}</div>
+                              <div class="post-archive-meta-details-date">Commentaire ajouté le :
+                                {{ comment.createdAt }}</div>
+                            </div>
+                          </div>
+                          <hr class="my-5"/>
+                        {% endfor %}
 
                       {% else %}
-                        <p class="mb-5"><span class="translate-midlle badge rounded bg-dark p-2">{{ comments|length }}</span> commentaire pour ce post. Laissez nous votre commentaire, nous apprécions vos retours</p>
+                        <p class="mb-5">
+                          <span class="translate-midlle badge rounded bg-dark p-2">{{ comments|length }}</span>
+                          commentaire pour ce post. Laissez nous votre commentaire, nous apprécions vos retours</p>
                       {% endif %}
 
                     </div>
                   </div>
                 </div>
               </section>
-          </div>
-        
-        </div>
-      </div>
-    {% endblock %}
+            </div>
 
-  </section>      
+          </div>
+        </div>
+      {% endblock %}
+
+    </section>
     <div class="svg-border-angled text-dark">
       <!-- Angled SVG Border-->
       <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 100" preserveaspectratio="none" fill="currentColor">
         <polygon points="0,100 100,0 100,100"></polygon>
       </svg>
     </div>
-{% endblock %}
-
+  {% endblock %}

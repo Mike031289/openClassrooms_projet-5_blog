@@ -92,7 +92,7 @@ class UserManager extends BaseManager
 
         try {
             // Step 1: Insert the user into the 'user' table
-            $sql = 'INSERT INTO user (userName, email, passWord, createdAt) VALUES (?, ?, ?, ?)';
+            $sql  = 'INSERT INTO user (userName, email, passWord, createdAt) VALUES (?, ?, ?, ?)';
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(1, $userName, \PDO::PARAM_STR);
             $stmt->bindParam(2, $email, \PDO::PARAM_STR);
@@ -108,8 +108,8 @@ class UserManager extends BaseManager
 
             // Step 3: Retrieve the roleId from the 'role' table (adjust the SQL query as needed)
             $roleName = 'Visitor'; // Replace with the actual role name
-            $sql = 'SELECT roleId FROM role WHERE roleName = ?';
-            $stmt = $this->_db->prepare($sql);
+            $sql      = 'SELECT roleId FROM role WHERE roleName = ?';
+            $stmt     = $this->_db->prepare($sql);
             $stmt->bindParam(1, $roleName, \PDO::PARAM_STR);
 
             if ($stmt->execute()) {
@@ -124,7 +124,7 @@ class UserManager extends BaseManager
             }
 
             // Step 4: Insert the user ID and role into the 'userrole' table
-            $sql = 'INSERT INTO userrole (userId, roleId) VALUES (?, ?)';
+            $sql  = 'INSERT INTO userrole (userId, roleId) VALUES (?, ?)';
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(1, $id, \PDO::PARAM_INT);
             $stmt->bindParam(2, $roleId, \PDO::PARAM_INT);
@@ -135,12 +135,10 @@ class UserManager extends BaseManager
 
             // Commit the transaction
             $this->_db->commit();
-            // Convert $id to an integer
-            $id = (int) $id;
 
             // Create a new User object with the inserted data
             $user = new User();
-            $user->setId($id);
+            $user->setId((int) $id);
             $user->setUserName(htmlspecialchars($userName));
             $user->setEmail(htmlspecialchars($email));
             $user->setPassWord(htmlspecialchars($hashedPassword));
@@ -148,7 +146,8 @@ class UserManager extends BaseManager
 
             // Return the User object
             return $user;
-        } catch (ActionNotFoundException $e) {
+        }
+        catch (ActionNotFoundException $e) {
             // Redirect to a 404 error page if no matching route is found
             header('Location: 500');
             // Handle the error in case of failure and roll back the transaction

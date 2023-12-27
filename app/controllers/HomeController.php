@@ -20,7 +20,7 @@ class HomeController extends BaseController
     {
         // Check if the user is logged in and pass the user information to the template
         $user = $this->session->getUser();
-        
+
         $this->view("blog/home.html.twig", ['user' => $user]);
     }
 

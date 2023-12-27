@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace App\Manager;
+
 use App\Models\Category;
 
 class CategoryManager extends BaseManager
@@ -34,34 +35,35 @@ class CategoryManager extends BaseManager
     }
 
     /**
- * Retrieve the ID of a category based on its name.
- *
- * @param string $categoryName the name of the category
- * @return int|null the ID of the category or null if not found
- */
-public function getCategoryIdByName(string $categoryName): ?int
-{
-    try {
-        $sql = 'SELECT id FROM category WHERE name = :name';
-        $stmt = $this->_db->prepare($sql);
-        $stmt->bindValue(':name', $categoryName, \PDO::PARAM_STR);
-        $stmt->execute();
+     * Retrieve the ID of a category based on its name.
+     *
+     * @param string $categoryName the name of the category
+     * @return int|null the ID of the category or null if not found
+     */
+    public function getCategoryIdByName(string $categoryName): ?int
+    {
+        try {
+            $sql  = 'SELECT id FROM category WHERE name = :name';
+            $stmt = $this->_db->prepare($sql);
+            $stmt->bindValue(':name', $categoryName, \PDO::PARAM_STR);
+            $stmt->execute();
 
-        // Check if a record is found
-        if ($stmt->rowCount() === 0) {
-            return null; // No record found, return null
+            // Check if a record is found
+            if ($stmt->rowCount() === 0) {
+                return null; // No record found, return null
+            }
+
+            // Fetch the ID as an integer
+            $categoryId = (int) $stmt->fetchColumn();
+
+            return $categoryId;
         }
-
-        // Fetch the ID as an integer
-        $categoryId = (int)$stmt->fetchColumn();
-
-        return $categoryId;
-    } catch (\PDOException $e) {
-        // Handle the exception, log the error, or return an appropriate response
-        // For example, you might want to redirect to an error page
-        header('Location: 500');
-        return null;
+        catch (\PDOException $e) {
+            // Handle the exception, log the error, or return an appropriate response
+            // For example, you might want to redirect to an error page
+            header('Location: 500');
+            return null;
+        }
     }
-}
 
 }

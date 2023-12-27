@@ -1,107 +1,19 @@
-{# {% extends 'templates/layout.html.twig' %}
-
-{% set page = 'login' %}
-
-{% block header_title %}
-{% endblock %}
-
-{% block header_description %}
-{% endblock %} #}
-
-{# {% block content %}
-  <div id="layoutAuthentication">
-    <div id="layoutAuthentication_content">
-      <main>
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-5">
-              <div class="card shadow-lg border-0 rounded-lg mt-5">
-                <div class="card-header">
-                  <h3 class="text-center font-weight-light my-4">Se connecter</h3>
-                </div>
-                <div class="card-body">
-                  <form class="" novalidate="novalidate" action="login" method="POST">
-                    {% if error is defined %}
-                      <div class="alert alert-danger" role="alert">
-                        {{ error }}
-                      </div>
-                    {% endif %}
-                    {% if success is defined %}
-                      <div class="alert alert-success" role="alert">
-                        {{ success }}
-                      </div>
-                    {% endif %}
-                    <div class="{% if errors.email %}has-error{% endif %}">
-                      <div class="form-floating mb-3 ">
-                        <input class="form-control {% if errors.email %}is-invalid{% endif %}" id="inputEmail" type="email" name="email" required="required" value="{{ value.emailValue ?? '' }}"/>
-                        <label for="inputEmail">Adresse Email *</label>
-                        {% if errors.email %}
-                          <div class="invalid-feedback">{{ errors.email }}</div>
-                        {% endif %}
-                      </div>
-                    </div>
-                    <div class="{% if errors.password %}has-error{% endif %}">
-                      <div class="form-floating  input-group mb-3 ">
-                        <input class="form-control {% if errors.password %}is-invalid{% endif %}" id="inputPassword" type="password" name="passWord" required="required" value="{{ value.passwordValue ?? '' }}"/>
-                        <label for="inputPassword">Mot de passe *</label>
-                        <div class="input-group-append" id="show-password">
-                          <span class="input-group-text">
-                            <i class="fa fa-eye" id="password-icon"></i>
-                          </span>
-                        </div>
-                        {% if errors.password %}
-                          <div class="invalid-feedback">{{ errors.password }}</div>
-                        {% endif %}
-                      </div>
-                    </div>
-
-                    <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                      <a class="text-success" href="#">Mot de passe oublié ?</a>
-                      <button type="submit" class="btn btn-dark">Connexion</button>
-                    </div>
-                  </form>
-                </div>
-                <div class="card-footer text-center py-3">
-                  <div class="">
-                    <a class="text-success" href="http://localhost/mon-blog/register">Je n'ai pas de compte je m'inscris!</a>
-                  </div>
-                  <div class="card-text mt-2">
-                    <small class="text-body-secondary">
-                      * Ces champs sont obligatoire</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
-    </div>
-    <div id="layoutAuthentication_footer">
-      <footer class="py-5 bg-light mt-5">
-        <div class="container-fluid px-4">
-          <div class="d-flex align-items-center justify-content-between small"></div>
-        </div>
-      </footer>
-    </div>
-  </div>
-{% endblock %} #}
-
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="utf-8"/>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-  <meta name="description" content=""/>
-  <meta name="author" content=""/>
-  <title>Connexion</title>
-  <link href="/../mon-blog/public/css/adminStyles.css" rel="stylesheet"/>
-  <link rel="icon" type="image/x-icon" href="/../mon-blog/public/assets/img/logo.png"/>
-  <script data-search-pseudo-elements="data-search-pseudo-elements" defer="defer" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/easymde@2.18.0/dist/easymde.min.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/easymde@2.18.0/dist/easymde.min.css" rel="stylesheet">
-</head>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Connexion</title>
+    <link href="/../mon-blog/public/css/adminStyles.css" rel="stylesheet"/>
+    <link rel="icon" type="image/x-icon" href="/../mon-blog/public/assets/img/logo.png"/>
+    <script data-search-pseudo-elements="data-search-pseudo-elements" defer="defer" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/easymde@2.18.0/dist/easymde.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/easymde@2.18.0/dist/easymde.min.css" rel="stylesheet">
+  </head>
   <body class="bg-primary">
     <div id="layoutAuthentication">
       <div id="layoutAuthentication_content">
@@ -150,19 +62,19 @@
                           {% endif %}
                         </div>
                       </div>
-                      
+
                       <!-- Form Group (login box)-->
                       <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                         <a class="small text-secondary" href="/../mon-blog/posts/{{ 1 }}">Retourer au Blog</a>
                         <button type="submit" class="btn btn-secondary">Connexion</button>
                       </div>
                       <div class="small text-mutted mt-2">
-                          * Ces champs sont obligatoires
+                        * Ces champs sont obligatoires
                       </div>
                     </form>
                   </div>
                   <div class="card-footer text-center">
-                    <div class="small"> 
+                    <div class="small">
                       <a class="text-secondary" href="/../mon-blog/register">Besoin d'un compte ? S'inscrire !</a>
                     </div>
                   </div>
@@ -197,4 +109,3 @@
     <script src="/../mon-blog/public/js/blogJs.js"></script>
   </body>
 </html>
-

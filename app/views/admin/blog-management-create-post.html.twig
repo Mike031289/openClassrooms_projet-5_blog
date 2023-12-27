@@ -40,9 +40,12 @@
           </div>
           <div class="card-body">
             <select class="form-select" name="category" required="required">
-            <option></option>
+              <option></option>
               {% for category in categories %}
-              <option value="{{ category.id }}">{{ category.id }} - {{ category.name }} </option>
+                <option value="{{ category.id }}">{{ category.id }}
+                  -
+                  {{ category.name }}
+                </option>
               {% endfor %}
             </select>
           </div>
@@ -57,7 +60,7 @@
             <i class="text-muted" data-feather="info" data-bs-toggle="tooltip" data-bs-placement="left" title="petit extrait du post"></i>
           </div>
           <div class="card-body">
-           <textarea class="form-control" id="postpreview" name="postPreview" rows="3" required="required"></textarea>
+            <textarea class="form-control" id="postpreview" name="postPreview" rows="3" required="required"></textarea>
           </div>
         </div>
         <div class="card card-header-actions mb-4">

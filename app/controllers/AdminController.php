@@ -46,7 +46,7 @@ class AdminController extends BaseController
         }
 
         // User is logged in and has the 'Admin' role, proceed to the admin dashboard
-        $posts = $this->getManager(PostManager::class)->getAll();
+        $posts      = $this->getManager(PostManager::class)->getAll();
         $categories = $this->getManager(CategoryManager::class)->getAll();
 
         // Render the admin dashboard view
@@ -81,10 +81,10 @@ class AdminController extends BaseController
     public function createPost(): void
     {
         // Retrieve data from the form
-        $title = FormHelper::post('title');
-        $content = FormHelper::post('content');
-        $postImg = FormHelper::files('postImage');
-        $categoryId = FormHelper::post('category');
+        $title       = FormHelper::post('title');
+        $content     = FormHelper::post('content');
+        $postImg     = FormHelper::files('postImage');
+        $categoryId  = FormHelper::post('category');
         $postPreview = FormHelper::post('postPreview');
 
         // Retrieve User from the session
@@ -100,7 +100,7 @@ class AdminController extends BaseController
 
         // User is logged in and has the 'Admin' role, proceed to create the new post
         $authorRole = $this->getManager(UserManager::class)->getAuthorRoleById($user->getId());
-        $this->getManager(PostManager::class)->createNewPost($title, $content, $postImg, (int)$categoryId, $authorRole, $postPreview);
+        $this->getManager(PostManager::class)->createNewPost($title, $content, $postImg, (int) $categoryId, $authorRole, $postPreview);
 
         $success = "Merci, l'ajout du Poste Réussi !";
 
@@ -142,10 +142,10 @@ class AdminController extends BaseController
     public function updatePost(int $id): void
     {
         // Retrieve data from the form
-        $title = FormHelper::post('title');
-        $content = FormHelper::post('content');
-        $postImg = FormHelper::files('postImage');
-        $categoryId = FormHelper::post('category');
+        $title       = FormHelper::post('title');
+        $content     = FormHelper::post('content');
+        $postImg     = FormHelper::files('postImage');
+        $categoryId  = FormHelper::post('category');
         $postPreview = FormHelper::post('postPreview');
 
         // Retrieve User from the session
@@ -160,7 +160,7 @@ class AdminController extends BaseController
         }
 
         $authorRole = $this->getManager(UserManager::class)->getAuthorRoleById($user->getId());
-        $this->getManager(PostManager::class)->updatePost($id, $title, $content, $postImg, (int)$categoryId, $authorRole, $postPreview);
+        $this->getManager(PostManager::class)->updatePost($id, $title, $content, $postImg, (int) $categoryId, $authorRole, $postPreview);
         $success = 'Poste Modifié avec succès !';
         $this->view('admin/blog-management-edit-post.html.twig', ['user' => $user, 'success' => $success]);
     }

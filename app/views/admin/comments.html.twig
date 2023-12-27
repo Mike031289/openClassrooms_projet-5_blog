@@ -29,50 +29,55 @@
     <div class="col-auto m-3">
       <h1 class="page-header-title">
         <button class="btn btn-purple btn-icon" type="button">
-            <i class="fas fa-flag"></i>
+          <i class="fas fa-flag"></i>
         </button>
-          Listes des Commentaires
+        Listes des Commentaires
       </h1>
     </div>
     {% block content %}
       <div class="card card-header-actions col-lg-7 col-md col-sm">
-       {% if success is defined %}
+        {% if success is defined %}
           <div class="alert alert-success text-center" role="alert">
             {{ success }}
           </div>
         {% endif %}
         {% if comments %}
-        {% for comment in comments %}
-        <div class="card card-header-actions m-1">
+          {% for comment in comments %}
+            <div class="card card-header-actions m-1">
 
-         <!-- Modal -->
-          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <form class="modal-dialog" role="document" method="POST" enctype="multipart/form-data" action="/../mon-blog/adminDashboard/comments/{{ comment.id }}">
-                <div class="modal-content">
+              <!-- Modal -->
+              <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <form class="modal-dialog" role="document" method="POST" enctype="multipart/form-data" action="/../mon-blog/adminDashboard/comments/{{ comment.id }}">
+                  <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Voulez-vous supprimer ce commentaire ?</h5>
-                        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                      <h5 class="modal-title" id="staticBackdropLabel">Voulez-vous supprimer ce commentaire ?</h5>
+                      <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">{{ comment.content }}</div>
-                    <div class="modal-footer"><button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Non</button><button class="btn btn-danger" type="submit">Oui</button></div>
-                </div>
-              </form>
-            </div>
-            <div class="card-header nav-item dropdown no-caret dropdown-user"> 
-              <div class="text-secondary"><i class="fa fa-user-circle text-secondary" aria-hidden="true"></i>
-              {{ comment.authorName }}</div>
+                    <div class="modal-footer">
+                      <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Non</button>
+                      <button class="btn btn-danger" type="submit">Oui</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="card-header nav-item dropdown no-caret dropdown-user">
+                <div class="text-secondary">
+                  <i class="fa fa-user-circle text-secondary" aria-hidden="true"></i>
+                  {{ comment.authorName }}</div>
 
-            <button class="btn btn-danger btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Retirer</button>
+                <button class="btn btn-danger btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Retirer</button>
+              </div>
+              <div class="card-body">
+                {{ comment.content }}
+              </div>
+              <div class="card-footer">
+                <small>Ajouté le :
+                  {{ comment.createdAt }}</small>
+              </div>
+              {# </form> #}
             </div>
-            <div class="card-body">
-              {{ comment.content }}
-            </div>
-            <div class="card-footer">
-              <small>Ajouté le : {{ comment.createdAt }}</small>
-            </div>
-          {# </form> #}
-        </div>
-        {% endfor %}
+          {% endfor %}
         {% else %}
           <p class="m-5">Pas de commentaires disponible</p>
         {% endif %}
@@ -89,7 +94,8 @@
               </li>
             {% endif %}
 
-            {% set maxPagesToShow = 10 %} {# Adjust this value as needed #}
+            {% set maxPagesToShow = 10 %}
+            {# Adjust this value as needed #}
             {% set startPage = (currentPage - maxPagesToShow / 10)|round %}
             {% set endPage = startPage + maxPagesToShow - 1 %}
 
@@ -103,7 +109,8 @@
               {% elseif page > totalPages %}
                 {# Display nothing or ellipsis for pages after the last page #}
               {% else %}
-                <li class="page-item disabled"><span class="page-link">...</span></li>
+                <li class="page-item disabled">
+                  <span class="page-link">...</span></li>
               {% endif %}
             {% endfor %}
 

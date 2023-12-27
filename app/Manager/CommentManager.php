@@ -33,7 +33,7 @@ class CommentManager extends BaseManager
 
         try {
             // Insert the comment into the 'Comment' table
-            $sql = 'INSERT INTO Comment (content, authorName, postId, createdAt) VALUES (?, ?, ?, ?)';
+            $sql  = 'INSERT INTO Comment (content, authorName, postId, createdAt) VALUES (?, ?, ?, ?)';
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(1, $content, \PDO::PARAM_STR);
             $stmt->bindParam(2, $authorName, \PDO::PARAM_STR); // Corrected from PARAM_INT to PARAM_STR
@@ -52,14 +52,15 @@ class CommentManager extends BaseManager
 
             // Create a new Comment object with the inserted data
             $comment = new Comment();
-            $comment->setId((int)$id);
+            $comment->setId((int) $id);
             $comment->setContent(htmlspecialchars($content));
             $comment->setAuthorName(htmlspecialchars($authorName));
-            $comment->setPostId((int)$postId);
+            $comment->setPostId((int) $postId);
             $comment->setCreatedAt(new \DateTime($createdAt));
 
             return $comment;
-        } catch (ActionNotFoundException $e) {
+        }
+        catch (ActionNotFoundException $e) {
             // Handle the error in case of failure and roll back the transaction
             // Redirect to a 500 error page if no matching route is found
             header('Location: 500');
@@ -95,7 +96,7 @@ class CommentManager extends BaseManager
      */
     private function getTotalComments(): int
     {
-        $sql = 'SELECT COUNT(*) FROM Comment';
+        $sql  = 'SELECT COUNT(*) FROM Comment';
         $stmt = $this->_db->query($sql);
 
         return (int) $stmt->fetchColumn();
@@ -123,7 +124,7 @@ class CommentManager extends BaseManager
             $totalComments = $this->getTotalComments();
 
             // Retrieve comments from the 'Comment' table, ordered by date in descending order, with pagination
-            $sql = 'SELECT * FROM comment ORDER BY createdAt DESC LIMIT :offset, :perPage';
+            $sql  = 'SELECT * FROM comment ORDER BY createdAt DESC LIMIT :offset, :perPage';
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(':offset', $offset, \PDO::PARAM_INT);
             $stmt->bindParam(':perPage', $perPage, \PDO::PARAM_INT);
@@ -152,7 +153,8 @@ class CommentManager extends BaseManager
                 'currentPage' => $page,
                 'totalPages'  => ceil($totalComments / $perPage),
             ];
-        } catch (ActionNotFoundException $e) {
+        }
+        catch (ActionNotFoundException $e) {
             // Handle the error in case of failure and roll back the transaction
             header("Location: 500");
         }
@@ -169,7 +171,7 @@ class CommentManager extends BaseManager
     {
         try {
             // Prepare and execute the SQL query
-            $sql = 'SELECT * FROM Comment WHERE id = :commentId ORDER BY createdAt DESC';
+            $sql  = 'SELECT * FROM Comment WHERE id = :commentId ORDER BY createdAt DESC';
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(':commentId', $commentId, \PDO::PARAM_INT);
             $stmt->execute();
@@ -194,7 +196,8 @@ class CommentManager extends BaseManager
             $comment->setCreatedAt(new \DateTime($commentData->createdAt));
 
             return $comment;
-        } catch (ActionNotFoundException $e) {
+        }
+        catch (ActionNotFoundException $e) {
             // Handle the error in case of failure and roll back the transaction
             header("Location: 500");
         }
@@ -211,7 +214,7 @@ class CommentManager extends BaseManager
     {
         try {
             // Prepare and execute a DELETE SQL query to remove the comment by its ID
-            $sql = 'DELETE FROM Comment WHERE id = ?';
+            $sql  = 'DELETE FROM Comment WHERE id = ?';
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(1, $id, \PDO::PARAM_INT);
 
@@ -221,7 +224,8 @@ class CommentManager extends BaseManager
             }
 
             return false; // Return false if the deletion failed
-        } catch (ActionNotFoundException $e) {
+        }
+        catch (ActionNotFoundException $e) {
             // Handle any exceptions, e.g., log the error or return false
             // Redirect to a 500 error page if no matching route is found
             header('Location: 500');
