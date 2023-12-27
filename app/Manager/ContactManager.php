@@ -33,7 +33,7 @@ class ContactManager extends BaseManager
 
         try {
             // Step 2: Insert the contact into the 'Contact' table
-            $sql  = 'INSERT INTO Contact (name, email, message, createdAt) VALUES (?, ?, ?, ?)';
+            $sql = 'INSERT INTO Contact (name, email, message, createdAt) VALUES (?, ?, ?, ?)';
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(1, $userName, \PDO::PARAM_STR);
             $stmt->bindParam(2, $email, \PDO::PARAM_STR);
@@ -59,9 +59,7 @@ class ContactManager extends BaseManager
             $contact->setCreatedAt(new \DateTime($createdAt));
 
             return $contact;
-
-        }
-        catch (ActionNotFoundException $e) {
+        } catch (ActionNotFoundException $e) {
             // Handle the error in case of failure and roll back the transaction
             // Redirect to a 500 error page if no matching route is found
             header('Location: 500');
@@ -79,7 +77,7 @@ class ContactManager extends BaseManager
     private function getTotalContacts(): int
     {
         // Retrieve the total number of contacts
-        $sql  = 'SELECT COUNT(*) FROM Contact';
+        $sql = 'SELECT COUNT(*) FROM Contact';
         $stmt = $this->_db->query($sql);
 
         return $stmt->fetchColumn();
@@ -106,7 +104,7 @@ class ContactManager extends BaseManager
             $totalContacts = $this->getTotalContacts();
 
             // Retrieve contacts from the 'Contact' table, ordered by date in descending order, with pagination
-            $sql  = 'SELECT * FROM Contact ORDER BY createdAt DESC LIMIT :offset, :perPage';
+            $sql = 'SELECT * FROM Contact ORDER BY createdAt DESC LIMIT :offset, :perPage';
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(':offset', $offset, \PDO::PARAM_INT);
             $stmt->bindParam(':perPage', $perPage, \PDO::PARAM_INT);
@@ -136,11 +134,10 @@ class ContactManager extends BaseManager
                 'currentPage' => $page,
                 'totalPages'  => ceil($totalContacts / $perPage),
             ];
-        }
-        catch (ActionNotFoundException $e) {
+        } catch (ActionNotFoundException $e) {
             // Handle exceptions, log errors, or return an empty array
             // Redirect to an admin 500 error page if an exception occurs
-            header("Location: 500");
+            header('Location: 500');
         }
     }
 }

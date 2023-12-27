@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 /**
@@ -27,7 +29,7 @@ class Comment
     /**
      * Get the value of id.
      *
-     * @return int The comment ID.
+     * @return int the comment ID
      */
     public function getId(): int
     {
@@ -37,20 +39,19 @@ class Comment
     /**
      * Set the value of id.
      *
-     * @param int $id The comment ID.
-     *
-     * @return self
+     * @param int $id the comment ID
      */
     public function setId(int $id): self
     {
         $this->id = $id;
+
         return $this;
     }
 
     /**
      * Get the value of content.
      *
-     * @return string The content of the comment.
+     * @return string the content of the comment
      */
     public function getContent(): string
     {
@@ -60,20 +61,19 @@ class Comment
     /**
      * Set the value of content.
      *
-     * @param string $content The content of the comment.
-     *
-     * @return self
+     * @param string $content the content of the comment
      */
     public function setContent(string $content): self
     {
         $this->content = $content;
+
         return $this;
     }
 
     /**
      * Get the value of authorName.
      *
-     * @return string The name of the author of the comment.
+     * @return string the name of the author of the comment
      */
     public function getAuthorName(): string
     {
@@ -83,20 +83,19 @@ class Comment
     /**
      * Set the value of authorName.
      *
-     * @param string $authorName The name of the author of the comment.
-     *
-     * @return self
+     * @param string $authorName the name of the author of the comment
      */
     public function setAuthorName(string $authorName): self
     {
         $this->authorName = $authorName;
+
         return $this;
     }
 
     /**
      * Get the value of postId.
      *
-     * @return int The ID of the post associated with the comment.
+     * @return int the ID of the post associated with the comment
      */
     public function getPostId(): int
     {
@@ -106,20 +105,19 @@ class Comment
     /**
      * Set the value of postId.
      *
-     * @param int $postId The ID of the post associated with the comment.
-     *
-     * @return self
+     * @param int $postId the ID of the post associated with the comment
      */
     public function setPostId(int $postId): self
     {
         $this->postId = $postId;
+
         return $this;
     }
 
     /**
      * Get the formatted value of createdAt.
      *
-     * @return string The formatted creation date and time of the comment.
+     * @return string the formatted creation date and time of the comment
      */
     public function getCreatedAt(): string
     {
@@ -131,9 +129,7 @@ class Comment
     /**
      * Set the value of createdAt.
      *
-     * @param \DateTime $createdAt The creation date and time of the comment.
-     *
-     * @return self
+     * @param \DateTime $createdAt the creation date and time of the comment
      */
     public function setCreatedAt(\DateTime $createdAt): self
     {

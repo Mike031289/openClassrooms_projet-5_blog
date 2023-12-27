@@ -46,11 +46,11 @@ class ContactController extends BaseController
 
         // Retrieve data from the form
         $userName = FormHelper::post('userName');
-        $email    = FormHelper::post('email');
-        $message  = FormHelper::post('message');
+        $email = FormHelper::post('email');
+        $message = FormHelper::post('message');
 
         $errors = [];
-        $error  = 'Formulaire non soumit, vérifier vos champs de saisie';
+        $error = 'Formulaire non soumit, vérifier vos champs de saisie';
 
         // Validate the fields if empty
         if (empty($userName)) {
@@ -75,8 +75,8 @@ class ContactController extends BaseController
         if (!empty($errors)) {
             // Add the name, email, and message values to the value array so the value will note be clear after submition
             $value['userNameValue'] = $userName;
-            $value['emailValue']    = $email;
-            $value['messageValue']  = $message;
+            $value['emailValue'] = $email;
+            $value['messageValue'] = $message;
             $this->view('blog/contact.html.twig', ['user' => $user, 'errors' => $errors, 'value' => $value, 'error' => $error]);
         }
 

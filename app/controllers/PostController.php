@@ -92,7 +92,7 @@ class PostController extends BaseController
         if (!$post) {
             // Handle the case where the article does not exist (e.g., redirect, display an error, etc.)
 
-            header("Location: 404");
+            header('Location: 404');
         }
 
         $comments = $this->getManager(CommentManager::class)->getCommentsByPostId($id);
@@ -111,7 +111,7 @@ class PostController extends BaseController
         $user = $this->session->getUser();
 
         // Retrieve data from the form
-        $content    = FormHelper::post('content');
+        $content = FormHelper::post('content');
         $authorName = $user->getUserName();
 
         // Create a new comment

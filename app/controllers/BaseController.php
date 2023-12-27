@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use Twig\Loader\FilesystemLoader;
-use App\Manager\UserManager;
 use App\Core\HttpRequest;
-use Twig\Environment;
 use App\Core\Session;
+use App\Manager\UserManager;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 /**
  * Class BaseController
@@ -36,9 +36,9 @@ class BaseController
     public function __construct(HttpRequest $httpRequest, object $config)
     {
         $this->httpRequest = $httpRequest;
-        $this->config      = $config;
-        $loader            = new FilesystemLoader(__DIR__ . '/../Views');
-        $this->_twig       = new Environment($loader);
+        $this->config = $config;
+        $loader = new FilesystemLoader(__DIR__.'/../Views');
+        $this->_twig = new Environment($loader);
         $this->bindManager();
         $this->session = new Session(new UserManager($config->database)); // Initialize the session manager
     }

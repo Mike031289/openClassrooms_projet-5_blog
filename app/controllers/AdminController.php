@@ -46,7 +46,7 @@ class AdminController extends BaseController
         }
 
         // User is logged in and has the 'Admin' role, proceed to the admin dashboard
-        $posts      = $this->getManager(PostManager::class)->getAll();
+        $posts = $this->getManager(PostManager::class)->getAll();
         $categories = $this->getManager(CategoryManager::class)->getAll();
 
         // Render the admin dashboard view
@@ -81,10 +81,10 @@ class AdminController extends BaseController
     public function createPost(): void
     {
         // Retrieve data from the form
-        $title       = FormHelper::post('title');
-        $content     = FormHelper::post('content');
-        $postImg     = FormHelper::files('postImage');
-        $categoryId  = FormHelper::post('category');
+        $title = FormHelper::post('title');
+        $content = FormHelper::post('content');
+        $postImg = FormHelper::files('postImage');
+        $categoryId = FormHelper::post('category');
         $postPreview = FormHelper::post('postPreview');
 
         // Retrieve User from the session
@@ -142,10 +142,10 @@ class AdminController extends BaseController
     public function updatePost(int $id): void
     {
         // Retrieve data from the form
-        $title       = FormHelper::post('title');
-        $content     = FormHelper::post('content');
-        $postImg     = FormHelper::files('postImage');
-        $categoryId  = FormHelper::post('category');
+        $title = FormHelper::post('title');
+        $content = FormHelper::post('content');
+        $postImg = FormHelper::files('postImage');
+        $categoryId = FormHelper::post('category');
         $postPreview = FormHelper::post('postPreview');
 
         // Retrieve User from the session

@@ -21,7 +21,7 @@ class HttpRequest
      */
     public function __construct()
     {
-        $this->_url    = $_SERVER['REQUEST_URI'];
+        $this->_url = $_SERVER['REQUEST_URI'];
         $this->_method = $_SERVER['REQUEST_METHOD'];
     }
 
@@ -80,7 +80,7 @@ class HttpRequest
             case 'GET':
             case 'DELETE':
                 // Search for a match between the route path ($this->_route->getPath()) and the current URL ($this->_url)
-                if (preg_match('#' . $this->_route->getPath() . '#', $this->_url, $matches)) {
+                if (preg_match('#'.$this->_route->getPath().'#', $this->_url, $matches)) {
                     for ($i = 1; $i < \count($matches) - 1; ++$i) {
                         $this->_param[] = $matches[$i];
                     }

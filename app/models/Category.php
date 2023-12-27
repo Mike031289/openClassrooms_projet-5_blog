@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 /**
@@ -18,7 +20,7 @@ class Category
     /**
      * Get the value of id.
      *
-     * @return int|null The category ID.
+     * @return int|null the category ID
      */
     public function getId(): ?int
     {
@@ -28,9 +30,7 @@ class Category
     /**
      * Set the value of id.
      *
-     * @param int $id The category ID.
-     *
-     * @return self
+     * @param int $id the category ID
      */
     public function setId(int $id): self
     {
@@ -42,7 +42,7 @@ class Category
     /**
      * Get the value of name.
      *
-     * @return string|null The category name.
+     * @return string|null the category name
      */
     public function getName(): ?string
     {
@@ -52,9 +52,7 @@ class Category
     /**
      * Set the value of name.
      *
-     * @param string $name The category name.
-     *
-     * @return self
+     * @param string $name the category name
      */
     public function setName(string $name): self
     {
