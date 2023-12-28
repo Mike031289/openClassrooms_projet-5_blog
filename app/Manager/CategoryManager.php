@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Manager;
 
+use App\Exceptions\ActionNotFoundException;
 use App\Models\Category;
 
 class CategoryManager extends BaseManager
@@ -57,7 +58,7 @@ class CategoryManager extends BaseManager
             $categoryId = (int) $stmt->fetchColumn();
 
             return $categoryId;
-        } catch (\PDOException $e) {
+        } catch (ActionNotFoundException $e) {
             // Handle the exception, log the error, or return an appropriate response
             // For example, you might want to redirect to an error page
             header('Location: 500');

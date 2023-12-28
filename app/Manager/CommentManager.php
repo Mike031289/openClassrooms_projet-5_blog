@@ -155,6 +155,8 @@ class CommentManager extends BaseManager
         } catch (ActionNotFoundException $e) {
             // Handle the error in case of failure and roll back the transaction
             header('Location: 500');
+            
+            return null;
         }
     }
 
@@ -197,6 +199,8 @@ class CommentManager extends BaseManager
         } catch (ActionNotFoundException $e) {
             // Handle the error in case of failure and roll back the transaction
             header('Location: 500');
+
+            return null;
         }
     }
 

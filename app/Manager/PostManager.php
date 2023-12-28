@@ -19,7 +19,7 @@ class PostManager extends BaseManager
      *
      * @param string     $title       the title of the post
      * @param string     $content     the content of the post
-     * @param array|null $postImg     The image file for the post. Null if no image.
+     * @param array<string> $postImg     The image file for the post. Null if no image.
      * @param int        $categoryId  the category ID of the post
      * @param string     $authorRole  the author role of the post
      * @param string     $postPreview the preview of the post
@@ -48,7 +48,7 @@ class PostManager extends BaseManager
             $updatedAt = $date->format('Y-m-d H:i:s');
 
             // Insert the post into the 'Post' table
-            $sql = 'INSERT INTO post (title, content, imageUrl, categoryId, authorRole, createdAt, updatedAt, postpreview) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+            $sql  = 'INSERT INTO post (title, content, imageUrl, categoryId, authorRole, createdAt, updatedAt, postpreview) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(1, $title, \PDO::PARAM_STR);
             $stmt->bindParam(2, $content, \PDO::PARAM_STR);
@@ -85,7 +85,8 @@ class PostManager extends BaseManager
             $post->setPostPreview(htmlspecialchars($postPreview));
 
             return $post;
-        } catch (ActionNotFoundException $e) {
+        }
+        catch (ActionNotFoundException $e) {
             // Handle the error in case of failure and roll back the transaction
             // Redirect to a 500 error page if no matching route is found
             header('Location: 500');
@@ -127,29 +128,42 @@ class PostManager extends BaseManager
     /**
      * Retrieves the total number of posts in the 'Post' table.
      *
-     * @return int the total number of posts
+     * @return int|null The total number of posts
+     * @throws ActionNotFoundException If an error occurs during the database query
      */
-    public function getTotalPosts(): int
+    public function getTotalPosts(): ?int
     {
-        // Retrieve the total number of posts
-        $sql = 'SELECT COUNT(*) FROM post';
-        $stmt = $this->_db->query($sql);
+        try {
+            // Retrieve the total number of posts
+            $sql  = 'SELECT COUNT(*) FROM post';
+            $stmt = $this->_db->query($sql);
 
-        return $stmt->fetchColumn();
+            if ($stmt === false) {
+                throw new ActionNotFoundException();
+            }
+
+            return (int) $stmt->fetchColumn();
+        }
+        catch (ActionNotFoundException $e) {
+            // Handle exceptions, log errors, or redirect to your custom error page
+            header('Location: 500'); // Replace with the actual path
+            
+            return null;
+        }
     }
 
     /**
      * Retrieves the total number of posts in the 'Post' table by category.
      *
-     * @param int $categoryId the ID of the category
+     * @param int $categoryId The ID of the category
      *
-     * @return int the total number of posts by category
+     * @return int|null The total number of posts by category, or null on failure
      */
     public function getTotalPostsByCategory(int $categoryId): ?int
     {
         try {
             // Prepare the SQL query
-            $sql = 'SELECT COUNT(*) FROM post WHERE categoryId = :categoryId';
+            $sql  = 'SELECT COUNT(*) FROM post WHERE categoryId = :categoryId';
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(':categoryId', $categoryId, \PDO::PARAM_INT);
 
@@ -157,13 +171,16 @@ class PostManager extends BaseManager
             $stmt->execute();
 
             // Fetch the result
-            $totalPostsByCategory = $stmt->fetchColumn();
+            $totalPostsByCategory = (int) $stmt->fetchColumn();
 
             return $totalPostsByCategory;
-        } catch (ActionNotFoundException $e) {
-            // Handle exceptions, log errors, or return an empty array
+        }
+        catch (ActionNotFoundException $e) {
+            // Handle exceptions, log errors, or return null
             // Redirect to an admin 500 error page if an exception occurs
             header('Location: 500');
+
+            return null;
         }
     }
 
@@ -174,7 +191,7 @@ class PostManager extends BaseManager
      * @param int $page       the current page number (default is 1)
      * @param int $pageSize   the number of posts per page
      *
-     * @return array|null An array containing posts and pagination information
+     * @return array<string, mixed> An array containing posts and pagination information
      */
     public function getPaginatedPostsByCategory(int $categoryId, int $page, int $pageSize): ?array
     {
@@ -195,12 +212,13 @@ class PostManager extends BaseManager
             $stmt->bindValue(':start', $start, \PDO::PARAM_INT);
             $stmt->bindParam(':categoryId', $categoryId, \PDO::PARAM_INT);
             $stmt->bindParam(':pageSize', $pageSize, \PDO::PARAM_INT);
+
             // Execute the query
             $stmt->execute();
 
             // Use setFetchMode to specify the class and fetch mode
-            // Use setFetchMode to specify the class and fetch mode
             $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Post::class, []);
+
 
             $posts = [];
             while ($data = $stmt->fetchObject()) {
@@ -224,10 +242,13 @@ class PostManager extends BaseManager
                 'currentPage' => $page,
                 'totalPages'  => ceil($totalPostsByCategory / $pageSize),
             ];
-        } catch (ActionNotFoundException $e) {
+        }
+        catch (ActionNotFoundException $e) {
             // Handle exceptions, log errors, or return an empty array
             // Redirect to an admin 500 error page if an exception occurs
             header('Location: 500');
+
+            return null;
         }
     }
 
@@ -237,7 +258,7 @@ class PostManager extends BaseManager
      * @param int $page     the current page number (default is 1)
      * @param int $pageSize the number of posts per page
      *
-     * @return array|null an array containing posts and pagination information
+     * @return array<string, mixed> an array containing posts and pagination information
      */
     public function getPaginatedPosts(int $page, int $pageSize): ?array
     {
@@ -251,7 +272,7 @@ class PostManager extends BaseManager
             // Retrieve the total number of posts
             $totalPosts = $this->getTotalPosts();
 
-            $sql = 'SELECT * FROM post ORDER BY createdAt DESC LIMIT :start, :pageSize';
+            $sql  = 'SELECT * FROM post ORDER BY createdAt DESC LIMIT :start, :pageSize';
             $stmt = $this->_db->prepare($sql);
             $stmt->bindValue(':start', $start, \PDO::PARAM_INT);
             $stmt->bindValue(':pageSize', $pageSize, \PDO::PARAM_INT);
@@ -282,17 +303,20 @@ class PostManager extends BaseManager
                 'currentPage' => $page,
                 'totalPages'  => ceil($totalPosts / $pageSize),
             ];
-        } catch (ActionNotFoundException $e) {
+        }
+        catch (ActionNotFoundException $e) {
             // Handle exceptions, log errors, or return an empty array
             // Redirect to an admin 500 error page if an exception occurs
             header('Location: 500');
+
+            return null;
         }
     }
 
     /**
      * Move the uploaded image file to the designated folder.
      *
-     * @param array $imageFile the image file information from $_FILES
+     * @param array<string> $imageFile the image file information from $_FILES
      *
      * @return string|null the file name of the uploaded image, or null on failure
      */
@@ -302,10 +326,10 @@ class PostManager extends BaseManager
         $uploadDirectory = '../mon-blog/public/assets/img/postImg/';
 
         // Get file information
-        $fileTmpName = $imageFile['tmp_name'];
-        $fileName = basename($imageFile['name']);
-        $fileType = $imageFile['type'];
-        $fileSize = $imageFile['size'];
+        $fileTmpName   = $imageFile['tmp_name'];
+        $fileName      = basename($imageFile['name']);
+        $fileType      = $imageFile['type'];
+        $fileSize      = $imageFile['size'];
         $fileExtension = strtolower(pathinfo($fileName, \PATHINFO_EXTENSION));
 
         // Allowed file extensions
@@ -317,10 +341,10 @@ class PostManager extends BaseManager
         }
 
         // Generate a unique file name to avoid overwriting existing files
-        $uniqueFileName = uniqid().'_'.$fileName;
+        $uniqueFileName = uniqid() . '_' . $fileName;
 
         // Move the uploaded file to the designated folder
-        $imageFilePath = $uploadDirectory.$uniqueFileName;
+        $imageFilePath = $uploadDirectory . $uniqueFileName;
         move_uploaded_file($fileTmpName, $imageFilePath);
 
         return $uniqueFileName;
@@ -329,13 +353,14 @@ class PostManager extends BaseManager
     /**
      * Update a post in the database.
      *
-     * @param            $id          The ID of the post to update
-     * @param            $title       The updated title
-     * @param            $content     The updated content
-     * @param            $postImg     The updated image file. Pass null if no update is needed.
-     * @param            $categoryId  The updated category ID
-     * @param            $authorRole  The updated author role
-     * @param            $postPreview The updated post preview
+     * @param int    $id          The ID of the post to update
+     * @param string $title       The updated title
+     * @param string $content     The updated content
+     * @param array<string> $postImg The updated image file. Pass null if no update is needed.
+     * @param int    $categoryId  The updated category ID
+     * @param string $authorRole  The updated author role
+     * @param string $postPreview The updated post preview
+     *
      * @return Post|null the updated Post object or null on failure
      */
     public function updatePost(int $id, string $title, string $content, ?array $postImg, int $categoryId, string $authorRole, string $postPreview): ?Post
@@ -358,7 +383,7 @@ class PostManager extends BaseManager
             $updatedAt = $date->format('Y-m-d H:i:s');
 
             // Step 2: Update the post in the 'Post' table
-            $sql = 'UPDATE Post SET title = ?, content = ?, imageUrl = ?, categoryId = ?, authorRole = ?, updatedAt = ?, postpreview = ? WHERE id = ?';
+            $sql  = 'UPDATE Post SET title = ?, content = ?, imageUrl = ?, categoryId = ?, authorRole = ?, updatedAt = ?, postpreview = ? WHERE id = ?';
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(1, $title, \PDO::PARAM_STR);
             $stmt->bindParam(2, $content, \PDO::PARAM_STR);
@@ -388,7 +413,8 @@ class PostManager extends BaseManager
             $post->setPostPreview(htmlspecialchars($postPreview));
 
             return $post;
-        } catch (ActionNotFoundException $e) {
+        }
+        catch (ActionNotFoundException $e) {
             // Handle the error in case of failure and roll back the transaction
             // Redirect to a 500 error page if no matching route is found
             header('Location: 500');
@@ -409,7 +435,7 @@ class PostManager extends BaseManager
     {
         try {
             // Prepare and execute a DELETE SQL query to remove the post by its ID
-            $sql = 'DELETE FROM Post WHERE id = ?';
+            $sql  = 'DELETE FROM Post WHERE id = ?';
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(1, $id, \PDO::PARAM_INT);
 
@@ -419,7 +445,8 @@ class PostManager extends BaseManager
             }
 
             return false; // Return false if the deletion failed
-        } catch (ActionNotFoundException $e) {
+        }
+        catch (ActionNotFoundException $e) {
             // Handle any exceptions, e.g., log the error or return false
             // Redirect to a 500 error page if no matching route is found
             header('Location: 500');

@@ -138,6 +138,8 @@ class ContactManager extends BaseManager
             // Handle exceptions, log errors, or return an empty array
             // Redirect to an admin 500 error page if an exception occurs
             header('Location: 500');
+
+            return null;
         }
     }
 }
