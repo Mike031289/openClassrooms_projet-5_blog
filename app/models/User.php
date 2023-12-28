@@ -6,36 +6,40 @@ namespace App\Models;
 
 /**
  * Class User
+ *
+ * Represents a user in the system.
  */
 class User
 {
     /**
-     * @var int|null the user's unique identifier
+     * @var int|null The user's unique identifier.
      */
-    private $id;
+    private ?int $id;
 
     /**
-     * @var string|null the user's username
+     * @var string|null The user's username.
      */
-    private $userName;
+    private ?string $userName;
 
     /**
-     * @var string|null the user's email address
+     * @var string|null The user's email address.
      */
-    private $email;
+    private ?string $email;
 
     /**
-     * @var string|null the hashed password of the user
+     * @var string|null The hashed password of the user.
      */
-    private $passWord;
+    private ?string $passWord;
 
     /**
-     * @var string|null the creation date of the user
+     * @var string The creation date of the user in the format 'Y-m-d H:i:s'.
      */
-    private $createdAt;
+    private string $createdAt;
 
     /**
      * Get the value of id.
+     *
+     * @return int|null The user's unique identifier.
      */
     public function getId(): ?int
     {
@@ -44,6 +48,10 @@ class User
 
     /**
      * Set the value of id.
+     *
+     * @param int $id The user's unique identifier.
+     *
+     * @return self
      */
     public function setId(int $id): self
     {
@@ -55,9 +63,9 @@ class User
     /**
      * Get the value of userName.
      *
-     * @return string|null
+     * @return string|null The user's username.
      */
-    public function getUserName()
+    public function getUserName(): ?string
     {
         return $this->userName;
     }
@@ -65,9 +73,11 @@ class User
     /**
      * Set the value of userName.
      *
-     * @param string $userName
+     * @param string $userName The user's username.
+     *
+     * @return self
      */
-    public function setUserName($userName): self
+    public function setUserName(string $userName): self
     {
         $this->userName = $userName;
 
@@ -77,9 +87,9 @@ class User
     /**
      * Get the value of email.
      *
-     * @return string|null
+     * @return string|null The user's email address.
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -87,9 +97,11 @@ class User
     /**
      * Set the value of email.
      *
-     * @param string $email
+     * @param string $email The user's email address.
+     *
+     * @return self
      */
-    public function setEmail($email): self
+    public function setEmail(string $email): self
     {
         $this->email = $email;
 
@@ -99,9 +111,9 @@ class User
     /**
      * Get the value of passWord.
      *
-     * @return string|null
+     * @return string|null The hashed password of the user.
      */
-    public function getPassWord()
+    public function getPassWord(): ?string
     {
         return $this->passWord;
     }
@@ -109,9 +121,11 @@ class User
     /**
      * Set the value of passWord.
      *
-     * @param string $passWord
+     * @param string $passWord The hashed password of the user.
+     *
+     * @return self
      */
-    public function setPassWord($passWord): self
+    public function setPassWord(string $passWord): self
     {
         $this->passWord = $passWord;
 
@@ -119,7 +133,9 @@ class User
     }
 
     /**
-     * Get the formatted value of createdAt
+     * Get the formatted value of createdAt.
+     *
+     * @return string The formatted creation date of the user in the format 'd/m/Y H:i'.
      */
     public function getCreatedAt(): string
     {
@@ -129,7 +145,11 @@ class User
     }
 
     /**
-     * Set the value of createdAt
+     * Set the value of createdAt.
+     *
+     * @param \DateTime $createdAt The creation date of the user.
+     *
+     * @return self
      */
     public function setCreatedAt(\DateTime $createdAt): self
     {
