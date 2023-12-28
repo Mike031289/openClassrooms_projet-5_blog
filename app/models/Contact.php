@@ -14,24 +14,26 @@ class Contact
     private int $id;
 
     /**
-     * @var string|null the userName of the contact
+     * @var string|null The userName of the contact.
      */
-    private string $userName;
+    private ?string $userName;
 
     /**
-     * @var string|null the user's email address
+     * @var string|null The user's email address.
      */
-    private string $email;
+    private ?string $email;
 
     /**
-     * @var string|null the contact message
+     * @var string|null The contact message.
      */
-    private string $message;
+    private ?string $message;
 
     private string $createdAt;
 
     /**
-     * Get the value of id
+     * Get the value of id.
+     *
+     * @return int The contact's ID.
      */
     public function getId(): int
     {
@@ -39,9 +41,11 @@ class Contact
     }
 
     /**
-     * Set the value of id
+     * Set the value of id.
      *
-     * @param int $id the contact's ID
+     * @param int $id The contact's ID.
+     *
+     * @return self
      */
     public function setId(int $id): self
     {
@@ -52,8 +56,10 @@ class Contact
 
     /**
      * Get the userName of the contact.
+     *
+     * @return string|null The userName of the contact.
      */
-    public function getuserName(): string
+    public function getUserName(): ?string
     {
         return $this->userName;
     }
@@ -61,9 +67,11 @@ class Contact
     /**
      * Set the userName of the contact.
      *
-     * @param string $userName the userName of the contact
+     * @param string|null $userName The userName of the contact.
+     *
+     * @return self
      */
-    public function setUserName(string $userName): self
+    public function setUserName(?string $userName): self
     {
         $this->userName = $userName;
 
@@ -73,7 +81,7 @@ class Contact
     /**
      * Get the user's email address.
      *
-     * @return string|null the user's email address
+     * @return string|null The user's email address.
      */
     public function getEmail(): ?string
     {
@@ -83,7 +91,9 @@ class Contact
     /**
      * Set the user's email address.
      *
-     * @param string|null $email the user's email address
+     * @param string|null $email The user's email address.
+     *
+     * @return self
      */
     public function setEmail(?string $email): self
     {
@@ -93,19 +103,23 @@ class Contact
     }
 
     /**
-     * Get the value of message
+     * Get the value of message.
+     *
+     * @return string|null The contact message.
      */
-    public function getMessage(): string
+    public function getMessage(): ?string
     {
         return $this->message;
     }
 
     /**
-     * Set the value of message
+     * Set the value of message.
      *
-     * @param string $message the contact message
+     * @param string|null $message The contact message.
+     *
+     * @return self
      */
-    public function setMessage(string $message): self
+    public function setMessage(?string $message): self
     {
         $this->message = $message;
 
@@ -113,7 +127,9 @@ class Contact
     }
 
     /**
-     * Get the formatted value of createdAt
+     * Get the formatted value of createdAt.
+     *
+     * @return string The formatted creation date of the contact in the format 'd/m/Y H:i'.
      */
     public function getCreatedAt(): string
     {
@@ -123,7 +139,11 @@ class Contact
     }
 
     /**
-     * Set the value of createdAt
+     * Set the value of createdAt.
+     *
+     * @param \DateTime $createdAt The creation date of the contact.
+     *
+     * @return self
      */
     public function setCreatedAt(\DateTime $createdAt): self
     {
