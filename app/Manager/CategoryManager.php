@@ -61,7 +61,7 @@ class CategoryManager extends BaseManager
         } catch (ActionNotFoundException $e) {
             // Handle the exception, log the error, or return an appropriate response
             // For example, you might want to redirect to an error page
-            header('Location: 500');
+            header('Location: /../mon-blog/500');
 
             return null;
         }

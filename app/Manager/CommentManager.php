@@ -62,7 +62,7 @@ class CommentManager extends BaseManager
         } catch (ActionNotFoundException $e) {
             // Handle the error in case of failure and roll back the transaction
             // Redirect to a 500 error page if no matching route is found
-            header('Location: 500');
+            header('Location: /../mon-blog/500');
             $this->_db->rollBack();
 
             return null;
@@ -91,14 +91,29 @@ class CommentManager extends BaseManager
     /**
      * Retrieves the total number of comments in the 'Comment' table.
      *
-     * @return int the total number of comments
+     * @return int|null the total number of comments
+     * @throws ActionNotFoundException If an error occurs during the database query
      */
-    private function getTotalComments(): int
+    private function getTotalComments(): ?int
     {
+        try {
+
+        // Retrieve the total number of Comments
         $sql = 'SELECT COUNT(*) FROM Comment';
         $stmt = $this->_db->query($sql);
 
-        return (int) $stmt->fetchColumn();
+            if ($stmt === false) {
+                throw new ActionNotFoundException();
+            }
+
+            return (int) $stmt->fetchColumn();
+        }
+        catch (ActionNotFoundException $e) {
+            // Handle exceptions, log errors, or redirect to your custom error page
+            header('Location: /../mon-blog/500');
+            
+            return null;
+        }
     }
 
     /**
@@ -154,7 +169,7 @@ class CommentManager extends BaseManager
             ];
         } catch (ActionNotFoundException $e) {
             // Handle the error in case of failure and roll back the transaction
-            header('Location: 500');
+            header('Location: /../mon-blog/500');
             
             return null;
         }
@@ -198,7 +213,7 @@ class CommentManager extends BaseManager
             return $comment;
         } catch (ActionNotFoundException $e) {
             // Handle the error in case of failure and roll back the transaction
-            header('Location: 500');
+            header('Location: /../mon-blog/500');
 
             return null;
         }
@@ -228,7 +243,7 @@ class CommentManager extends BaseManager
         } catch (ActionNotFoundException $e) {
             // Handle any exceptions, e.g., log the error or return false
             // Redirect to a 500 error page if no matching route is found
-            header('Location: 500');
+            header('Location: /../mon-blog/500');
 
             return false;
         }

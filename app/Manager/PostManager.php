@@ -89,7 +89,7 @@ class PostManager extends BaseManager
         catch (ActionNotFoundException $e) {
             // Handle the error in case of failure and roll back the transaction
             // Redirect to a 500 error page if no matching route is found
-            header('Location: 500');
+            header('Location: /../mon-blog/500');
             $this->_db->rollBack();
 
             return null;
@@ -146,7 +146,7 @@ class PostManager extends BaseManager
         }
         catch (ActionNotFoundException $e) {
             // Handle exceptions, log errors, or redirect to your custom error page
-            header('Location: 500'); // Replace with the actual path
+            header('Location: /../mon-blog/500');
             
             return null;
         }

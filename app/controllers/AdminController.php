@@ -42,7 +42,7 @@ class AdminController extends BaseController
 
         // Check if the user is not logged in, or the user does not have the 'Admin' role, redirect to the login page
         if ((!$user) || ('Admin' !== $userRole)) {
-            header('Location: login');
+           header('Location: /../mon-blog/login');
         }
 
         // User is logged in and has the 'Admin' role, proceed to the admin dashboard
@@ -66,7 +66,7 @@ class AdminController extends BaseController
 
         // Check if the user is not logged in, or the user does not have the 'Admin' role, redirect to the login page
         if ((!$user) || ('Admin' !== $userRole)) {
-            header('Location: login');
+            header('Location: /../mon-blog/login');
         }
 
         // User is logged in and has the 'Admin' role, proceed to the post form
@@ -95,7 +95,7 @@ class AdminController extends BaseController
 
         // Check if the user is not logged in, or the user does not have the 'Admin' role, redirect to the login page
         if ((!$user) || ('Admin' !== $userRole)) {
-            header('Location: login');
+            header('Location: /../mon-blog/login');
         }
 
         // User is logged in and has the 'Admin' role, proceed to create the new post
@@ -122,7 +122,7 @@ class AdminController extends BaseController
 
         // Check if the user is not logged in, or the user does not have the 'Admin' role redirect to the login page
         if ((!$user) || ('Admin' !== $userRole)) {
-            header('Location: login');
+            header('Location: /../mon-blog/login');
         }
 
         // User is logged in and has the 'Admin' role, proceed to the admin dashboard
@@ -156,7 +156,7 @@ class AdminController extends BaseController
 
         // Check if the user is not logged in, or the user does not have the 'Admin' role redirect to the login page
         if ((!$user) || ('Admin' !== $userRole)) {
-            header('Location: login');
+            header('Location: /../mon-blog/login');
         }
 
         $authorRole = $this->getManager(UserManager::class)->getAuthorRoleById($user->getId());
@@ -180,7 +180,7 @@ class AdminController extends BaseController
 
         // Check if the user is not logged in, or the user does not have the 'Admin' role redirect to the login page
         if ((!$user) || ('Admin' !== $userRole)) {
-            header('Location: login');
+            header('Location: /../mon-blog/login');
         }
 
         // User is logged in and has the 'Admin' role, proceed to the admin dashboard
@@ -207,7 +207,7 @@ class AdminController extends BaseController
 
         // Check if the user is not logged in, or the user does not have the 'Admin' role redirect to the login page
         if ((!$user) || ('Admin' !== $userRole)) {
-            header('Location: login');
+            header('Location: /../mon-blog/login');
         }
 
         $this->getManager(PostManager::class)->deletePost($id);
@@ -230,7 +230,7 @@ class AdminController extends BaseController
 
         // Check if the user is not logged in, or the user does not have the 'Admin' role redirect to the login page
         if ((!$user) || ('Admin' !== $userRole)) {
-            header('Location: login');
+            header('Location: /../mon-blog/login');
         }
 
         $perPage = 3;  // Set your desired items per page
@@ -262,7 +262,7 @@ class AdminController extends BaseController
 
         // Check if the user is not logged in, or the user does not have the 'Admin' role, redirect to the login page
         if (!$user || 'Admin' !== $userRole) {
-            header('Location: login');
+            header('Location: /../mon-blog/login');
         }
 
         $perPage = 3;  // Set your desired items per page
@@ -294,7 +294,7 @@ class AdminController extends BaseController
 
         // Check if the user is not logged in, or the user does not have the 'Admin' role redirect to the login page
         if ((!$user) || ('Admin' !== $userRole)) {
-            header('Location: login');
+            header('Location: /../mon-blog/login');
         }
 
         $this->getManager(CommentManager::class)->deleteComment($id);
@@ -318,7 +318,7 @@ class AdminController extends BaseController
 
         // Check if the user is not logged in, or the user does not have the 'Admin' role, redirect to the login page
         if (!$user || 'Admin' !== $userRole) {
-            header('Location: login');
+            header('Location: /../mon-blog/login');
         }
 
         // Display the admin profile view

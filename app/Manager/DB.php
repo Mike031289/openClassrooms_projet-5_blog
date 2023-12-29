@@ -14,7 +14,7 @@ class DB
      */
     private function __construct(object $dataSource)
     {
-        $this->_db = new \PDO('mysql:dbname='.$dataSource->dbname.';host='.$dataSource->host, $dataSource->user, $dataSource->password);
+        $this->_db = new \PDO('mysql:dbname=' . $dataSource->dbname . ';host=' . $dataSource->host, $dataSource->user, $dataSource->password);
     }
 
     /**

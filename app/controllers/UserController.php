@@ -103,7 +103,7 @@ class UserController extends BaseController
         $successMessage = 'Votre compte a été bien créé ! Connectez vous et commentez nos articles';
         // Définir un cookie avec le message de succès
         setcookie('success', $successMessage, time() + 3600, '/mon-blog/login');
-        header('Location: login');
+        header('Location: /../mon-blog/login');
     }
 
     /**
@@ -114,7 +114,7 @@ class UserController extends BaseController
         if (isset($_COOKIE['success'])) {
             $successMessage = $_COOKIE['success'];
             // Delete the cookie so that it is not displayed again
-            setcookie('success', '', time() - 3600, '/mon-blog/login');
+            setcookie('success', '', time() - 3600, '/../mon-blog/login');
             // Pass on the message of success to Twig
             $this->view('user/login.html.twig', ['success' => $successMessage]);
         } else {
@@ -180,7 +180,7 @@ class UserController extends BaseController
         $this->session->connect($user, $userRole);
 
         if ('Admin' === $userRole) {
-            header('Location: adminDashboard');
+            header('Location: /../mon-blog/adminDashboard');
         } elseif ('Visitor' === $userRole) {
             header('Location: /../mon-blog/');
         }

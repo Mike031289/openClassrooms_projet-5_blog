@@ -72,15 +72,29 @@ class ContactManager extends BaseManager
     /**
      * Retrieves the total number of contacts in the 'Contact' table.
      *
-     * @return int the total number of contacts
+     * @return int|null the total number of contacts
+     * @throws ActionNotFoundException If an error occurs during the database query
      */
-    private function getTotalContacts(): int
+    private function getTotalContacts(): ?int
     {
+        try {
+
         // Retrieve the total number of contacts
         $sql = 'SELECT COUNT(*) FROM Contact';
         $stmt = $this->_db->query($sql);
 
-        return $stmt->fetchColumn();
+            if ($stmt === false) {
+                throw new ActionNotFoundException();
+            }
+
+            return (int) $stmt->fetchColumn();
+        }
+        catch (ActionNotFoundException $e) {
+            // Handle exceptions, log errors, or redirect to your custom error page
+            header('Location: /../mon-blog/500');
+            
+            return null;
+        }
     }
 
     /**
@@ -137,7 +151,7 @@ class ContactManager extends BaseManager
         } catch (ActionNotFoundException $e) {
             // Handle exceptions, log errors, or return an empty array
             // Redirect to an admin 500 error page if an exception occurs
-            header('Location: 500');
+            header('Location: /../mon-blog/500');
 
             return null;
         }
