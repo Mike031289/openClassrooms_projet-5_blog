@@ -103,7 +103,7 @@ class ContactManager extends BaseManager
      * @param $page    The current page number (default is 1)
      * @param $perPage The number of contacts per page
      *
-     * @return array an array containing contacts and pagination information
+     * @return array<string, mixed> an array containing contacts and pagination information
      */
     public function getPaginatedContacts(int $page, int $perPage): ?array
     {

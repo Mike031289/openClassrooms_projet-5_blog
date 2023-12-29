@@ -31,9 +31,9 @@ class BaseManager
      *
      * @param string $table      the name of the database table
      * @param string $object     the name of the object class
-     * @param mixed  $dataSource the data source for the manager
+     * @param object  $dataSource the data source for the manager
      */
-    public function __construct(string $table, string $object, mixed $dataSource)
+    public function __construct(string $table, string $object, object $dataSource)
     {
         $this->_table = $table;
         $this->_object = $object;
