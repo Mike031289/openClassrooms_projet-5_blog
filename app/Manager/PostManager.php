@@ -17,14 +17,14 @@ class PostManager extends BaseManager
     /**
      * Create a new post and insert it into the database.
      *
-     * @param string     $title       the title of the post
-     * @param string     $content     the content of the post
+     * @param string        $title       The title of the post
+     * @param string        $content     The content of the post
      * @param array<string> $postImg     The image file for the post. Null if no image.
-     * @param int        $categoryId  the category ID of the post
-     * @param string     $authorRole  the author role of the post
-     * @param string     $postPreview the preview of the post
+     * @param int           $categoryId  The category ID of the post
+     * @param string        $authorRole  The author role of the post
+     * @param string        $postPreview The preview of the post
      *
-     * @return Post|null the created Post object, or null on failure
+     * @return Post|null The created Post object, or null on failure
      */
     public function createNewPost(string $title, string $content, ?array $postImg, int $categoryId, string $authorRole, string $postPreview): ?Post
     {
@@ -100,9 +100,9 @@ class PostManager extends BaseManager
      * Retrieve a specific record from the table associated with the current class based on its identifier (ID).
      * It returns the record in the form of an object corresponding to the class of the current object.
      *
-     * @param int $id the identifier of the record to retrieve
+     * @param int $id The identifier of the record to retrieve
      *
-     * @return Post|null the retrieved object or null if not found
+     * @return Post|null The retrieved object or null if not found
      */
     public function getPostById(int $id): ?Post
     {
@@ -187,11 +187,11 @@ class PostManager extends BaseManager
     /**
      * Retrieves a paginated list of posts by category.
      *
-     * @param int $categoryId the category ID
-     * @param int $page       the current page number (default is 1)
-     * @param int $pageSize   the number of posts per page
+     * @param int $categoryId The category ID
+     * @param int $page       The current page number (default is 1)
+     * @param int $pageSize   The number of posts per page
      *
-     * @return array<string, mixed> An array containing posts and pagination information
+     * @return array<string, mixed>|null An array containing posts and pagination information
      */
     public function getPaginatedPostsByCategory(int $categoryId, int $page, int $pageSize): ?array
     {
@@ -255,10 +255,10 @@ class PostManager extends BaseManager
     /**
      * Retrieves a paginated list of posts.
      *
-     * @param int $page     the current page number (default is 1)
-     * @param int $pageSize the number of posts per page
+     * @param int $page     The current page number (default is 1)
+     * @param int $pageSize The number of posts per page
      *
-     * @return array<string, mixed> an array containing posts and pagination information
+     * @return array<string, mixed>|null An array containing posts and pagination information
      */
     public function getPaginatedPosts(int $page, int $pageSize): ?array
     {
@@ -427,7 +427,7 @@ class PostManager extends BaseManager
     /**
      * Delete a post from the database by its ID.
      *
-     * @param $id The ID of the post to be deleted
+     * @param int $id The ID of the post to be deleted
      *
      * @return bool true if the post was successfully deleted, false otherwise
      */

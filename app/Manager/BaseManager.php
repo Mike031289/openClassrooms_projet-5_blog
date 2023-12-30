@@ -44,10 +44,11 @@ class BaseManager
      * Retrieve a specific record from the table associated with the current class based on its identifier (ID).
      * It returns the record in the form of an object corresponding to the class of the current object.
      *
-     * @param  int        $id the identifier of the record to retrieve
-     * @return mixed|null the retrieved object or null if not found
+     * @param int $id The identifier of the record to retrieve
+     *
+     * @return object|null The retrieved object or null if not found
      */
-    public function getById(int $id): object
+    public function getById(int $id): ?object
     {
         $req = $this->_db->prepare("SELECT * FROM {$this->_table} WHERE id = :id");
         $req->bindValue(':id', $id, \PDO::PARAM_INT);
@@ -61,37 +62,38 @@ class BaseManager
      * Retrieve all the rows in the table associated with the current class from the database.
      * It returns an array containing the records in the form of objects corresponding to the class of the current object.
      *
-     * @return array the array of retrieved objects
+     * @return array The array of retrieved objects
      */
     public function getAll(): array
     {
         $req = $this->_db->prepare("SELECT * FROM {$this->_table}");
         $req->execute();
 
-        // Utiliser FETCH_OBJ pour obtenir des objets anonymes
+        // Use FETCH_OBJ to obtain anonymous objects
         return $req->fetchAll(\PDO::FETCH_OBJ);
     }
 
     /**
      * Insert a new record into the table associated with the current class using a specified object.
      *
-     * @param  array<string, mixed> $object an associative array containing the data to be inserted in the database
-     * @return array<string, mixed> the object after insertion
+     * @param array<string, mixed> $object An associative array containing the data to be inserted in the database
+     *
+     * @return array<string, mixed> The object after insertion
      */
-    public function create(array $object)
+    public function create(array $object): array
     {
-        $columns = array_keys($object);
+        $columns      = array_keys($object);
         $columnString = implode(', ', $columns);
 
         // Create placeholders for the values
-        $valuePlaceholders = ':'.implode(', :', $columns);
+        $valuePlaceholders = ':' . implode(', :', $columns);
 
-        $sql = 'INSERT INTO '.$this->_table." ($columnString) VALUES ($valuePlaceholders)";
+        $sql = 'INSERT INTO ' . $this->_table . " ($columnString) VALUES ($valuePlaceholders)";
         $req = $this->_db->prepare($sql);
 
         // Bind values to parameters
         foreach ($columns as $column) {
-            $req->bindValue(':'.$column, $object[$column]);
+            $req->bindValue(':' . $column, $object[$column]);
         }
 
         // Execute the query after binding parameters
@@ -100,4 +102,5 @@ class BaseManager
         // Return the object after insertion
         return $object;
     }
+
 }

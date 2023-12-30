@@ -119,10 +119,10 @@ class CommentManager extends BaseManager
     /**
      * Retrieves a paginated list of comments without considering the post ID.
      *
-     * @param int $page    the current page number (default is 1)
-     * @param int $perPage the number of comments per page (default is 5)
+     * @param int $page    The current page number (default is 1)
+     * @param int $perPage The number of comments per page (default is 5)
      *
-     * @return array an array containing comments and pagination information
+     * @return array<string, mixed>|null An array containing comments and pagination information or null on failure
      */
     public function getPaginatedComments(int $page, int $perPage): ?array
     {
@@ -133,12 +133,15 @@ class CommentManager extends BaseManager
         // Calculate the offset based on the page number and items per page
         $offset = ($page - 1) * $perPage;
 
+        // Initialize the $comments array
+        $comments = [];
+
         try {
             // Retrieve the total number of comments
             $totalComments = $this->getTotalComments();
 
             // Retrieve comments from the 'Comment' table, ordered by date in descending order, with pagination
-            $sql = 'SELECT * FROM comment ORDER BY createdAt DESC LIMIT :offset, :perPage';
+            $sql  = 'SELECT * FROM comment ORDER BY createdAt DESC LIMIT :offset, :perPage';
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(':offset', $offset, \PDO::PARAM_INT);
             $stmt->bindParam(':perPage', $perPage, \PDO::PARAM_INT);
@@ -167,13 +170,15 @@ class CommentManager extends BaseManager
                 'currentPage' => $page,
                 'totalPages'  => ceil($totalComments / $perPage),
             ];
-        } catch (ActionNotFoundException $e) {
-            // Handle the error in case of failure and roll back the transaction
+        }
+        catch (ActionNotFoundException $e) {
+            // Handle the error in case of failure and redirect to a 500 error page
             header('Location: /../mon-blog/500');
-            
+
             return null;
         }
     }
+
 
     /**
      * Retrieve a Comment object by its ID.

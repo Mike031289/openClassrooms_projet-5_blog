@@ -9,11 +9,23 @@ use App\Models\Category;
 
 class CategoryManager extends BaseManager
 {
+    /**
+     * CategoryManager constructor.
+     *
+     * @param object $dataSource the data source for the manager
+     */
     public function __construct(object $dataSource)
     {
         parent::__construct('category', 'Category', $dataSource);
     }
 
+    /**
+     * Retrieve a specific category by its ID.
+     *
+     * @param int $id The identifier of the category to retrieve
+     *
+     * @return Category|null The retrieved category object or null if not found
+     */
     public function getCategoryById(int $id): ?Category
     {
         // Prepare the SQL query to retrieve a specific record by ID
@@ -38,13 +50,14 @@ class CategoryManager extends BaseManager
     /**
      * Retrieve the ID of a category based on its name.
      *
-     * @param  string   $categoryName the name of the category
-     * @return int|null the ID of the category or null if not found
+     * @param string $categoryName The name of the category
+     *
+     * @return int|null The ID of the category or null if not found
      */
     public function getCategoryIdByName(string $categoryName): ?int
     {
         try {
-            $sql = 'SELECT id FROM category WHERE name = :name';
+            $sql  = 'SELECT id FROM category WHERE name = :name';
             $stmt = $this->_db->prepare($sql);
             $stmt->bindValue(':name', $categoryName, \PDO::PARAM_STR);
             $stmt->execute();
@@ -58,7 +71,8 @@ class CategoryManager extends BaseManager
             $categoryId = (int) $stmt->fetchColumn();
 
             return $categoryId;
-        } catch (ActionNotFoundException $e) {
+        }
+        catch (ActionNotFoundException $e) {
             // Handle the exception, log the error, or return an appropriate response
             // For example, you might want to redirect to an error page
             header('Location: /../mon-blog/500');

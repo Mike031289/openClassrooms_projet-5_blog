@@ -100,10 +100,10 @@ class ContactManager extends BaseManager
     /**
      * Retrieves a paginated list of contacts.
      *
-     * @param $page    The current page number (default is 1)
-     * @param $perPage The number of contacts per page
+     * @param int $page    The current page number (default is 1)
+     * @param int $perPage The number of contacts per page
      *
-     * @return array<string, mixed> an array containing contacts and pagination information
+     * @return array<string, mixed>|null an array containing contacts and pagination information
      */
     public function getPaginatedContacts(int $page, int $perPage): ?array
     {
@@ -113,12 +113,15 @@ class ContactManager extends BaseManager
         // Calculate the offset based on the page number and items per page
         $offset = ($page - 1) * $perPage;
 
+        // Initialize the $contacts array
+        $contacts = [];
+
         try {
             // Retrieve the total number of contacts
             $totalContacts = $this->getTotalContacts();
 
             // Retrieve contacts from the 'Contact' table, ordered by date in descending order, with pagination
-            $sql = 'SELECT * FROM Contact ORDER BY createdAt DESC LIMIT :offset, :perPage';
+            $sql  = 'SELECT * FROM Contact ORDER BY createdAt DESC LIMIT :offset, :perPage';
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(':offset', $offset, \PDO::PARAM_INT);
             $stmt->bindParam(':perPage', $perPage, \PDO::PARAM_INT);
@@ -148,7 +151,8 @@ class ContactManager extends BaseManager
                 'currentPage' => $page,
                 'totalPages'  => ceil($totalContacts / $perPage),
             ];
-        } catch (ActionNotFoundException $e) {
+        }
+        catch (ActionNotFoundException $e) {
             // Handle exceptions, log errors, or return an empty array
             // Redirect to an admin 500 error page if an exception occurs
             header('Location: /../mon-blog/500');
@@ -156,4 +160,5 @@ class ContactManager extends BaseManager
             return null;
         }
     }
+
 }
