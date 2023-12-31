@@ -3,6 +3,7 @@ Création d'un blog PHP - OpenclassRooms
 SymfonyInsight Badge
 
 #Directory Structure:
+
 monblog/
 │
 ├── app/
@@ -23,20 +24,21 @@ monblog/
 │   │   ├── BaseManager.php
 │   │   └── ...
 │   ├── Core
+│   │   ├── Functions/
 │   │   ├── HttpRequest.php
 │   │   ├── Router.php
 │   │   ├── Route.php
 │   │   └── ...
 │   ├── Exceptions
 │   │   ├── NoRouteFoundException.php
-│   │   ├── ...
+│   │   ├── ActionNotFoundException.php
 │   │   ├── ...
 │   │   └── ...
 │   └── ...
 │
 ├── public/
 │   ├── assets/
-│   ├── lcss/
+│   ├── css/
 │   ├── js/
 │   └── ...
 │
