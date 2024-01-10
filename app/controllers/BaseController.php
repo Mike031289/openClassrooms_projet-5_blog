@@ -30,7 +30,7 @@ class BaseController
     /**
      * BaseController constructor.
      *
-     * @param object $httpRequest the HTTP request object
+     * @param HttpRequest $httpRequest the HTTP request object
      * @param object $config      the application configuration object (JSON decode Object)
      */
     public function __construct(HttpRequest $httpRequest, object $config)
