@@ -18,8 +18,8 @@ use Twig\Loader\FilesystemLoader;
 class BaseController
 {
     protected HttpRequest $httpRequest;
-    protected array $_managers = [];
-    private array $_param = [];
+    protected mixed $_managers = [];
+    private mixed $_param = [];
     private Environment $_twig;
     protected Session $session;
     private object $config;
@@ -47,7 +47,7 @@ class BaseController
      * Render a view.
      *
      * @param string $fileName    the name of the Twig template file
-     * @param array  $viewContent an associative array of data to pass to the view
+     * @param array<mixed> $viewContent an associative array of data to pass to the view
      */
     protected function view(string $fileName, array $viewContent = []): void
     {
