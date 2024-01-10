@@ -18,15 +18,19 @@ class HttpRequest
 
     /**
      * HttpRequest constructor.
+     *
+     * Initializes the HttpRequest object with the current URL and request method.
      */
     public function __construct()
     {
-        $this->_url = $_SERVER['REQUEST_URI'];
+        $this->_url    = $_SERVER['REQUEST_URI'];
         $this->_method = $_SERVER['REQUEST_METHOD'];
     }
 
     /**
      * Get the value of _url.
+     *
+     * @return string The current URL of the HTTP request.
      */
     public function getUrl(): string
     {
@@ -35,6 +39,8 @@ class HttpRequest
 
     /**
      * Get the value of _method.
+     *
+     * @return string The HTTP request method (GET, POST, etc.).
      */
     public function getMethod(): string
     {
@@ -43,7 +49,8 @@ class HttpRequest
 
     /**
      * Get the value of _param.
-     * @return array<mixed> $_param
+     *
+     * @return array<mixed> An array containing the parameters extracted from the HTTP request.
      */
     public function getParam(): array
     {
@@ -53,7 +60,7 @@ class HttpRequest
     /**
      * Get the value of _route.
      *
-     * @return Route|null
+     * @return Route|null The matched Route object or null if no route is set.
      */
     public function getRoute(): ?Route
     {
@@ -63,7 +70,8 @@ class HttpRequest
     /**
      * Set the value of _route.
      *
-     * @param Route|null $_route
+     * @param Route|null $_route The Route object to set for the HTTP request.
+     * @return self
      */
     public function setRoute(?Route $_route): self
     {
@@ -74,6 +82,9 @@ class HttpRequest
 
     /**
      * Bind parameters from the HTTP request to the route.
+     *
+     * Depending on the HTTP request method, extracts parameters from the URL or form data
+     * and binds them to the associated Route object.
      */
     public function bindParam(): void
     {
@@ -81,14 +92,15 @@ class HttpRequest
             case 'GET':
             case 'DELETE':
                 // Search for a match between the route path ($this->_route->getPath()) and the current URL ($this->_url)
-                if (preg_match('#'.$this->_route->getPath().'#', $this->_url, $matches)) {
-                    for ($i = 1; $i < \count($matches) - 1; ++$i) {
+                if (preg_match('#' . $this->_route->getPath() . '#', $this->_url, $matches)) {
+                    for ($i = 1; $i < \count($matches); ++$i) {
                         $this->_param[] = $matches[$i];
                     }
                 }
                 break;
             case 'POST':
             case 'PUT':
+                // Retrieve parameters from the POST data and bind them to the route
                 foreach ($this->_route->getParam() as $param) {
                     if (isset($_POST[$param])) {
                         $this->_param[] = $_POST[$param];
@@ -101,11 +113,12 @@ class HttpRequest
     /**
      * Run the route processing configuration settings.
      *
-     * @param object $config the application configuration
+     * @param object $config The application configuration.
      */
     public function run(object $config): void
     {
         if ($this->_route) {
+            // Execute the associated controller action for the matched route
             $this->_route->run($this, $config);
         }
     }
