@@ -16,14 +16,14 @@ class Route
     private string $_controller;
     private string $_action;
     private string $_method;
-    private array $_param;
-    private array $_managers;
+    private mixed $_param;
+    private mixed $_managers;
 
     /**
      * Route constructor.
      *
      * @param object $route       the route object containing route information
-     * @param array  $routeParams the route parameters
+     * @param array<mixed>  $routeParams the route parameters
      */
     public function __construct(object $route, array $routeParams)
     {
@@ -61,6 +61,7 @@ class Route
 
     /**
      * Get the value of _method.
+     * @return string $_method
      */
     public function getMethod(): string
     {
@@ -69,6 +70,7 @@ class Route
 
     /**
      * Get the value of _param.
+     * @return array<mixed>  $_param
      */
     public function getParam(): array
     {
@@ -77,6 +79,7 @@ class Route
 
     /**
      * Get the value of _managers.
+     * @return array<mixed>  $_managers
      */
     public function getManagers(): array
     {
