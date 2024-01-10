@@ -13,7 +13,7 @@ class HttpRequest
 {
     private string $_url;
     private string $_method;
-    private array $_param = [];
+    private mixed $_param = [];
     private ?Route $_route = null;
 
     /**
@@ -43,6 +43,7 @@ class HttpRequest
 
     /**
      * Get the value of _param.
+     * @return array<mixed> $_param
      */
     public function getParam(): array
     {
