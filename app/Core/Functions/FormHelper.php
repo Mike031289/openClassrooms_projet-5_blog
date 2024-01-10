@@ -57,9 +57,9 @@ class FormHelper
     /**
      * Validate a field using a regular expression pattern.
      *
-     * @param $field The field value to validate
-     * @param $regex The regular expression pattern to use for validation
-     * @return, true if the field is valid, false otherwise.
+     * @param string $field The field value to validate
+     * @param string $regex The regular expression pattern to use for validation
+     * @return bool true if the field is valid, false otherwise.
      */
     public static function validateField(string $field, string $regex): bool
     {
