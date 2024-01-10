@@ -12,9 +12,11 @@ use App\Exceptions\NoRouteFoundException;
  * This script serves as the entry point for handling incoming HTTP requests.
  */
 
-// Load Class files, Inclusion of application configuration and startup files
+// Load application configuration
 $configFile = file_get_contents("config/config.json");
-$config = json_decode($configFile);
+$config     = json_decode($configFile);
+
+// Load routes configuration
 $configRoutes = file_get_contents('config/routes.json');
 $configRoutes = json_decode($configRoutes);
 
