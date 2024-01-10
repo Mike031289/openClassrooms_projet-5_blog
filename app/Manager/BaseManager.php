@@ -60,9 +60,11 @@ class BaseManager
 
     /**
      * Retrieve all the rows in the table associated with the current class from the database.
-     * It returns an array containing the records in the form of objects corresponding to the class of the current object.
      *
-     * @return array The array of retrieved objects
+     * It returns an array containing the records in the form of objects corresponding to the class
+     * of the current object.
+     *
+     * @return object[] The array of retrieved objects
      */
     public function getAll(): array
     {
