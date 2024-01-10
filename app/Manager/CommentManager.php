@@ -72,10 +72,12 @@ class CommentManager extends BaseManager
     /**
      * Retrieve comments related to a specific article based on its identifier (postId).
      *
-     * @param        $postId The identifier of the article for which to retrieve comments
-     * @return array an array of Comment objects representing the comments for the specified article
+     * @param int $postId The identifier of the article for which to retrieve comments
+     * @return Comment[]|null An array of Comment objects representing the comments for the specified article,
+     *                        or null if no comments are found
+     * @throws \PDOException If there is an error with the database query
      */
-    public function getCommentsByPostId(int $postId)
+    public function getCommentsByPostId(int $postId): ?array
     {
         $req = $this->_db->prepare('SELECT * FROM comment WHERE postId = :postId');
         $req->bindValue(':postId', $postId, \PDO::PARAM_INT);
