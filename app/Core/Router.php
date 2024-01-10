@@ -14,7 +14,7 @@ use App\Exceptions\NoRouteFoundException;
 class Router
 {
     /**
-     * @var array the list of configured routes
+     * @var array<mixed> the list of configured routes
      */
     private array $_listRoute;
 
@@ -26,7 +26,7 @@ class Router
     /**
      * Router constructor.
      *
-     * @param array  $configRoutes an array containing the list of configured routes
+     * @param array<mixed>  $configRoutes an array containing the list of configured routes
      * @param string $_baseUrl     the base URL for the application
      */
     public function __construct(array $configRoutes, string $_baseUrl)
@@ -43,9 +43,9 @@ class Router
      *
      * @param  HttpRequest           $httpRequest the HTTP request object
      * @throws NoRouteFoundException if no matching route is found
-     * @return Route                 the matched route
+     * @return ?Route                 the matched route
      */
-    public function findRoute(object $httpRequest): Route
+    public function findRoute(object $httpRequest): ?Route
     {
         // Extract the URL portion after the base URL
         $url = str_replace($this->_baseUrl, '', $httpRequest->getUrl());
