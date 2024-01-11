@@ -96,7 +96,9 @@ class HttpRequest
                     // Pre-calculate the pattern outside the loop
                     $pattern = '#' . $this->_route->getPath() . '#';
 
-                    for ($i = 1; $i < \count($matches); ++$i) {
+                    for ($i = 1; 
+                        $i < count($matches); 
+                        ++$i) {
                         $this->_param[] = $matches[$i];
                     }
                 }
@@ -127,5 +129,5 @@ class HttpRequest
             $this->_route->run($this, $config);
         }
     }
-    
+
 }
