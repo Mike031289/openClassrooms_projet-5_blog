@@ -1,6 +1,6 @@
 Projet 5 - DA PHP SF
 Création d'un blog PHP - OpenclassRooms
-SymfonyInsight Badge lien : https://insight.symfony.com/projects/6248f345-e826-4493-a8f5-324e99ac3ebd/analyses/28?status=stats
+SymfonyInsight Badge lien : https://insight.symfony.com/projects/6248f345-e826-4493-a8f5-324e99ac3ebd/analyses/33?status=stats
 
 #Directory Structure:
 
