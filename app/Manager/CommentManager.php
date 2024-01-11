@@ -181,7 +181,6 @@ class CommentManager extends BaseManager
         }
     }
 
-
     /**
      * Retrieve a Comment object by its ID.
      *
@@ -255,5 +254,4 @@ class CommentManager extends BaseManager
             return false;
         }
     }
-    
 }
