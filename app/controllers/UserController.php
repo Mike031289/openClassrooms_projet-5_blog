@@ -6,19 +6,21 @@ namespace App\Controllers;
 
 use App\Core\Functions\FormHelper;
 use App\Manager\UserManager;
+use App\Core\HttpRequest;
 
 /**
  * UserController - Controller responsible for handling user-related actions.
  */
 class UserController extends BaseController
 {
+
     /**
      * UserController constructor.
      *
-     * @param object $httpRequest the HTTP request object
+     * @param HttpRequest $httpRequest the HTTP request object
      * @param object $config      the application configuration
      */
-    public function __construct(object $httpRequest, object $config)
+    public function __construct(HttpRequest $httpRequest, object $config)
     {
         parent::__construct($httpRequest, $config);
     }

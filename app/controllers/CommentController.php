@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Core\HttpRequest;
+
 /**
  * Class CommentController
  *
@@ -14,10 +16,10 @@ class CommentController extends BaseController
     /**
      * CommentController constructor.
      *
-     * @param object $httpRequest the HTTP request object
+     * @param HttpRequest $httpRequest the HTTP request object
      * @param object $config      the application configuration object (JSON decode Object)
      */
-    public function __construct(object $httpRequest, object $config)
+    public function __construct(HttpRequest $httpRequest, object $config)
     {
         parent::__construct($httpRequest, $config);
     }

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use Twig\Loader\FilesystemLoader;
+use App\Manager\UserManager;
 use App\Core\HttpRequest;
 use App\Core\Session;
-use App\Manager\UserManager;
 use Twig\Environment;
-use Twig\Loader\FilesystemLoader;
 
 /**
  * Class BaseController

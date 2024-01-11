@@ -8,6 +8,7 @@ use App\Core\Functions\FormHelper;
 use App\Manager\CategoryManager;
 use App\Manager\CommentManager;
 use App\Manager\PostManager;
+use App\Core\HttpRequest;
 
 /**
  * Class PostController
@@ -19,10 +20,10 @@ class PostController extends BaseController
     /**
      * PostController constructor.
      *
-     * @param object $httpRequest the HTTP request object
+     * @param HttpRequest $httpRequest the HTTP request object
      * @param object $config      the application configuration
      */
-    public function __construct(object $httpRequest, object $config)
+    public function __construct(HttpRequest $httpRequest, object $config)
     {
         parent::__construct($httpRequest, $config);
     }
