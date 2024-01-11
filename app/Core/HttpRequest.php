@@ -91,8 +91,8 @@ class HttpRequest
         switch ($this->_method) {
             case 'GET':
             case 'DELETE':
-                // Search for a match between the route path ($this->_route->getPath()) and the current URL ($this->_url)
-                if (preg_match('#' . $this->_route->getPath() . '#', $this->_url, $matches)) {
+                // Check if a route is set before trying to access its path
+                if ($this->_route && preg_match('#' . $this->_route->getPath() . '#', $this->_url, $matches)) {
                     for ($i = 1; $i < \count($matches); ++$i) {
                         $this->_param[] = $matches[$i];
                     }
@@ -100,10 +100,12 @@ class HttpRequest
                 break;
             case 'POST':
             case 'PUT':
-                // Retrieve parameters from the POST data and bind them to the route
-                foreach ($this->_route->getParam() as $param) {
-                    if (isset($_POST[$param])) {
-                        $this->_param[] = $_POST[$param];
+                // Check if a route is set before trying to access its parameters
+                if ($this->_route) {
+                    foreach ($this->_route->getParam() as $param) {
+                        if (isset($_POST[$param])) {
+                            $this->_param[] = $_POST[$param];
+                        }
                     }
                 }
                 break;
