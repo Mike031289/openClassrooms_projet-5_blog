@@ -1,6 +1,6 @@
 Projet 5 - DA PHP SF
 Création d'un blog PHP - OpenclassRooms
-SymfonyInsight Badge lien : https://insight.symfony.com/projects/6248f345-e826-4493-a8f5-324e99ac3ebd/analyses/33?status=stats
+SymfonyInsight Badge lien : https://insight.symfony.com/projects/6248f345-e826-4493-a8f5-324e99ac3ebd/analyses/32?status=stats
 
 #Directory Structure:
 
@@ -55,6 +55,7 @@ monblog/
 ├── .gitignore
 ├── .htaccess
 ├── composer.json
+├── monblog.sql
 ├── composer.lock
 ├── index.php
 └── ...
@@ -64,6 +65,7 @@ Installation :
 Lancer la commande  git https://github.com/Mike031289/openClassrooms_projet-5_blog
 Lancer la commande cd openClassrooms_projet-5_blog
 Lancer dans le terminal composer install
+Récupérez la base de donnée à la racine (fichier nomé monblog.sql)
 
 Remarques :
 
@@ -71,27 +73,6 @@ Mettre à jour le fichier de configuration de la base de données (app/config.js
 Pour que vous puissiez vous connecter à votre base de données, veuillez modifier le fichier avec vos identifiants, hôte et nom de base de données Ces informations sont trouvables chez votre hébergeur.
 
 Fichier json : app/config.json
-{
-	"autoloadFolder": [
-		"app/Controllers",
-		"app/Models",
-		"app/Models/Manager/",
-		"app/Exceptions",
-		"app/Core/Functions",
-		"app/Core/",
-		"vendor/"
-	],
-	
-	"baseUrl": "/mon-blog",
-	
-	"database":  {
-            "name": "mon-blog",
-            "dbname": "monblog",
-            "host": "localhost",
-            "user": "root",
-            "password": ""
-    }
-}
 
 Le site est consultable ici : https://dmdprod.com/developpeur-php-adjoukou-agbelou/
 
