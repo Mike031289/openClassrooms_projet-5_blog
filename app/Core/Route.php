@@ -14,7 +14,7 @@ class Route
 {
     private string $_path;
     private string $_controller;
-    private ?string $_action;
+    private string $_action;
     private string $_method;
     private mixed $_param;
     private mixed $_managers;
@@ -59,7 +59,7 @@ class Route
     /**
      * Get the value of _action.
      */
-    public function getAction(): ?string
+    public function getAction(): string
     {
         return $this->_action;
     }
