@@ -111,24 +111,31 @@ class PostController extends BaseController
         // Check if the user is logged in and pass the user information to the template
         $user = $this->session->getUser();
 
-        // Retrieve data from the form
-        $content = FormHelper::post('content');
-        $authorName = $user->getUserName();
+        if ($user !== null) {
+            // Check if the user is not null before calling its methods
+            $authorName = $user->getUserName();
 
-        // Create a new comment
-        $this->getManager(CommentManager::class)->createComment($content, $authorName, $postId);
+            // Retrieve data from the form
+            $content = FormHelper::post('content');
 
-        // Get all comments for the current post
-        $comments = $this->getManager(CommentManager::class)->getCommentsByPostId($postId);
+            // Create a new comment
+            $this->getManager(CommentManager::class)->createComment($content, $authorName, $postId);
 
-        // Retrieve post, comments, and user information as needed
-        $post = $this->getManager(PostManager::class)->getPostById($postId);
+            // Get all comments for the current post
+            $comments = $this->getManager(CommentManager::class)->getCommentsByPostId($postId);
 
-        // Display the post with comments
-        $this->view('blog/post.html.twig', [
-            'post'     => $post,
-            'comments' => $comments,
-            'user'     => $user,
-        ]);
+            // Retrieve post, comments, and user information as needed
+            $post = $this->getManager(PostManager::class)->getPostById($postId);
+
+            // Display the post with comments
+            $this->view('blog/post.html.twig', [
+                'post'     => $post,
+                'comments' => $comments,
+                'user'     => $user,
+            ]);
+        } else {
+            // Handle the case where the user is not logged in (e.g., redirect to login page)
+            header('Location: /../mon-blog/login');
+        }
     }
 }
