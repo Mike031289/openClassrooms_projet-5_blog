@@ -61,4 +61,5 @@ class DB
     {
         return $this->_db;
     }
+    
 }

@@ -92,7 +92,10 @@ class HttpRequest
             case 'GET':
             case 'DELETE':
                 // Check if a route is set before trying to access its path
-                if ($this->_route && preg_match('#' . $this->_route->getPath() . '#', $this->_url, $matches)) {
+                if ($this->_route && $this->_url && preg_match('#' . $this->_route->getPath() . '#', $this->_url, $matches)) {
+                    // Pre-calculate the pattern outside the loop
+                    $pattern = '#' . $this->_route->getPath() . '#';
+
                     for ($i = 1; $i < \count($matches); ++$i) {
                         $this->_param[] = $matches[$i];
                     }
@@ -124,4 +127,5 @@ class HttpRequest
             $this->_route->run($this, $config);
         }
     }
+    
 }

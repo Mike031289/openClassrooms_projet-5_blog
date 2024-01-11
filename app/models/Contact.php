@@ -151,4 +151,5 @@ class Contact
 
         return $this;
     }
+    
 }

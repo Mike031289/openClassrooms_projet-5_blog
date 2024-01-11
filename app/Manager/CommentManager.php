@@ -255,4 +255,5 @@ class CommentManager extends BaseManager
             return false;
         }
     }
+    
 }

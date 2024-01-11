@@ -82,4 +82,5 @@ class Session
 
         return $this->userManager->getUserRoleByEmail($_SESSION['userEmail']);
     }
+
 }

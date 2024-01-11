@@ -85,5 +85,3 @@ window.addEventListener('scroll', function () {
     }
     scrollPos = currentTop;
 });
-
-
