@@ -74,7 +74,7 @@ class Session
      *
      * @return string the role of the user
      */
-    public function getUserRole(): string
+    public function getUserRole(): ?string
     {
         if (!$this->isLoggedIn()) {
             return ''; // Assuming an empty string is appropriate for an unauthenticated user
