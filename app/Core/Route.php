@@ -14,7 +14,7 @@ class Route
 {
     private string $_path;
     private string $_controller;
-    private string $_action;
+    private ?string $_action;
     private string $_method;
     private mixed $_param;
     private mixed $_managers;
@@ -27,12 +27,17 @@ class Route
      */
     public function __construct(object $route, array $routeParams)
     {
-        $this->_path = $route->path;
+        // Check if the required properties exist in $route
+        if (!property_exists($route, 'path') || !property_exists($route, 'controller') || !property_exists($route, 'action') || !property_exists($route, 'method') || !property_exists($route, 'managers')) {
+            throw new \InvalidArgumentException('Invalid $route. It must have properties: path, controller, action, method, and managers.');
+        }
+
+        $this->_path       = $route->path;
         $this->_controller = $route->controller;
-        $this->_action = $route->action;
-        $this->_method = $route->method;
-        $this->_param = $routeParams;
-        $this->_managers = $route->managers;
+        $this->_action     = $route->action;
+        $this->_method     = $route->method;
+        $this->_param      = $routeParams;
+        $this->_managers   = $route->managers;
     }
 
     /**
@@ -97,7 +102,7 @@ class Route
      */
     public function run(object $httpRequest, object $config): void
     {
-        $controller = null;
+        $controller     = null;
         $controllerName = $this->_controller;
 
         // Check if the controller class exists
