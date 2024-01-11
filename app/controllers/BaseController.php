@@ -24,9 +24,6 @@ class BaseController
     protected Session $session;
     private object $config;
 
-    // Declare a property for SessionManager
-    // private object $sessionManager;
-
     /**
      * BaseController constructor.
      *
@@ -36,11 +33,11 @@ class BaseController
     public function __construct(HttpRequest $httpRequest, object $config)
     {
         $this->httpRequest = $httpRequest;
-        $this->config = $config;
-        $loader = new FilesystemLoader(__DIR__.'/../Views');
-        $this->_twig = new Environment($loader);
+        $this->config      = $config;
+        $loader            = new FilesystemLoader(__DIR__ . '/../Views');
+        $this->_twig       = new Environment($loader);
         $this->bindManager();
-        $this->session = new Session(new UserManager($config->database)); // Initialize the session manager
+        $this->session = new Session(new UserManager($this->config->database ?? null)); // Initialize the session manager
     }
 
     /**
@@ -63,8 +60,11 @@ class BaseController
      */
     private function bindManager(): void
     {
-        foreach ($this->httpRequest->getRoute()->getManagers() as $manager) {
-            $this->_managers[$manager] = new $manager($this->config->database);
+        $route = $this->httpRequest->getRoute();
+        if ($route) {
+            foreach ($route->getManagers() as $manager) {
+                $this->_managers[$manager] = new $manager($this->config->database ?? null);
+            }
         }
     }
 
@@ -77,6 +77,6 @@ class BaseController
      */
     protected function getManager(string $className)
     {
-        return $this->_managers[$className];
+        return $this->_managers[$className] ?? null;
     }
 }

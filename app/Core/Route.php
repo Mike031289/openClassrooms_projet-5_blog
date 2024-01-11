@@ -29,7 +29,7 @@ class Route
     {
         // Check if the required properties exist in $route
         if (!property_exists($route, 'path') || !property_exists($route, 'controller') || !property_exists($route, 'action') || !property_exists($route, 'method') || !property_exists($route, 'managers')) {
-            throw new \InvalidArgumentException('Invalid $route. It must have properties: path, controller, action, method, and managers.');
+            throw new ActionNotFoundException();
         }
 
         $this->_path       = $route->path;
