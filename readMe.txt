@@ -1,6 +1,6 @@
 Projet 5 - DA PHP SF
 Création d'un blog PHP - OpenclassRooms
-SymfonyInsight Badge lien : https://insight.symfony.com/projects/6248f345-e826-4493-a8f5-324e99ac3ebd/analyses/32?status=stats
+SymfonyInsight Badge lien : https://insight.symfony.com/projects/6248f345-e826-4493-a8f5-324e99ac3ebd/analyses/33?status=stats
 
 #Directory Structure:
 
@@ -76,11 +76,9 @@ Fichier json : app/config.json
 
 Le site est consultable ici : https://dmdprod.com/developpeur-php-adjoukou-agbelou/
 
-Les identifiants par défaut sont :
+Les identifiants par défaut pour tester l'application (le blog et l'administration du blog)sont :
 
-Administrateur
-
-agbe@gmail.com Agbe@gmail.com0312
+Interface Administrateur: email : agbe@gmail.com, passWord: Agbe@gmail.com0312
 
 Utilisateur (créer votre compte avec vos propres identifiants)
 ou utilisez celui-ci
