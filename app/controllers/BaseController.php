@@ -18,8 +18,8 @@ use Twig\Environment;
 class BaseController
 {
     protected HttpRequest $httpRequest;
-    protected mixed $_managers = [];
-    private mixed $_param = [];
+    protected array $_managers = [];
+    private array $_param = [];
     private Environment $_twig;
     protected Session $session;
     private object $config;

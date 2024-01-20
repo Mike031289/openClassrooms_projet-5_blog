@@ -13,7 +13,7 @@ class HttpRequest
 {
     private string $_url;
     private string $_method;
-    private mixed $_param = [];
+    private array $_param = [];
     private ?Route $_route = null;
 
     /**

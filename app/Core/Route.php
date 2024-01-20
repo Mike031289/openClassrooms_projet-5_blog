@@ -16,8 +16,8 @@ class Route
     private string $_controller;
     private string $_action;
     private string $_method;
-    private mixed $_param;
-    private mixed $_managers;
+    private array $_param;
+    private array $_managers;
 
     /**
      * Route constructor.
