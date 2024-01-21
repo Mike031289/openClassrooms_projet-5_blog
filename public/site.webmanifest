@@ -2,13 +2,13 @@
   "name": "adjoukouagbelou-developpeur-fullstack",
   "short_name": "mon-blog",
   "description": "This application is my personal blog as a Full Stack Web Developer. It illustrates my skills and the projects I've completed. I also publish articles on this blog. I've also created a section reserved for blog administration. This second part of administration has access controlled by an admin account with a login and password.",
-  "start_url": "https://dmdprod.com/developpeur-fullstack-adjoukouagbelou/",
+  "start_url": "https://dmdprod.com/developpeur-fullstack-adjoukouagbelou/mon-blog/",
   "display": "standalone",
   "background_color": "#f2f6fc",
   "theme_color": "#6900c7",
   "icons": [
     {
-      "src": "/../mon-blog/public/assets/img/logo.png",
+      "src": "/../assets/img/logo.png",
       "sizes": "192x192",
       "type": "image/png"
     }
