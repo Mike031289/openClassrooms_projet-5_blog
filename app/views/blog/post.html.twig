@@ -6,14 +6,14 @@
   {% block navContainer %}
     <nav class="navbar navbar-marketing navbar-expand-lg bg-secondary navbar-dark fixed-top">
       <div class="container bg-secondary px-5">
-        <a class="navbar-brand text-white" href="/../mon-blog">Adjoukou AGBELOU</a>
+        <a class="navbar-brand text-white" href="/../mon-blog/">Adjoukou AGBELOU</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <i data-feather="menu"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link {% if page == 'home' %}active{% endif %}" href="/../mon-blog">Accueil</a>
+              <a class="nav-link {% if page == 'home' %}active{% endif %}" href="/../mon-blog/">Accueil</a>
             </li>
             <li class="nav-item">
               <a class="nav-link {% if page == 'posts' %}active{% endif %}" href="/../mon-blog/posts/{{ 1 }}">Articles</a>
@@ -52,7 +52,7 @@
               <h1 class="mt-5">{{ post.title }}</h1>
               <div class="d-flex align-items-center justify-content-between mb-5">
                 <div class="single-post-meta me-4">
-                  <img class="single-post-meta-img" src="/../mon-blog/public/assets/img/illustrations/profiles/profile-1.png"/>
+                  <img class="single-post-meta-img" src="/../assets/img/illustrations/profiles/profile-1.png"/>
                   <div class="single-post-meta-details">
                     <div class="single-post-meta-details-name">Publié par : l'{{ post.authorRole }}</div>
                     <div class="single-post-meta-details-date">Le,
@@ -71,7 +71,7 @@
                   </a>
                 </div>
               </div>
-              <img class="img-fluid mb-2 rounded" src="/../mon-blog/public/assets/img/postImg/{{ post.imageUrl }}"/>
+              <img class="img-fluid mb-2 rounded" src="/../assets/img/postImg/{{ post.imageUrl }}"/>
               <div class="small text-gray-500 text-center">Photo Credit:
                 {{ user.userName }}</div>
               <div class="single-post-text my-5">
@@ -119,7 +119,7 @@
                             <p>{{ comment.content }}</p>
                           </a>
                           <div class="post-archive-meta">
-                            <img class="post-archive-meta-img" src="/../mon-blog/public/assets/img/illustrations/profiles/profile-1.png"/>
+                            <img class="post-archive-meta-img" src="/../assets/img/illustrations/profiles/profile-1.png"/>
                             <div class="post-archive-meta-details">
                               <div class="post-archive-meta-details-name">Auteur :
                                 {{ comment.authorName }}</div>
