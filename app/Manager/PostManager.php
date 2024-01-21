@@ -7,8 +7,18 @@ namespace App\Manager;
 use App\Exceptions\ActionNotFoundException;
 use App\Models\Post;
 
+/**
+ * Class PostManager
+ *
+ * Manages operations related to posts in the application.
+ */
 class PostManager extends BaseManager
 {
+    /**
+     * PostManager constructor.
+     *
+     * @param object $dataSource The data source object.
+     */
     public function __construct(object $dataSource)
     {
         parent::__construct('post', 'Post', $dataSource);
@@ -17,37 +27,32 @@ class PostManager extends BaseManager
     /**
      * Create a new post and insert it into the database.
      *
-     * @param string        $title       The title of the post
-     * @param string        $content     The content of the post
-     * @param array<string> $postImg     The image file for the post. Null if no image.
-     * @param int           $categoryId  The category ID of the post
-     * @param string        $authorRole  The author role of the post
-     * @param string        $postPreview The preview of the post
+     * @param string      $title       The title of the post.
+     * @param string      $content     The content of the post.
+     * @param array|null  $postImg     The image file for the post. Null if no image.
+     * @param int         $categoryId  The category ID of the post.
+     * @param string      $authorRole  The author role of the post.
+     * @param string      $postPreview The preview of the post.
      *
-     * @return Post|null The created Post object, or null on failure
+     * @return Post|null The created Post object, or null on failure.
      */
     public function createNewPost(string $title, string $content, ?array $postImg, int $categoryId, string $authorRole, string $postPreview): ?Post
     {
         $this->_db->beginTransaction();
 
         try {
+            $imageFileName = null;
+
             // Check if $postImg is not null before calling uploadImage
-            if (null !== $postImg) {
-                // Move the image to the designated folder
+            if ($postImg !== null) {
                 $imageFileName = $this->uploadImage($postImg);
-            } else {
-                // Handle the case where $postImg is null (if needed)
-                // For example, you might want to set a default image or display an error message.
-                $imageFileName = null; // Set a default value or handle the null case accordingly
             }
 
-            // Get the current date
             $date = new \DateTime();
-            $date->setTimezone(new \DateTimeZone('Europe/Paris')); // Set the timezone if necessary
+            $date->setTimezone(new \DateTimeZone('Europe/Paris'));
             $createdAt = $date->format('Y-m-d H:i:s');
             $updatedAt = $date->format('Y-m-d H:i:s');
 
-            // Insert the post into the 'Post' table
             $sql  = 'INSERT INTO post (title, content, imageUrl, categoryId, authorRole, createdAt, updatedAt, postpreview) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(1, $title, \PDO::PARAM_STR);
@@ -63,21 +68,15 @@ class PostManager extends BaseManager
                 throw new ActionNotFoundException();
             }
 
-            // Get the ID of the newly created post
-            $id = $this->_db->lastInsertId();
+            $id = (int) $this->_db->lastInsertId();
 
-            // Convert $id to an integer
-            $id = (int) $id;
-
-            // Commit the transaction
             $this->_db->commit();
 
-            // Create a new Post object with the inserted data
             $post = new Post();
             $post->setId($id);
             $post->setTitle(htmlspecialchars($title));
             $post->setContent(htmlspecialchars($content));
-            $post->setImageUrl(htmlspecialchars($imageFileName));
+            $post->setImageUrl((string) htmlspecialchars($imageFileName));
             $post->setCategoryId($categoryId);
             $post->setAuthorRole(htmlspecialchars($authorRole));
             $post->setCreatedAt(new \DateTime($createdAt));
@@ -87,8 +86,6 @@ class PostManager extends BaseManager
             return $post;
         }
         catch (ActionNotFoundException $e) {
-            // Handle the error in case of failure and roll back the transaction
-            // Redirect to a 500 error page if no matching route is found
             header('Location: /../mon-blog/500');
             $this->_db->rollBack();
 
@@ -98,43 +95,32 @@ class PostManager extends BaseManager
 
     /**
      * Retrieve a specific record from the table associated with the current class based on its identifier (ID).
-     * It returns the record in the form of an object corresponding to the class of the current object.
      *
-     * @param int $id The identifier of the record to retrieve
+     * @param int $id The identifier of the record to retrieve.
      *
-     * @return Post|null The retrieved object or null if not found
+     * @return Post|null The retrieved object or null if not found.
      */
     public function getPostById(int $id): ?Post
     {
-        // Prepare the SQL query to retrieve a specific record by ID
-        $sql = 'SELECT * FROM post WHERE id = :id ORDER BY createdAt DESC LIMIT 1';
-
-        // Prepare the SQL statement
+        $sql  = 'SELECT * FROM post WHERE id = :id ORDER BY createdAt DESC LIMIT 1';
         $stmt = $this->_db->prepare($sql);
-
-        // Bind the ID parameter
         $stmt->bindValue(':id', $id, \PDO::PARAM_INT);
-
-        // Execute the query
         $stmt->execute();
-
-        // Set the fetch mode to retrieve the result as an object of the Post class
         $stmt->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, Post::class, []);
 
-        // Fetch and return the object or null if not found
         return $stmt->fetchObject(Post::class) ?: null;
     }
 
     /**
      * Retrieves the total number of posts in the 'Post' table.
      *
-     * @return int|null The total number of posts
-     * @throws ActionNotFoundException If an error occurs during the database query
+     * @return int|null The total number of posts or null on failure.
+     *
+     * @throws ActionNotFoundException If an error occurs during the database query.
      */
     public function getTotalPosts(): ?int
     {
         try {
-            // Retrieve the total number of posts
             $sql  = 'SELECT COUNT(*) FROM post';
             $stmt = $this->_db->query($sql);
 
@@ -145,9 +131,8 @@ class PostManager extends BaseManager
             return (int) $stmt->fetchColumn();
         }
         catch (ActionNotFoundException $e) {
-            // Handle exceptions, log errors, or redirect to your custom error page
             header('Location: /../mon-blog/500');
-            
+
             return null;
         }
     }
@@ -316,14 +301,14 @@ class PostManager extends BaseManager
     /**
      * Move the uploaded image file to the designated folder.
      *
-     * @param array<string> $imageFile the image file information from $_FILES
+     * @param array|null $imageFile The image file information from $_FILES.
      *
-     * @return string|null the file name of the uploaded image, or null on failure
+     * @return string|null The file name of the uploaded image, or null on failure.
      */
-    private function uploadImage(array $imageFile): ?string
+    private function uploadImage(?array $imageFile): ?string
     {
         // Specify the upload directory
-        $uploadDirectory = '../mon-blog/public/assets/img/postImg/';
+        $uploadDirectory = 'assets/img/postImg/';
 
         // Get file information
         $fileTmpName   = $imageFile['tmp_name'];
