@@ -74,7 +74,7 @@ Pour que vous puissiez vous connecter à votre base de données, veuillez modifi
 
 Fichier json : app/config.json
 
-Le site est consultable ici : https://dmdprod.com/developpeur-php-adjoukou-agbelou/
+Le site est consultable ici : https://dmdprod.com/developpeur-fullstack-adjoukou.agbelou
 
 Les identifiants par défaut pour tester l'application (le blog et l'administration du blog)sont :
 
