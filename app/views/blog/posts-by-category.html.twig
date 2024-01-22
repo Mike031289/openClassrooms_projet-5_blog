@@ -72,14 +72,14 @@
       {% for post in posts %}
         <div class="col-md-6 col-xl-4 mb-5">
           <a class="card post-preview lift" href="/../mon-blog/post/{{ post.id }}">
-            <img class="card-img-top" src="/../assets/img/postImg/{{ post.imageUrl }}" alt="post image"/>
+            <img class="card-img-top" src="/../mon-blog/public/assets/img/postImg/{{ post.imageUrl }}" alt="post image"/>
             <div class="card-body">
               <h5 class="card-title">{{ post.title }}</h5>
               <p class="card-text">{{ post.postpreview }}</p>
             </div>
             <div class="card-footer">
               <div class="post-preview-meta">
-                <img class="post-preview-meta-img" src="/../assets/img/illustrations/profiles/profile-2.png"/>
+                <img class="post-preview-meta-img" src="/../mon-blog/public/assets/img/illustrations/profiles/profile-2.png"/>
                 <div class="post-preview-meta-details col-lg col-md col-sm">
                   <div class="post-preview-meta-details-name">Publié par : l'{{ post.authorRole }}</div>
                   <div class="post-preview-meta-details-date">Le,

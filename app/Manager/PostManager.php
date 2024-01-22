@@ -308,7 +308,7 @@ class PostManager extends BaseManager
     private function uploadImage(?array $imageFile): ?string
     {
         // Specify the upload directory
-        $uploadDirectory = 'assets/img/postImg/';
+        $uploadDirectory = 'public/assets/img/postImg/';
 
         // Get file information
         $fileTmpName   = $imageFile['tmp_name'];

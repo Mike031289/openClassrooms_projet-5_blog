@@ -5,7 +5,7 @@
   {% block navContainer %}
     <nav class="navbar navbar-marketing navbar-expand-lg bg-dark navbar-dark fixed-top">
       <div class="container bg-dark px-5">
-        <a class="navbar-brand text-white" href="../mon-blog/">Adjoukou AGBELOU</a>
+        <a class="navbar-brand text-white" href="/../mon-blog/">Adjoukou AGBELOU</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <i data-feather="menu"></i>
         </button>
@@ -15,20 +15,20 @@
               <a class="nav-link {% if page == 'home' %}active{% endif %}" href="../mon-blog/">Accueil</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link {% if page == 'posts' %}active{% endif %}" href="../mon-blog/posts/{{ 1 }}">Articles</a>
+              <a class="nav-link {% if page == 'posts' %}active{% endif %}" href="/../mon-blog/posts/{{ 1 }}">Articles</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link {% if page == 'contact' %}active{% endif %}" href="../mon-blog/contact">Contact</a>
+              <a class="nav-link {% if page == 'contact' %}active{% endif %}" href="/../mon-blog/contact">Contact</a>
             </li>
           </ul>
           {%if user is defined and user is not null %}
-            <a class="btn fw-500 ms-lg-4 btn-teal {% if page == 'logout' %}active{% endif %}" href="../mon-blog/logout">
+            <a class="btn fw-500 ms-lg-4 btn-teal {% if page == 'logout' %}active{% endif %}" href="/../mon-blog/logout">
               Se déconnecter
               <i class="ms-2" data-feather="log-out"></i>
             </a>
           {% else %}
 
-            <a class="btn fw-500 ms-lg-4 btn-white {% if page == 'login' %}active{% endif %}" href="../mon-blog/login">
+            <a class="btn fw-500 ms-lg-4 btn-white {% if page == 'login' %}active{% endif %}" href="/../mon-blog/login">
               Se connecter
               <i class="ms-2" data-feather="log-in"></i>
             </a>
@@ -48,7 +48,7 @@
         <div class="row gx-5 justify-content-center">
           <div class="col-lg-6">
             <div class="text-center mt-4">
-              <img class="img-fluid p-4" src="../assets/img/error-img/404-error.svg" alt="Erreur 404"/>
+              <img class="img-fluid p-4" src="/../mon-blog/public/assets/img/error-img/404-error.svg" alt="Erreur 404"/>
               <p class="lead">Oupss !! La page que vous souhaitez accéder n'existe pas ou L'URL demandée n'a pas été trouvée sur ce serveur</p>
               <a class="text-arrow-icon" href="javascript:void(0);" onclick="history.back();">
                 <i class="ms-0 me-1" data-feather="arrow-left"></i>

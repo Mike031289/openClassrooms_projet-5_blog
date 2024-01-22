@@ -1,5 +1,5 @@
 <?php
-require '../vendor/autoload.php';
+require 'vendor/autoload.php';
 
 use App\Core\HttpRequest;
 use App\Core\Router;
@@ -13,11 +13,11 @@ use App\Exceptions\NoRouteFoundException;
  */
 
 // Load application configuration
-$configFile = file_get_contents("../config/config.json");
+$configFile = file_get_contents("config/config.json");
 $config     = json_decode($configFile);
 
 // Load routes configuration
-$configRoutes = file_get_contents('../config/routes.json');
+$configRoutes = file_get_contents('config/routes.json');
 $configRoutes = json_decode($configRoutes);
 
 try { 

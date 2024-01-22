@@ -8,9 +8,9 @@
       <meta name="description" content="Développeur Concepteur D'Application PHP/SYMFONY Adjoukou AGBELOU"/>
       <meta name="author" content="Développeur Full Satck Adjoukou AGBELOU"/>
       <title>Adjoukou Dashboard</title>
-      <link href="/../css/adminStyles.css" rel="stylesheet"/>
-      <link rel="icon" type="image/x-icon" href="/../assets/img/logo.png"/>
-      <link rel="icon" type="image/x-icon" href="/../assets/favicon.ico"/>
+      <link href="/../mon-blog/public/css/adminStyles.css" rel="stylesheet"/>
+      <link rel="icon" type="image/x-icon" href="/../mon-blog/public/assets/img/logo.png"/>
+      <link rel="icon" type="image/x-icon" href="/../mon-blog/public/assets/favicon.ico"/>
       <script data-search-pseudo-elements="data-search-pseudo-elements" defer="defer" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/easymde@2.18.0/dist/easymde.min.js"></script>
@@ -52,11 +52,11 @@
             </li>
             <!-- User Dropdown-->
             <li class="nav-item dropdown no-caret dropdown-user me-3 me-lg-4">
-              <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="img-fluid" src="/../assets/img/illustrations/profiles/profile-1.png"/></a>
+              <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="img-fluid" src="/../mon-blog/public/assets/img/illustrations/profiles/profile-1.png"/></a>
               <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
                 {% if user is defined and user is not null %}
                   <h6 class="dropdown-header d-flex align-items-center">
-                    <img class="dropdown-user-img" src="/../assets/img/illustrations/profiles/profile-1.png"/>
+                    <img class="dropdown-user-img" src="/../mon-blog/public/assets/img/illustrations/profiles/profile-1.png"/>
                     <div class="dropdown-user-details">
                       <div class="dropdown-user-details-name">{{ user.userName }}</div>
                       <div class="dropdown-user-details-email">{{ user.email }}</div>
@@ -213,16 +213,16 @@
           </div>
         </div>
         {% block AdminJsLink %}
-          <script src="/../js/boostrapBundleMinScripts.js"></script>
-          <script src="/../js/adminJs/adminScripts.js"></script>
-          <script src="/../js/adminJs/markdown.js"></script>
-          <script src="/../js/adminJs/litepicker.js"></script>
-          <script src="/../js/adminJs/datatables/datatables-simple-demo.js"></script>
+          <script src="/../mon-blog/public/js/boostrapBundleMinScripts.js"></script>
+          <script src="/../mon-blog/public/js/adminJs/adminScripts.js"></script>
+          <script src="/../mon-blog/public/js/adminJs/markdown.js"></script>
+          <script src="/../mon-blog/public/js/adminJs/litepicker.js"></script>
+          <script src="/../mon-blog/public/js/adminJs/datatables/datatables-simple-demo.js"></script>
           <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" crossorigin="anonymous"></script>
           <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
           <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/bundle.js" crossorigin="anonymous"></script>
         {% endblock %}
-      {% endblock %}
+      {% endblock %}s
     </body>
   </html>
