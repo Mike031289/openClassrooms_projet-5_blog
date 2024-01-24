@@ -14,7 +14,7 @@
 	"database":  {
             "name": "mon-blog",
             "dbname": "monblog",
-            "host": "localhost",
+            "host": "127.0.0.1",
             "user": "root",
             "password": ""
     }

@@ -4,7 +4,7 @@ SymfonyInsight Badge lien : https://insight.symfony.com/projects/6248f345-e826-4
 
 #Directory Structure:
 
-monblog/
+mon-blog/
 │
 ├── app/
 │   ├── Controllers/
@@ -63,7 +63,8 @@ monblog/
 Installation :
 
 Lancer la commande  git https://github.com/Mike031289/openClassrooms_projet-5_blog
-Lancer la commande cd openClassrooms_projet-5_blog
+Lancer la commande cd openClassrooms_projet-5_blog. 
+NB: *Renommer le dossier /openClassrooms_projet-5_blog à /mon-blog qui est le dossier de base du projet.
 Lancer dans le terminal composer install
 Récupérez la base de donnée à la racine (fichier nomé monblog.sql)
 
