@@ -16,11 +16,11 @@ class FormHelper
      * Get a value from the specified data source or from the $_POST superglobal if not provided.
      *
      * @param string $key     The key to retrieve
-     * @param mixed  $default The default value to return if the key does not exist
-     * @param array<mixed> $source The data source to retrieve the value from (default is $_POST)
-     * @return mixed The value associated with the key or the default value
+     * @param $default The default value to return if the key does not exist
+     * @param array $source The data source to retrieve the value from (default is $_POST)
+     * @return string The value associated with the key or the default value
      */
-    public static function post(string $key, mixed $default = null, array $source = null): mixed
+    public static function post(string $key, $default = null , $source = null ): string
     {
         // If $source is not provided, use $_POST as the default source
         $source = $source ?? $_POST;
